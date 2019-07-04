@@ -6,7 +6,7 @@
         <artifactId>atinbo-common</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>common-core</artifactId>
+    <artifactId>core</artifactId>
 
     <dependencies>
         <!-- compile -->

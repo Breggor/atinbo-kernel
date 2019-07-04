@@ -3,17 +3,19 @@
 // (powered by Fernflower decompiler)
 //
 
-package com.atinbo.support.httpstatus;
+package com.atinbo.support.base;
 
 
-import com.atinbo.support.constants.IErrorEnum;
+import com.atinbo.support.base.IError;
 
-public interface IError503Enum<T extends Enum<T>> extends IErrorEnum<T> {
-    default Integer configHttpCode() {
+public interface IError503<T extends Enum<T>> extends IError<T> {
+    @Override
+    default Integer httpCode() {
         return 503;
     }
 
-    default String configReason() {
+    @Override
+    default String reason() {
         return "[Overload] - 由于临时的服务器维护或者过载, 服务器当前无法处理请求.";
     }
 }

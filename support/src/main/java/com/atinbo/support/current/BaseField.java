@@ -5,7 +5,7 @@
 
 package com.atinbo.support.current;
 
-import com.atinbo.support.constants.EnumDeleted;
+import com.atinbo.support.constants.DeletedEnum;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,7 +13,7 @@ import java.util.Date;
 public class BaseField implements Serializable {
     private Integer order;
     private Integer version;
-    private EnumDeleted deleted;
+    private DeletedEnum deleted;
     private Long createdBy;
     private String createByName;
     private Date createTime;
@@ -42,11 +42,11 @@ public class BaseField implements Serializable {
         this.version = version;
     }
 
-    public EnumDeleted getDeleted() {
+    public DeletedEnum getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(EnumDeleted deleted) {
+    public void setDeleted(DeletedEnum deleted) {
         this.deleted = deleted;
     }
 
