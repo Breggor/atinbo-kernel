@@ -5,11 +5,6 @@
 
 package com.atinbo.support.starter;
 
-import com.kuaicto.framework.config.IComponentConfig;
-import com.kuaicto.framework.core.CoreBoot;
-import com.kuaicto.framework.core.Handler;
-import com.kuaicto.framework.core.IPlugin;
-import com.kuaicto.framework.core.Interceptor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +17,20 @@ public abstract class ComponentStarter extends Starter implements IComponentConf
     public ComponentStarter() {
     }
 
+
+    @Override
     public void assemblyHandler() {
         this.configHandler(this.componentHandlers);
         CoreBoot.me.attachHandler(this.componentHandlers);
     }
 
+    @Override
     public void assemblyInterceptor() {
         this.configInterceptor(this.componentInterceptors);
         CoreBoot.me.attachInterceptor(this.componentInterceptors);
     }
 
+    @Override
     public void assemblyPlugin() {
         this.configPlugin(this.componentPlugins);
         CoreBoot.me.attachPlugin(this.componentPlugins);

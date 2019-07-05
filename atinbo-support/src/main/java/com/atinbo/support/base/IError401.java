@@ -1,7 +1,5 @@
 package com.atinbo.support.base;
 
-import com.atinbo.support.base.IError;
-
 /**
  * http 401错误
  *

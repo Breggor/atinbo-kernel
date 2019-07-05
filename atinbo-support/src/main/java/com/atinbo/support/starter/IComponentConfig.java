@@ -5,14 +5,11 @@
 
 package com.atinbo.support.starter;
 
-import com.kuaicto.framework.core.Handler;
-import com.kuaicto.framework.core.IPlugin;
-import com.kuaicto.framework.core.Interceptor;
+
+import org.springframework.beans.factory.BeanFactory;
 
 import java.io.Serializable;
 import java.util.List;
-
-import org.springframework.beans.factory.BeanFactory;
 
 public interface IComponentConfig extends Serializable {
     default void assemblyComponent() {

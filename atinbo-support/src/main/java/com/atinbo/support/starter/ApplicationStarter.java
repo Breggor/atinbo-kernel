@@ -5,13 +5,6 @@
 
 package com.atinbo.support.starter;
 
-import com.kuaicto.framework.config.IApplicationConfig;
-import com.kuaicto.framework.config.IComponentConfig;
-import com.kuaicto.framework.core.Constant;
-import com.kuaicto.framework.core.Handlers;
-import com.kuaicto.framework.core.Interceptors;
-import com.kuaicto.framework.core.Plugins;
-import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -29,13 +22,14 @@ public abstract class ApplicationStarter extends Starter implements IApplication
         this.configConsts(IApplicationConfig.GLOBAL_CONSTANT);
     }
 
+    @Override
     public void runApplication(String[] args) {
         String[] var10000 = new String[1];
         StringBuilder var10003 = new StringBuilder();
         Constant var10004 = IApplicationConfig.GLOBAL_CONSTANT;
         var10000[0] = var10003.append("--spring.profiles.active").append("=").append(IApplicationConfig.GLOBAL_CONSTANT.getEnv()).toString();
         String[] custom = var10000;
-        String[] runerArgs = (String[]) ArrayUtils.addAll(args, custom);
+        String[] runerArgs = (String[]) Arrays.copyOf(args, args.length, String[].class);
         Arrays.stream(runerArgs).forEach((v) -> {
             String[] arg = v.split("=");
             if (arg.length > 1) {
@@ -46,21 +40,27 @@ public abstract class ApplicationStarter extends Starter implements IApplication
         IApplicationStarter.runApplication(this, runerArgs);
     }
 
+    @Override
     public void configConsts(Constant constant) {
     }
 
+    @Override
     public void configHandler(Handlers handlers) {
     }
 
+    @Override
     public void configInterceptor(Interceptors interceptors) {
     }
 
+    @Override
     public void configPlugin(Plugins plugins) {
     }
 
+    @Override
     public void configComponent(List<IComponentConfig> components) {
     }
 
+    @Override
     public void init(BeanFactory applicationContext) {
     }
 }

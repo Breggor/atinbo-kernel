@@ -5,7 +5,6 @@
 
 package com.atinbo.support.starter;
 
-import com.kuaicto.framework.kit.LoggerKit;
 
 public class Constant {
     public static final String SPRING_ENV_CMD = "--spring.profiles.active";
@@ -47,13 +46,13 @@ public class Constant {
 
     public Constant setLogFilePath(String logFilePath) {
         this.logFilePath = logFilePath == null ? null : logFilePath.trim();
-        LoggerKit.pushLogFilePath(this.logFilePath);
+        LoggerHelper.pushLogFilePath(this.logFilePath);
         return this;
     }
 
     public Constant setLogMaxHistory(String logMaxHistory) {
         this.logMaxHistory = logMaxHistory == null ? null : logMaxHistory.trim();
-        LoggerKit.pushLogMaxHistory(this.logMaxHistory);
+        LoggerHelper.pushLogMaxHistory(this.logMaxHistory);
         return this;
     }
 }

@@ -5,15 +5,11 @@
 
 package com.atinbo.support.starter;
 
-import com.kuaicto.framework.core.Constant;
-import com.kuaicto.framework.core.Handlers;
-import com.kuaicto.framework.core.Interceptors;
-import com.kuaicto.framework.core.Plugins;
+
+import org.springframework.beans.factory.BeanFactory;
 
 import java.io.Serializable;
 import java.util.List;
-
-import org.springframework.beans.factory.BeanFactory;
 
 public interface IApplicationConfig extends Serializable {
     Constant GLOBAL_CONSTANT = new Constant();

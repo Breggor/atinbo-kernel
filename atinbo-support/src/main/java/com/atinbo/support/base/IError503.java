@@ -6,8 +6,6 @@
 package com.atinbo.support.base;
 
 
-import com.atinbo.support.base.IError;
-
 public interface IError503<T extends Enum<T>> extends IError<T> {
     @Override
     default Integer httpCode() {

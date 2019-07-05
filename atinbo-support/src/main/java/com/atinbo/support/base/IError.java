@@ -5,6 +5,7 @@ package com.atinbo.support.base;
  * 错误接口
  *
  * @param <T>
+ * @author breggor
  */
 public interface IError<T extends Enum<T>> extends ICode<T, Integer> {
     String reason();

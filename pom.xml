@@ -7,9 +7,11 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>core</module>
-        <module>support</module>
-        <module>mvc-ext</module>
+        <module>atinbo-core</module>
+        <module>atinbo-support</module>
+        <module>atinbo-mvc</module>
+        <module>atinbo-redis</module>
+        <module>atinbo-dal</module>
     </modules>
 
     <properties>
@@ -17,11 +19,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.locales>zh_CN</project.build.locales>
+
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.1.2</maven-jar-plugin.version>
         <maven-source-plugin.version>3.1.0</maven-source-plugin.version>
         <maven-javadoc-plugin.version>3.1.0</maven-javadoc-plugin.version>
-        <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
+        <maven-versions-plugin.version>2.7</maven-versions-plugin.version>
+        <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+
         <spring.version>5.1.2.RELEASE</spring.version>
         <spring-boot.version>2.1.0.RELEASE</spring-boot.version>
         <sofa-boot.version>3.1.5</sofa-boot.version>
@@ -32,6 +37,8 @@
         <HikariCP.version>3.3.1</HikariCP.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <lombok.version>1.18.8</lombok.version>
+        <orika.version>1.5.4</orika.version>
+        <fastjson.version>1.2.58</fastjson.version>
         <skipTests>true</skipTests>
     </properties>
 
@@ -58,6 +65,18 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>ma.glasnost.orika</groupId>
+                <artifactId>orika-core</artifactId>
+                <version>${orika.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -124,6 +143,13 @@
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>${spring-boot.version}</version>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy-plugin.version}</version>
+                </plugin>
+
             </plugins>
         </pluginManagement>
 
@@ -131,8 +157,60 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-                <version>${versions-maven-plugin.version}</version>
+                <version>${maven-versions-plugin.version}</version>
             </plugin>
         </plugins>
     </build>
+
+
+    <!-- 分发构件至远程仓库-->
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Nexus Release</name>
+            <url>http://192.168.6.104/repository/maven-releases/</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Nexus SNAPSHOTS</name>
+            <url>http://192.168.6.104/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>snapshots</id>
+            <name>Snapshots</name>
+            <url>http://192.168.6.104/repository/maven-public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>releases</id>
+            <name>Releases</name>
+            <url>http://192.168.6.104/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <url>http://192.168.6.104/repository/maven-public/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
