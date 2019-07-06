@@ -39,7 +39,7 @@
 
         <dependency>
             <groupId>com.atinbo</groupId>
-            <artifactId>common-core</artifactId>
+            <artifactId>atinbo-core</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
