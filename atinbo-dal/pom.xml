@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>atinbo-dal-mongo</module>
+        <module>atinbo-dal-redis</module>
     </modules>
     <artifactId>atinbo-dal</artifactId>
 

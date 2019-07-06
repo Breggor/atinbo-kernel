@@ -1,4 +1,4 @@
-package com.atinbo.redis;
+package com.atinbo.dal.redis;
 
 public abstract class RedisKeyGenerator {
     private final static String DELIMITER = ":";

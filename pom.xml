@@ -10,7 +10,6 @@
         <module>atinbo-core</module>
         <module>atinbo-support</module>
         <module>atinbo-mvc</module>
-        <module>atinbo-redis</module>
         <module>atinbo-dal</module>
     </modules>
 
