@@ -35,7 +35,7 @@ public class ParamValidateInterceptor implements HandlerInterceptor {
         StringBuilder sBuiler = new StringBuilder();
         if (!checkBusinessParam(request, handler, sBuiler)) {
             ResultVO resultVO = ResultVO.errorMsg(sBuiler.toString());
-            String resultString = resultVO.toJsonString();
+            String resultString = resultVO.toString();
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(resultString);
             logger.warn(resultString);
