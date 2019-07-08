@@ -1,4 +1,4 @@
-package com.atinbo.core.mapper;
+package com.atinbo.core.utils;
 
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;

@@ -3,9 +3,8 @@
 // (powered by Fernflower decompiler)
 //
 
-package com.atinbo.support.utils;
+package com.atinbo.core.utils;
 
-import com.atinbo.support.exceptions.BeanCopyException;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;
@@ -42,11 +41,11 @@ public class BeanUtils {
         }
     }
 
-    public static void copyProperties(Object fromObj, Object toObj) throws BeanCopyException {
+    public static void copyProperties(Object fromObj, Object toObj) throws RuntimeException {
         copyProperties(fromObj, toObj, true);
     }
 
-    public static void copyProperties(Object fromObj, Object toObj, boolean ignoreNull) throws BeanCopyException {
+    public static void copyProperties(Object fromObj, Object toObj, boolean ignoreNull) throws RuntimeException {
         if (fromObj != null && toObj != null) {
             Class<? extends Object> fromClass = fromObj.getClass();
             Class<? extends Object> toClass = toObj.getClass();
@@ -76,12 +75,12 @@ public class BeanUtils {
                 }
 
             } catch (Exception var18) {
-                throw new BeanCopyException(var18);
+                throw new RuntimeException(var18);
             }
         }
     }
 
-    public static <T> T copyProperties(Object from, Class<T> toClass) throws BeanCopyException {
+    public static <T> T copyProperties(Object from, Class<T> toClass) throws RuntimeException {
         if (from == null) {
             return null;
         } else {
@@ -90,12 +89,12 @@ public class BeanUtils {
                 copyProperties(from, to);
                 return to;
             } catch (IllegalAccessException | InstantiationException var4) {
-                throw new BeanCopyException(var4);
+                throw new RuntimeException(var4);
             }
         }
     }
 
-    public static <T> List<T> copyListProperties(Collection<? extends Object> fromList, Class<T> toClass) throws BeanCopyException {
+    public static <T> List<T> copyListProperties(Collection<? extends Object> fromList, Class<T> toClass) throws RuntimeException {
         if (fromList == null) {
             return null;
         } else {
