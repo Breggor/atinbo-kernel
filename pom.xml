@@ -32,6 +32,6 @@
         <module>atinbo-support</module>
         <module>atinbo-mvc</module>
         <module>atinbo-dal</module>
-        <module>atinbo-bom</module>
+        <module>atinbo-dependencies-bom</module>
     </modules>
 </project>
