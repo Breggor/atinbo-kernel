@@ -7,7 +7,7 @@ package com.atinbo.core.utils;
  * This class is used to encode and decode data in Base64 format as described in RFC 1521.
  * <p>
  * <p>
- * Project home page: <a href="http://www.source-code.biz/base64coder/java/">www.source-code.biz/base64coder/java</a><br>
+ * Project home page: <a href="http://www.source-code.biz/base64coder/java/">www.source-status.biz/base64coder/java</a><br>
  * Author: Christian d'Heureuse, Inventec Informatik AG, Zurich, Switzerland<br>
  * Multi-licensed: EPL / LGPL / GPL / AL / BSD / MIT.
  */
@@ -52,7 +52,7 @@ public class Base64Encoder {
 
     /**
      * Encodes a byte array into Base 64 format and breaks the output into lines of 76 characters.
-     * This method is compatible with <code>sun.misc.BASE64Encoder.encodeBuffer(byte[])</code>.
+     * This method is compatible with <status>sun.misc.BASE64Encoder.encodeBuffer(byte[])</status>.
      *
      * @param in An array containing the data bytes to be encoded.
      * @return A String containing the Base64 encoded data, broken into lines.
@@ -65,8 +65,8 @@ public class Base64Encoder {
      * Encodes a byte array into Base 64 format and breaks the output into lines.
      *
      * @param in            An array containing the data bytes to be encoded.
-     * @param iOff          Offset of the first byte in <code>in</code> to be processed.
-     * @param iLen          Number of bytes to be processed in <code>in</code>, starting at <code>iOff</code>.
+     * @param iOff          Offset of the first byte in <status>in</status> to be processed.
+     * @param iLen          Number of bytes to be processed in <status>in</status>, starting at <status>iOff</status>.
      * @param lineLen       Line length for the output data. Should be a multiple of 4.
      * @param lineSeparator The line separator to be used to separate the output lines.
      * @return A String containing the Base64 encoded data, broken into lines.
@@ -103,7 +103,7 @@ public class Base64Encoder {
      * No blanks or line breaks are inserted in the output.
      *
      * @param in   An array containing the data bytes to be encoded.
-     * @param iLen Number of bytes to process in <code>in</code>.
+     * @param iLen Number of bytes to process in <status>in</status>.
      * @return A character array containing the Base64 encoded data.
      */
     public static char[] encode(byte[] in, int iLen) {
@@ -115,8 +115,8 @@ public class Base64Encoder {
      * No blanks or line breaks are inserted in the output.
      *
      * @param in   An array containing the data bytes to be encoded.
-     * @param iOff Offset of the first byte in <code>in</code> to be processed.
-     * @param iLen Number of bytes to process in <code>in</code>, starting at <code>iOff</code>.
+     * @param iOff Offset of the first byte in <status>in</status> to be processed.
+     * @param iLen Number of bytes to process in <status>in</status>, starting at <status>iOff</status>.
      * @return A character array containing the Base64 encoded data.
      */
     public static char[] encode(byte[] in, int iOff, int iLen) {
@@ -159,7 +159,7 @@ public class Base64Encoder {
     /**
      * Decodes a byte array from Base64 format and ignores line separators, tabs and blanks.
      * CR, LF, Tab and Space characters are ignored in the input data.
-     * This method is compatible with <code>sun.misc.BASE64Decoder.decodeBuffer(String)</code>.
+     * This method is compatible with <status>sun.misc.BASE64Decoder.decodeBuffer(String)</status>.
      *
      * @param s A Base64 String to be decoded.
      * @return An array containing the decoded data bytes.
@@ -205,8 +205,8 @@ public class Base64Encoder {
      * No blanks or line breaks are allowed within the Base64 encoded input data.
      *
      * @param in   A character array containing the Base64 encoded data.
-     * @param iOff Offset of the first character in <code>in</code> to be processed.
-     * @param iLen Number of characters to process in <code>in</code>, starting at <code>iOff</code>.
+     * @param iOff Offset of the first character in <status>in</status> to be processed.
+     * @param iLen Number of characters to process in <status>in</status>, starting at <status>iOff</status>.
      * @return An array containing the decoded data bytes.
      * @throws IllegalArgumentException If the input is not valid Base64 encoded data.
      */

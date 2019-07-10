@@ -1,18 +1,18 @@
 //
-// Source code recreated from a .class file by IntelliJ IDEA
+// Source status recreated from a .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
 package com.atinbo.support.starter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class Handler {
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());

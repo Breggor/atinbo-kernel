@@ -1,7 +1,7 @@
-package com.atinbo.support.httpstatus;
+package com.atinbo.support.error;
 
 
-import com.atinbo.support.base.IError400;
+import com.atinbo.core.http.status.IError400;
 
 public enum Enum400Error implements IError400<Enum400Error> {
     INVALID_PARAM(400001, "非法参数"),
@@ -9,7 +9,6 @@ public enum Enum400Error implements IError400<Enum400Error> {
     UPDATE_ERROR(400002, "更新异常"),
     DELETE_ERROR(400003, "删除异常"),
     EABLED_ERROR(400004, "启用/禁用异常"),
-
     ;
 
 

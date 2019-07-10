@@ -50,9 +50,8 @@
         </dependency>
 
         <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-core</artifactId>
-            <version>10.2.3</version>
+            <groupId>com.atinbo</groupId>
+            <artifactId>atinbo-core</artifactId>
         </dependency>
     </dependencies>
 </project>

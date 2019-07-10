@@ -1,6 +1,5 @@
 package com.atinbo.core.utils;
 
-import com.atinbo.core.model.PageVO;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.Arrays;
 import java.util.Map;
 
 public class jacksonJsonUtils {
@@ -148,15 +146,5 @@ public class jacksonJsonUtils {
         } catch (IOException e) {
             throw new RuntimeException("JsonParseException when deserialize json");
         }
-    }
-
-    public static void main(String[] args) {
-        PageVO.setViewStrategy(1);
-        PageVO<String> page = new PageVO<>(10, 1, 100);
-        page.setData(Arrays.asList("1", "2", "3", "4"));
-        String s = jacksonJsonUtils.parseToJson(page);
-        System.out.println("s = " + s);
-        PageVO pageVO = jacksonJsonUtils.parseToObject(s, PageVO.class);
-        System.out.println("pageVO = " + pageVO);
     }
 }

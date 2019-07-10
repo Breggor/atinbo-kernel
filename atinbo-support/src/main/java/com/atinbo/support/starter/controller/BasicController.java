@@ -1,13 +1,13 @@
 //
-// Source code recreated from a .class file by IntelliJ IDEA
+// Source status recreated from a .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
 package com.atinbo.support.starter.controller;
 
-import com.atinbo.support.exceptions.APIException;
+import com.atinbo.core.exception.APIException;
+import com.atinbo.support.error.Enum401Error;
 import com.atinbo.support.exceptions.SessionUserNotFoundException;
-import com.atinbo.support.httpstatus.Enum401Error;
 import com.atinbo.support.starter.HttpRender;
 import com.atinbo.support.starter.LoggerHelper;
 import com.atinbo.support.user.SessionUser;
@@ -56,7 +56,7 @@ public class BasicController {
             String strictEvnValue = System.getenv("STRICT");
             boolean isStrictMode = !StringUtils.isEmpty(strictEvnValue) && "KUAICTO".equalsIgnoreCase(strictEvnValue);
             if (isStrictMode) {
-                throw new APIException(Enum401Error.SGW_SESSION_USER_NOT_FOUND);
+                throw new APIException(Enum401Error.USER_NOT_FOUND);
             }
 
             sessionUserFromGateway = defaultSessionUser;

@@ -1,15 +1,14 @@
-package com.atinbo.support.httpstatus;
+package com.atinbo.support.error;
 
 
-import com.atinbo.support.base.IError401;
+import com.atinbo.core.http.status.IError401;
 
 public enum Enum401Error implements IError401<Enum401Error> {
     UNAUTH(401000, "未登录"),
     USER_LOGIN_AUTH_FAILED(401001, "登陆授权失败，账号或密码错误"),
     WECHAT_AUTHENTICATION_FAILED(401002, "微信授权失败"),
-    QQ_AUTHENTICATION_FAILED(401003, "QQ授权失败"),
+    USER_NOT_FOUND(401003, "用户没有找到"),
     WECHAT_MINI_PROGRAM_AUTHENTICATION_FAILED(401004, "微信小程序授权失败"),
-    SGW_SESSION_USER_NOT_FOUND(401001, "网关用户没有找到"),
     USER_AUTH_FAILED(401005, "用户授权失败");
 
 

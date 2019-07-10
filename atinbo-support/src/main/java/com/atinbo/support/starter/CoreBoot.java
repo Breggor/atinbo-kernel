@@ -1,15 +1,15 @@
 //
-// Source code recreated from a .class file by IntelliJ IDEA
+// Source status recreated from a .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
 package com.atinbo.support.starter;
 
+import org.springframework.beans.factory.BeanFactory;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.springframework.beans.factory.BeanFactory;
 
 public class CoreBoot implements IApplicationConfig {
     public static final CoreBoot me = new CoreBoot();

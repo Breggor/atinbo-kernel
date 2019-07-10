@@ -1,7 +1,7 @@
-package com.atinbo.support.exceptions;
+package com.atinbo.core.exception;
 
 
-import com.atinbo.support.base.IError;
+import com.atinbo.core.http.status.IError;
 
 /**
  * @author breggor

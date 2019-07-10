@@ -1,6 +1,7 @@
 package com.atinbo.support.constants;
 
-import com.atinbo.support.base.ILabelCode;
+
+import com.atinbo.core.base.ILabelCode;
 
 import java.util.Arrays;
 

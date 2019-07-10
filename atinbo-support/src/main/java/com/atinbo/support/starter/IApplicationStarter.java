@@ -1,5 +1,5 @@
 //
-// Source code recreated from a .class file by IntelliJ IDEA
+// Source status recreated from a .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 

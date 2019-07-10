@@ -1,8 +1,9 @@
-package com.atinbo.support.httpstatus;
+package com.atinbo.core.http.status.impl;
 
-import com.atinbo.support.base.IError403;
+import com.atinbo.core.http.status.IError500;
 
-public enum Enum500Error implements IError403<Enum500Error> {
+public enum Enum500Error implements IError500<Enum500Error> {
+    SYSTEM_ERROR(500001, "系统错误"),
 
     ;
 

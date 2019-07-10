@@ -1,9 +1,9 @@
 //
-// Source code recreated from a .class file by IntelliJ IDEA
+// Source status recreated from a .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
 
-package com.atinbo.support.base;
+package com.atinbo.core.http.status;
 
 
 public interface IError503<T extends Enum<T>> extends IError<T> {

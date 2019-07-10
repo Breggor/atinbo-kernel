@@ -1,5 +1,7 @@
-package com.atinbo.support.base;
+package com.atinbo.core.http.status;
 
+
+import com.atinbo.core.base.ICode;
 
 /**
  * 错误接口
