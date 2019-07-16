@@ -1,20 +1,30 @@
 package com.atinbo.core.http.model;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 
 /**
  * 分页传入参数
+ *
+ * @author breggor
  */
+@Data
+@Accessors(chain = true)
 public class PageParam implements Serializable {
     /**
      * 默认单页记录数
      */
     public static final int DEFAULT_PAGE_SIZE = 10;
     /**
+     * 最大分页行数
+     */
+    public static final int MAX_PAGE_SIZE = 1000;
+    /**
      * 默认当前页
      */
     public static final int DEFAULT_CURRENT_PAGE = 1;
-    private static final long serialVersionUID = 9181509197952826120L;
     /**
      * 当前页
      */
@@ -28,15 +38,13 @@ public class PageParam implements Serializable {
      */
     private Integer offset;
 
-    public PageParam() {
-    }
 
     /**
-     * @param pageSize    单页记录数
      * @param currentPage 当前页
+     * @param pageSize    单页记录数
      */
-    public PageParam(int pageSize, int currentPage) {
-        if (pageSize <= 0) {
+    public PageParam(int currentPage, int pageSize) {
+        if (pageSize <= 0 || pageSize >= MAX_PAGE_SIZE) {
             pageSize = DEFAULT_PAGE_SIZE;
         }
         if (currentPage <= 0) {
@@ -57,39 +65,5 @@ public class PageParam implements Serializable {
         int currentPage = offset / pageSize + 1;
         PageParam pageParam = new PageParam(pageSize, currentPage);
         return pageParam;
-    }
-
-    public Integer getCurrentPage() {
-        return currentPage;
-    }
-
-    public void setCurrentPage(Integer currentPage) {
-        this.currentPage = currentPage;
-    }
-
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public Integer getOffset() {
-        return offset;
-    }
-
-    public void setOffset(Integer offset) {
-        this.offset = offset;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("PageParam{");
-        sb.append("currentPage=").append(currentPage);
-        sb.append(", pageSize=").append(pageSize);
-        sb.append(", offset=").append(offset);
-        sb.append('}');
-        return sb.toString();
     }
 }

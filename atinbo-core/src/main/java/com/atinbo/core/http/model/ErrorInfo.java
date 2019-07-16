@@ -1,11 +1,18 @@
 package com.atinbo.core.http.model;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+
 /**
  * 错误信息
  *
  * @author breggor
  */
-public class ErrorInfo {
+@Data
+@Accessors(chain = true)
+public class ErrorInfo implements Serializable {
     /**
      * 消息
      */
@@ -14,22 +21,4 @@ public class ErrorInfo {
      * 原因
      */
     private String reason;
-
-    public String getMessage() {
-        return message;
-    }
-
-    public ErrorInfo setMessage(String message) {
-        this.message = message;
-        return this;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public ErrorInfo setReason(String reason) {
-        this.reason = reason;
-        return this;
-    }
 }
