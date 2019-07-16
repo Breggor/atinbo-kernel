@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Data
 @NoArgsConstructor
-public class PageResult<T> implements Serializable {
+public class PageResult<T extends BaseVO> implements Serializable {
     /**
      * 默认单页记录数
      */

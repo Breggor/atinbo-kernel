@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class Outcome<T> {
+public class Outcome<T extends BaseBO> {
     /**
      * 返回对象
      */
@@ -25,7 +25,7 @@ public class Outcome<T> {
      */
     private String error;
 
-    public static <T> Outcome<T> ofFail(String error) {
-        return new Outcome<T>().setError(error);
+    public static <E extends BaseBO> Outcome<E> ofFail(String error) {
+        return new Outcome<E>().setError(error);
     }
 }
