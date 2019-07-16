@@ -34,4 +34,19 @@
         <module>atinbo-dal</module>
         <module>atinbo-dependencies</module>
     </modules>
+
+    <build>
+        <plugins>
+            <!--JavaSource-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <!-- Javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
