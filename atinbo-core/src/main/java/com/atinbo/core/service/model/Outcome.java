@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class Answer<T> {
+public class Outcome<T> {
     /**
      * 返回对象
      */
