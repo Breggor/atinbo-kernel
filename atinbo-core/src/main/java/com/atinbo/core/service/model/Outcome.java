@@ -24,4 +24,8 @@ public class Outcome<T> {
      * 错误信息
      */
     private String error;
+
+    public static <T> Outcome<T> ofFail(String error) {
+        return new Outcome<T>().setError(error);
+    }
 }
