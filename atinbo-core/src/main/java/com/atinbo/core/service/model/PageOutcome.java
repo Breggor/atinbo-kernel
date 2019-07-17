@@ -34,7 +34,7 @@ public class PageOutcome<T extends BaseBO> implements Serializable {
     /**
      * 总行数
      */
-    private Integer totalRow;
+    private Integer totalCount;
     /**
      * 页总数
      */
@@ -62,9 +62,9 @@ public class PageOutcome<T extends BaseBO> implements Serializable {
      *
      * @param pageSize    每页行数
      * @param currentPage 当前页
-     * @param totalRow    总行数
+     * @param totalCount  总行数
      */
-    public PageOutcome(int pageSize, int currentPage, int totalRow) {
+    public PageOutcome(int pageSize, int currentPage, int totalCount) {
         if (pageSize <= 0) {
             pageSize = DEFAULT_PAGE_SIZE;
         }
@@ -73,8 +73,8 @@ public class PageOutcome<T extends BaseBO> implements Serializable {
         }
         this.pageSize = pageSize;
         this.currentPage = currentPage;
-        this.totalRow = totalRow;
-        this.totalPage = (totalRow - 1) / pageSize + 1;
+        this.totalCount = totalCount;
+        this.totalPage = (totalCount - 1) / pageSize + 1;
 
     }
 

@@ -4,6 +4,7 @@ package com.atinbo.core.http.model;
 import com.atinbo.core.http.status.IError;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.Map;
  */
 @Data
 @NoArgsConstructor
+@Accessors(chain = true)
 public class ErrResult implements Serializable {
 
     /**
