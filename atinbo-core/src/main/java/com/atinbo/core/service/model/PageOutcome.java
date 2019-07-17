@@ -1,6 +1,7 @@
 package com.atinbo.core.service.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.util.List;
  * @author breggor
  */
 @Data
+@NoArgsConstructor
 @Accessors(chain = true)
 public class PageOutcome<T extends BaseBO> implements Serializable {
     /**
