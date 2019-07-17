@@ -44,4 +44,8 @@ public class PageInfo implements Serializable {
      * 总行数
      */
     private Integer totalCount;
+
+    public PageInfo of(int currentPage, int totalPage, int pageSize, int totalCount) {
+        return new PageInfo(currentPage, totalPage, pageSize, totalCount);
+    }
 }

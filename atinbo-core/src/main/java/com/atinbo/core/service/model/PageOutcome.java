@@ -99,7 +99,7 @@ public class PageOutcome<T extends BaseBO> implements Serializable {
      * @param <E>
      * @return
      */
-    public static <E extends BaseBO> PageOutcome<E> ofSuccess(List<E> data) {
-        return new PageOutcome<E>().setSuccess(true).setData(data);
+    public static <E extends BaseBO> PageOutcome<E> ofSuccess(PageInfo page, List<E> data) {
+        return new PageOutcome<E>().setSuccess(true).setPage(page).setData(data);
     }
 }
