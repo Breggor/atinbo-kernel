@@ -18,7 +18,7 @@ import java.util.Map;
  */
 @Data
 @NoArgsConstructor
-public class Result implements Serializable {
+public class ErrResult implements Serializable {
 
     /**
      * 状态码
@@ -34,22 +34,22 @@ public class Result implements Serializable {
     private List<ErrorInfo> errors;
 
 
-    public Result(IError error) {
+    public ErrResult(IError error) {
         this.message = error.getMessage();
         this.code = (Integer) error.getCode();
         this.addError(error.reason(), error.getMessage());
     }
 
-    public static Result error(Map<String, String> errs) {
-        Result result = new Result();
+    public static ErrResult error(Map<String, String> errs) {
+        ErrResult result = new ErrResult();
         if (null != errs && !errs.isEmpty()) {
             errs.entrySet().stream().forEach(obj -> result.addError(obj.getKey(), obj.getValue()));
         }
         return result;
     }
 
-    public static Result error(String message) {
-        Result result = new Result();
+    public static ErrResult error(String message) {
+        ErrResult result = new ErrResult();
         result.setMessage(message);
         return result;
     }

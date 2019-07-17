@@ -1,7 +1,7 @@
 package com.atinbo.support.starter;
 
 import com.atinbo.core.exception.APIException;
-import com.atinbo.core.http.model.Result;
+import com.atinbo.core.http.model.ErrResult;
 import org.springframework.web.util.NestedServletException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +42,7 @@ public class FrameworkExceptionHandler extends Handler {
     }
 
     private void flushFrameworkException(HttpServletResponse response, APIException ex) {
-        Result result = new Result(ex.getError());
+        ErrResult result = new ErrResult(ex.getError());
         response.setStatus(ex.getError().getHttpCode());
         HttpRender.flushJson(response, result);
     }
@@ -50,7 +50,7 @@ public class FrameworkExceptionHandler extends Handler {
 
     private void flushException500(HttpServletResponse response, Exception e) {
         response.setStatus(500);
-        Result result = new Result();
+        ErrResult result = new ErrResult();
         result.setMessage(e.getMessage());
         result.setCode(500);
         result.addError("Internal Server Error", e.getMessage());

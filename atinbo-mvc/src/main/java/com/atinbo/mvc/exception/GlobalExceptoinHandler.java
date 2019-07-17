@@ -1,7 +1,7 @@
 package com.atinbo.mvc.exception;
 
 import com.atinbo.core.exception.APIException;
-import com.atinbo.core.http.model.Result;
+import com.atinbo.core.http.model.ErrResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
@@ -26,37 +26,37 @@ public class GlobalExceptoinHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Result bindException(MethodArgumentNotValidException e) {
+    public ErrResult bindException(MethodArgumentNotValidException e) {
         return doErr(e.getBindingResult());
     }
 
     @ExceptionHandler(BindException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Result handleBindException(BindException e) {
+    public ErrResult handleBindException(BindException e) {
         return doErr(e.getBindingResult());
     }
 
-    private Result doErr(BindingResult bindingResult2) {
+    private ErrResult doErr(BindingResult bindingResult2) {
         BindingResult bindingResult = bindingResult2;
         Map<String, String> errs = new HashMap<>();
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
             errs.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
-        return Result.error(errs);
+        return ErrResult.error(errs);
     }
 
 
     @ExceptionHandler(APIException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public Result handleBizRuntimeException(HttpServletRequest request,
-                                            HttpServletResponse response, APIException ex) {
-        return new Result(SYSTEM_ERROR);
+    public ErrResult handleBizRuntimeException(HttpServletRequest request,
+                                               HttpServletResponse response, APIException ex) {
+        return new ErrResult(SYSTEM_ERROR);
     }
 
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public Result handleRuntimeException(HttpServletRequest request,
-                                         HttpServletResponse response, RuntimeException ex) {
-        return new Result(SYSTEM_ERROR);
+    public ErrResult handleRuntimeException(HttpServletRequest request,
+                                            HttpServletResponse response, RuntimeException ex) {
+        return new ErrResult(SYSTEM_ERROR);
     }
 }

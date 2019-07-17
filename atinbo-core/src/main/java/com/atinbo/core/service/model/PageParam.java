@@ -1,4 +1,4 @@
-package com.atinbo.core.http.model;
+package com.atinbo.core.service.model;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
