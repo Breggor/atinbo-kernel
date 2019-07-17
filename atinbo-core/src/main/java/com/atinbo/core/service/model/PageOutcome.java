@@ -1,5 +1,6 @@
 package com.atinbo.core.service.model;
 
+import com.atinbo.core.base.PageInfo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -17,36 +18,16 @@ import java.util.List;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class PageOutcome<T extends BaseBO> implements Serializable {
-    /**
-     * 默认单页记录数
-     */
-    public static final int DEFAULT_PAGE_SIZE = 10;
-    /**
-     * 默认当前页
-     */
-    public static final int DEFAULT_CURRENT_PAGE = 1;
 
+    /**
+     * 分页信息
+     */
+    private PageInfo page = PageInfo.EMPTY;
     /**
      * 分页数据列表
      */
     private List<T> data;
 
-    /**
-     * 总行数
-     */
-    private Integer totalCount;
-    /**
-     * 页总数
-     */
-    private Integer totalPage;
-    /**
-     * 当前页
-     */
-    private Integer currentPage;
-    /**
-     * 单页记录数
-     */
-    private Integer pageSize;
     /**
      * 是否成功
      */
@@ -66,15 +47,15 @@ public class PageOutcome<T extends BaseBO> implements Serializable {
      */
     public PageOutcome(int pageSize, int currentPage, int totalCount) {
         if (pageSize <= 0) {
-            pageSize = DEFAULT_PAGE_SIZE;
+            pageSize = PageInfo.DEFAULT_PAGE_SIZE;
         }
         if (currentPage <= 0) {
-            currentPage = DEFAULT_CURRENT_PAGE;
+            currentPage = PageInfo.DEFAULT_CURRENT_PAGE;
         }
-        this.pageSize = pageSize;
-        this.currentPage = currentPage;
-        this.totalCount = totalCount;
-        this.totalPage = (totalCount - 1) / pageSize + 1;
+        page.setPageSize(pageSize);
+        page.setCurrentPage(currentPage);
+        page.setTotalCount(totalCount);
+        page.setTotalPage((totalCount - 1) / pageSize + 1);
 
     }
 
@@ -86,15 +67,16 @@ public class PageOutcome<T extends BaseBO> implements Serializable {
      */
     public PageOutcome(int pageSize, int currentPage) {
         if (pageSize <= 0) {
-            pageSize = DEFAULT_PAGE_SIZE;
+            pageSize = PageInfo.DEFAULT_PAGE_SIZE;
         }
         if (currentPage <= 0) {
-            currentPage = DEFAULT_CURRENT_PAGE;
+            currentPage = PageInfo.DEFAULT_CURRENT_PAGE;
         }
-        this.pageSize = pageSize;
-        this.currentPage = currentPage;
-        if (currentPage > totalPage) {
-            this.currentPage = totalPage;
+        page.setPageSize(pageSize);
+        page.setCurrentPage(currentPage);
+
+        if (currentPage > page.getTotalPage()) {
+            page.setCurrentPage(page.getTotalPage());
         }
     }
 
