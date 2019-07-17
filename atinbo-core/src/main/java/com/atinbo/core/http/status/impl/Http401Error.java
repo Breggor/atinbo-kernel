@@ -1,9 +1,9 @@
 package com.atinbo.core.http.status.impl;
 
 
-import com.atinbo.core.http.status.IError401;
+import com.atinbo.core.http.status.IHttpError401;
 
-public enum Enum401Error implements IError401<Enum401Error> {
+public enum Http401Error implements IHttpError401<Http401Error> {
     UNAUTH(401000, "未登录"),
     USER_LOGIN_AUTH_FAILED(401001, "登陆授权失败，账号或密码错误"),
     WECHAT_AUTHENTICATION_FAILED(401002, "微信授权失败"),
@@ -15,7 +15,7 @@ public enum Enum401Error implements IError401<Enum401Error> {
     private Integer code;
     private String message;
 
-    Enum401Error(Integer code, String message) {
+    Http401Error(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

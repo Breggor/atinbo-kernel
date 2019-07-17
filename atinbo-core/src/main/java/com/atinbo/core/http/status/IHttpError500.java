@@ -6,7 +6,7 @@
 package com.atinbo.core.http.status;
 
 
-public interface IError500<T extends Enum<T>> extends IError<T> {
+public interface IHttpError500<T extends Enum<T>> extends IHttpError<T> {
     @Override
     default Integer httpCode() {
         return 500;

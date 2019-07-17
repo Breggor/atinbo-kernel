@@ -1,7 +1,7 @@
 package com.atinbo.core.http.model;
 
 
-import com.atinbo.core.http.status.IError;
+import com.atinbo.core.http.status.IHttpError;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -36,7 +36,7 @@ public class ErrResult implements Serializable {
     private List<ErrorInfo> errors;
 
 
-    public ErrResult(IError error) {
+    public ErrResult(IHttpError error) {
         this.message = error.getMessage();
         this.code = (Integer) error.getCode();
         this.addError(error.reason(), error.getMessage());

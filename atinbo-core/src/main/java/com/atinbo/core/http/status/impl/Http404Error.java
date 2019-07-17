@@ -1,13 +1,13 @@
 package com.atinbo.core.http.status.impl;
 
-import com.atinbo.core.http.status.IError404;
+import com.atinbo.core.http.status.IHttpError404;
 
-public enum Enum404Error implements IError404<Enum404Error> {
+public enum Http404Error implements IHttpError404<Http404Error> {
     NOT_FOUND(404001, "未找到");
     private Integer code;
     private String message;
 
-    Enum404Error(Integer code, String message) {
+    Http404Error(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

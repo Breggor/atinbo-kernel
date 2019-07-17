@@ -6,7 +6,7 @@ package com.atinbo.core.http.status;
  * @param <T>
  * @author breggor
  */
-public interface IError401<T extends Enum<T>> extends IError<T> {
+public interface IHttpError401<T extends Enum<T>> extends IHttpError<T> {
     @Override
     default Integer httpCode() {
         return 401;

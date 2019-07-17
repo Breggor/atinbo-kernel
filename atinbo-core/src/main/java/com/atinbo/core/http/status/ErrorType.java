@@ -1,4 +1,4 @@
-package com.atinbo.core.base;
+package com.atinbo.core.http.status;
 
 
 /**

@@ -1,23 +1,23 @@
 package com.atinbo.core.exception;
 
 
-import com.atinbo.core.http.status.IError;
+import com.atinbo.core.http.status.IHttpError;
 
 /**
  * @author breggor
  */
 public abstract class FrameworkException extends Exception {
-    protected IError error;
+    protected IHttpError error;
 
-    public FrameworkException(IError error) {
+    public FrameworkException(IHttpError error) {
         this.error = error;
     }
 
-    public IError getError() {
+    public IHttpError getError() {
         return this.error;
     }
 
-    public FrameworkException setErrorEnum(IError error) {
+    public FrameworkException setErrorEnum(IHttpError error) {
         this.error = error;
         return this;
     }

@@ -1,9 +1,9 @@
 package com.atinbo.core.http.status.impl;
 
 
-import com.atinbo.core.http.status.IError400;
+import com.atinbo.core.http.status.IHttpError400;
 
-public enum Enum400Error implements IError400<Enum400Error> {
+public enum Http400Error implements IHttpError400<Http400Error> {
     INVALID_PARAM(400001, "非法参数"),
     CREATE_FAILED(400014, "创建失败"),
     UPDATE_ERROR(400002, "更新异常"),
@@ -15,7 +15,7 @@ public enum Enum400Error implements IError400<Enum400Error> {
     private Integer code;
     private String message;
 
-    Enum400Error(Integer code, String message) {
+    Http400Error(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

@@ -1,15 +1,13 @@
 package com.atinbo.core.http.status;
 
 
-import com.atinbo.core.base.ICode;
-
 /**
  * 错误接口
  *
  * @param <T>
  * @author breggor
  */
-public interface IError<T extends Enum<T>> extends ICode<T, Integer> {
+public interface IHttpError<T extends Enum<T>> extends IHttpStatusCode<T> {
     String reason();
 
     Integer httpCode();
@@ -24,6 +22,7 @@ public interface IError<T extends Enum<T>> extends ICode<T, Integer> {
 
     String getMessage();
 
+    @Override
     default T codeOf(Integer code) {
         return null;
     }

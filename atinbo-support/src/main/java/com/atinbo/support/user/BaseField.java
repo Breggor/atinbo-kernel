@@ -5,8 +5,6 @@
 
 package com.atinbo.support.user;
 
-import com.atinbo.support.constants.DeletedEnum;
-
 import java.io.Serializable;
 import java.util.Date;
 

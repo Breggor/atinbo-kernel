@@ -1,16 +1,14 @@
 package com.atinbo.core.http.status.impl;
 
-import com.atinbo.core.http.status.IError500;
+import com.atinbo.core.http.status.IHttpError500;
 
-public enum Enum500Error implements IError500<Enum500Error> {
-    SYSTEM_ERROR(500001, "系统错误"),
-
-    ;
+public enum Http500Error implements IHttpError500<Http500Error> {
+    SYSTEM_ERROR(500001, "系统错误");
 
     private Integer code;
     private String message;
 
-    Enum500Error(Integer code, String message) {
+    Http500Error(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

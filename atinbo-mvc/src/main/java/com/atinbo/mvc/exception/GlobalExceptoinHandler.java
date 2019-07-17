@@ -1,6 +1,6 @@
 package com.atinbo.mvc.exception;
 
-import com.atinbo.core.exception.APIException;
+import com.atinbo.core.exception.HttpAPIException;
 import com.atinbo.core.http.model.ErrResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.atinbo.core.http.status.impl.Enum500Error.SYSTEM_ERROR;
+import static com.atinbo.core.http.status.impl.Http500Error.SYSTEM_ERROR;
 
 @Slf4j
 @RestControllerAdvice
@@ -46,10 +46,10 @@ public class GlobalExceptoinHandler {
     }
 
 
-    @ExceptionHandler(APIException.class)
+    @ExceptionHandler(HttpAPIException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrResult handleBizRuntimeException(HttpServletRequest request,
-                                               HttpServletResponse response, APIException ex) {
+                                               HttpServletResponse response, HttpAPIException ex) {
         return new ErrResult(SYSTEM_ERROR);
     }
 

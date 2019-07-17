@@ -1,6 +1,6 @@
 package com.atinbo.support.starter;
 
-import com.atinbo.core.exception.APIException;
+import com.atinbo.core.exception.HttpAPIException;
 import com.atinbo.core.http.model.ErrResult;
 import org.springframework.web.util.NestedServletException;
 
@@ -24,8 +24,8 @@ public class FrameworkExceptionHandler extends Handler {
         try {
             super.next.handle(url, request, response);
         } catch (NestedServletException e) {
-            if (e.getCause() instanceof APIException) {
-                this.flushFrameworkException(response, (APIException) e.getCause());
+            if (e.getCause() instanceof HttpAPIException) {
+                this.flushFrameworkException(response, (HttpAPIException) e.getCause());
             } else if (e.getCause() instanceof ClassCastException && e.getMessage().contains(SPRING_404_EXCEPTION_MESSAGE)) {
                 response.setStatus(404);
             } else {
@@ -41,7 +41,7 @@ public class FrameworkExceptionHandler extends Handler {
 
     }
 
-    private void flushFrameworkException(HttpServletResponse response, APIException ex) {
+    private void flushFrameworkException(HttpServletResponse response, HttpAPIException ex) {
         ErrResult result = new ErrResult(ex.getError());
         response.setStatus(ex.getError().getHttpCode());
         HttpRender.flushJson(response, result);

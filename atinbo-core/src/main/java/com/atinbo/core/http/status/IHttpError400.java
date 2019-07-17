@@ -7,7 +7,7 @@ package com.atinbo.core.http.status;
  * @param <T>
  * @author breggor
  */
-public interface IError400<T extends Enum<T>> extends IError<T> {
+public interface IHttpError400<T extends Enum<T>> extends IHttpError<T> {
     @Override
     default Integer httpCode() {
         return 400;

@@ -6,7 +6,7 @@ package com.atinbo.core.http.status;
  *
  * @param <T>
  */
-public interface IError404<T extends Enum<T>> extends IError<T> {
+public interface IHttpError404<T extends Enum<T>> extends IHttpError<T> {
     @Override
     default Integer httpCode() {
         return 404;

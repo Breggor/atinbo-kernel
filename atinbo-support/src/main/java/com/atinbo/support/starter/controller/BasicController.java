@@ -5,7 +5,7 @@
 
 package com.atinbo.support.starter.controller;
 
-import com.atinbo.core.exception.APIException;
+import com.atinbo.core.exception.HttpAPIException;
 import com.atinbo.support.error.Enum401Error;
 import com.atinbo.support.exceptions.SessionUserNotFoundException;
 import com.atinbo.support.starter.HttpRender;
@@ -32,22 +32,22 @@ public class BasicController {
     public BasicController() {
     }
 
-    protected SessionUser getSessionUserFromGateway() throws APIException {
+    protected SessionUser getSessionUserFromGateway() throws HttpAPIException {
         return this.getSessionUserFromGateway(this.request);
     }
 
-    protected SessionUser getSessionUserFromGateway(SessionUser defaultSessionUser) throws APIException {
+    protected SessionUser getSessionUserFromGateway(SessionUser defaultSessionUser) throws HttpAPIException {
         return this.getSessionUserFromGateway(this.request, defaultSessionUser);
     }
 
-    protected SessionUser getSessionUserFromGateway(HttpServletRequest request) throws APIException {
+    protected SessionUser getSessionUserFromGateway(HttpServletRequest request) throws HttpAPIException {
         SessionUser defaultSessionUser = new SessionUser();
         defaultSessionUser.setUserName("tester");
         defaultSessionUser.setUserId(-99L);
         return this.getSessionUserFromGateway(request, defaultSessionUser);
     }
 
-    protected SessionUser getSessionUserFromGateway(HttpServletRequest request, SessionUser defaultSessionUser) throws APIException {
+    protected SessionUser getSessionUserFromGateway(HttpServletRequest request, SessionUser defaultSessionUser) throws HttpAPIException {
         SessionUser sessionUserFromGateway = null;
 
         try {
@@ -56,7 +56,7 @@ public class BasicController {
             String strictEvnValue = System.getenv("STRICT");
             boolean isStrictMode = !StringUtils.isEmpty(strictEvnValue) && "KUAICTO".equalsIgnoreCase(strictEvnValue);
             if (isStrictMode) {
-                throw new APIException(Enum401Error.USER_NOT_FOUND);
+                throw new HttpAPIException(Enum401Error.USER_NOT_FOUND);
             }
 
             sessionUserFromGateway = defaultSessionUser;
