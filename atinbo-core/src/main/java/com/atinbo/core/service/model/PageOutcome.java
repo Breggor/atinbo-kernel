@@ -47,6 +47,14 @@ public class PageOutcome<T extends BaseBO> implements Serializable {
      * 单页记录数
      */
     private Integer pageSize;
+    /**
+     * 是否成功
+     */
+    private boolean success = false;
+    /**
+     * 错误信息
+     */
+    private String error;
 
 
     /**
@@ -88,5 +96,28 @@ public class PageOutcome<T extends BaseBO> implements Serializable {
         if (currentPage > totalPage) {
             this.currentPage = totalPage;
         }
+    }
+
+
+    /**
+     * 失败返回结果
+     *
+     * @param error
+     * @param <E>
+     * @return
+     */
+    public static <E extends BaseBO> PageOutcome<E> ofFail(String error) {
+        return new PageOutcome<E>().setError(error);
+    }
+
+    /**
+     * 成功返回结果
+     *
+     * @param data
+     * @param <E>
+     * @return
+     */
+    public static <E extends BaseBO> PageOutcome<E> ofSuccess(List<E> data) {
+        return new PageOutcome<E>().setSuccess(true).setData(data);
     }
 }
