@@ -45,7 +45,7 @@ public class PageInfo implements Serializable {
      */
     private Integer totalCount;
 
-    public PageInfo of(int currentPage, int totalPage, int pageSize, int totalCount) {
+    public static PageInfo of(int currentPage, int totalPage, int pageSize, int totalCount) {
         return new PageInfo(currentPage, totalPage, pageSize, totalCount);
     }
 }
