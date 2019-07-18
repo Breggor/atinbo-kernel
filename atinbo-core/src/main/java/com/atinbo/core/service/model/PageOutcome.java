@@ -8,6 +8,9 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.util.List;
 
+import static com.atinbo.core.constants.CoreConstants.DEFAULT_CURRENT_PAGE;
+import static com.atinbo.core.constants.CoreConstants.DEFAULT_PAGE_SIZE;
+
 /**
  * 服务接口层返回对象
  *
@@ -47,10 +50,10 @@ public class PageOutcome<T extends BaseBO> implements Serializable {
      */
     public PageOutcome(int pageSize, int currentPage, int totalCount) {
         if (pageSize <= 0) {
-            pageSize = PageInfo.DEFAULT_PAGE_SIZE;
+            pageSize = DEFAULT_PAGE_SIZE;
         }
         if (currentPage <= 0) {
-            currentPage = PageInfo.DEFAULT_CURRENT_PAGE;
+            currentPage = DEFAULT_CURRENT_PAGE;
         }
         page.setPageSize(pageSize);
         page.setCurrentPage(currentPage);
@@ -67,10 +70,10 @@ public class PageOutcome<T extends BaseBO> implements Serializable {
      */
     public PageOutcome(int pageSize, int currentPage) {
         if (pageSize <= 0) {
-            pageSize = PageInfo.DEFAULT_PAGE_SIZE;
+            pageSize = DEFAULT_PAGE_SIZE;
         }
         if (currentPage <= 0) {
-            currentPage = PageInfo.DEFAULT_CURRENT_PAGE;
+            currentPage = DEFAULT_CURRENT_PAGE;
         }
         page.setPageSize(pageSize);
         page.setCurrentPage(currentPage);

@@ -17,16 +17,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class PageInfo implements Serializable {
-    public static final PageInfo EMPTY = new PageInfo(null, null, null, null);
 
-    /**
-     * 默认单页记录数
-     */
-    public static final int DEFAULT_PAGE_SIZE = 10;
-    /**
-     * 默认当前页
-     */
-    public static final int DEFAULT_CURRENT_PAGE = 1;
+    public static final PageInfo EMPTY = new PageInfo(null, null, null, null);
 
     /**
      * 当前页

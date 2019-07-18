@@ -1,10 +1,13 @@
 package com.atinbo.core.service.model;
 
+import com.atinbo.core.base.SortInfo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+
+import static com.atinbo.core.constants.CoreConstants.*;
 
 /**
  * 分页传入参数
@@ -15,18 +18,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class PageParam implements Serializable {
-    /**
-     * 默认单页记录数
-     */
-    public static final int DEFAULT_PAGE_SIZE = 10;
-    /**
-     * 最大分页行数
-     */
-    public static final int MAX_PAGE_SIZE = 1000;
-    /**
-     * 默认当前页
-     */
-    public static final int DEFAULT_CURRENT_PAGE = 1;
+
     /**
      * 当前页
      */
@@ -39,7 +31,10 @@ public class PageParam implements Serializable {
      * 起始行
      */
     private Integer offset;
-
+    /**
+     * 排序
+     */
+    private SortInfo sort;
 
     /**
      * @param currentPage 当前页
