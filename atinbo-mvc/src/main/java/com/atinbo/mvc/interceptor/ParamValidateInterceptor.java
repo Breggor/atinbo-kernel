@@ -1,6 +1,7 @@
 package com.atinbo.mvc.interceptor;
 
 import com.atinbo.core.http.model.ErrResult;
+import com.atinbo.core.http.status.HttpStatusCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
@@ -32,9 +33,9 @@ public class ParamValidateInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
 
-        StringBuilder sBuiler = new StringBuilder();
-        if (!checkBusinessParam(request, handler, sBuiler)) {
-            ErrResult resultVO = ErrResult.error(sBuiler.toString());
+        StringBuilder errs = new StringBuilder();
+        if (!checkBusinessParam(request, handler, errs)) {
+            ErrResult resultVO = ErrResult.error(HttpStatusCode.ERR_400.getHttpCode(), errs.toString());
             String resultString = resultVO.toString();
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(resultString);

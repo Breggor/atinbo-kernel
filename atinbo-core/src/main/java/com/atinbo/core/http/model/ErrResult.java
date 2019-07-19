@@ -41,14 +41,8 @@ public class ErrResult implements Serializable {
         this.code = error.getHttpCode();
     }
 
-    public static ErrResult error(Map<String, String> errs) {
-        return error(null, errs);
-    }
-
-    public static ErrResult error(String message) {
-        ErrResult result = new ErrResult();
-        result.setMessage(message);
-        return result;
+    public static ErrResult error(int code, String message) {
+        return new ErrResult().setCode(code).setMessage(message);
     }
 
     public static ErrResult error(HttpStatusCode statusCode, Map<String, String> errs) {
