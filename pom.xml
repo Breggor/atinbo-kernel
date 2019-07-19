@@ -29,7 +29,7 @@
 
     <modules>
         <module>atinbo-core</module>
-        <module>atinbo-support</module>
+        <module>atinbo-boot</module>
         <module>atinbo-mvc</module>
         <module>atinbo-dal</module>
         <module>atinbo-mq</module>
