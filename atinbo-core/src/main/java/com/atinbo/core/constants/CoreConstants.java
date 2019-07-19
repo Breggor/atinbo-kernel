@@ -19,5 +19,5 @@ public interface CoreConstants {
     /**
      * 默认当前页
      */
-    public static final int DEFAULT_CURRENT_PAGE = 1;
+    public static final int DEFAULT_CURRENT_PAGE = 0;
 }

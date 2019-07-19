@@ -8,9 +8,6 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.util.List;
 
-import static com.atinbo.core.constants.CoreConstants.DEFAULT_CURRENT_PAGE;
-import static com.atinbo.core.constants.CoreConstants.DEFAULT_PAGE_SIZE;
-
 /**
  * 服务接口层返回对象
  *
@@ -39,50 +36,6 @@ public class PageOutcome<T extends BaseBO> implements Serializable {
      * 错误信息
      */
     private String error;
-
-
-    /**
-     * 构造函数
-     *
-     * @param pageSize    每页行数
-     * @param currentPage 当前页
-     * @param totalCount  总行数
-     */
-    public PageOutcome(int pageSize, int currentPage, int totalCount) {
-        if (pageSize <= 0) {
-            pageSize = DEFAULT_PAGE_SIZE;
-        }
-        if (currentPage <= 0) {
-            currentPage = DEFAULT_CURRENT_PAGE;
-        }
-        page.setPageSize(pageSize);
-        page.setCurrentPage(currentPage);
-        page.setTotalCount(totalCount);
-        page.setTotalPage((totalCount - 1) / pageSize + 1);
-
-    }
-
-    /**
-     * solr分页时的构造函数
-     *
-     * @param pageSize    单页记录数
-     * @param currentPage 当前页
-     */
-    public PageOutcome(int pageSize, int currentPage) {
-        if (pageSize <= 0) {
-            pageSize = DEFAULT_PAGE_SIZE;
-        }
-        if (currentPage <= 0) {
-            currentPage = DEFAULT_CURRENT_PAGE;
-        }
-        page.setPageSize(pageSize);
-        page.setCurrentPage(currentPage);
-
-        if (currentPage > page.getTotalPage()) {
-            page.setCurrentPage(page.getTotalPage());
-        }
-    }
-
 
     /**
      * 失败返回结果

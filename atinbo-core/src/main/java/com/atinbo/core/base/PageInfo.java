@@ -18,26 +18,35 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class PageInfo implements Serializable {
 
-    public static final PageInfo EMPTY = new PageInfo(null, null, null, null);
+    public static final PageInfo EMPTY = new PageInfo(0, 10, 0, 0);
 
     /**
      * 当前页
      */
-    private Integer currentPage;
+    private int page;
     /**
-     * 页总数
+     * 每页行数
      */
-    private Integer totalPage;
+    private int size;
     /**
-     * 单页记录数
+     * 总页数
      */
-    private Integer pageSize;
+    private int total;
     /**
      * 总行数
      */
-    private Integer totalCount;
+    private long rows;
 
-    public static PageInfo of(int currentPage, int totalPage, int pageSize, int totalCount) {
-        return new PageInfo(currentPage, totalPage, pageSize, totalCount);
+    /**
+     * 创建分页
+     *
+     * @param page  当前页
+     * @param size  每页行数
+     * @param total 总页数
+     * @param rows  总行数
+     * @return
+     */
+    public static PageInfo of(int page, int size, int total, long rows) {
+        return new PageInfo(page, size, total, rows);
     }
 }
