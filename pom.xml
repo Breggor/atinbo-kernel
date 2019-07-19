@@ -13,7 +13,7 @@
     </parent>
 
     <properties>
-        <atinbo-common.version>1.0.0-SNAPSHOT</atinbo-common.version>
+        <atinbo-kernel.version>1.0.0-SNAPSHOT</atinbo-kernel.version>
     </properties>
 
     <dependencyManagement>
@@ -21,7 +21,7 @@
             <dependency>
                 <groupId>com.atinbo</groupId>
                 <artifactId>atinbo-core</artifactId>
-                <version>${atinbo-common.version}</version>
+                <version>${atinbo-kernel.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -33,7 +33,7 @@
         <module>atinbo-mvc</module>
         <module>atinbo-dal</module>
         <module>atinbo-mq</module>
-        <module>atinbo-dependencies</module>
+        <module>atinbo-deps</module>
     </modules>
 
     <build>

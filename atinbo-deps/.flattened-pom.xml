@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.atinbo</groupId>
-  <artifactId>atinbo-dependencies</artifactId>
+  <artifactId>atinbo-deps</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <distributionManagement>
@@ -19,8 +19,8 @@
     </snapshotRepository>
   </distributionManagement>
   <properties>
-    <atinbo-common.version>1.0.0-SNAPSHOT</atinbo-common.version>
     <java.version>1.8</java.version>
+    <atinbo-kernel.version>1.0.0-SNAPSHOT</atinbo-kernel.version>
     <flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -29,27 +29,27 @@
       <dependency>
         <groupId>com.atinbo</groupId>
         <artifactId>atinbo-core</artifactId>
-        <version>${atinbo-common.version}</version>
+        <version>${atinbo-kernel.version}</version>
       </dependency>
       <dependency>
         <groupId>com.atinbo</groupId>
         <artifactId>atinbo-dal</artifactId>
-        <version>${atinbo-common.version}</version>
+        <version>${atinbo-kernel.version}</version>
       </dependency>
       <dependency>
         <groupId>com.atinbo</groupId>
         <artifactId>atinbo-mvc</artifactId>
-        <version>${atinbo-common.version}</version>
+        <version>${atinbo-kernel.version}</version>
       </dependency>
       <dependency>
         <groupId>com.atinbo</groupId>
         <artifactId>atinbo-mq</artifactId>
-        <version>${atinbo-common.version}</version>
+        <version>${atinbo-kernel.version}</version>
       </dependency>
       <dependency>
         <groupId>com.atinbo</groupId>
-        <artifactId>atinbo-support</artifactId>
-        <version>${atinbo-common.version}</version>
+        <artifactId>atinbo-boot</artifactId>
+        <version>${atinbo-kernel.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
