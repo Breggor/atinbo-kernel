@@ -1,7 +1,7 @@
 package com.atinbo.core.http.model;
 
 
-import com.atinbo.core.http.status.IHttpError;
+import com.atinbo.core.http.status.HttpStatusCode;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -36,23 +36,28 @@ public class ErrResult implements Serializable {
     private List<ErrorInfo> errors;
 
 
-    public ErrResult(IHttpError error) {
+    public ErrResult(HttpStatusCode error) {
         this.message = error.getMessage();
-        this.code = (Integer) error.getCode();
-        this.addError(error.reason(), error.getMessage());
+        this.code = error.getHttpCode();
     }
 
     public static ErrResult error(Map<String, String> errs) {
-        ErrResult result = new ErrResult();
-        if (null != errs && !errs.isEmpty()) {
-            errs.entrySet().stream().forEach(obj -> result.addError(obj.getKey(), obj.getValue()));
-        }
-        return result;
+        return error(null, errs);
     }
 
     public static ErrResult error(String message) {
         ErrResult result = new ErrResult();
         result.setMessage(message);
+        return result;
+    }
+
+    public static ErrResult error(HttpStatusCode statusCode, Map<String, String> errs) {
+        ErrResult result = new ErrResult();
+        result.setCode(statusCode.getHttpCode());
+        result.setMessage(statusCode.getMessage());
+        if (null != errs && !errs.isEmpty()) {
+            errs.entrySet().stream().forEach(obj -> result.addError(obj.getKey(), obj.getValue()));
+        }
         return result;
     }
 

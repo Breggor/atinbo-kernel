@@ -1,7 +1,7 @@
 package com.atinbo.core.exception;
 
 
-import com.atinbo.core.http.status.IHttpError;
+import com.atinbo.core.http.status.HttpStatusCode;
 
 /**
  * 接口异常
@@ -9,7 +9,7 @@ import com.atinbo.core.http.status.IHttpError;
  * @author breggor
  */
 public class HttpAPIException extends FrameworkException {
-    public HttpAPIException(IHttpError error) {
+    public HttpAPIException(HttpStatusCode error) {
         super(error);
     }
 

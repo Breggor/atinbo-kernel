@@ -6,7 +6,7 @@
 package com.atinbo.support.starter.controller;
 
 import com.atinbo.core.exception.HttpAPIException;
-import com.atinbo.support.error.Enum401Error;
+import com.atinbo.core.http.status.HttpStatusCode;
 import com.atinbo.support.exceptions.SessionUserNotFoundException;
 import com.atinbo.support.starter.HttpRender;
 import com.atinbo.support.starter.LoggerHelper;
@@ -56,7 +56,7 @@ public class BasicController {
             String strictEvnValue = System.getenv("STRICT");
             boolean isStrictMode = !StringUtils.isEmpty(strictEvnValue) && "KUAICTO".equalsIgnoreCase(strictEvnValue);
             if (isStrictMode) {
-                throw new HttpAPIException(Enum401Error.USER_NOT_FOUND);
+                throw new HttpAPIException(HttpStatusCode.ERR_401);
             }
 
             sessionUserFromGateway = defaultSessionUser;
