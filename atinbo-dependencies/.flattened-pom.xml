@@ -43,6 +43,11 @@
       </dependency>
       <dependency>
         <groupId>com.atinbo</groupId>
+        <artifactId>atinbo-mq</artifactId>
+        <version>${atinbo-common.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.atinbo</groupId>
         <artifactId>atinbo-support</artifactId>
         <version>${atinbo-common.version}</version>
       </dependency>
