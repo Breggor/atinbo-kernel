@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.atinbo.core.http.status.HttpStatusCode.ERR_500;
+
 
 /**
  * SpringMVC 统一拦截
@@ -42,18 +44,17 @@ public class GlobalExceptoinHandler {
 
 
     /**
-     * 请求参数无法绑定异常拦截
+     * 请求没有数据异常拦截
      *
      * @param e
      * @return
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrResult handleBindException(HttpMessageNotReadableException e) {
+    public ErrResult handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         log.error(e.getMessage(), e);
         return ErrResult.error(HttpStatusCode.ERR_400.getHttpCode(), ErrorType.DATA_INVALID.getLabel());
     }
-
 
     /**
      * 自定义HttpAPI异常处理
@@ -63,9 +64,9 @@ public class GlobalExceptoinHandler {
      */
     @ExceptionHandler(HttpAPIException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrResult handleBizRuntimeException(HttpAPIException e) {
+    public ErrResult handleHttpAPIException(HttpAPIException e) {
         log.error(e.getMessage(), e);
-        return new ErrResult(HttpStatusCode.ERR_500);
+        return new ErrResult(ERR_500);
     }
 
     /**
@@ -78,7 +79,21 @@ public class GlobalExceptoinHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrResult handleRuntimeException(RuntimeException e) {
         log.error(e.getMessage(), e);
-        return new ErrResult(HttpStatusCode.ERR_500);
+        return new ErrResult(ERR_500);
+    }
+
+
+    /**
+     * 服务器内部异常
+     *
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrResult handleException(Exception ex) {
+        log.error(ex.getMessage(), ex);
+        return ErrResult.error(ERR_500.getHttpCode(), ERR_500.getMessage());
     }
 
 
