@@ -50,7 +50,7 @@ public class ErrResult implements Serializable {
         result.setCode(statusCode.getHttpCode());
         result.setMessage(statusCode.getMessage());
         if (null != errs && !errs.isEmpty()) {
-            errs.entrySet().stream().forEach(obj -> result.addError(obj.getKey(), obj.getKey() + ": " + obj.getValue()));
+            errs.entrySet().stream().forEach(obj -> result.addError(obj.getKey(), obj.getValue()));
         }
         return result;
     }
