@@ -14,11 +14,12 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class ErrorInfo implements Serializable {
     /**
-     * 消息
-     */
-    private String message;
-    /**
      * 原因
      */
     private String reason;
+
+    /**
+     * 消息
+     */
+    private String message;
 }

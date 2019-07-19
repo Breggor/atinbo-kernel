@@ -50,15 +50,15 @@ public class ErrResult implements Serializable {
         result.setCode(statusCode.getHttpCode());
         result.setMessage(statusCode.getMessage());
         if (null != errs && !errs.isEmpty()) {
-            errs.entrySet().stream().forEach(obj -> result.addError(obj.getKey(), obj.getValue()));
+            errs.entrySet().stream().forEach(obj -> result.addError(obj.getKey(), obj.getKey() + ": " + obj.getValue()));
         }
         return result;
     }
 
-    public void addError(String message, String reason) {
+    public void addError(String reason, String message) {
         if (this.errors == null) {
             this.errors = new ArrayList<>();
         }
-        this.errors.add(new ErrorInfo().setMessage(message).setReason(reason));
+        this.errors.add(new ErrorInfo().setReason(reason).setMessage(message));
     }
 }
