@@ -55,7 +55,22 @@ public class ErrResult implements Serializable {
         return result;
     }
 
-    public void addError(String reason, String message) {
+    public static ErrResult error(int httpCode, String message, String reason) {
+        ErrResult result = new ErrResult();
+        result.setCode(httpCode);
+        result.setMessage(message);
+        result.addError(reason);
+        return result;
+    }
+
+    private void addError(String reason) {
+        if (this.errors == null) {
+            this.errors = new ArrayList<>();
+        }
+        this.errors.add(new ErrorInfo().setReason(reason));
+    }
+
+    private void addError(String reason, String message) {
         if (this.errors == null) {
             this.errors = new ArrayList<>();
         }

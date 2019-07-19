@@ -27,7 +27,7 @@ public class jacksonJsonUtils {
         //默认SerializationFeature.FAIL_ON_EMPTY_BEANS为true,实体不提供getter、setter方法时报错
         //No serializer found for class com.clr.api.client.service.test.TestService$User
         //and no properties discovered to create BeanSerializer
-        //(to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) )
+        //(to avoid handler, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) )
         mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 //		mapper.configure(Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
 //		mapper.setDateFormat(new SimpleDateFormat(DateUtil.defaultFormat));

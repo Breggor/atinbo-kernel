@@ -7,6 +7,8 @@ import org.springframework.web.util.NestedServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static com.atinbo.core.http.status.HttpStatusCode.ERR_500;
+
 
 /**
  * 异常处理器
@@ -50,11 +52,7 @@ public class FrameworkExceptionHandler extends Handler {
 
     private void flushException500(HttpServletResponse response, Exception e) {
         response.setStatus(500);
-        ErrResult result = new ErrResult();
-        result.setMessage(e.getMessage());
-        result.setCode(500);
-        result.addError("Internal Server Error", e.getMessage());
-
+        ErrResult result = ErrResult.error(ERR_500.getHttpCode(), ERR_500.getMessage(), e.getMessage());
         HttpRender.flushJson(response, result);
     }
 }

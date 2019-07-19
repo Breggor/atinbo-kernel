@@ -1,4 +1,4 @@
-package com.atinbo.mvc.exception;
+package com.atinbo.mvc.handler;
 
 import com.atinbo.core.exception.HttpAPIException;
 import com.atinbo.core.http.model.ErrResult;
@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.atinbo.core.http.status.HttpStatusCode.ERR_500;
+import static com.atinbo.core.http.status.HttpStatusCode.*;
 
 
 /**
@@ -27,7 +29,7 @@ import static com.atinbo.core.http.status.HttpStatusCode.ERR_500;
  */
 @Slf4j
 @RestControllerAdvice
-public class GlobalExceptoinHandler {
+public class HttpExceptoinHandler {
 
     /**
      * 请求参数无法验证异常拦截
@@ -56,6 +58,33 @@ public class GlobalExceptoinHandler {
         return ErrResult.error(HttpStatusCode.ERR_400.getHttpCode(), ErrorType.DATA_INVALID.getLabel());
     }
 
+
+    /**
+     * 请求方法不被服务支持异常拦截
+     *
+     * @param e
+     * @return
+     */
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ErrResult handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+        log.error(e.getMessage(), e);
+        return ErrResult.error(ERR_405.getHttpCode(), ERR_405.getMessage());
+    }
+
+    /**
+     * 服务器拒绝服务，原因是请求格式不被支持异常拦截
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
+    public ErrResult handleHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException e) {
+        log.error(e.getMessage(), e);
+        return ErrResult.error(ERR_415.getHttpCode(), ERR_415.getMessage());
+    }
+
     /**
      * 自定义HttpAPI异常处理
      *
@@ -66,7 +95,7 @@ public class GlobalExceptoinHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrResult handleHttpAPIException(HttpAPIException e) {
         log.error(e.getMessage(), e);
-        return new ErrResult(ERR_500);
+        return ErrResult.error(ERR_500.getHttpCode(), ERR_500.getMessage(), e.getMessage());
     }
 
     /**
@@ -75,25 +104,11 @@ public class GlobalExceptoinHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler(value = {Exception.class, RuntimeException.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrResult handleRuntimeException(RuntimeException e) {
+    public ErrResult handleException(Exception e) {
         log.error(e.getMessage(), e);
-        return new ErrResult(ERR_500);
-    }
-
-
-    /**
-     * 服务器内部异常
-     *
-     * @param ex
-     * @return
-     */
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrResult handleException(Exception ex) {
-        log.error(ex.getMessage(), ex);
-        return ErrResult.error(ERR_500.getHttpCode(), ERR_500.getMessage());
+        return ErrResult.error(ERR_500.getHttpCode(), ERR_500.getMessage(), e.getMessage());
     }
 
 
