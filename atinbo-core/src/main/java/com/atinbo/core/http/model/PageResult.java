@@ -19,13 +19,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class PageResult<T extends BaseVO> implements Serializable {
-
-    private PageInfo page;
+public class PageResult<T extends BaseVO> extends PageInfo implements Serializable {
     /**
      * 分页数据列表
      */
     private List<T> data;
+
+    public PageResult(PageInfo page, List<T> data) {
+        super(page.getPage(), page.getSize(), page.getTotal(), page.getRows());
+        this.data = data;
+    }
 
     /**
      * @param page
