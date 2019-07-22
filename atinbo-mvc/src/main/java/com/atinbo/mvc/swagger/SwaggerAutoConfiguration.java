@@ -4,8 +4,6 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -32,12 +30,6 @@ import java.util.stream.Collectors;
 public class SwaggerAutoConfiguration {
 
     @Bean
-    @ConditionalOnMissingBean
-    public SwaggerProperties swaggerProperties() {
-        return new SwaggerProperties();
-    }
-
-    @Bean
     @ConditionalOnProperty(prefix = "swagger", name = "enabled", havingValue = "true", matchIfMissing = false)
     public Docket autoEnableSwagger(SwaggerProperties swaggerProperties) {
         // api信息
@@ -47,7 +39,7 @@ public class SwaggerAutoConfiguration {
                 .license(swaggerProperties.getLicense())
                 .licenseUrl(swaggerProperties.getLicenseUrl())
                 .version(swaggerProperties.getVersion())
-                .contact(new Contact(swaggerProperties.getContactName(),swaggerProperties.getContactUrl(),swaggerProperties.getContactEmail()))
+                .contact(new Contact(swaggerProperties.getContactName(), swaggerProperties.getContactUrl(), swaggerProperties.getContactEmail()))
                 .build();
 
         // 忽略路径

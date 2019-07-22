@@ -1,14 +1,13 @@
 package com.atinbo.core.spring;
 
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.Validate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.EmbeddedValueResolverAware;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringValueResolver;
 
 /**
  * 以静态变量保存Spring ApplicationContext, 可在任何代码任何地方任何时候取出ApplicaitonContext.
@@ -22,14 +21,15 @@ import org.springframework.util.StringValueResolver;
  *
  * @author Breggor
  */
+@Slf4j
 @Component
-public class SpringContextHolder implements ApplicationContextAware, EmbeddedValueResolverAware, DisposableBean {
+@Lazy(false)
+public class SpringContextHolder implements ApplicationContextAware, DisposableBean {
 
-    private static Logger logger = LoggerFactory.getLogger(SpringContextHolder.class);
 
     private static ApplicationContext applicationContext = null;
 
-    private static StringValueResolver stringValueResolver = null;
+//    private static StringValueResolver stringValueResolver = null;
 
     /**
      * 取得存储在静态变量中的ApplicationContext.
@@ -44,7 +44,7 @@ public class SpringContextHolder implements ApplicationContextAware, EmbeddedVal
      */
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
-        logger.debug("注入ApplicationContext:{}", applicationContext);
+        log.debug("注入ApplicationContext:{}", applicationContext);
         if (SpringContextHolder.applicationContext == null) {
             SpringContextHolder.applicationContext = applicationContext;
         }
@@ -80,9 +80,9 @@ public class SpringContextHolder implements ApplicationContextAware, EmbeddedVal
      * 清除SpringContextHolder中的ApplicationContext为Null.
      */
     public static void clearHolder() {
-        logger.debug("清除SpringContextHolder中的ApplicationContext:{}", applicationContext);
+        log.debug("清除SpringContextHolder中的ApplicationContext:{}", applicationContext);
         applicationContext = null;
-        stringValueResolver = null;
+//        stringValueResolver = null;
     }
 
     /**
@@ -95,39 +95,39 @@ public class SpringContextHolder implements ApplicationContextAware, EmbeddedVal
     /**
      * 检查stringValueResolver不为空.
      */
-    public static void assertStringValueInjected() {
-        Validate.validState(stringValueResolver != null, "stringValueResolver属性未注入");
-    }
+//    public static void assertStringValueInjected() {
+//        Validate.validState(stringValueResolver != null, "stringValueResolver属性未注入");
+//    }
 
     /**
      * 从静态变量applicationContext中取得property, 自动转型为所赋值对象的类型.
      */
-    @SuppressWarnings("unchecked")
-    public static <T> T getProperty(String name) {
-        assertApplicationContextInjected();
-        assertStringValueInjected();
-        return (T) stringValueResolver.resolveStringValue(String.format("${%s}", name));
-    }
+//    @SuppressWarnings("unchecked")
+//    public static <T> T getProperty(String name) {
+//        assertApplicationContextInjected();
+//        assertStringValueInjected();
+//        return (T) stringValueResolver.resolveStringValue(String.format("${%s}", name));
+//    }
 
     /**
      * 实现DisposableBean接口, 在Context关闭时清理静态变量.
      */
-    public void destroy() throws Exception {
+    @Override
+    @SneakyThrows
+    public void destroy() {
         SpringContextHolder.clearHolder();
     }
 
     /**
      * 实现EmbeddedValueResolverAware接口，将配置文件中的配置信息保存
      *
-     * @param stringValueResolver
+     * @param resolver
      */
-    @Override
-    public void setEmbeddedValueResolver(StringValueResolver stringValueResolver) {
-        logger.debug("注入stringValueResolver:{}", stringValueResolver);
-        if (SpringContextHolder.stringValueResolver == null) {
-            SpringContextHolder.stringValueResolver = stringValueResolver;
-        }
-    }
+//    @Override
+//    public void setEmbeddedValueResolver(StringValueResolver resolver) {
+//        logger.debug("注入stringValueResolver:{}", stringValueResolver);
+//        if (SpringContextHolder.stringValueResolver == null) {
+//            SpringContextHolder.stringValueResolver = stringValueResolver;
+//        }
+//    }
 }
-
-
