@@ -14,8 +14,5 @@
     <modules>
         <module>atinbo-log-spring-boot-starter</module>
     </modules>
-    <properties>
-        <atinbo-kernel.version>1.0.0-SNAPSHOT</atinbo-kernel.version>
-    </properties>
 
 </project>
