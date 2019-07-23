@@ -3,7 +3,7 @@ package com.atinbo.log.util;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.http.HttpUtil;
-import com.atinbo.log.model.SystemLog;
+import com.atinbo.log.model.SysLogSource;
 import lombok.experimental.UtilityClass;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -18,38 +18,38 @@ import java.util.Objects;
  */
 @UtilityClass
 public class SystemLogUtils {
-	public SystemLog getSystemLog() {
-		HttpServletRequest request = ((ServletRequestAttributes) Objects
-			.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
-		SystemLog sysLog = new SystemLog();
-		sysLog.setCreateBy(Objects.requireNonNull(getUsername()));
-		//TODO 日志类型定义
-		sysLog.setType("0");
-		sysLog.setRemoteAddr(ServletUtil.getClientIP(request));
-		sysLog.setRequestUri(URLUtil.getPath(request.getRequestURI()));
-		sysLog.setMethod(request.getMethod());
-		sysLog.setUserAgent(request.getHeader("user-agent"));
-		sysLog.setParams(HttpUtil.toParams(request.getParameterMap()));
-		sysLog.setServiceId(getClientId());
-		return sysLog;
-	}
+    public SysLogSource getSystemLog() {
+        HttpServletRequest request = ((ServletRequestAttributes) Objects
+                .requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+        SysLogSource logSource = new SysLogSource();
+        logSource.setCreateBy(Objects.requireNonNull(getUsername()));
+        //TODO 日志类型定义
+        logSource.setType("0");
+        logSource.setRemoteAddr(ServletUtil.getClientIP(request));
+        logSource.setRequestUri(URLUtil.getPath(request.getRequestURI()));
+        logSource.setMethod(request.getMethod());
+        logSource.setUserAgent(request.getHeader("user-agent"));
+        logSource.setParams(HttpUtil.toParams(request.getParameterMap()));
+        logSource.setServiceId(getClientId());
+        return logSource;
+    }
 
-	/**
-	 * 获取客户端
-	 *
-	 * @return clientId
-	 */
-	private String getClientId() {
-		return null;
-	}
+    /**
+     * Gateway header X-GW-CLIENT-ID获取客户端
+     *
+     * @return clientId
+     */
+    private String getClientId() {
+        return null;
+    }
 
-	/**
-	 * 获取用户名称
-	 *
-	 * @return username
-	 */
-	private String getUsername() {
-		return "";
-	}
+    /**
+     * Gateway header X-GW-USER获取用户名称
+     *
+     * @return username
+     */
+    private String getUsername() {
+        return "";
+    }
 
 }

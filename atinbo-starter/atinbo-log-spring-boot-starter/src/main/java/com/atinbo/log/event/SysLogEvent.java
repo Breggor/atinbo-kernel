@@ -1,6 +1,6 @@
 package com.atinbo.log.event;
 
-import com.atinbo.log.model.SystemLog;
+import com.atinbo.log.model.SysLogSource;
 import org.springframework.context.ApplicationEvent;
 
 /**
@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationEvent;
  */
 public class SysLogEvent extends ApplicationEvent {
 
-	public SysLogEvent(SystemLog source) {
+	public SysLogEvent(SysLogSource source) {
 		super(source);
 	}
 }

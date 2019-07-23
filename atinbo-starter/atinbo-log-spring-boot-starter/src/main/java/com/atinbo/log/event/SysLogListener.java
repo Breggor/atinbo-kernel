@@ -1,6 +1,6 @@
 package com.atinbo.log.event;
 
-import com.atinbo.log.model.SystemLog;
+import com.atinbo.log.model.SysLogSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
@@ -18,7 +18,7 @@ public class SysLogListener {
 	@Order
 	@EventListener(SysLogEvent.class)
 	public void saveSysLog(SysLogEvent event) {
-		SystemLog systemLog = (SystemLog) event.getSource();
+		SysLogSource systemLog = (SysLogSource) event.getSource();
 		//TODO 日志存储
 		log.info("systemLog:{}", systemLog);
 	}

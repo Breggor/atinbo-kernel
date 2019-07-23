@@ -3,7 +3,7 @@ package com.atinbo.log.aspect;
 import com.atinbo.core.spring.SpringContextHolder;
 import com.atinbo.log.annotation.SysLog;
 import com.atinbo.log.event.SysLogEvent;
-import com.atinbo.log.model.SystemLog;
+import com.atinbo.log.model.SysLogSource;
 import com.atinbo.log.util.SystemLogUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +31,7 @@ public class SysLogAspect {
         String strMethodName = point.getSignature().getName();
         log.info("[模块]:{},[类名]:{},[方法]:{},[日志]:{}", module, strClassName, strMethodName, sysLog.value());
 
-		SystemLog logVo = SystemLogUtils.getSystemLog();
+		SysLogSource logVo = SystemLogUtils.getSystemLog();
 		logVo.setTitle(sysLog.value());
         // 发送异步日志事件
         Long startTime = System.currentTimeMillis();
