@@ -25,24 +25,18 @@
 
             <dependency>
                 <groupId>com.atinbo</groupId>
-                <artifactId>atinbo-dal</artifactId>
-                <version>${atinbo-kernel.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.atinbo</groupId>
                 <artifactId>atinbo-dal-mongo</artifactId>
-                <version>${project.version}</version>
+                <version>${atinbo-kernel.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.atinbo</groupId>
                 <artifactId>atinbo-dal-redis</artifactId>
-                <version>${project.version}</version>
+                <version>${atinbo-kernel.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.atinbo</groupId>
                 <artifactId>atinbo-dal-cache</artifactId>
-                <version>${project.version}</version>
+                <version>${atinbo-kernel.version}</version>
             </dependency>
 
             <dependency>
