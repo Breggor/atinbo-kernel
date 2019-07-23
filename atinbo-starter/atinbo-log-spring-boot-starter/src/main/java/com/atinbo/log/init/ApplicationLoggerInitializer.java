@@ -20,7 +20,7 @@ public class ApplicationLoggerInitializer implements ApplicationContextInitializ
 
 		String logBase = environment.getProperty("LOGGING_PATH", "logs");
 
-		String logName = environment.getProperty("sys.log.name", appName.concat(".sys.log"));
+		String logName = environment.getProperty("sys.log.name", "debug.log");
 		// spring boot admin 直接加载日志
 		System.setProperty("logging.file", String.format("%s/%s/%s", logBase, appName, logName));
 	}
