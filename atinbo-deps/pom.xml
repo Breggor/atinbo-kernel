@@ -56,6 +56,12 @@
                 <artifactId>atinbo-boot</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.atinbo</groupId>
+                <artifactId>atinbo-log-spring-boot-starter</artifactId>
+                <version>${atinbo-kernel.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
