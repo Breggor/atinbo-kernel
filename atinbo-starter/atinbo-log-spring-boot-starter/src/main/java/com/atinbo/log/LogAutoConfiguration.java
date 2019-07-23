@@ -1,6 +1,7 @@
 package com.atinbo.log;
 
 import com.atinbo.log.aspect.SysLogAspect;
+import com.atinbo.log.event.SysLogListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -17,5 +18,10 @@ public class LogAutoConfiguration {
     @Bean
     public SysLogAspect sysLogAspect() {
         return new SysLogAspect();
+    }
+
+    @Bean
+    public SysLogListener sysLogListener() {
+        return new SysLogListener();
     }
 }

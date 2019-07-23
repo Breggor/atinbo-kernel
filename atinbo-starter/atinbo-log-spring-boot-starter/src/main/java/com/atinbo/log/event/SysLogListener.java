@@ -18,8 +18,8 @@ public class SysLogListener {
 	@Order
 	@EventListener(SysLogEvent.class)
 	public void saveSysLog(SysLogEvent event) {
-		SysLogSource systemLog = (SysLogSource) event.getSource();
+		SysLogSource logSource = (SysLogSource) event.getSource();
 		//TODO 日志存储
-		log.info("systemLog:{}", systemLog);
+		log.info("logSource:{}", logSource);
 	}
 }
