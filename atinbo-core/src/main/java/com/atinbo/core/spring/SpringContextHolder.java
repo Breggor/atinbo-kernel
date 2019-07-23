@@ -6,6 +6,7 @@ import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -91,6 +92,19 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
     public static void assertApplicationContextInjected() {
         Validate.validState(applicationContext != null, "applicaitonContext属性未注入, 请在applicationContext.xml中定义SpringContextHolder.");
     }
+
+    /**
+     * 发布事件
+     *
+     * @param event
+     */
+    public static void publishEvent(ApplicationEvent event) {
+        if (applicationContext == null) {
+            return;
+        }
+        applicationContext.publishEvent(event);
+    }
+
 
     /**
      * 检查stringValueResolver不为空.
