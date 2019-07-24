@@ -1,4 +1,4 @@
-package com.atinbo.mvc.swagger;
+package com.atinbo.swagger;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

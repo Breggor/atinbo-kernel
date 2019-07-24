@@ -1,13 +1,13 @@
-package com.atinbo.mvc.swagger;
+package com.atinbo.swagger;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.StringUtils;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -15,6 +15,7 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
  * @date 2019-07-18
  */
 @Configuration
+@EnableSwagger2
 @EnableConfigurationProperties(SwaggerProperties.class)
 public class SwaggerAutoConfiguration {
 
@@ -45,7 +47,7 @@ public class SwaggerAutoConfiguration {
         // 忽略路径
         String excludePaths = swaggerProperties.getExcludePaths();
         List<Predicate<String>> exclude = new ArrayList<>();
-        if (StringUtils.isNotEmpty(excludePaths)) {
+        if (!StringUtils.isEmpty(excludePaths)) {
             exclude = Arrays.stream(excludePaths.split(","))
                     .map(PathSelectors::ant)
                     .collect(Collectors.toList());
