@@ -1,4 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.atinbo.log.LogAutoConfiguration
 org.springframework.context.ApplicationContextInitializer=\
-    com.pig4cloud.pig.common.log.init.ApplicationLoggerInitializer
+    com.atinbo.log.init.ApplicationLoggerInitializer
