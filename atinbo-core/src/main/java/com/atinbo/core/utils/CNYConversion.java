@@ -3,11 +3,11 @@ package com.atinbo.core.utils;
 import java.math.BigDecimal;
 
 /**
- * 金额换算工具
+ * 人民币换算
  * 支持元转分，分转元
  * Created by Breggor on 2015/10/28.
  */
-public abstract class AmountConversion {
+public abstract class CNYConversion {
 
 
     /**
@@ -37,10 +37,4 @@ public abstract class AmountConversion {
         }
         return val;
     }
-
-//    public static void main(String[] args) {
-//        System.out.println(AmountConversion.fenToYuan(1990));
-//        System.out.println(AmountConversion.yuanToFen(39.109));
-//    }
-
 }
