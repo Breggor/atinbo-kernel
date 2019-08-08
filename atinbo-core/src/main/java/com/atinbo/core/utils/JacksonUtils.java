@@ -15,19 +15,21 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Map;
 
-public class jacksonJsonUtils {
+
+/**
+ * JacksonUtils
+ *
+ * @author breggor
+ */
+public class JacksonUtils {
 
     public static ObjectMapper mapper = new ObjectMapper();
 
     static {
         mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
         mapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
-        //json字符串中的某key在实体中无法找到对应的映射，会报错。
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         //默认SerializationFeature.FAIL_ON_EMPTY_BEANS为true,实体不提供getter、setter方法时报错
-        //No serializer found for class com.clr.api.client.service.test.TestService$User
-        //and no properties discovered to create BeanSerializer
-        //(to avoid handler, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) )
         mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 //		mapper.configure(Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
 //		mapper.setDateFormat(new SimpleDateFormat(DateUtil.defaultFormat));
