@@ -50,6 +50,5 @@
             <groupId>com.atinbo</groupId>
             <artifactId>atinbo-core</artifactId>
         </dependency>
-
     </dependencies>
 </project>
