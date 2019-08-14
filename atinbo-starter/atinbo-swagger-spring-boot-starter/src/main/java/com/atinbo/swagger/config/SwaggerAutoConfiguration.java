@@ -1,9 +1,10 @@
-package com.atinbo.swagger;
+package com.atinbo.swagger.config;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,13 +29,15 @@ import java.util.stream.Collectors;
  * @date 2019-07-18
  */
 @Configuration
-@EnableSwagger2
 @EnableConfigurationProperties(SwaggerProperties.class)
+@ConditionalOnBean(annotation = EnableSwagger2.class)
 public class SwaggerAutoConfiguration {
+    @Resource
+    private SwaggerProperties swaggerProperties;
 
     @Bean
-    @ConditionalOnProperty(prefix = "swagger", name = "enabled", havingValue = "true", matchIfMissing = false)
-    public Docket autoEnableSwagger(SwaggerProperties swaggerProperties) {
+    @ConditionalOnMissingBean(Docket.class)
+    public Docket autoEnableSwagger() {
         // api信息
         ApiInfo apiInfo = new ApiInfoBuilder()
                 .title(swaggerProperties.getTitle())

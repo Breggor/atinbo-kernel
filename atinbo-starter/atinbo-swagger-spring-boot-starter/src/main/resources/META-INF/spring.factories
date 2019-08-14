@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.atinbo.swagger.SwaggerAutoConfiguration
+com.atinbo.swagger.config.SwaggerAutoConfiguration

@@ -45,3 +45,9 @@ Thumbs.db
 将删除 atinbo-support/src/main/java/com/atinbo/support/starter/interceptor/
 将删除 atinbo-support/src/main/resources/
 将删除 atinbo-support/src/test/
+将删除 atinbo-boot/src/main/resources/
+将删除 atinbo-boot/src/test/
+将删除 atinbo-dal/atinbo-dal-redis/src/main/resources/
+将删除 atinbo-dal/atinbo-dal-redis/src/test/
+将删除 atinbo-mq/atinbo-mq-kafka/src/
+将删除 atinbo-mq/atinbo-mq-rocketmq/src/
