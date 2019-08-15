@@ -1,6 +1,6 @@
 package com.atinbo.rocketmq.autoconfig;
 
-import com.atinbo.rocketmq.annotation.EnableMQConfiguration;
+import com.atinbo.rocketmq.annotation.EnableRocketMQ;
 import com.atinbo.rocketmq.base.AbstractMQProducer;
 import com.atinbo.rocketmq.base.AbstractMQPushConsumer;
 import org.springframework.beans.BeansException;
@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
  * @author breggor
  */
 @Configuration
-@ConditionalOnBean(annotation = EnableMQConfiguration.class)
+@ConditionalOnBean(annotation = EnableRocketMQ.class)
 @AutoConfigureAfter({AbstractMQProducer.class, AbstractMQPushConsumer.class})
 @EnableConfigurationProperties(MQProperties.class)
 public class MQBaseAutoConfiguration implements ApplicationContextAware {
