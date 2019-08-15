@@ -4,8 +4,9 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * Created by yipin on 2017/6/28.
  * RocketMQ的配置参数
+ *
+ * @author breggor
  */
 @Data
 @ConfigurationProperties(prefix = "spring.rocketmq")
@@ -31,5 +32,15 @@ public class MQProperties {
      * switch of send message with vip channel
      */
     private Boolean vipChannelEnabled = Boolean.TRUE;
+
+    /**
+     * The property of "access-key".
+     */
+    private String accessKey;
+
+    /**
+     * The property of "secret-key".
+     */
+    private String secretKey;
 
 }

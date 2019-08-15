@@ -5,8 +5,9 @@ import org.springframework.stereotype.Component;
 import java.lang.annotation.*;
 
 /**
- * Created by pufang on 2018/7/26.
  * RocketMQ事务消息生产者
+ *
+ * @author breggor
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

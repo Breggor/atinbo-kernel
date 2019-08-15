@@ -12,9 +12,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Description：RocketMQ消费抽象基类
- * Created by Jay Chang on 2017/9/14
- * Modified By：
+ * RocketMQ消费抽象基类
+ *
+ * @author breggor
  */
 @Slf4j
 public abstract class AbstractMQConsumer<T> {
@@ -24,7 +24,7 @@ public abstract class AbstractMQConsumer<T> {
     /**
      * 反序列化解析消息
      *
-     * @param message  消息体
+     * @param message 消息体
      * @return 序列化结果
      */
     protected T parseMessage(MessageExt message) {

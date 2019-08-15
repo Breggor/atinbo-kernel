@@ -1,5 +1,8 @@
 package com.atinbo.rocketmq.base;
 
+/**
+ * @author breggor
+ */
 public enum ConsumeMode {
     /**
      * CONCURRENTLY

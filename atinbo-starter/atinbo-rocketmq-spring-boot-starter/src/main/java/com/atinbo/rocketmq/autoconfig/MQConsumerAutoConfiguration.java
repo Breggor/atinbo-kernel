@@ -25,8 +25,9 @@ import javax.annotation.PostConstruct;
 import java.util.*;
 
 /**
- * Created by suclogger on 2017/6/28.
  * 自动装配消息消费者
+ *
+ * @author breggor
  */
 @Slf4j
 @Configuration
@@ -40,7 +41,7 @@ public class MQConsumerAutoConfiguration extends MQBaseAutoConfiguration {
     @PostConstruct
     public void init() throws Exception {
         Map<String, Object> beans = applicationContext.getBeansWithAnnotation(MQConsumer.class);
-        if(!CollectionUtils.isEmpty(beans) && mqProperties.getTraceEnabled()) {
+        if (!CollectionUtils.isEmpty(beans) && mqProperties.getTraceEnabled()) {
             initAsyncAppender();
         }
         validConsumerMap = new HashMap<>();
@@ -52,7 +53,7 @@ public class MQConsumerAutoConfiguration extends MQBaseAutoConfiguration {
     }
 
     private AsyncTraceDispatcher initAsyncAppender() {
-        if(asyncTraceDispatcher != null) {
+        if (asyncTraceDispatcher != null) {
             return asyncTraceDispatcher;
         }
         try {
@@ -87,14 +88,14 @@ public class MQConsumerAutoConfiguration extends MQBaseAutoConfiguration {
         String consumerGroup = environment.resolvePlaceholders(mqConsumer.consumerGroup());
         String topic = environment.resolvePlaceholders(mqConsumer.topic());
         String tags = "*";
-        if(mqConsumer.tag().length == 1) {
+        if (mqConsumer.tag().length == 1) {
             tags = environment.resolvePlaceholders(mqConsumer.tag()[0]);
-        } else if(mqConsumer.tag().length > 1) {
+        } else if (mqConsumer.tag().length > 1) {
             tags = StringUtils.join(mqConsumer.tag(), "||");
         }
 
         // 检查consumerGroup
-        if(!StringUtils.isEmpty(validConsumerMap.get(consumerGroup))) {
+        if (!StringUtils.isEmpty(validConsumerMap.get(consumerGroup))) {
             String exist = validConsumerMap.get(consumerGroup);
             throw new RuntimeException("消费组重复订阅，请新增消费组用于新的topic和tag组合: " + consumerGroup + "已经订阅了" + exist);
         } else {

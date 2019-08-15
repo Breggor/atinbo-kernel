@@ -9,8 +9,9 @@ import org.apache.rocketmq.client.producer.TransactionMQProducer;
 import org.apache.rocketmq.common.message.Message;
 
 /**
- * Created by pufang on 20180726.
  * RocketMQ的事务生产者的抽象基类
+ *
+ * @author breggor
  */
 @Slf4j
 public abstract class AbstractMQTransactionProducer implements TransactionListener {
@@ -24,7 +25,7 @@ public abstract class AbstractMQTransactionProducer implements TransactionListen
     public SendResult sendMessageInTransaction(Message msg, Object arg) throws MQException {
         try {
             SendResult sendResult = transactionProducer.sendMessageInTransaction(msg, arg);
-            if(sendResult.getSendStatus() != SendStatus.SEND_OK) {
+            if (sendResult.getSendStatus() != SendStatus.SEND_OK) {
                 log.error("事务消息发送失败，topic : {}, msgObj {}", msg.getTopic(), msg);
                 throw new MQException("事务消息发送失败，topic :" + msg.getTopic() + ", status :" + sendResult.getSendStatus());
             }

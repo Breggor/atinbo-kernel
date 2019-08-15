@@ -1,7 +1,7 @@
 package com.atinbo.rocketmq.base;
 
 /**
- * Created by suclogger on 2017/11/8.
+ * @author breggor
  */
 public class MessageExtConst {
 
@@ -37,9 +37,7 @@ public class MessageExtConst {
     public static final String PROPERTY_EXT_BODY_CRC = "BODY_CRC";
 
     /**
-     *
      * 以下属性来自 Message.property
-     *
      */
     public static final String PROPERTY_KEYS = "KEYS";
     public static final String PROPERTY_TAGS = "TAGS";

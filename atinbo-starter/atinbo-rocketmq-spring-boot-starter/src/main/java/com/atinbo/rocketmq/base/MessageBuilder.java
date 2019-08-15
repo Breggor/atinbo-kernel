@@ -1,7 +1,7 @@
 package com.atinbo.rocketmq.base;
 
-import com.google.gson.Gson;
 import com.atinbo.rocketmq.annotation.MQKey;
+import com.google.gson.Gson;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -11,14 +11,15 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 
+/**
+ * @author breggor
+ */
 @Data
 @Slf4j
 public class MessageBuilder {
 
-    private static Gson gson = new Gson();
-
     private static final String[] DELAY_ARRAY = "1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h".split(" ");
-
+    private static Gson gson = new Gson();
     private String topic;
     private String tag;
     private String key;
@@ -59,14 +60,14 @@ public class MessageBuilder {
     }
 
     public Message build() {
-        String messageKey= "";
+        String messageKey = "";
         try {
             Field[] fields = message.getClass().getDeclaredFields();
             for (Field field : fields) {
-                Annotation[] allFAnnos= field.getAnnotations();
-                if(allFAnnos.length > 0) {
+                Annotation[] allFAnnos = field.getAnnotations();
+                if (allFAnnos.length > 0) {
                     for (int i = 0; i < allFAnnos.length; i++) {
-                        if(allFAnnos[i].annotationType().equals(MQKey.class)) {
+                        if (allFAnnos[i].annotationType().equals(MQKey.class)) {
                             field.setAccessible(true);
                             MQKey mqKey = MQKey.class.cast(allFAnnos[i]);
                             messageKey = StringUtils.isEmpty(mqKey.prefix()) ? field.get(message).toString() : (mqKey.prefix() + field.get(message).toString());
@@ -75,11 +76,11 @@ public class MessageBuilder {
                 }
             }
         } catch (Exception e) {
-            log.error("parse key error : {}" , e.getMessage());
+            log.error("parse key error : {}", e.getMessage());
         }
         String str = gson.toJson(message);
-        if(StringUtils.isEmpty(topic)) {
-            if(StringUtils.isEmpty(getTopic())) {
+        if (StringUtils.isEmpty(topic)) {
+            if (StringUtils.isEmpty(getTopic())) {
                 throw new RuntimeException("no topic defined to send this message");
             }
         }
@@ -87,15 +88,14 @@ public class MessageBuilder {
         if (!StringUtils.isEmpty(tag)) {
             message.setTags(tag);
         }
-        if(StringUtils.isNotEmpty(messageKey)) {
+        if (StringUtils.isNotEmpty(messageKey)) {
             message.setKeys(messageKey);
         }
-        if(delayTimeLevel != null && delayTimeLevel > 0 && delayTimeLevel <= DELAY_ARRAY.length) {
+        if (delayTimeLevel != null && delayTimeLevel > 0 && delayTimeLevel <= DELAY_ARRAY.length) {
             message.setDelayTimeLevel(delayTimeLevel);
         }
         return message;
     }
-
 
 
 }

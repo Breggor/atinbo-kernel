@@ -12,23 +12,24 @@ import org.apache.rocketmq.common.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Created by yipin on 2017/6/27.
  * RocketMQ的生产者的抽象基类
+ *
+ * @author breggor
  */
 @Slf4j
 public abstract class AbstractMQProducer {
 
     private static MessageQueueSelector messageQueueSelector = new SelectMessageQueueByHash();
+    @Autowired
+    private DefaultMQProducer producer;
 
     public AbstractMQProducer() {
     }
 
-    @Autowired
-    private DefaultMQProducer producer;
-
     /**
      * 同步发送消息
-     * @param message  消息体
+     *
+     * @param message 消息体
      * @throws MQException 消息异常
      */
     public void syncSend(Message message) throws MQException {
@@ -45,12 +46,13 @@ public abstract class AbstractMQProducer {
 
     /**
      * 同步发送消息
-     * @param message  消息体
-     * @param hashKey  用于hash后选择queue的key
+     *
+     * @param message 消息体
+     * @param hashKey 用于hash后选择queue的key
      * @throws MQException 消息异常
      */
     public void syncSendOrderly(Message message, String hashKey) throws MQException {
-        if(StringUtils.isEmpty(hashKey)) {
+        if (StringUtils.isEmpty(hashKey)) {
             // fall back to normal
             syncSend(message);
         }
@@ -66,14 +68,17 @@ public abstract class AbstractMQProducer {
 
     /**
      * 重写此方法处理发送后的逻辑
-     * @param message  发送消息体
-     * @param sendResult  发送结果
+     *
+     * @param message    发送消息体
+     * @param sendResult 发送结果
      */
-    public void doAfterSyncSend(Message message, SendResult sendResult) {}
+    public void doAfterSyncSend(Message message, SendResult sendResult) {
+    }
 
     /**
      * 异步发送消息
-     * @param message msgObj
+     *
+     * @param message      msgObj
      * @param sendCallback 回调
      * @throws MQException 消息异常
      */

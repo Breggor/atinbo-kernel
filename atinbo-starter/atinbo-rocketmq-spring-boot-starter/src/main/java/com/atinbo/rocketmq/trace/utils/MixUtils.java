@@ -3,20 +3,20 @@ package com.atinbo.rocketmq.trace.utils;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 /**
  * 消息轨迹工具类
  *
- * author: manhong.yqd
- * since: 14-6-20
+ * @author breggor
  */
 public class MixUtils {
     public static String getLocalAddress() {
         try {
             // 遍历网卡，查找一个非回路ip地址并返回
             Enumeration<NetworkInterface> enumeration = NetworkInterface.getNetworkInterfaces();
-            ArrayList<String> ipv4Result = new ArrayList<String>();
-            ArrayList<String> ipv6Result = new ArrayList<String>();
+            List<String> ipv4Result = new ArrayList<>();
+            List<String> ipv6Result = new ArrayList<>();
             while (enumeration.hasMoreElements()) {
                 final NetworkInterface networkInterface = enumeration.nextElement();
                 final Enumeration<InetAddress> en = networkInterface.getInetAddresses();
@@ -25,8 +25,7 @@ public class MixUtils {
                     if (!address.isLoopbackAddress()) {
                         if (address instanceof Inet6Address) {
                             ipv6Result.add(normalizeHostAddress(address));
-                        }
-                        else {
+                        } else {
                             ipv4Result.add(normalizeHostAddress(address));
                         }
                     }
@@ -53,14 +52,11 @@ public class MixUtils {
             // 然后使用本地ip
             final InetAddress localHost = InetAddress.getLocalHost();
             return normalizeHostAddress(localHost);
-        }
-        catch (SocketException e) {
+        } catch (SocketException e) {
             e.printStackTrace();
-        }
-        catch (UnknownHostException e) {
+        } catch (UnknownHostException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
 
         }
 
@@ -71,8 +67,7 @@ public class MixUtils {
     public static String normalizeHostAddress(final InetAddress localHost) {
         if (localHost instanceof Inet6Address) {
             return "[" + localHost.getHostAddress() + "]";
-        }
-        else {
+        } else {
             return localHost.getHostAddress();
         }
     }

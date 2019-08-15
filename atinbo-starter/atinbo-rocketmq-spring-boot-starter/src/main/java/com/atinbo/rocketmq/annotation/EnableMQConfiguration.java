@@ -2,8 +2,9 @@ package com.atinbo.rocketmq.annotation;
 
 import java.lang.annotation.*;
 
+
 /**
- * Created by suclogger on 2017/6/30.
+ * @author breggor
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
