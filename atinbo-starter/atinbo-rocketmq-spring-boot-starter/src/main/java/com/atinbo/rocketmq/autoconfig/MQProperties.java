@@ -12,34 +12,34 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "spring.rocketmq")
 public class MQProperties {
     /**
-     * config name server address
+     * rocketmq服务地址
      */
     private String nameServerAddress;
     /**
-     * config producer group , default to DPG+RANDOM UUID like DPG-fads-3143-123d-1111
+     * 生产者分组 , default to DPG+RANDOM UUID like DPG-fads-3143-123d-1111
      */
     private String producerGroup;
     /**
-     * config send message timeout
+     * 发送消息超时时间
      */
     private Integer sendMsgTimeout = 3000;
     /**
-     * switch of trace message consumer: send message consumer info to topic: rmq_sys_TRACE_DATA
+     * 是否开启轨迹: send message consumer info to topic: rmq_sys_TRACE_DATA
      */
     private Boolean traceEnabled = Boolean.TRUE;
 
     /**
-     * switch of send message with vip channel
+     * 是否开启vip通道
      */
     private Boolean vipChannelEnabled = Boolean.TRUE;
 
     /**
-     * The property of "access-key".
+     * 访问Key
      */
     private String accessKey;
 
     /**
-     * The property of "secret-key".
+     * 密码key
      */
     private String secretKey;
 
