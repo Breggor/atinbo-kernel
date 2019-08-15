@@ -12,7 +12,6 @@
     <artifactId>atinbo-mq</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>atinbo-mq-rocketmq</module>
         <module>atinbo-mq-kafka</module>
     </modules>
 
