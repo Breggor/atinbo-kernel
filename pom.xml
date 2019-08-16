@@ -10,6 +10,7 @@
         <groupId>com.atinbo</groupId>
         <artifactId>atinbo-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath>atinbo-parent/pom.xml</relativePath>
     </parent>
 
     <properties>
@@ -28,6 +29,7 @@
 
 
     <modules>
+        <module>atinbo-parent</module>
         <module>atinbo-base</module>
         <module>atinbo-core</module>
         <module>atinbo-mvc</module>
