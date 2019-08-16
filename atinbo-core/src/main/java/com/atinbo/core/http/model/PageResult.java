@@ -1,6 +1,6 @@
 package com.atinbo.core.http.model;
 
-import com.atinbo.core.base.PageInfo;
+import com.atinbo.core.model.PageInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

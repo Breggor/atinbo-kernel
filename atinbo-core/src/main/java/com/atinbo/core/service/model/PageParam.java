@@ -1,6 +1,6 @@
 package com.atinbo.core.service.model;
 
-import com.atinbo.core.base.SortInfo;
+import com.atinbo.core.model.SortInfo;
 
 import java.io.Serializable;
 import java.util.StringJoiner;

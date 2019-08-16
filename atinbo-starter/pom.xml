@@ -12,9 +12,10 @@
     <artifactId>atinbo-starter</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>atinbo-log-spring-boot-starter</module>
-        <module>atinbo-rocketmq-spring-boot-starter</module>
-        <module>atinbo-swagger-spring-boot-starter</module>
+        <module>log-spring-boot-starter</module>
+        <module>rocketmq-spring-boot-starter</module>
+        <module>swagger-spring-boot-starter</module>
+        <module>dislock-spring-boot-starter</module>
     </modules>
 
 </project>

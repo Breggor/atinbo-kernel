@@ -28,11 +28,10 @@
 
 
     <modules>
+        <module>atinbo-base</module>
         <module>atinbo-core</module>
-        <module>atinbo-boot</module>
         <module>atinbo-mvc</module>
         <module>atinbo-dal</module>
-        <module>atinbo-mq</module>
         <module>atinbo-deps</module>
         <module>atinbo-starter</module>
     </modules>
