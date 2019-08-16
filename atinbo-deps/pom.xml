@@ -47,28 +47,33 @@
 
             <dependency>
                 <groupId>com.atinbo</groupId>
-                <artifactId>atinbo-mq</artifactId>
+                <artifactId>atinbo-base</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.atinbo</groupId>
-                <artifactId>atinbo-boot</artifactId>
+                <artifactId>log-spring-boot-starter</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.atinbo</groupId>
-                <artifactId>atinbo-log-spring-boot-starter</artifactId>
+                <artifactId>swagger-spring-boot-starter</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.atinbo</groupId>
-                <artifactId>atinbo-swagger-spring-boot-starter</artifactId>
+                <artifactId>dislock-spring-boot-starter</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.atinbo</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${atinbo-kernel.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
