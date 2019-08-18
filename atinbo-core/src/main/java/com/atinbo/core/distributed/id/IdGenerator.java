@@ -6,8 +6,11 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.util.Objects;
 
+/**
+ * 分布式ID
+ */
 @Component
-public class UIDGenerator {
+public class IdGenerator {
 
     /**
      * 每个服务器节点workerId
@@ -15,7 +18,7 @@ public class UIDGenerator {
     private Long workerId;
     private SnowFlake flake;
 
-    public UIDGenerator(@Value("${workerId}") Long workerId) {
+    public IdGenerator(@Value("${disId.workerId}") Long workerId) {
         this.workerId = workerId;
     }
 
