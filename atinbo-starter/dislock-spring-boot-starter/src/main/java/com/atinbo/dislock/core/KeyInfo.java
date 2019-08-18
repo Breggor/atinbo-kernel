@@ -48,13 +48,13 @@ public class KeyInfo {
 
     public static class Builder {
 
-        private List<String> keyList = new ArrayList<>();
+        private List<String> keys = new ArrayList<>();
         private long leaseTime = -1;
         private long waitTime = -1;
         private TimeUnit timeUnit = TimeUnit.SECONDS;
 
         public Builder appendKey(String key) {
-            keyList.add(DisLockConsts.KEY_PREFIX + key);
+            keys.add(DisLockConsts.KEY_PREFIX + key);
             return this;
         }
 
@@ -74,11 +74,11 @@ public class KeyInfo {
         }
 
         public boolean isEmptyKeys() {
-            return this.keyList.isEmpty();
+            return this.keys.isEmpty();
         }
 
         public KeyInfo build() {
-            return new KeyInfo(keyList, leaseTime, waitTime, timeUnit);
+            return new KeyInfo(keys, leaseTime, waitTime, timeUnit);
         }
     }
 }
