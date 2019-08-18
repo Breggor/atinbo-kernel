@@ -20,11 +20,10 @@ import org.redisson.connection.balancer.RoundRobinLoadBalancer;
 import org.redisson.connection.balancer.WeightedRoundRobinBalancer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Scope;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -40,7 +39,6 @@ import java.util.Map;
 @Configuration
 @ConditionalOnBean(annotation = EnableDisLock.class)
 @EnableConfigurationProperties(DisLockProperties.class)
-@Import({DisLockInterceptor.class})
 public class DisLockAutoConfiguration {
 
     @Autowired
@@ -51,7 +49,7 @@ public class DisLockAutoConfiguration {
      *
      * @return RedissonClient
      */
-    @Bean(name = "lockRedissonClient", destroyMethod = "shutdown")
+    @Bean(name = "disLockRedissonClient", destroyMethod = "shutdown")
     public RedissonClient redissonClient() throws URISyntaxException {
         Config config = new Config();
         ServerPattern serverPattern = MapStore.getServerPattern(disLockProperties.getPattern());
@@ -80,47 +78,49 @@ public class DisLockAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     public LockServiceFactory serviceBeanFactory() {
         return new LockServiceFactory();
     }
 
     @Bean
-    @Scope("prototype")
+    @ConditionalOnMissingBean
     public ReentrantLockServiceImpl reentrantLockServiceImpl() {
         return new ReentrantLockServiceImpl();
     }
 
     @Bean
-    @Scope("prototype")
+    @ConditionalOnMissingBean
     public FairLockServiceImpl fairLockServiceImpl() {
         return new FairLockServiceImpl();
     }
 
     @Bean
-    @Scope("prototype")
+    @ConditionalOnMissingBean
     public MultiLockServiceImpl multiLockServiceImpl() {
         return new MultiLockServiceImpl();
     }
 
     @Bean
-    @Scope("prototype")
+    @ConditionalOnMissingBean
     public RedLockServiceImpl redLockServiceImpl() {
         return new RedLockServiceImpl();
     }
 
     @Bean
-    @Scope("prototype")
+    @ConditionalOnMissingBean
     public ReadLockServiceImpl readLockServiceImpl() {
         return new ReadLockServiceImpl();
     }
 
     @Bean
-    @Scope("prototype")
+    @ConditionalOnMissingBean
     public WriteLockServiceImpl writeLockServiceImpl() {
         return new WriteLockServiceImpl();
     }
 
     @Bean
+    @ConditionalOnMissingBean
     public DisLockInterceptor lockInterceptor() {
         return new DisLockInterceptor();
     }

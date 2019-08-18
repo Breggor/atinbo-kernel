@@ -1,35 +1,26 @@
 package com.atinbo.dislock.service.impl;
 
 import com.atinbo.dislock.core.KeyInfo;
+import com.atinbo.dislock.service.AbstractLockService;
 import com.atinbo.dislock.service.LockService;
 import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+
+import java.util.Objects;
 
 /**
  * 可重入锁加锁服务
  *
  * @author breggor
  */
-public class ReentrantLockServiceImpl implements LockService {
-
-    @Qualifier("lockRedissonClient")
-    @Autowired
-    private RedissonClient lockRedissonClient;
-
-    private KeyInfo keyInfo;
-
-    private RLock lock;
-
-    @Override
-    public void setKeyInfo(KeyInfo keyInfo) {
-        this.keyInfo = keyInfo;
-    }
+public class ReentrantLockServiceImpl extends AbstractLockService implements LockService {
 
     @Override
     public void lock() throws Exception {
-        this.lock = lockRedissonClient.getLock(keyInfo.getKeys().get(0));
+        KeyInfo keyInfo = getKeyInfo();
+        Objects.requireNonNull(keyInfo, "keyInfo: 不能为null");
+
+        RLock lock = getRedissonClient().getLock(keyInfo.getKeys().get(0));
+        setLock(lock);
 
         if (!isLeaseTime(keyInfo) && !isWaitTime(keyInfo)) {
             lock.lock();
@@ -51,8 +42,6 @@ public class ReentrantLockServiceImpl implements LockService {
 
     @Override
     public void release() {
-        this.lock.unlock();
+        this.getLock().unlock();
     }
-
-
 }
