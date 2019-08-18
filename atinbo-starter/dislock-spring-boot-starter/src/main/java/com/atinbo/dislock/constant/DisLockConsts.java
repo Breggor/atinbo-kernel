@@ -4,9 +4,6 @@ package com.atinbo.dislock.constant;
  * 公共常量
  *
  * @author breggor
- * @version 1.1.0
- * @apiNote 知识改变命运，技术改变世界
- * @since 2018-12-23 15:35
  */
 public interface DisLockConsts {
     /**
@@ -40,7 +37,7 @@ public interface DisLockConsts {
     /**
      * 锁的前缀
      */
-    String KEY_PREFIX = "tooleek" + KEY_SPLIT_MARK + "lock" + KEY_SPLIT_MARK + "key" + KEY_SPLIT_MARK;
+    String KEY_PREFIX = "dislock" + KEY_SPLIT_MARK + "key" + KEY_SPLIT_MARK;
 
 
     /**
