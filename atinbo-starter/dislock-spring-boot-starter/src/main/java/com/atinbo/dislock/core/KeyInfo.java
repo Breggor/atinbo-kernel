@@ -6,15 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class LockKey {
 
-    private List<String> keyList = new ArrayList<>();
+/**
+ * 锁key信息
+ *
+ * @author breggor
+ */
+public class KeyInfo {
+
+    private List<String> keys = new ArrayList<>();
     private long leaseTime = -1;
     private long waitTime = -1;
     private TimeUnit timeUnit = TimeUnit.SECONDS;
 
-    private LockKey(List<String> keyList, long leaseTime, long waitTime, TimeUnit timeUnit) {
-        this.keyList = keyList;
+    private KeyInfo(List<String> keys, long leaseTime, long waitTime, TimeUnit timeUnit) {
+        this.keys = keys;
         this.leaseTime = leaseTime;
         this.waitTime = waitTime;
         this.timeUnit = timeUnit;
@@ -24,8 +30,8 @@ public class LockKey {
         return new Builder();
     }
 
-    public List<String> getKeyList() {
-        return keyList;
+    public List<String> getKeys() {
+        return keys;
     }
 
     public long getLeaseTime() {
@@ -71,8 +77,8 @@ public class LockKey {
             return this.keyList.isEmpty();
         }
 
-        public LockKey build() {
-            return new LockKey(keyList, leaseTime, waitTime, timeUnit);
+        public KeyInfo build() {
+            return new KeyInfo(keyList, leaseTime, waitTime, timeUnit);
         }
     }
 }

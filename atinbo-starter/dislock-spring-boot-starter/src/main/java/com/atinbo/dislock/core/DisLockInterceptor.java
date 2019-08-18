@@ -28,7 +28,7 @@ import java.lang.reflect.Method;
 public class DisLockInterceptor {
 
     @Autowired
-    private LockServiceFactory serviceBeanFactory;
+    private LockServiceFactory lockServiceFactory;
 
     private ThreadLocal<LockService> localLockService = new ThreadLocal<>();
 
@@ -45,16 +45,16 @@ public class DisLockInterceptor {
         String methodName = methodSignature.getName();
 
         KeyStrategy keyStrategy = getKeyStrategy(className, methodName, realMethod, args);
-        LockKey.Builder keyBuilder = new KeyStrategyContext(keyStrategy).generateBuilder();
+        KeyInfo.Builder keyBuilder = new KeyStrategyContext(keyStrategy).generateBuilder();
 
-        LockKey lockKey = keyBuilder
+        KeyInfo lockKey = keyBuilder
                 .leaseTime(lock.leaseTime())
                 .waitTime(lock.waitTime())
                 .timeUnit(lock.timeUnit())
                 .build();
 
-        LockService lockService = serviceBeanFactory.getService(lock.lockType());
-        lockService.setLockKey(lockKey);
+        LockService lockService = lockServiceFactory.getService(lock.lockType());
+        lockService.setKeyInfo(lockKey);
 
         localLockService.set(lockService);
 

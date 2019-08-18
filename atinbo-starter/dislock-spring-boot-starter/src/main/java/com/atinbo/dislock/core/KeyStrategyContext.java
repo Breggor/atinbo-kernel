@@ -12,7 +12,7 @@ public class KeyStrategyContext {
         this.keyStrategy = keyStrategy;
     }
 
-    public LockKey.Builder generateBuilder() {
+    public KeyInfo.Builder generateBuilder() {
         return this.keyStrategy.generateBuilder();
     }
 

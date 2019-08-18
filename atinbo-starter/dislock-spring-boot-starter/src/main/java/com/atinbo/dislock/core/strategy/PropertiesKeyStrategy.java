@@ -1,7 +1,8 @@
 package com.atinbo.dislock.core.strategy;
 
 import com.atinbo.dislock.annotation.Key;
-import com.atinbo.dislock.core.LockKey.Builder;
+import com.atinbo.dislock.core.KeyInfo;
+import com.atinbo.dislock.core.KeyInfo.Builder;
 import com.atinbo.dislock.exception.KeyBuilderException;
 
 import java.lang.reflect.Field;
@@ -21,7 +22,7 @@ public class PropertiesKeyStrategy extends KeyStrategy {
     @SuppressWarnings("rawtypes")
     @Override
     public Builder generateBuilder() throws KeyBuilderException {
-        Builder keyBuilder = com.atinbo.dislock.core.LockKey.newBuilder();
+        Builder keyBuilder = KeyInfo.newBuilder();
         for (int i = 0; i < args.length; i++) {
             Object obj = args[i];
             Class objectClass = obj.getClass();

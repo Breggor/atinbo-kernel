@@ -1,7 +1,7 @@
 package com.atinbo.dislock.core.strategy;
 
-import com.atinbo.dislock.core.LockKey;
-import com.atinbo.dislock.core.LockKey.Builder;
+import com.atinbo.dislock.core.KeyInfo;
+import com.atinbo.dislock.core.KeyInfo.Builder;
 import com.atinbo.dislock.exception.KeyBuilderException;
 
 import java.lang.reflect.Method;
@@ -19,7 +19,7 @@ public class ClassKeyStrategy extends KeyStrategy {
 
     @Override
     public Builder generateBuilder() throws KeyBuilderException {
-        Builder keyBuilder = LockKey.newBuilder();
+        Builder keyBuilder = KeyInfo.newBuilder();
         keyBuilder.appendKey(wrapKeyTag(new StringBuilder(getSimpleClassName()).append(".").append(methodName).toString()));
         return keyBuilder;
     }

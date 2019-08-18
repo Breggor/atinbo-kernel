@@ -1,6 +1,6 @@
 package com.atinbo.dislock.service.impl;
 
-import com.atinbo.dislock.core.LockKey;
+import com.atinbo.dislock.core.KeyInfo;
 import com.atinbo.dislock.service.LockService;
 import org.redisson.RedissonMultiLock;
 import org.redisson.api.RLock;
@@ -19,34 +19,35 @@ public class MultiLockServiceImpl implements LockService {
     @Autowired
     private RedissonClient lockRedissonClient;
 
-    private LockKey lockKey;
+    private KeyInfo keyInfo;
 
     private RedissonMultiLock lock;
 
     @Override
-    public void setLockKey(LockKey lockKey) {
-        this.lockKey = lockKey;
+    public void setKeyInfo(KeyInfo keyInfo) {
+        this.keyInfo = keyInfo;
     }
 
     @Override
     public void lock() throws Exception {
-        RLock[] lockList = new RLock[lockKey.getKeyList().size()];
-        for (int i = 0; i < lockKey.getKeyList().size(); i++) {
-            lockList[i] = lockRedissonClient.getLock(lockKey.getKeyList().get(i));
+        RLock[] lockList = new RLock[keyInfo.getKeys().size()];
+        for (int i = 0; i < keyInfo.getKeys().size(); i++) {
+            lockList[i] = lockRedissonClient.getLock(keyInfo.getKeys().get(i));
         }
 
         lock = new RedissonMultiLock(lockList);
-
-        if (lockKey.getLeaseTime() == -1 && lockKey.getWaitTime() == -1) {
+        if (!isLeaseTime(keyInfo) && !isWaitTime(keyInfo)) {
             lock.lock();
             return;
         }
-        if (lockKey.getLeaseTime() != -1 && lockKey.getWaitTime() == -1) {
-            lock.lock(lockKey.getLeaseTime(), lockKey.getTimeUnit());
+
+        if (isLeaseTime(keyInfo) && isWaitTime(keyInfo)) {
+            lock.lock(keyInfo.getLeaseTime(), keyInfo.getTimeUnit());
             return;
         }
-        if (lockKey.getLeaseTime() != -1 && lockKey.getWaitTime() != -1) {
-            lock.tryLock(lockKey.getWaitTime(), lockKey.getLeaseTime(), lockKey.getTimeUnit());
+
+        if (isLeaseTime(keyInfo) && isWaitTime(keyInfo)) {
+            lock.tryLock(keyInfo.getWaitTime(), keyInfo.getLeaseTime(), keyInfo.getTimeUnit());
             return;
         }
 

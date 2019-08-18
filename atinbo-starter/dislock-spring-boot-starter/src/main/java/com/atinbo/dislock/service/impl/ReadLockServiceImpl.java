@@ -1,6 +1,6 @@
 package com.atinbo.dislock.service.impl;
 
-import com.atinbo.dislock.core.LockKey;
+import com.atinbo.dislock.core.KeyInfo;
 import com.atinbo.dislock.service.LockService;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -18,30 +18,31 @@ public class ReadLockServiceImpl implements LockService {
     @Autowired
     private RedissonClient lockRedissonClient;
 
-    private LockKey lockKey;
+    private KeyInfo keyInfo;
 
     private RLock lock;
 
     @Override
-    public void setLockKey(LockKey lockKey) {
-        this.lockKey = lockKey;
+    public void setKeyInfo(KeyInfo keyInfo) {
+        this.keyInfo = keyInfo;
     }
 
     @Override
     public void lock() throws Exception {
+        this.lock = lockRedissonClient.getReadWriteLock(keyInfo.getKeys().get(0)).readLock();
 
-        this.lock = lockRedissonClient.getReadWriteLock(lockKey.getKeyList().get(0)).readLock();
-
-        if (lockKey.getLeaseTime() == -1 && lockKey.getWaitTime() == -1) {
+        if (!isLeaseTime(keyInfo) && !isWaitTime(keyInfo)) {
             lock.lock();
             return;
         }
-        if (lockKey.getLeaseTime() != -1 && lockKey.getWaitTime() == -1) {
-            lock.lock(lockKey.getLeaseTime(), lockKey.getTimeUnit());
+
+        if (isLeaseTime(keyInfo) && isWaitTime(keyInfo)) {
+            lock.lock(keyInfo.getLeaseTime(), keyInfo.getTimeUnit());
             return;
         }
-        if (lockKey.getLeaseTime() != -1 && lockKey.getWaitTime() != -1) {
-            lock.tryLock(lockKey.getWaitTime(), lockKey.getLeaseTime(), lockKey.getTimeUnit());
+
+        if (isLeaseTime(keyInfo) && isWaitTime(keyInfo)) {
+            lock.tryLock(keyInfo.getWaitTime(), keyInfo.getLeaseTime(), keyInfo.getTimeUnit());
             return;
         }
 

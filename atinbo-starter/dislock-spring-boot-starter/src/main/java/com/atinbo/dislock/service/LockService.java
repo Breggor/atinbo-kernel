@@ -1,6 +1,6 @@
 package com.atinbo.dislock.service;
 
-import com.atinbo.dislock.core.LockKey;
+import com.atinbo.dislock.core.KeyInfo;
 
 /**
  * 锁服务
@@ -12,9 +12,9 @@ public interface LockService {
     /**
      * 添加key
      *
-     * @param lockKey
+     * @param keyInfo
      */
-    public void setLockKey(LockKey lockKey);
+    public void setKeyInfo(KeyInfo keyInfo);
 
     /**
      * 加锁
@@ -26,4 +26,24 @@ public interface LockService {
      */
     public void release();
 
+
+    /**
+     * 是否设置离开时间
+     *
+     * @param keyInfo
+     * @return
+     */
+    default boolean isLeaseTime(KeyInfo keyInfo) {
+        return keyInfo.getLeaseTime() != -1;
+    }
+
+    /**
+     * 是否设置等待时间
+     *
+     * @param keyInfo
+     * @return
+     */
+    default boolean isWaitTime(KeyInfo keyInfo) {
+        return keyInfo.getWaitTime() != -1;
+    }
 }
