@@ -33,7 +33,7 @@ public class DisLockInterceptor {
     private ThreadLocal<LockService> localLockService = new ThreadLocal<>();
 
     @Around(value = "@annotation(com.atinbo.dislock.annotation.DisLock)")
-    public Object lockHandle(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object handle(ProceedingJoinPoint joinPoint) throws Throwable {
 
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method targetMethod = methodSignature.getMethod();
@@ -46,12 +46,7 @@ public class DisLockInterceptor {
 
         KeyStrategy keyStrategy = getKeyStrategy(className, methodName, realMethod, args);
         KeyInfo.Builder keyBuilder = new KeyStrategyContext(keyStrategy).generateBuilder();
-
-        KeyInfo lockKey = keyBuilder
-                .leaseTime(lock.leaseTime())
-                .waitTime(lock.waitTime())
-                .timeUnit(lock.timeUnit())
-                .build();
+        KeyInfo lockKey = keyBuilder.leaseTime(lock.leaseTime()).waitTime(lock.waitTime()).timeUnit(lock.timeUnit()).build();
 
         LockService lockService = lockServiceFactory.getService(lock.lockType());
         lockService.setKeyInfo(lockKey);
