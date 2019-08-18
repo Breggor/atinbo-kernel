@@ -1,7 +1,7 @@
 package com.atinbo.dislock.service;
 
 import com.atinbo.dislock.constant.DisLockType;
-import com.atinbo.dislock.exception.ServiceNotFoundException;
+import com.atinbo.dislock.exception.LockServiceNotFoundException;
 import com.atinbo.dislock.service.impl.*;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -34,12 +34,12 @@ public class LockServiceFactory implements ApplicationContextAware {
      *
      * @param lockType
      * @return
-     * @throws ServiceNotFoundException
+     * @throws LockServiceNotFoundException
      */
-    public LockService getService(DisLockType lockType) throws ServiceNotFoundException {
+    public LockService getService(DisLockType lockType) throws LockServiceNotFoundException {
         LockService lockService = (LockService) applicationContext.getBean(serviceMap.get(lockType));
         if (lockService == null) {
-            throw new ServiceNotFoundException();
+            throw new LockServiceNotFoundException();
         }
         return lockService;
     }

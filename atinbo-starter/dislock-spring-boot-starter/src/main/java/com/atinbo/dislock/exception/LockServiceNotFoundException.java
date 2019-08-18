@@ -5,11 +5,11 @@ package com.atinbo.dislock.exception;
  *
  * @author breggor
  */
-public class ServiceNotFoundException extends RuntimeException {
+public class LockServiceNotFoundException extends RuntimeException {
 
     private static final long serialVersionUID = -8199483743071016533L;
 
-    public ServiceNotFoundException() {
+    public LockServiceNotFoundException() {
         super("没有找到相应的锁服务实现类");
     }
 
