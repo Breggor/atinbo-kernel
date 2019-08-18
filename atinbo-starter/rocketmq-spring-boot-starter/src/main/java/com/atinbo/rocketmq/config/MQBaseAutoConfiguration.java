@@ -1,4 +1,4 @@
-package com.atinbo.rocketmq.autoconfig;
+package com.atinbo.rocketmq.config;
 
 import com.atinbo.rocketmq.annotation.EnableRocketMQ;
 import com.atinbo.rocketmq.base.AbstractMQProducer;

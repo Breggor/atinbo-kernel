@@ -1,4 +1,4 @@
-package com.atinbo.rocketmq.autoconfig;
+package com.atinbo.rocketmq.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

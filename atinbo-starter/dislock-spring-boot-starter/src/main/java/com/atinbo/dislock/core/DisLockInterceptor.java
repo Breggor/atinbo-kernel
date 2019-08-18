@@ -40,15 +40,11 @@ public class DisLockInterceptor {
         Method realMethod = joinPoint.getTarget().getClass().getDeclaredMethod(methodSignature.getName(), targetMethod.getParameterTypes());
 
         DisLock lock = realMethod.getAnnotation(DisLock.class);
-
-
         Object[] args = joinPoint.getArgs();
-
         String className = joinPoint.getTarget().getClass().getName();
         String methodName = methodSignature.getName();
 
         KeyStrategy keyStrategy = getKeyStrategy(className, methodName, realMethod, args);
-
         LockKey.Builder keyBuilder = new KeyStrategyContext(keyStrategy).generateBuilder();
 
         LockKey lockKey = keyBuilder

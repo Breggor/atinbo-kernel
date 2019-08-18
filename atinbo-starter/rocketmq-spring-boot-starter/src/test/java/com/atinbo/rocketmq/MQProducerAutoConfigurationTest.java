@@ -1,9 +1,9 @@
 package com.atinbo.rocketmq;
 
 import com.atinbo.rocketmq.annotation.MQProducer;
-import com.atinbo.rocketmq.autoconfig.MQBaseAutoConfiguration;
-import com.atinbo.rocketmq.autoconfig.MQProducerAutoConfiguration;
 import com.atinbo.rocketmq.base.AbstractMQProducer;
+import com.atinbo.rocketmq.config.MQBaseAutoConfiguration;
+import com.atinbo.rocketmq.config.MQProducerAutoConfiguration;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.junit.After;
 import org.junit.Test;

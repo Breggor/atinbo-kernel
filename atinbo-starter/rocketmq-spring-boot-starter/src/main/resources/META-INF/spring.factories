@@ -1,4 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.atinbo.rocketmq.autoconfig.MQBaseAutoConfiguration,\
-com.atinbo.rocketmq.autoconfig.MQConsumerAutoConfiguration,\
-com.atinbo.rocketmq.autoconfig.MQProducerAutoConfiguration
+com.atinbo.rocketmq.config.MQBaseAutoConfiguration,\
+com.atinbo.rocketmq.config.MQConsumerAutoConfiguration,\
+com.atinbo.rocketmq.config.MQProducerAutoConfiguration

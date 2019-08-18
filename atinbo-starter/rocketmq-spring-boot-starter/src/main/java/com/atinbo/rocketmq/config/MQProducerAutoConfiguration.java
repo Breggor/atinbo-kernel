@@ -1,4 +1,4 @@
-package com.atinbo.rocketmq.autoconfig;
+package com.atinbo.rocketmq.config;
 
 import com.atinbo.rocketmq.annotation.MQProducer;
 import com.atinbo.rocketmq.annotation.MQTransactionProducer;

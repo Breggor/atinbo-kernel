@@ -1,4 +1,4 @@
-package com.atinbo.rocketmq.autoconfig;
+package com.atinbo.rocketmq.config;
 
 import com.atinbo.rocketmq.annotation.MQConsumer;
 import com.atinbo.rocketmq.base.AbstractMQPushConsumer;

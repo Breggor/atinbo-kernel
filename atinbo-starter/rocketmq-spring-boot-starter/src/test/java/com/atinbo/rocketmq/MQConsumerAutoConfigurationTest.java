@@ -1,9 +1,9 @@
 package com.atinbo.rocketmq;
 
 import com.atinbo.rocketmq.annotation.MQConsumer;
-import com.atinbo.rocketmq.autoconfig.MQConsumerAutoConfiguration;
 import com.atinbo.rocketmq.base.AbstractMQPushConsumer;
 import com.atinbo.rocketmq.base.MessageExtConst;
+import com.atinbo.rocketmq.config.MQConsumerAutoConfiguration;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.boot.test.util.TestPropertyValues;
