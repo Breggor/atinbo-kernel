@@ -4,12 +4,12 @@ import com.atinbo.dislock.annotation.EnableDisLock;
 import com.atinbo.dislock.constant.DisLockConsts;
 import com.atinbo.dislock.constant.ServerPattern;
 import com.atinbo.dislock.core.DisLockInterceptor;
+import com.atinbo.dislock.core.ServerPatternFactory;
 import com.atinbo.dislock.exception.UnknownLoadBalancerException;
 import com.atinbo.dislock.exception.UnknownReadModeException;
 import com.atinbo.dislock.exception.UnknownSubscriptionModeException;
 import com.atinbo.dislock.service.LockServiceFactory;
 import com.atinbo.dislock.service.impl.*;
-import com.atinbo.dislock.store.MapStore;
 import com.atinbo.dislock.util.ValidateUtil;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
@@ -52,7 +52,7 @@ public class DisLockAutoConfiguration {
     @Bean(name = "disLockRedissonClient", destroyMethod = "shutdown")
     public RedissonClient redissonClient() throws URISyntaxException {
         Config config = new Config();
-        ServerPattern serverPattern = MapStore.getServerPattern(disLockProperties.getPattern());
+        ServerPattern serverPattern = ServerPatternFactory.getServerPattern(disLockProperties.getPattern());
 
         if (serverPattern == ServerPattern.SINGLE) {
             SingleServerConfig singleServerConfig = config.useSingleServer();

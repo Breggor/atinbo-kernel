@@ -10,7 +10,7 @@ import com.atinbo.dislock.core.KeyInfo;
 public interface LockService {
 
     /**
-     * 添加key
+     * 设置当前锁key信息
      *
      * @param keyInfo
      */

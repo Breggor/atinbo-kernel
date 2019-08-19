@@ -6,8 +6,6 @@ import com.atinbo.dislock.service.LockService;
 import org.redisson.RedissonMultiLock;
 import org.redisson.api.RLock;
 
-import java.util.Objects;
-
 /**
  * 联锁操作服务
  *
@@ -16,39 +14,11 @@ import java.util.Objects;
 public class MultiLockServiceImpl extends AbstractLockService implements LockService {
 
     @Override
-    public void lock() throws Exception {
-        KeyInfo keyInfo = getKeyInfo();
-        Objects.requireNonNull(keyInfo, "keyInfo: 不能为null");
-
+    public RLock getLock(KeyInfo keyInfo) {
         RLock[] lockList = new RLock[keyInfo.getKeys().size()];
         for (int i = 0; i < keyInfo.getKeys().size(); i++) {
             lockList[i] = getRedissonClient().getLock(keyInfo.getKeys().get(i));
         }
-
-        RedissonMultiLock lock = new RedissonMultiLock(lockList);
-        setLock(lock);
-
-        if (!enableLeaseTime(keyInfo) && !enableWaitTime(keyInfo)) {
-            lock.lock();
-            return;
-        }
-
-        if (enableLeaseTime(keyInfo) && !enableWaitTime(keyInfo)) {
-            lock.lock(keyInfo.getLeaseTime(), keyInfo.getTimeUnit());
-            return;
-        }
-
-        if (enableLeaseTime(keyInfo) && enableWaitTime(keyInfo)) {
-            lock.tryLock(keyInfo.getWaitTime(), keyInfo.getLeaseTime(), keyInfo.getTimeUnit());
-            return;
-        }
-
-        lock.lock();
+        return new RedissonMultiLock(lockList);
     }
-
-    @Override
-    public void release() {
-        getLock().unlock();
-    }
-
 }

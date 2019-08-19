@@ -1,4 +1,4 @@
-package com.atinbo.dislock.store;
+package com.atinbo.dislock.core;
 
 import com.atinbo.dislock.constant.ServerPattern;
 import com.atinbo.dislock.exception.StoreIsEmptyException;
@@ -6,8 +6,7 @@ import com.atinbo.dislock.exception.StoreIsEmptyException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapStore {
-
+public class ServerPatternFactory {
     private static Map<String, ServerPattern> serverPatternMap = new HashMap<>();
 
     static {
@@ -16,6 +15,9 @@ public class MapStore {
         serverPatternMap.put(ServerPattern.MASTER_SLAVE.getPattern(), ServerPattern.MASTER_SLAVE);
         serverPatternMap.put(ServerPattern.REPLICATED.getPattern(), ServerPattern.REPLICATED);
         serverPatternMap.put(ServerPattern.SENTINEL.getPattern(), ServerPattern.SENTINEL);
+    }
+
+    private ServerPatternFactory() {
     }
 
     /**
