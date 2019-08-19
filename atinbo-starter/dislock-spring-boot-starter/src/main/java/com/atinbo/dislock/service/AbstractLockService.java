@@ -81,7 +81,7 @@ public abstract class AbstractLockService implements LockService {
     }
 
     /**
-     * 实现不同类型LOCK
+     * 实现不同类型lock
      *
      * @param keyInfo
      * @return
