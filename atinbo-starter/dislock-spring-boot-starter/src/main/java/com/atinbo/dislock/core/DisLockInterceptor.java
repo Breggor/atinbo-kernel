@@ -56,8 +56,7 @@ public class DisLockInterceptor {
             log.debug("[分布式锁] - key生成策略: class={}, method={}, keyStrategy={}", className, methodName, keyStrategy);
         }
 
-        KeyInfo.Builder keyBuilder = keyStrategy.generateBuilder();
-        KeyInfo lockKey = keyBuilder.leaseTime(lock.leaseTime()).waitTime(lock.waitTime()).timeUnit(lock.timeUnit()).build();
+        KeyInfo lockKey = keyStrategy.generateBuilder().leaseTime(lock.leaseTime()).waitTime(lock.waitTime()).timeUnit(lock.timeUnit()).build();
         if (log.isDebugEnabled()) {
             log.debug("[分布式锁] - 锁key生成: class={}, method={}, lockKey={}", className, methodName, lockKey);
         }
