@@ -1,6 +1,7 @@
 package com.atinbo.dislock.service;
 
 import com.atinbo.dislock.core.KeyInfo;
+import com.atinbo.dislock.exception.LockException;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,9 @@ public abstract class AbstractLockService implements LockService {
 
     @Override
     public void release() {
+        if (!this.lockThreadLocal.get().isHeldByCurrentThread()) {
+            throw new LockException(String.format("[分布式锁] - 锁超时或者锁已释放: %s", keyInfoThreadLocal.get()));
+        }
         this.lockThreadLocal.get().unlock();
         this.clear();
     }
