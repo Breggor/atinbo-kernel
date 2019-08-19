@@ -26,24 +26,23 @@ public interface LockService {
      */
     public void release();
 
-
     /**
-     * 是否设置离开时间
+     * 是否启用离开时间
      *
      * @param keyInfo
      * @return
      */
-    default boolean isLeaseTime(KeyInfo keyInfo) {
+    default boolean enableLeaseTime(KeyInfo keyInfo) {
         return keyInfo.getLeaseTime() != -1;
     }
 
     /**
-     * 是否设置等待时间
+     * 是否启用等待时间
      *
      * @param keyInfo
      * @return
      */
-    default boolean isWaitTime(KeyInfo keyInfo) {
+    default boolean enableWaitTime(KeyInfo keyInfo) {
         return keyInfo.getWaitTime() != -1;
     }
 }

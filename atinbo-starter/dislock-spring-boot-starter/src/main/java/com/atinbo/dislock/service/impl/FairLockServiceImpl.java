@@ -21,17 +21,17 @@ public class FairLockServiceImpl extends AbstractLockService implements LockServ
         RLock lock = getRedissonClient().getFairLock(keyInfo.getKeys().get(0));
         setLock(lock);
 
-        if (!isLeaseTime(keyInfo) && !isWaitTime(keyInfo)) {
+        if (!enableLeaseTime(keyInfo) && !enableWaitTime(keyInfo)) {
             lock.lock();
             return;
         }
 
-        if (isLeaseTime(keyInfo) && isWaitTime(keyInfo)) {
+        if (enableLeaseTime(keyInfo) && !enableWaitTime(keyInfo)) {
             lock.lock(keyInfo.getLeaseTime(), keyInfo.getTimeUnit());
             return;
         }
 
-        if (isLeaseTime(keyInfo) && isWaitTime(keyInfo)) {
+        if (enableLeaseTime(keyInfo) && enableWaitTime(keyInfo)) {
             lock.tryLock(keyInfo.getWaitTime(), keyInfo.getLeaseTime(), keyInfo.getTimeUnit());
             return;
         }
