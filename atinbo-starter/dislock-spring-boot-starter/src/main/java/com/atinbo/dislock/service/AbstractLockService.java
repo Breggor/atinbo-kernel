@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  * 锁服务有状态数据多线程处理
+ *
+ * @author breggor
  */
 public abstract class AbstractLockService implements LockService {
     /**
