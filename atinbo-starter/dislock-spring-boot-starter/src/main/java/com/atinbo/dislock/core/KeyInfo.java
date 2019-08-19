@@ -4,6 +4,7 @@ import com.atinbo.dislock.constant.DisLockConsts;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
 
 
@@ -44,6 +45,16 @@ public class KeyInfo {
 
     public TimeUnit getTimeUnit() {
         return timeUnit;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", KeyInfo.class.getSimpleName() + "[", "]")
+                .add("keys=" + keys)
+                .add("leaseTime=" + leaseTime)
+                .add("waitTime=" + waitTime)
+                .add("timeUnit=" + timeUnit)
+                .toString();
     }
 
     public static class Builder {

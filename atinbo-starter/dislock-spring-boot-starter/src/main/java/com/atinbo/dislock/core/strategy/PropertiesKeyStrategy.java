@@ -7,6 +7,7 @@ import com.atinbo.dislock.exception.KeyBuilderException;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.StringJoiner;
 
 /**
  * 属性锁处理
@@ -43,4 +44,11 @@ public class PropertiesKeyStrategy extends KeyStrategy {
         return keyBuilder;
     }
 
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", PropertiesKeyStrategy.class.getSimpleName() + "[", "]")
+                .add("className='" + className + "'")
+                .add("methodName='" + methodName + "'")
+                .toString();
+    }
 }

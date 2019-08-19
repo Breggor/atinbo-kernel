@@ -6,6 +6,7 @@ import com.atinbo.dislock.core.KeyInfo.Builder;
 import com.atinbo.dislock.exception.KeyBuilderException;
 
 import java.lang.reflect.Method;
+import java.util.StringJoiner;
 
 /**
  * 参数锁处理
@@ -29,4 +30,11 @@ public class ParameterKeyStrategy extends KeyStrategy {
         return keyBuilder;
     }
 
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", ParameterKeyStrategy.class.getSimpleName() + "[", "]")
+                .add("className='" + className + "'")
+                .add("methodName='" + methodName + "'")
+                .toString();
+    }
 }

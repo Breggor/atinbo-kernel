@@ -34,6 +34,9 @@ public class DisLockInterceptor {
 
     @Around(value = "@annotation(com.atinbo.dislock.annotation.DisLock)")
     public Object handle(ProceedingJoinPoint joinPoint) throws Throwable {
+        if (log.isDebugEnabled()) {
+            log.debug("[分布式锁] - 拦截进入处理>>>>>>>>>>>>>>");
+        }
 
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method targetMethod = methodSignature.getMethod();
@@ -44,17 +47,25 @@ public class DisLockInterceptor {
         String className = joinPoint.getTarget().getClass().getName();
         String methodName = methodSignature.getName();
 
+        if (log.isDebugEnabled()) {
+            log.debug("[分布式锁] - 被锁定对象信息: class={}, method={}", className, methodName);
+        }
+
         KeyStrategy keyStrategy = getKeyStrategy(className, methodName, realMethod, args);
-        KeyInfo.Builder keyBuilder = new KeyStrategyContext(keyStrategy).generateBuilder();
+        if (log.isDebugEnabled()) {
+            log.debug("[分布式锁] - key生成策略: class={}, method={}, keyStrategy={}", className, methodName, keyStrategy);
+        }
+
+        KeyInfo.Builder keyBuilder = keyStrategy.generateBuilder();
         KeyInfo lockKey = keyBuilder.leaseTime(lock.leaseTime()).waitTime(lock.waitTime()).timeUnit(lock.timeUnit()).build();
+        if (log.isDebugEnabled()) {
+            log.debug("[分布式锁] - 锁key生成: class={}, method={}, lockKey={}", className, methodName, lockKey);
+        }
 
         LockService lockService = lockServiceFactory.getService(lock.lockType());
-        lockService.setKeyInfo(lockKey);
-
         localLockService.set(lockService);
-
+        lockService.setKeyInfo(lockKey);
         lockService.lock();
-
         return joinPoint.proceed();
     }
 
@@ -96,5 +107,4 @@ public class DisLockInterceptor {
         localLockService.get().release();
         localLockService.remove();
     }
-
 }
