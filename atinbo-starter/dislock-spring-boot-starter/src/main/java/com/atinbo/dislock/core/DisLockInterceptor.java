@@ -97,12 +97,18 @@ public class DisLockInterceptor {
 
     @AfterReturning(value = "@annotation(com.atinbo.dislock.annotation.DisLock)")
     public void afterReturning(JoinPoint joinPoint) {
+        if (log.isDebugEnabled()) {
+            log.debug("[分布式锁] - 处理完：锁释放");
+        }
         localLockService.get().release();
         localLockService.remove();
     }
 
     @AfterThrowing(value = "@annotation(com.atinbo.dislock.annotation.DisLock)")
     public void afterThrowing(JoinPoint joinPoint) {
+        if (log.isDebugEnabled()) {
+            log.debug("[分布式锁] - 内部异常：导致锁释放");
+        }
         localLockService.get().release();
         localLockService.remove();
     }
