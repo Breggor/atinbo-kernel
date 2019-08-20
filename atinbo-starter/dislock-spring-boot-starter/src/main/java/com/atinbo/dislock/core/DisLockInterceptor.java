@@ -35,7 +35,7 @@ public class DisLockInterceptor {
     @Around(value = "@annotation(com.atinbo.dislock.annotation.DisLock)")
     public Object handle(ProceedingJoinPoint joinPoint) throws Throwable {
         if (log.isDebugEnabled()) {
-            log.debug("[分布式锁] - 拦截进入处理>>>>>>>>>>>>>>");
+            log.debug("[分布式锁] - 拦截进入处理");
         }
 
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
