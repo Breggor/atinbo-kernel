@@ -54,6 +54,11 @@ public abstract class AbstractLockService implements LockService {
     public void lock() throws Exception {
         KeyInfo keyInfo = keyInfoThreadLocal.get();
         Objects.requireNonNull(keyInfo, "keyInfo: 不能为null");
+
+        if (keyInfo.getKeys().isEmpty()) {
+            throw new LockException("keyInfo keys不能为空");
+        }
+
         RLock lock = getLock(keyInfo);
         lockThreadLocal.set(lock);
 
