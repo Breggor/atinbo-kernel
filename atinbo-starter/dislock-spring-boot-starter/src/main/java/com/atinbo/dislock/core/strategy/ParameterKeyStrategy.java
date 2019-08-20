@@ -1,6 +1,6 @@
 package com.atinbo.dislock.core.strategy;
 
-import com.atinbo.dislock.annotation.Key;
+import com.atinbo.dislock.annotation.LockKey;
 import com.atinbo.dislock.core.KeyInfo;
 import com.atinbo.dislock.core.KeyInfo.Builder;
 import com.atinbo.dislock.exception.KeyBuilderException;
@@ -23,7 +23,7 @@ public class ParameterKeyStrategy extends KeyStrategy {
     public Builder generateBuilder() throws KeyBuilderException {
         Builder keyBuilder = KeyInfo.newBuilder();
         for (int i = 0; i < realMethod.getParameters().length; i++) {
-            if (realMethod.getParameters()[i].isAnnotationPresent(Key.class)) {
+            if (realMethod.getParameters()[i].isAnnotationPresent(LockKey.class)) {
                 keyBuilder.appendKey(wrapKeyTag(args[i].toString()));
             }
         }

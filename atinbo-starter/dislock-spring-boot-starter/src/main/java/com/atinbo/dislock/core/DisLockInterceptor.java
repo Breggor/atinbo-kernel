@@ -1,7 +1,7 @@
 package com.atinbo.dislock.core;
 
 import com.atinbo.dislock.annotation.DisLock;
-import com.atinbo.dislock.annotation.Key;
+import com.atinbo.dislock.annotation.LockKey;
 import com.atinbo.dislock.core.strategy.*;
 import com.atinbo.dislock.service.LockService;
 import com.atinbo.dislock.service.LockServiceFactory;
@@ -71,12 +71,12 @@ public class DisLockInterceptor {
     private KeyStrategy getKeyStrategy(String className, String methodName, Method realMethod, Object[] args) {
         //参数锁
         for (int i = 0; i < realMethod.getParameters().length; i++) {
-            if (realMethod.getParameters()[i].isAnnotationPresent(Key.class)) {
+            if (realMethod.getParameters()[i].isAnnotationPresent(LockKey.class)) {
                 return new ParameterKeyStrategy(className, methodName, realMethod, args);
             }
         }
         //方法锁
-        if (null != realMethod.getAnnotation(Key.class)) {
+        if (null != realMethod.getAnnotation(LockKey.class)) {
             return new MethodKeyStrategy(className, methodName, realMethod, args);
         }
         //属性锁
@@ -86,7 +86,7 @@ public class DisLockInterceptor {
             Class objectClass = obj.getClass();
             Field[] fields = objectClass.getDeclaredFields();
             for (Field field : fields) {
-                if (null != field.getAnnotation(Key.class)) {
+                if (null != field.getAnnotation(LockKey.class)) {
                     return new PropertiesKeyStrategy(className, methodName, realMethod, args);
                 }
             }

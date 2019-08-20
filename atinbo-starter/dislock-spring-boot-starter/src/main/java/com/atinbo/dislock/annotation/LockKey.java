@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Key {
+public @interface LockKey {
 
     String[] value() default {};
 

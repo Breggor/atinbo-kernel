@@ -1,6 +1,6 @@
 package com.atinbo.dislock.core.strategy;
 
-import com.atinbo.dislock.annotation.Key;
+import com.atinbo.dislock.annotation.LockKey;
 import com.atinbo.dislock.core.KeyInfo;
 import com.atinbo.dislock.core.KeyInfo.Builder;
 import com.atinbo.dislock.exception.KeyBuilderException;
@@ -29,7 +29,7 @@ public class PropertiesKeyStrategy extends KeyStrategy {
             Class objectClass = obj.getClass();
             Field[] fields = objectClass.getDeclaredFields();
             for (Field field : fields) {
-                if (null != field.getAnnotation(Key.class)) {
+                if (null != field.getAnnotation(LockKey.class)) {
                     field.setAccessible(true);
                     try {
                         keyBuilder.appendKey(wrapKeyTag(field.get(obj).toString()));
