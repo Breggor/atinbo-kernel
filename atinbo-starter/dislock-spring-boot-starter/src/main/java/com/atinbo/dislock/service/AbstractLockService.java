@@ -82,9 +82,6 @@ public abstract class AbstractLockService implements LockService {
 
     @Override
     public void release() {
-        if (!this.lockThreadLocal.get().isHeldByCurrentThread()) {
-            throw new LockException(String.format("[分布式锁] - 锁超时或者锁已释放: %s", keyInfoThreadLocal.get()));
-        }
         this.lockThreadLocal.get().unlock();
         this.clear();
     }
