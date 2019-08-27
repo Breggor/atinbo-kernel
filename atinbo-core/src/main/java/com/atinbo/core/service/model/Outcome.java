@@ -3,6 +3,8 @@ package com.atinbo.core.service.model;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * 服务接口层返回对象
  *
@@ -11,7 +13,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class Outcome<T extends BaseBO> {
+public class Outcome<T extends BaseBO> implements Serializable {
     /**
      * 返回对象
      */
