@@ -32,7 +32,9 @@ public class PropertiesKeyStrategy extends KeyStrategy {
                 if (null != field.getAnnotation(LockKey.class)) {
                     field.setAccessible(true);
                     try {
-                        keyBuilder.appendKey(wrapKeyTag(field.get(obj).toString()));
+                        Object fieldVal = field.get(obj);
+                        checkLockKey(fieldVal,field.getName());
+                        keyBuilder.appendKey(wrapKeyTag(fieldVal.toString()));
                     } catch (IllegalArgumentException e) {
                         throw new KeyBuilderException("生成builder失败", e);
                     } catch (IllegalAccessException e) {

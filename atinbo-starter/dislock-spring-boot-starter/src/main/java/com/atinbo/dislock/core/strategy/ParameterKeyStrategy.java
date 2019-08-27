@@ -24,6 +24,7 @@ public class ParameterKeyStrategy extends KeyStrategy {
         Builder keyBuilder = KeyInfo.newBuilder();
         for (int i = 0; i < realMethod.getParameters().length; i++) {
             if (realMethod.getParameters()[i].isAnnotationPresent(LockKey.class)) {
+                checkLockKey(args[i], realMethod.getParameters()[i].getName());
                 keyBuilder.appendKey(wrapKeyTag(args[i].toString()));
             }
         }

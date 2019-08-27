@@ -7,6 +7,8 @@ import com.atinbo.dislock.exception.KeyBuilderException;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.text.MessageFormat;
+import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
@@ -37,7 +39,9 @@ public class MethodKeyStrategy extends KeyStrategy {
                         field.setAccessible(true);
                         if (field.getName().equals(propertyName[1])) {
                             try {
-                                keyBuilder.appendKey(wrapKeyTag(field.get(obj).toString()));
+                                Object fieldVal = field.get(obj);
+                                checkLockKey(fieldVal, propertyName[1]);
+                                keyBuilder.appendKey(wrapKeyTag(fieldVal.toString()));
                             } catch (IllegalAccessException e) {
                                 throw new KeyBuilderException("生成builder失败", e);
                             }

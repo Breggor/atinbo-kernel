@@ -13,4 +13,8 @@ public class KeyBuilderException extends RuntimeException {
     public KeyBuilderException(String message, Throwable cause) {
         super(message, cause);
     }
+
+    public KeyBuilderException(String message) {
+        super(message);
+    }
 }

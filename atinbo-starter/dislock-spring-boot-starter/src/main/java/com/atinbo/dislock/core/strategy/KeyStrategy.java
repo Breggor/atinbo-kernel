@@ -5,6 +5,8 @@ import com.atinbo.dislock.core.KeyInfo.Builder;
 import com.atinbo.dislock.exception.KeyBuilderException;
 
 import java.lang.reflect.Method;
+import java.text.MessageFormat;
+import java.util.Objects;
 
 /**
  * key策略
@@ -38,6 +40,16 @@ public abstract class KeyStrategy {
     public String wrapKeyTag(String valTag) {
         return getSimpleClassName() + DisLockConsts.KEY_SPLIT_MARK + this.methodName
                 + DisLockConsts.KEY_SPLIT_MARK + valTag;
+    }
+
+    /**
+     * 检查分布式Key是否为null
+     *
+     * @param fieldVal
+     * @param field
+     */
+    protected void checkLockKey(Object fieldVal, String field) {
+        Objects.requireNonNull(fieldVal, () -> MessageFormat.format("[分布式锁] - LockKey={0},不能为空", field));
     }
 
     /**
