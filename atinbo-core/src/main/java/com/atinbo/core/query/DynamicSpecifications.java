@@ -12,6 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 使用方法： 为（数据库）实体类创建一个查询对象类，该类需要实现 QueryParam 接口
+ *           因部分查询对象都继承了 PageParam ，故此处拼接忽略了 PageParam 中的属性
+ *             查询对象类的属性和实体类属性一致，并且是全匹配查询时不需要做任何处理
+ *             否则需要在查询属性加上 @Query 注解，注解使用方法请查看注解类中的注释
+ *
  * JPA 动态查询条件拼接
  *
  * @author zenghao
