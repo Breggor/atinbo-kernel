@@ -1,6 +1,6 @@
 package com.atinbo.core.service.model;
 
-import com.atinbo.core.model.PageInfo;
+import com.atinbo.core.model.Pagination;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -22,7 +22,7 @@ public class PageOutcome<T extends BaseBO> implements Serializable {
     /**
      * 分页信息
      */
-    private PageInfo page = PageInfo.EMPTY;
+    private Pagination page = Pagination.EMPTY;
     /**
      * 分页数据列表
      */
@@ -55,7 +55,7 @@ public class PageOutcome<T extends BaseBO> implements Serializable {
      * @param <E>
      * @return
      */
-    public static <E extends BaseBO> PageOutcome<E> ofSuccess(PageInfo page, List<E> data) {
+    public static <E extends BaseBO> PageOutcome<E> ofSuccess(Pagination page, List<E> data) {
         return new PageOutcome<E>().setSuccess(true).setPage(page).setData(data);
     }
 }

@@ -1,6 +1,6 @@
 package com.atinbo.core.http.model;
 
-import com.atinbo.core.model.PageInfo;
+import com.atinbo.core.model.Pagination;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,14 +19,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class PageResult<T extends BaseVO> extends PageInfo implements Serializable {
+public class PageResult<T extends BaseVO> extends Pagination implements Serializable {
     /**
      * 分页数据列表
      */
     private List<T> data;
 
-    public PageResult(PageInfo page, List<T> data) {
-        super(page.getPage(), page.getSize(), page.getTotal(), page.getRows());
+    public PageResult(Pagination page, List<T> data) {
+        super(page.getCurrent(), page.getSize(), page.getTotal(), page.getRows());
         this.data = data;
     }
 
@@ -36,7 +36,7 @@ public class PageResult<T extends BaseVO> extends PageInfo implements Serializab
      * @param <E>
      * @return
      */
-    public static <E> PageResult of(PageInfo page, List<E> data) {
+    public static <E> PageResult of(Pagination page, List<E> data) {
         return new PageResult(page, data);
     }
 }

@@ -1,10 +1,9 @@
-//
-// Source status recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package com.atinbo.constants;
 
+/**
+ * url匹配模式
+ * @author breggor
+ */
 public enum UrlPatternType {
     CONTAIN,
     EXCEPT;

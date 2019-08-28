@@ -16,14 +16,14 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class PageInfo implements Serializable {
+public class Pagination implements Serializable {
 
-    public static final PageInfo EMPTY = new PageInfo(0, 10, 0, 0);
+    public static final Pagination EMPTY = new Pagination(0, 10, 0, 0);
 
     /**
      * 当前页
      */
-    private int page;
+    private int current;
     /**
      * 每页行数
      */
@@ -40,13 +40,13 @@ public class PageInfo implements Serializable {
     /**
      * 创建分页
      *
-     * @param page  当前页
+     * @param current  当前页
      * @param size  每页行数
      * @param total 总页数
      * @param rows  总行数
      * @return
      */
-    public static PageInfo of(int page, int size, int total, long rows) {
-        return new PageInfo(page, size, total, rows);
+    public static Pagination of(int current, int size, int total, long rows) {
+        return new Pagination(current, size, total, rows);
     }
 }
