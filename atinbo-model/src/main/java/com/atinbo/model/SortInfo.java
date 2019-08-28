@@ -1,6 +1,5 @@
-package com.atinbo.core.model;
+package com.atinbo.model;
 
-import com.atinbo.core.constants.SortDirection;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

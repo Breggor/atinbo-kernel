@@ -1,6 +1,7 @@
 package com.atinbo.core.http.model;
 
-import com.atinbo.core.model.Pagination;
+
+import com.atinbo.model.Pagination;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

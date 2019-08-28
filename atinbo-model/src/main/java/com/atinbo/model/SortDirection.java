@@ -1,4 +1,4 @@
-package com.atinbo.core.constants;
+package com.atinbo.model;
 
 /**
  * 排序反向

@@ -1,4 +1,4 @@
-package com.atinbo.core.service.model;
+package com.atinbo.model;
 
 import java.io.Serializable;
 

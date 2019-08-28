@@ -1,4 +1,4 @@
-package com.atinbo.core.model;
+package com.atinbo.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -19,6 +19,7 @@
         <module>atinbo-dal</module>
         <module>atinbo-deps</module>
         <module>atinbo-starter</module>
+        <module>atinbo-model</module>
     </modules>
 
     <distributionManagement>

@@ -1,6 +1,5 @@
-package com.atinbo.core.service.model;
+package com.atinbo.model;
 
-import com.atinbo.core.model.Pagination;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;

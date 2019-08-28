@@ -1,6 +1,7 @@
 package com.atinbo.core.query;
 
-import com.atinbo.core.service.model.PageParam;
+
+import com.atinbo.model.PageParam;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -11,8 +12,9 @@ import java.util.List;
 
 /**
  * JPA 动态查询条件拼接
- * @author  zenghao
- * @create  2019/7/23
+ *
+ * @author zenghao
+ * @create 2019/7/23
  */
 public class DynamicSpecifications {
 
@@ -27,18 +29,18 @@ public class DynamicSpecifications {
             Query queryMode;
             for (Field field : fieldList) {
                 fieldValue = ReflectionUtils.invokeGetterMethod(queryParam, field.getName());
-                if(fieldValue == null){
+                if (fieldValue == null) {
                     continue;
                 }
 
                 if (field.isAnnotationPresent(Query.class)) {
                     queryMode = field.getAnnotation(Query.class);
-                    if (queryMode.ignore()){
+                    if (queryMode.ignore()) {
                         continue;
                     }
                     fieldName = StringUtils.isBlank(queryMode.field()) ? field.getName() : queryMode.field();
                     operator = queryMode.operator();
-                }else {
+                } else {
                     fieldName = field.getName();
                     operator = Operator.EQ;
                 }
