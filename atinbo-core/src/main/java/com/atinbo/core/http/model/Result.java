@@ -25,7 +25,7 @@ public class Result<T> implements Serializable {
     private T data;
 
     /**
-     * 状态码: 0:成功，非零为失败
+     * 状态码: 0:成功，-1：失败，业务异常：非零或非-1
      */
     private int code = 0;
     /**
@@ -47,7 +47,11 @@ public class Result<T> implements Serializable {
         return new Result(data);
     }
 
-    public static Result ofSuccess() {
-        return new Result();
+    public static Result success() {
+        return new Result().setMessage("成功");
+    }
+
+    public static Result failure() {
+        return new Result().setCode(-1).setMessage("失败");
     }
 }
