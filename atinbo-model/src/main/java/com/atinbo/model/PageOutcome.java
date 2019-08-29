@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-public class PageOutcome<T extends BaseBO> implements Serializable {
+public class PageOutcome<T extends Serializable> implements Serializable {
 
     /**
      * 分页信息
@@ -43,7 +43,7 @@ public class PageOutcome<T extends BaseBO> implements Serializable {
      * @param <E>
      * @return
      */
-    public static <E extends BaseBO> PageOutcome<E> ofFail(String error) {
+    public static <E extends Serializable> PageOutcome<E> ofFail(String error) {
         return new PageOutcome<E>().setError(error);
     }
 
@@ -54,7 +54,7 @@ public class PageOutcome<T extends BaseBO> implements Serializable {
      * @param <E>
      * @return
      */
-    public static <E extends BaseBO> PageOutcome<E> ofSuccess(Pagination page, List<E> data) {
+    public static <E extends Serializable> PageOutcome<E> ofSuccess(Pagination page, List<E> data) {
         return new PageOutcome<E>().setSuccess(true).setPage(page).setData(data);
     }
 }

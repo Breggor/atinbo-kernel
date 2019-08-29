@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-public class Outcome<T extends BaseBO> implements Serializable {
+public class Outcome<T extends Serializable> implements Serializable {
     /**
      * 返回对象
      */
@@ -34,7 +34,7 @@ public class Outcome<T extends BaseBO> implements Serializable {
      * @param <E>
      * @return
      */
-    public static <E extends BaseBO> Outcome<E> ofFail(String error) {
+    public static <E extends Serializable> Outcome<E> ofFail(String error) {
         return new Outcome<E>().setError(error);
     }
 
@@ -45,7 +45,7 @@ public class Outcome<T extends BaseBO> implements Serializable {
      * @param <E>
      * @return
      */
-    public static <E extends BaseBO> Outcome<E> ofSuccess(E data) {
+    public static <E extends Serializable> Outcome<E> ofSuccess(E data) {
         return new Outcome<E>().setSuccess(true).setData(data);
     }
 }

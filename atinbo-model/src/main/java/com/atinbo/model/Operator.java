@@ -1,4 +1,4 @@
-package com.atinbo.core.query;
+package com.atinbo.model;
 
 /**
  * 查询操作符

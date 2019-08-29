@@ -1,7 +1,9 @@
 package com.atinbo.core.query;
 
 
+import com.atinbo.model.Operator;
 import com.atinbo.model.PageParam;
+import com.atinbo.model.Query;
 import com.atinbo.model.QueryParam;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
