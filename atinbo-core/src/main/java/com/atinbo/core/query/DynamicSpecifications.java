@@ -35,7 +35,7 @@ public class DynamicSpecifications {
             Query queryMode;
             for (Field field : fieldList) {
                 fieldValue = ReflectionUtils.invokeGetterMethod(queryParam, field.getName());
-                if (fieldValue == null) {
+                if (fieldValue == null || (field.getType() == String.class && StringUtils.isBlank((String)fieldValue))) {
                     continue;
                 }
 
