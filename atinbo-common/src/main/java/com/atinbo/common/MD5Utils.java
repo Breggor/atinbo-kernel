@@ -1,4 +1,4 @@
-package com.atinbo.core.utils;
+package com.atinbo.common;
 
 import java.security.MessageDigest;
 

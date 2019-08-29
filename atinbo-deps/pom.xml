@@ -25,6 +25,12 @@
 
             <dependency>
                 <groupId>com.atinbo</groupId>
+                <artifactId>atinbo-common</artifactId>
+                <version>${atinbo-kernel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atinbo</groupId>
                 <artifactId>atinbo-core</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>

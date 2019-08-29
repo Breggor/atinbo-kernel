@@ -1,4 +1,4 @@
-package com.atinbo.core.utils;
+package com.atinbo.common;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;

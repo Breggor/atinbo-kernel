@@ -20,7 +20,17 @@
 
         <dependency>
             <groupId>com.atinbo</groupId>
-            <artifactId>atinbo-core</artifactId>
+            <artifactId>atinbo-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atinbo</groupId>
+            <artifactId>atinbo-model</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
 
         <dependency>

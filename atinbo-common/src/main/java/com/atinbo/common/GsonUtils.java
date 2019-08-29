@@ -1,11 +1,10 @@
-package com.atinbo.core.utils;
+package com.atinbo.common;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
@@ -32,7 +31,7 @@ public class GsonUtils {
         @Override
         public void write(final JsonWriter out, final String value) {
             try {
-                if (StringUtils.isBlank(value)) {
+                if (StrUtils.isBlank(value)) {
                     out.nullValue();
                     return;
                 }
@@ -122,7 +121,7 @@ public class GsonUtils {
      * @return java.lang.String string
      */
     public String toGetParam(final String json) {
-        if (StringUtils.isBlank(json)) {
+        if (StrUtils.isBlank(json)) {
             return "";
         }
         final Map<String, String> map = toStringMap(json);

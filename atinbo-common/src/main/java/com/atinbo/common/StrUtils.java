@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /** This class provides static helper methods for {@link CharSequence}. */
-public final class StringUtils {
+public final class StrUtils {
 
   /**
    * Check whether the given string value is empty. The value is empty if null or length is 0.
