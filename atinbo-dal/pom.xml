@@ -15,6 +15,7 @@
         <module>atinbo-dal-mongo</module>
         <module>atinbo-dal-redis</module>
         <module>atinbo-dal-cache</module>
+        <module>atinbo-dal-jpa</module>
     </modules>
     <artifactId>atinbo-dal</artifactId>
 

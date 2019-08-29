@@ -1,6 +1,7 @@
-package com.atinbo.core.query;
+package com.atinbo.jpa;
 
 
+import com.atinbo.core.utils.ReflectionUtils;
 import com.atinbo.model.Operator;
 import com.atinbo.model.PageParam;
 import com.atinbo.model.Query;

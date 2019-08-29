@@ -1,4 +1,4 @@
-package com.atinbo.core.domain;
+package com.atinbo.entity;
 
 
 import lombok.Getter;

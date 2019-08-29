@@ -1,4 +1,4 @@
-package com.atinbo.core.query;
+package com.atinbo.core.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -12,14 +12,14 @@ import java.util.List;
 
 /**
  * 反射工具类.
- * 
+ *
  * 提供访问私有变量,获取泛型类型Class, 提取集合中元素的属性, 转换字符串到对象等Util函数.
- * 
+ *
  * @author Breggor
  */
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class ReflectionUtils {
+public abstract class ReflectionUtils {
 
 	private static Logger logger = LoggerFactory.getLogger(ReflectionUtils.class);
 
@@ -40,7 +40,7 @@ public class ReflectionUtils {
 
 	/**
 	 * 调用Setter方法.
-	 * 
+	 *
 	 * @param propertyType
 	 *            用于查找Setter方法,为空时使用value的Class替代.
 	 */
@@ -88,7 +88,7 @@ public class ReflectionUtils {
 
 	/**
 	 * 循环向上转型, 获取对象的DeclaredField, 并强制设置为可访问.
-	 * 
+	 *
 	 * 如向上转型到Object仍无法找到, 返回null.
 	 */
 	public static Field getAccessibleField(final Object obj, final String fieldName) {
@@ -124,7 +124,7 @@ public class ReflectionUtils {
 
 	/**
 	 * 循环向上转型, 获取对象的DeclaredMethod,并强制设置为可访问. 如向上转型到Object仍无法找到, 返回null.
-	 * 
+	 *
 	 * 用于方法需要被多次调用的情况. 先使用本函数先取得Method,然后调用Method.invoke(Object obj, Object...
 	 * args)
 	 */
@@ -149,7 +149,7 @@ public class ReflectionUtils {
 	/**
 	 * 通过反射, 获得Class定义中声明的父类的泛型参数的类型. 如无法找到, 返回Object.class. eg. public UserDao
 	 * extends HibernateDao<User>
-	 * 
+	 *
 	 * @param clazz
 	 *            The class to introspect
 	 * @return the first generic declaration, or Object.class if cannot be
@@ -161,9 +161,9 @@ public class ReflectionUtils {
 
 	/**
 	 * 通过反射, 获得Class定义中声明的父类的泛型参数的类型. 如无法找到, 返回Object.class.
-	 * 
+	 *
 	 * 如public UserDao extends HibernateDao<User,Long>
-	 * 
+	 *
 	 * @param clazz
 	 *            clazz The class to introspect
 	 * @param index
@@ -211,7 +211,7 @@ public class ReflectionUtils {
 
 	/**
 	 * 返回Class所有字段及父类字段
-	 * 
+	 *
 	 * @param clazz
 	 * @return
 	 */
@@ -241,5 +241,25 @@ public class ReflectionUtils {
 			}
 		}
 		return fieldList;
+	}
+
+	/**
+	 * Gets field.
+	 *
+	 * @param beanClass the bean class
+	 * @param name      the name
+	 * @return the field
+	 * @throws SecurityException the security exception
+	 */
+	public static Field getField(final Class<?> beanClass, final String name) throws SecurityException {
+		final Field[] fields = beanClass.getDeclaredFields();
+		if (fields != null && fields.length != 0) {
+			for (Field field : fields) {
+				if (name.equals(field.getName())) {
+					return field;
+				}
+			}
+		}
+		return null;
 	}
 }

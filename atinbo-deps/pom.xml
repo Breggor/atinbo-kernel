@@ -34,14 +34,22 @@
                 <artifactId>atinbo-dal-mongo</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>com.atinbo</groupId>
                 <artifactId>atinbo-dal-redis</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>com.atinbo</groupId>
                 <artifactId>atinbo-dal-cache</artifactId>
+                <version>${atinbo-kernel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atinbo</groupId>
+                <artifactId>atinbo-dal-jpa</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>
 
