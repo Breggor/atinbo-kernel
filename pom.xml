@@ -20,6 +20,7 @@
         <module>atinbo-deps</module>
         <module>atinbo-starter</module>
         <module>atinbo-model</module>
+        <module>atinbo-common</module>
     </modules>
 
     <distributionManagement>
