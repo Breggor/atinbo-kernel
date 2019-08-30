@@ -51,7 +51,7 @@
         <mysql.connector.version>8.0.16</mysql.connector.version>
         <HikariCP.version>3.3.1</HikariCP.version>
         <swagger.version>2.7.0</swagger.version>
-        <swagger-ui.version>1.9.4</swagger-ui.version>
+        <swagger-ui.version>1.9.6</swagger-ui.version>
 
         <skipTests>true</skipTests>
     </properties>
