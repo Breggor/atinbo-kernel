@@ -53,6 +53,7 @@
         <jjwt.version>0.9.1</jjwt.version>
         <swagger.version>2.7.0</swagger.version>
         <swagger-ui.version>1.9.6</swagger-ui.version>
+        <easyexcel.version>2.0.0-beta1</easyexcel.version>
 
         <skipTests>true</skipTests>
     </properties>
@@ -203,6 +204,12 @@
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
                 <version>${gson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easyexcel.version}</version>
             </dependency>
 
             <dependency>
