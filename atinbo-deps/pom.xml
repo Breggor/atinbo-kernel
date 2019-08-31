@@ -61,7 +61,13 @@
 
             <dependency>
                 <groupId>com.atinbo</groupId>
-                <artifactId>atinbo-mvc</artifactId>
+                <artifactId>atinbo-webmvc</artifactId>
+                <version>${atinbo-kernel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atinbo</groupId>
+                <artifactId>atinbo-webflux</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>
 

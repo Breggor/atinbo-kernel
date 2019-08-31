@@ -15,7 +15,7 @@
         <module>atinbo-parent</module>
         <module>atinbo-base</module>
         <module>atinbo-core</module>
-        <module>atinbo-mvc</module>
+        <module>atinbo-web</module>
         <module>atinbo-dal</module>
         <module>atinbo-deps</module>
         <module>atinbo-starter</module>
