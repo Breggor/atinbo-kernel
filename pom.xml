@@ -14,13 +14,13 @@
     <modules>
         <module>atinbo-parent</module>
         <module>atinbo-base</module>
-        <module>atinbo-core</module>
-        <module>atinbo-web</module>
-        <module>atinbo-dal</module>
-        <module>atinbo-deps</module>
-        <module>atinbo-starter</module>
-        <module>atinbo-model</module>
         <module>atinbo-common</module>
+        <module>atinbo-model</module>
+        <module>atinbo-core</module>
+        <module>atinbo-dal</module>
+        <module>atinbo-web</module>
+        <module>atinbo-starter</module>
+        <module>atinbo-dependencies</module>
     </modules>
 
     <distributionManagement>
