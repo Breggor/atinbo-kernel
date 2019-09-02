@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * 跨域自动配置
@@ -37,7 +36,7 @@ public class CorsAutoConfiguration {
     @Bean
     @ConditionalOnProperty(prefix = "cors", name = "enabled", havingValue = "true", matchIfMissing = false)
     public WebMvcConfigurer corsConfigurer(CorsProperties corsProperties) {
-        return new WebMvcConfigurerAdapter() {
+        return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping(corsProperties.getPathPattern())
@@ -45,7 +44,6 @@ public class CorsAutoConfiguration {
                         .allowedMethods(corsProperties.getAllowedMethods())
                         .allowedOrigins(corsProperties.getAllowedOrigins())
                         .allowCredentials(corsProperties.isAllowCredentials()).maxAge(corsProperties.getMaxAge());
-                super.addCorsMappings(registry);
             }
         };
     }
