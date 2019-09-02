@@ -21,6 +21,7 @@
         <module>atinbo-web</module>
         <module>atinbo-starter</module>
         <module>atinbo-dependencies</module>
+        <module>atinbo-generate</module>
     </modules>
 
     <distributionManagement>
