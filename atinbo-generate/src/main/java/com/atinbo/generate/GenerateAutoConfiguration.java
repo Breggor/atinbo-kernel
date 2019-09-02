@@ -1,6 +1,8 @@
-package com.atinbo.generate.config;
+package com.atinbo.generate;
 
+import com.atinbo.generate.config.GenerateProperties;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
@@ -9,5 +11,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  */
 @MapperScan("com.atinbo.generate.mapper")
 @EnableConfigurationProperties(GenerateProperties.class)
+@ConditionalOnProperty(prefix = GenerateProperties.GENERATE_PREFIX , name = "enabled", havingValue = "true", matchIfMissing = false)
 public class GenerateAutoConfiguration {
+
 }
