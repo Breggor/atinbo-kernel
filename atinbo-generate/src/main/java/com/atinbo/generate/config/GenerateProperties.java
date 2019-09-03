@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 规则配置项
+ *
  * @author code-generator
  * @date 2019-8-20
  */

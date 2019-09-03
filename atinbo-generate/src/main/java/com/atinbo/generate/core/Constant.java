@@ -2,12 +2,13 @@ package com.atinbo.generate.core;
 
 /**
  * 常量类
+ *
  * @author code-generator
  * @date 2019-8-20
  */
 public abstract class Constant {
-    
-    
+
+
     public static final String CONTROLLER_TEMPLATE_PATH = "controller.ftl";
     public static final String SERVICE_TEMPLATE_PATH = "service.ftl";
     public static final String SERVICE_IMPL_TEMPLATE_PATH = "service_impl.ftl";

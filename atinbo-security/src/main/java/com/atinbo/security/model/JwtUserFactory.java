@@ -1,6 +1,5 @@
 package com.atinbo.security.model;
 
-import com.atinbo.security.model.JwtUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 

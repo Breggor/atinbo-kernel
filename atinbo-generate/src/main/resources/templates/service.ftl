@@ -12,29 +12,34 @@ import ${classInfo.packageName}.model.${classInfo.className};
 */
 public interface ${classInfo.className}Service {
 
-    /**
-    * 新增
-    */
-    public ReturnT<String> insert(${classInfo.className} ${classInfo.className?uncap_first});
+/**
+* 新增
+*/
+public ReturnT
+<String> insert(${classInfo.className} ${classInfo.className?uncap_first});
 
     /**
     * 删除
     */
-    public ReturnT<String> delete(int id);
+    public ReturnT
+    <String> delete(int id);
 
-    /**
-    * 更新
-    */
-    public ReturnT<String> update(${classInfo.className} ${classInfo.className?uncap_first});
+        /**
+        * 更新
+        */
+        public ReturnT
+        <String> update(${classInfo.className} ${classInfo.className?uncap_first});
 
-    /**
-    * Load查询
-    */
-    public ${classInfo.className} findById(int id);
+            /**
+            * Load查询
+            */
+            public ${classInfo.className} findById(int id);
 
-    /**
-    * 分页查询
-    */
-    public Map<String,Object> pageList(int offset, int pagesize);
+            /**
+            * 分页查询
+            */
+            public Map
+            <String
+            ,Object> pageList(int offset, int pagesize);
 
-}
+            }

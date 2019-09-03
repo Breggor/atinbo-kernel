@@ -1,4 +1,3 @@
-
 package com.atinbo.security.model;
 
 

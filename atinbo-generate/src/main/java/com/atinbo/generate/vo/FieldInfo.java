@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * 属性信息
+ *
  * @author code-generator
  * @date 2019-8-20
  */

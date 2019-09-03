@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * 表查询接口
+ *
  * @author code-generator
  * @date 2019-8-20
  */
@@ -42,9 +43,9 @@ public interface GenerateMapper {
     TableInfo selectTableInfo(@Param("tableName") String tableName);
 
 
-
     /**
      * 根据表名查询表中所有列
+     *
      * @param tableName
      * @return
      */

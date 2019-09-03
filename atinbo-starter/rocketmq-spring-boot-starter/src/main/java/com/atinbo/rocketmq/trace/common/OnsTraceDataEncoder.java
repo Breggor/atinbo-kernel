@@ -43,16 +43,14 @@ public class OnsTraceDataEncoder {
                 // 兼容某个版本的snapshot，此处没有offsetid的情况
                 if (line.length == 13) {
                     pubContext.setSuccess(Boolean.parseBoolean(line[12]));
-                }
-                else if (line.length == 14) {
+                } else if (line.length == 14) {
                     bean.setOffsetMsgId(line[12]);
                     pubContext.setSuccess(Boolean.parseBoolean(line[13]));
                 }
                 pubContext.setTraceBeans(new ArrayList<OnsTraceBean>(1));
                 pubContext.getTraceBeans().add(bean);
                 resList.add(pubContext);
-            }
-            else if (line[0].equals(OnsTraceType.SubBefore.name())) {
+            } else if (line[0].equals(OnsTraceType.SubBefore.name())) {
                 OnsTraceContext subBeforeContext = new OnsTraceContext();
                 subBeforeContext.setTraceType(OnsTraceType.SubBefore);
                 subBeforeContext.setTimeStamp(Long.parseLong(line[1]));
@@ -66,8 +64,7 @@ public class OnsTraceDataEncoder {
                 subBeforeContext.setTraceBeans(new ArrayList<OnsTraceBean>(1));
                 subBeforeContext.getTraceBeans().add(bean);
                 resList.add(subBeforeContext);
-            }
-            else if (line[0].equals(OnsTraceType.SubAfter.name())) {
+            } else if (line[0].equals(OnsTraceType.SubAfter.name())) {
                 OnsTraceContext subAfterContext = new OnsTraceContext();
                 subAfterContext.setTraceType(OnsTraceType.SubAfter);
                 subAfterContext.setRequestId(line[1]);
@@ -116,32 +113,32 @@ public class OnsTraceDataEncoder {
 //                .append(ctx.isSuccess()).append(OnsTraceConstants.FIELD_SPLITOR);
 //        }
 //            break;
-        case SubBefore: {
-            for (OnsTraceBean bean : ctx.getTraceBeans()) {
-                sb.append(ctx.getTraceType()).append(OnsTraceConstants.CONTENT_SPLITOR)//
-                    .append(ctx.getTimeStamp()).append(OnsTraceConstants.CONTENT_SPLITOR)//
-                    .append(ctx.getRegionId()).append(OnsTraceConstants.CONTENT_SPLITOR)//
-                    .append(ctx.getGroupName()).append(OnsTraceConstants.CONTENT_SPLITOR)//
-                    .append(ctx.getRequestId()).append(OnsTraceConstants.CONTENT_SPLITOR)//
-                    .append(bean.getMsgId()).append(OnsTraceConstants.CONTENT_SPLITOR)//
-                    .append(bean.getRetryTimes()).append(OnsTraceConstants.CONTENT_SPLITOR)//
-                    .append(bean.getKeys()).append(OnsTraceConstants.FIELD_SPLITOR);//
+            case SubBefore: {
+                for (OnsTraceBean bean : ctx.getTraceBeans()) {
+                    sb.append(ctx.getTraceType()).append(OnsTraceConstants.CONTENT_SPLITOR)//
+                            .append(ctx.getTimeStamp()).append(OnsTraceConstants.CONTENT_SPLITOR)//
+                            .append(ctx.getRegionId()).append(OnsTraceConstants.CONTENT_SPLITOR)//
+                            .append(ctx.getGroupName()).append(OnsTraceConstants.CONTENT_SPLITOR)//
+                            .append(ctx.getRequestId()).append(OnsTraceConstants.CONTENT_SPLITOR)//
+                            .append(bean.getMsgId()).append(OnsTraceConstants.CONTENT_SPLITOR)//
+                            .append(bean.getRetryTimes()).append(OnsTraceConstants.CONTENT_SPLITOR)//
+                            .append(bean.getKeys()).append(OnsTraceConstants.FIELD_SPLITOR);//
+                }
             }
-        }
             break;
-        case SubAfter: {
-            for (OnsTraceBean bean : ctx.getTraceBeans()) {
-                sb.append(ctx.getTraceType()).append(OnsTraceConstants.CONTENT_SPLITOR)//
-                    // .append(ctx.getTimeStamp()).append(OnsTraceConstants.CONTENT_SPLITOR)//
-                    .append(ctx.getRequestId()).append(OnsTraceConstants.CONTENT_SPLITOR)//
-                    .append(bean.getMsgId()).append(OnsTraceConstants.CONTENT_SPLITOR)//
-                    .append(ctx.getCostTime()).append(OnsTraceConstants.CONTENT_SPLITOR)//
-                    .append(ctx.isSuccess()).append(OnsTraceConstants.CONTENT_SPLITOR)//
-                    .append(bean.getKeys()).append(OnsTraceConstants.FIELD_SPLITOR);
+            case SubAfter: {
+                for (OnsTraceBean bean : ctx.getTraceBeans()) {
+                    sb.append(ctx.getTraceType()).append(OnsTraceConstants.CONTENT_SPLITOR)//
+                            // .append(ctx.getTimeStamp()).append(OnsTraceConstants.CONTENT_SPLITOR)//
+                            .append(ctx.getRequestId()).append(OnsTraceConstants.CONTENT_SPLITOR)//
+                            .append(bean.getMsgId()).append(OnsTraceConstants.CONTENT_SPLITOR)//
+                            .append(ctx.getCostTime()).append(OnsTraceConstants.CONTENT_SPLITOR)//
+                            .append(ctx.isSuccess()).append(OnsTraceConstants.CONTENT_SPLITOR)//
+                            .append(bean.getKeys()).append(OnsTraceConstants.FIELD_SPLITOR);
+                }
             }
-        }
             break;
-        default:
+            default:
         }
         transferBean.setTransData(sb.toString());
         for (OnsTraceBean bean : ctx.getTraceBeans()) {

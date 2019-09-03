@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * 数据库表信息
+ *
  * @author code-generator
  * @date 2019-8-20
  */

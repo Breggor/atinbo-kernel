@@ -12,11 +12,11 @@ import java.lang.annotation.*;
 @Documented
 public @interface SysLog {
 
-	/**
-	 * 描述
-	 *
-	 * @return {String}
-	 */
-	String value();
+    /**
+     * 描述
+     *
+     * @return {String}
+     */
+    String value();
 
 }

@@ -16,12 +16,12 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 public class CaffeineDataRegion implements DomainDataStorageAccess {
+    private static final int DEFAULT_EXPIRY_IN_SECONDS = 1800;
     /**
      * Region regionName
      */
     private final String regionName;
     private final Cache<Object, Object> cache;
-    private static final int DEFAULT_EXPIRY_IN_SECONDS = 1800;
 
     public CaffeineDataRegion(@NonNull String regionName) {
         this.regionName = StringUtils.replace(regionName, ".", ":") + ":";
@@ -36,10 +36,9 @@ public class CaffeineDataRegion implements DomainDataStorageAccess {
     /**
      * confirm the specified key exists in current region
      *
-     * @param key
-     *            cache key
+     * @param key cache key
      * @return if cache key is exists in current region return true, else return
-     *         false
+     * false
      */
     @Override
     public boolean contains(Object key) {

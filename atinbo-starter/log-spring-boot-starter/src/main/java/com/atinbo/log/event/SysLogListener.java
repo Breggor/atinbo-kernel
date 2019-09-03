@@ -14,12 +14,12 @@ import org.springframework.scheduling.annotation.Async;
 @Slf4j
 public class SysLogListener {
 
-	@Async
-	@Order
-	@EventListener(SysLogEvent.class)
-	public void saveSysLog(SysLogEvent event) {
-		SysLogSource logSource = (SysLogSource) event.getSource();
-		//TODO 日志存储
-		log.info("logSource:{}", logSource);
-	}
+    @Async
+    @Order
+    @EventListener(SysLogEvent.class)
+    public void saveSysLog(SysLogEvent event) {
+        SysLogSource logSource = (SysLogSource) event.getSource();
+        //TODO 日志存储
+        log.info("logSource:{}", logSource);
+    }
 }

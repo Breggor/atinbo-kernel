@@ -6,7 +6,8 @@ package com.atinbo.rocketmq.trace.dispatch;
  */
 public abstract class AsyncAppender {
     /**
-     *编码数据上下文到缓冲区
+     * 编码数据上下文到缓冲区
+     *
      * @param context 上下文
      */
     public abstract void append(Object context);

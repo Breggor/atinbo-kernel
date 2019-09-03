@@ -1,22 +1,16 @@
 package com.atinbo.generate.controller;
 
 import com.atinbo.core.http.model.Result;
-import com.atinbo.generate.core.Constant;
 import com.atinbo.generate.service.GenerateService;
 import com.atinbo.generate.vo.ClassInfo;
-import freemarker.template.Configuration;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author zenghao
@@ -30,24 +24,24 @@ public class GenerarteController {
 
 
     @GetMapping("/gen/list")
-    public List<ClassInfo> list(){
+    public List<ClassInfo> list() {
         return generateService.findAllTable();
     }
 
     @PostMapping("/gen")
-    public Result gen(@RequestParam(name = "tableName",required = false)String tableName){
-        if(StringUtils.isNotBlank(tableName)){
+    public Result gen(@RequestParam(name = "tableName", required = false) String tableName) {
+        if (StringUtils.isNotBlank(tableName)) {
             ClassInfo classInfo = generateService.findClassInfo(tableName);
             try {
                 generateService.generateClass(classInfo);
             } catch (Exception e) {
             }
-        }else {
+        } else {
             List<ClassInfo> classInfoList = generateService.findAllTable();
             for (ClassInfo classInfo : classInfoList) {
                 try {
                     generateService.generateClass(classInfo);
-                }catch (Exception e){
+                } catch (Exception e) {
                     continue;
                 }
             }

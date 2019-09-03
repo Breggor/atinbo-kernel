@@ -33,18 +33,15 @@ import java.util.Map;
  */
 @Slf4j
 public class CustomUsernamePasswordProcessingFilterFilter extends AbstractAuthenticationProcessingFilter {
-    private static final String CONTENT_TYPE_JSON = "application/json;charset=UTF-8";
     public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
     public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
-
-    private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
-    private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
-
+    private static final String CONTENT_TYPE_JSON = "application/json;charset=UTF-8";
     @Autowired
     ObjectMapper objectMapper;
-
     @Autowired
     JwtTokenOps jwtTokenOps;
+    private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
+    private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
 
     public CustomUsernamePasswordProcessingFilterFilter(String url, AuthenticationManager authenticationManager) {
         super(new AntPathRequestMatcher(url));

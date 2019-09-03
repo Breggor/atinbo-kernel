@@ -31,13 +31,13 @@ public class SysLogAspect {
         String strMethodName = point.getSignature().getName();
         log.info("[模块]:{},[类名]:{},[方法]:{},[日志]:{}", module, strClassName, strMethodName, sysLog.value());
 
-		SysLogSource logVo = SystemLogUtils.getSystemLog();
-		logVo.setTitle(sysLog.value());
+        SysLogSource logVo = SystemLogUtils.getSystemLog();
+        logVo.setTitle(sysLog.value());
         // 发送异步日志事件
         Long startTime = System.currentTimeMillis();
         Object obj = point.proceed();
         Long endTime = System.currentTimeMillis();
-		logVo.setTime(endTime - startTime);
+        logVo.setTime(endTime - startTime);
         log.info("[类名]:{},[方法]:{},[耗时]:{}", strClassName, strMethodName, endTime - startTime);
         SpringContextHolder.publishEvent(new SysLogEvent(logVo));
         return obj;
