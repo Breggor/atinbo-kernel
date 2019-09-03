@@ -1,4 +1,4 @@
-package ${classInfo.packageName}.entity;
+package ${classInfo.packageName}.vo;
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >

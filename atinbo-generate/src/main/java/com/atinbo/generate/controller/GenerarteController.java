@@ -1,22 +1,13 @@
 package com.atinbo.generate.controller;
 
 import com.atinbo.core.http.model.Result;
-import com.atinbo.generate.core.Constant;
 import com.atinbo.generate.service.GenerateService;
 import com.atinbo.generate.vo.ClassInfo;
-import freemarker.template.Configuration;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author zenghao

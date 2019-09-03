@@ -1,8 +1,10 @@
 package ${classInfo.packageName}.service;
 
 import java.util.Map;
+import com.atinbo.model.Outcome;
+import com.atinbo.model.PageOutcome;
 
-import ${classInfo.packageName}.model.${classInfo.className};
+import ${classInfo.packageName}.model.${classInfo.className}BO;
 
 /**
 *  ${classInfo.classComment}
@@ -15,26 +17,26 @@ public interface ${classInfo.className}Service {
     /**
     * 新增
     */
-    public ReturnT<String> insert(${classInfo.className} ${classInfo.className?uncap_first});
+    boolean insert(${classInfo.className}BO ${classInfo.className?uncap_first});
 
     /**
     * 删除
     */
-    public ReturnT<String> delete(int id);
+    boolean delete(${classInfo.primaryField.fieldClass} id);
 
     /**
     * 更新
     */
-    public ReturnT<String> update(${classInfo.className} ${classInfo.className?uncap_first});
+    boolean update(${classInfo.className} ${classInfo.className?uncap_first});
 
     /**
-    * Load查询
+    * 根据主键查询
     */
-    public ${classInfo.className} findById(int id);
+    ${classInfo.className}BO findById(${classInfo.primaryField.fieldClass} id);
 
     /**
     * 分页查询
     */
-    public Map<String,Object> pageList(int offset, int pagesize);
+    Map<String,Object> pageList(int offset, int pagesize);
 
 }

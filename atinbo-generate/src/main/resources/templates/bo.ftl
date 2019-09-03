@@ -1,4 +1,4 @@
-package ${classInfo.packageName}.entity;
+package ${classInfo.packageName}.model;
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >
@@ -11,8 +11,8 @@ package ${classInfo.packageName}.entity;
     </#list>
 </#if>
 import lombok.Data;
+import com.atinbo.model.BaseBO;
 
-import java.io.Serializable;
 <#if importDdate??>
 import java.util.Date;
 </#if>
@@ -21,13 +21,13 @@ import java.math.BigDecimal;
 </#if>
 
 /**
-*  ${classInfo.classComment}
+*  ${classInfo.classComment} BO
 *
 *  @author ${classInfo.author}
 *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
 */
 @Data
-public class ${classInfo.className} implements Serializable {
+public class ${classInfo.className}BO implements BaseBO {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
 <#list classInfo.fieldList as fieldItem >
