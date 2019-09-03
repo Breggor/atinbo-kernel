@@ -1,7 +1,9 @@
 package com.atinbo.generate.service;
 
 import com.atinbo.generate.vo.ClassInfo;
+import freemarker.template.TemplateException;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -22,4 +24,11 @@ public interface GenerateService {
      * @param tableName
      */
     ClassInfo findClassInfo(String tableName);
+
+    /**
+     * 生成代码
+     * @param classInfo
+     * @return
+     */
+    void generateClass(ClassInfo classInfo) throws IOException, TemplateException;
 }

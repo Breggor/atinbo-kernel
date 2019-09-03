@@ -2,6 +2,7 @@ package com.atinbo.generate.core;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,6 +43,25 @@ public class GenerateUtil {
             return TYPE_MAPPING.get(dbType.toUpperCase());
         }
         throw new RuntimeException(String.format("cannot found javaType mapping for dbType: %s ,please add to TYPE_MAPPING", dbType));
+    }
+
+    /**
+     * 生成文件路径
+     * @param outPath 配置输出路径
+     * @param packageName 包名
+     * @return
+     */
+    public static String genFilePath(String outPath,String packageName) {
+        return outPath + File.separator + packageName.replace(".", File.separator);
+    }
+
+    /**
+     * 表名生成类名
+     * @param tableName
+     * @return
+     */
+    public static String genClassName(String tableName) {
+        return tableName.substring(0,1).toUpperCase() + underlineToCamelCase(tableName.substring(1));
     }
 
     /**

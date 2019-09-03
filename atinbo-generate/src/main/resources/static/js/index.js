@@ -2,6 +2,9 @@ $(function () {
 
     $('#table').DataTable({
         language : {
+            "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示
+            "bPaginate" : true, //是否显示（应用）分页器
+            "bInfo" : true, //是否显示页脚信息，DataTables插件左下角显示记录数
             "lengthMenu" : '每页显示<select>' + '<option value="10">10</option>'
                 + '<option value="20">20</option>'
                 + '<option value="30">30</option>'
@@ -23,8 +26,17 @@ $(function () {
             "zeroRecords":    "没有找到记录"
 
         },
-        ajax : "gen/list",
+        ajax : {
+            url : "gen/list",
+            dataSrc : ""
+        },
         columns: [
+            {
+                "data": "tableName",
+                "name" : "tableName",
+                "sDefaultContent":"",  //默认空字符串
+                "sClass": "text-center"
+            },
             {
                 "data": "className",
                 "name" : "className",
@@ -41,23 +53,36 @@ $(function () {
                 "orderable" : false,
                 "data": "author",
                 'sClass': "text-center"
+            },
+            {
+                "orderable" : false,
+                'sClass': "text-center",
+                render: function (data, type, row, meta) {
+                    return "<a class=\"codeGenerate\" data-name=\""+ row.tableName +"\" href=\"javascript:;\">生成</a>";
+                }
             }
-        ]
+        ],
+        initComplete: function () {
+            //表格加载完毕，手动添加按钮到表格上
+            $("#table_length").append("<a href='javascript:void(0);' " +
+                "class='btn btn-default btn-sm codeGenerate' style='margin-left: 5px;'>全部生成</a>");
+        }
+
     });
     /**
      * 生成代码
      */
-    $('.codeGenerate').click(function () {
+    $(".table-content").on("click",".codeGenerate",function () {
         var tableName = $(this).data("name");
         $.ajax({
             url: "gen",
             type: "POST",
             data: {"tableName" : tableName},
             success: function (result) {
-                if(result.code == 200){
+                if(result.code == 0){
                     layer.alert("代码生成成功");
                 }else {
-                    layer.alert(result.msg);
+                    layer.alert(result.message);
                 }
             },
             error: function (e) {

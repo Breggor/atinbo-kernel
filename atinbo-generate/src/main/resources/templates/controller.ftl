@@ -17,7 +17,7 @@ import java.util.Map;
 *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
 */
 @Controller
-public class ConfController {
+public class ${classInfo.className}Controller {
 
     @Resource
     private ${classInfo.className}Service ${classInfo.className?uncap_first}Service;
