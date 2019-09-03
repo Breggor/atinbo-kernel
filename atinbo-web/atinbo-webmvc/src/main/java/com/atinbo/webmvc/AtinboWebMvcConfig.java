@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
  *
  * @author breggor
  */
-@ComponentScan(basePackageClasses = AtinboMvcConfig.class)
-public class AtinboMvcConfig {
+@ComponentScan(basePackageClasses = AtinboWebMvcConfig.class)
+public class AtinboWebMvcConfig {
 
 }

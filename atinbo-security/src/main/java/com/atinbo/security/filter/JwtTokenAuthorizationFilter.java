@@ -1,6 +1,6 @@
 package com.atinbo.security.filter;
 
-import com.atinbo.security.JwtUserDetailsService;
+import com.atinbo.security.service.JwtUserDetailsService;
 import com.atinbo.security.jwt.JwtTokenOps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,7 +8,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;

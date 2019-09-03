@@ -1,8 +1,12 @@
-package com.atinbo.security;
+package com.atinbo.security.config;
 
 
+import com.atinbo.security.JwtAuthenticationEntryPoint;
 import com.atinbo.security.filter.JwtTokenAuthorizationFilter;
+import com.atinbo.security.jwt.JwtTokenOps;
+import com.atinbo.security.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -32,12 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
 
-    @Autowired
-    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Autowired
     public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-       Objects.requireNonNull(jwtUserDetailsService,"jwtUserDetailsService为空，请项目中实现JwtUserDetailsService");
+        Objects.requireNonNull(jwtUserDetailsService, "jwtUserDetailsService为空，请项目中实现JwtUserDetailsService");
 
         authenticationManagerBuilder
                 // 设置UserDetailsService
@@ -46,13 +48,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder());
     }
 
+
     @Bean
+    @ConditionalOnMissingBean
+    public JwtTokenOps jwtTokenOps() {
+        return new JwtTokenOps();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint() {
+        return new JwtAuthenticationEntryPoint();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
     public JwtTokenAuthorizationFilter jwtTokenAuthorizationFilter() {
         return new JwtTokenAuthorizationFilter();
     }
 
     // 装载BCrypt密码编码器
     @Bean
+    @ConditionalOnMissingBean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -63,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 由于使用的是JWT，我们这里不需要csrf
                 .csrf().disable()
 
-                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
+                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint()).and()
                 // 基于token，所以不需要session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 

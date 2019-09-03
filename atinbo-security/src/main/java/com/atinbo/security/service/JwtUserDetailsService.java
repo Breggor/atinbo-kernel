@@ -1,4 +1,4 @@
-package com.atinbo.security;
+package com.atinbo.security.service;
 
 
 import com.atinbo.security.model.JwtUserFactory;
