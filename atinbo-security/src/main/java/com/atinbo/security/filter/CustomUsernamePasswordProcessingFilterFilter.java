@@ -110,7 +110,7 @@ public class CustomUsernamePasswordProcessingFilterFilter extends AbstractAuthen
             String token = jwtTokenOps.generateToken(principal);
             Map<String, Object> data = new HashMap<>();
             data.put("token", token);
-            data.put("userId", principal.getId());
+            data.put("userId", principal.getUserId());
             response.setHeader("Authorization", token);
             objectMapper.writeValue(response.getWriter(), Result.success().setData(data));
         } catch (IOException e) {
