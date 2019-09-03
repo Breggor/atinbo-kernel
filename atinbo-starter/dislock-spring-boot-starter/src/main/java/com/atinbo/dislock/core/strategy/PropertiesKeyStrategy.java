@@ -33,7 +33,7 @@ public class PropertiesKeyStrategy extends KeyStrategy {
                     field.setAccessible(true);
                     try {
                         Object fieldVal = field.get(obj);
-                        checkLockKey(fieldVal,field.getName());
+                        checkLockKey(fieldVal, field.getName());
                         keyBuilder.appendKey(wrapKeyTag(fieldVal.toString()));
                     } catch (IllegalArgumentException e) {
                         throw new KeyBuilderException("生成builder失败", e);

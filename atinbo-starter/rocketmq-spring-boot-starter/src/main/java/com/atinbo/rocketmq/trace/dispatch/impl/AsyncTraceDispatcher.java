@@ -90,7 +90,7 @@ public class AsyncTraceDispatcher extends AsyncDispatcher {
     public boolean append(Object ctx) {
         final long qsize = queueSize;
 
-        for (;;) {
+        for (; ; ) {
             final long put = putIndex.get();
             final long size = put - takeIndex.get();
             if (size >= qsize) {
@@ -104,11 +104,9 @@ public class AsyncTraceDispatcher extends AsyncDispatcher {
                 if (size >= notifyThreshold && !running.get() && lock.tryLock()) {
                     try {
                         notEmpty.signal();
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         clientlog.info("fail to signal notEmpty,maybe block!");
-                    }
-                    finally {
+                    } finally {
                         lock.unlock();
                     }
                 }
@@ -126,20 +124,16 @@ public class AsyncTraceDispatcher extends AsyncDispatcher {
             if (running.get()) {
                 try {
                     Thread.sleep(1);
-                }
-                catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     break;
                 }
-            }
-            else {
+            } else {
                 if (lock.tryLock()) {
                     try {
                         notEmpty.signal();
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         clientlog.info("fail to signal notEmpty,maybe block!");
-                    }
-                    finally {
+                    } finally {
                         lock.unlock();
                     }
                 }
@@ -166,7 +160,7 @@ public class AsyncTraceDispatcher extends AsyncDispatcher {
             long lastOutputTime = System.currentTimeMillis();
             long now;
 
-            for (;;) {
+            for (; ; ) {
                 try {
                     running.set(true);
                     long take = takeIndex.get();
@@ -195,24 +189,20 @@ public class AsyncTraceDispatcher extends AsyncDispatcher {
                             discardCount.lazySet(0); // 无需内存屏障，数量稍微丢失一点关系不大
                             lastOutputTime = now;
                         }
-                    }
-                    else {
+                    } else {
                         if (lock.tryLock()) {
                             try {
                                 running.set(false);
                                 notEmpty.await(parent.maxDelayTime, TimeUnit.MILLISECONDS);
-                            }
-                            finally {
+                            } finally {
                                 lock.unlock();
                             }
                         }
                     }
-                }
-                catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     clientlog.info("[WARN] " + workerName + " async thread is iterrupted");
                     break;
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     clientlog.info("[ERROR] Fail to async write log");
                 }
             }

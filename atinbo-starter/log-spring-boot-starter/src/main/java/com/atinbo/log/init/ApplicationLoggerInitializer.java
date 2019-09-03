@@ -12,16 +12,16 @@ import org.springframework.core.env.ConfigurableEnvironment;
  */
 public class ApplicationLoggerInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
-	@Override
-	public void initialize(ConfigurableApplicationContext applicationContext) {
-		ConfigurableEnvironment environment = applicationContext.getEnvironment();
+    @Override
+    public void initialize(ConfigurableApplicationContext applicationContext) {
+        ConfigurableEnvironment environment = applicationContext.getEnvironment();
 
-		String appName = environment.getProperty("spring.application.name");
+        String appName = environment.getProperty("spring.application.name");
 
-		String logBase = environment.getProperty("LOGGING_PATH", "logs");
+        String logBase = environment.getProperty("LOGGING_PATH", "logs");
 
-		String logName = environment.getProperty("sys.log.name", "debug.log");
-		// spring boot admin 直接加载日志
-		System.setProperty("logging.file", String.format("%s/%s/%s", logBase, appName, logName));
-	}
+        String logName = environment.getProperty("sys.log.name", "debug.log");
+        // spring boot admin 直接加载日志
+        System.setProperty("logging.file", String.format("%s/%s/%s", logBase, appName, logName));
+    }
 }

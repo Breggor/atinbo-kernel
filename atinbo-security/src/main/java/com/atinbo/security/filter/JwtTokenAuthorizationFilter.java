@@ -1,7 +1,7 @@
 package com.atinbo.security.filter;
 
-import com.atinbo.security.service.JwtUserDetailsService;
 import com.atinbo.security.jwt.JwtTokenOps;
+import com.atinbo.security.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,7 +33,7 @@ public class JwtTokenAuthorizationFilter extends OncePerRequestFilter {
     @Value("${jwt.header:Authorization}")
     private String tokenHeader;
 
-    @Value("${jwt.tokenHead:'Bearer '}")
+    @Value("${jwt.tokenHead:Bearer}")
     private String tokenHead;
 
 

@@ -17,7 +17,8 @@ public class JwtTokenOps implements Serializable {
 
     private static final long serialVersionUID = -3301605591108950415L;
 
-    private static final String CLAIM_KEY_USERNAME = "sub";
+    private static final String CLAIM_KEY_SUB = "sub";
+    private static final String CLAIM_KEY_USERNAME = "username";
     private static final String CLAIM_KEY_CREATED = "created";
 
     @Value("${jwt.secret:jwtToken}")
@@ -81,8 +82,9 @@ public class JwtTokenOps implements Serializable {
         return expiration.before(new Date());
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(JwtUser userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put(CLAIM_KEY_SUB, userDetails.getId());
         claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
         claims.put(CLAIM_KEY_CREATED, new Date());
         return generateToken(claims);
@@ -96,9 +98,6 @@ public class JwtTokenOps implements Serializable {
                 .compact();
     }
 
-    public Boolean canTokenBeRefreshed(String token, Date lastPasswordReset) {
-        return !isTokenExpired(token);
-    }
 
     public String refreshToken(String token) {
         String refreshedToken;

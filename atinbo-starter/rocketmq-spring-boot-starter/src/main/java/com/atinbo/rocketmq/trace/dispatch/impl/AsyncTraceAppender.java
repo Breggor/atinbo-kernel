@@ -27,13 +27,13 @@ public class AsyncTraceAppender extends AsyncAppender {
      */
     private final int batchSize;
     /**
-     * 临时存储batch的数据
-     */
-    private List<OnsTraceTransferBean> transDataList;
-    /**
      * 消息轨迹数据的producer
      */
     private final DefaultMQProducer traceProducer;
+    /**
+     * 临时存储batch的数据
+     */
+    private List<OnsTraceTransferBean> transDataList;
 
     /**
      * 构造消息类型的轨迹数据发送器
@@ -116,10 +116,8 @@ public class AsyncTraceAppender extends AsyncAppender {
     /**
      * 发送数据的接口
      *
-     * @param keySet
-     *            本批次包含的keyset
-     * @param data
-     *            本批次的轨迹数据
+     * @param keySet 本批次包含的keyset
+     * @param data   本批次的轨迹数据
      */
     public void sendTraceDataByMQ(Set<String> keySet, String data) {
         String topic = OnsTraceConstants.traceTopic;
@@ -135,12 +133,11 @@ public class AsyncTraceAppender extends AsyncAppender {
                 @Override
                 public void onException(Throwable e) {
                     //todo 对于发送失败的数据，如何保存，保证所有轨迹数据都记录下来
-                    clientlog.info("send trace data failed ,the msgidSet is"+message.getKeys());
+                    clientlog.info("send trace data failed ,the msgidSet is" + message.getKeys());
                 }
             }, 5000);
-        }
-        catch (Exception e) {
-            clientlog.info("send trace data failed ,the msgidSet is"+message.getKeys());
+        } catch (Exception e) {
+            clientlog.info("send trace data failed ,the msgidSet is" + message.getKeys());
         }
     }
 

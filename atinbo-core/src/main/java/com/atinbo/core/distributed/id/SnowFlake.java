@@ -12,29 +12,20 @@ import java.util.Random;
 @Slf4j
 public class SnowFlake {
 
-    private static class TimeBackwardsException extends RuntimeException {
-        public TimeBackwardsException(String message) {
-            super(message);
-        }
-    }
-
     /**
      * 起始的时间戳
      */
     private static final long START_STAMP = 1262275200000L;
-
     /**
      * 每一部分占用的位数
      */
     private static final long SEQUENCE_BIT = 12; //序列号占用的位数
     private static final long MACHINE_BIT = 10;   //机器标识占用的位数
-
     /**
      * 每一部分的最大值
      */
     private static final long MAX_MACHINE_NUM = -1L ^ (-1L << MACHINE_BIT);
     private static final long MAX_SEQUENCE = -1L ^ (-1L << SEQUENCE_BIT);
-
     /**
      * 每一部分向左的位移
      */
@@ -46,7 +37,6 @@ public class SnowFlake {
     private long sequence = 0L;
     //上一次时间戳
     private long lastStamp = -1L;
-
     public SnowFlake(long machineId) {
 
         if (machineId > MAX_MACHINE_NUM || machineId < 0) {
@@ -94,5 +84,11 @@ public class SnowFlake {
 
     private long getNewStamp() {
         return System.currentTimeMillis();
+    }
+
+    private static class TimeBackwardsException extends RuntimeException {
+        public TimeBackwardsException(String message) {
+            super(message);
+        }
     }
 }

@@ -19,16 +19,17 @@ import java.util.Map;
 @Controller
 public class ${classInfo.className}Controller {
 
-    @Resource
-    private ${classInfo.className}Service ${classInfo.className?uncap_first}Service;
+@Resource
+private ${classInfo.className}Service ${classInfo.className?uncap_first}Service;
 
-    /**
-    * 新增
-    */
-    @RequestMapping("/insert")
-    @ResponseBody
-    public ReturnT<String> insert(${classInfo.className} ${classInfo.className?uncap_first}){
-        return ${classInfo.className?uncap_first}Service.insert(${classInfo.className?uncap_first});
+/**
+* 新增
+*/
+@RequestMapping("/insert")
+@ResponseBody
+public ReturnT
+<String> insert(${classInfo.className} ${classInfo.className?uncap_first}){
+    return ${classInfo.className?uncap_first}Service.insert(${classInfo.className?uncap_first});
     }
 
     /**
@@ -36,36 +37,41 @@ public class ${classInfo.className}Controller {
     */
     @RequestMapping("/delete")
     @ResponseBody
-    public ReturnT<String> delete(int id){
+    public ReturnT
+    <String> delete(int id){
         return ${classInfo.className?uncap_first}Service.delete(id);
-    }
+        }
 
-    /**
-    * 更新
-    */
-    @RequestMapping("/update")
-    @ResponseBody
-    public ReturnT<String> update(${classInfo.className} ${classInfo.className?uncap_first}){
-        return ${classInfo.className?uncap_first}Service.update(${classInfo.className?uncap_first});
-    }
+        /**
+        * 更新
+        */
+        @RequestMapping("/update")
+        @ResponseBody
+        public ReturnT
+        <String> update(${classInfo.className} ${classInfo.className?uncap_first}){
+            return ${classInfo.className?uncap_first}Service.update(${classInfo.className?uncap_first});
+            }
 
-    /**
-    * Load查询
-    */
-    @RequestMapping("/load")
-    @ResponseBody
-    public ReturnT<String> load(int id){
-        return ${classInfo.className?uncap_first}Service.load(id);
-    }
+            /**
+            * Load查询
+            */
+            @RequestMapping("/load")
+            @ResponseBody
+            public ReturnT
+            <String> load(int id){
+                return ${classInfo.className?uncap_first}Service.load(id);
+                }
 
-    /**
-    * 分页查询
-    */
-    @RequestMapping("/pageList")
-    @ResponseBody
-    public Map<String, Object> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
-                                        @RequestParam(required = false, defaultValue = "10") int pagesize) {
-        return ${classInfo.className?uncap_first}Service.pageList(offset, pagesize);
-    }
+                /**
+                * 分页查询
+                */
+                @RequestMapping("/pageList")
+                @ResponseBody
+                public Map
+                <String
+                , Object> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
+                @RequestParam(required = false, defaultValue = "10") int pagesize) {
+                return ${classInfo.className?uncap_first}Service.pageList(offset, pagesize);
+                }
 
-}
+                }

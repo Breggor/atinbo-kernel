@@ -40,6 +40,7 @@ public interface IDomainService<T> {
 
     /**
      * 删除
+     *
      * @param id
      * @return
      * @throws ServiceAPIException

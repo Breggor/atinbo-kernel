@@ -40,10 +40,10 @@ public class Pagination implements Serializable {
     /**
      * 创建分页
      *
-     * @param current  当前页
-     * @param size  每页行数
-     * @param total 总页数
-     * @param rows  总行数
+     * @param current 当前页
+     * @param size    每页行数
+     * @param total   总页数
+     * @param rows    总行数
      * @return
      */
     public static Pagination of(int current, int size, int total, long rows) {

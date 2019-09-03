@@ -23,17 +23,17 @@ package com.atinbo.common.crypto;
  */
 public class EncryptorException extends RuntimeException {
 
-  private static final long serialVersionUID = 7340536599422956645L;
+    private static final long serialVersionUID = 7340536599422956645L;
 
-  public EncryptorException(String message, Throwable cause) {
-    super(message, cause);
-  }
+    public EncryptorException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-  public EncryptorException(String message) {
-    super(message);
-  }
+    public EncryptorException(String message) {
+        super(message);
+    }
 
-  public EncryptorException(Throwable cause) {
-    super(cause);
-  }
+    public EncryptorException(Throwable cause) {
+        super(cause);
+    }
 }
