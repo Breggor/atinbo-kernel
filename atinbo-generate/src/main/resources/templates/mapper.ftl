@@ -16,34 +16,34 @@ import ${classInfo.packageName}.model.${classInfo.className};
 @Mapper
 public interface ${classInfo.className}Mapper {
 
-/**
-* 新增
-*/
-public int insert(@Param("${classInfo.className?uncap_first}") ${classInfo.className} ${classInfo.className?uncap_first});
+    /**
+    * 新增
+    */
+    int insert(@Param("${classInfo.className?uncap_first}") ${classInfo.className} ${classInfo.className?uncap_first});
 
-/**
-* 删除
-*/
-public int delete(@Param("${classInfo.primaryField.fieldName}") int id);
+    /**
+    * 删除
+    */
+    int delete(@Param("${classInfo.primaryField.fieldName}") ${classInfo.primaryField.fieldClass} id);
 
-/**
-* 更新
-*/
-public int update(@Param("${classInfo.className?uncap_first}") ${classInfo.className} ${classInfo.className?uncap_first});
+    /**
+    * 更新
+    */
+    int update(@Param("${classInfo.className?uncap_first}") ${classInfo.className} ${classInfo.className?uncap_first});
 
-/**
-* Load查询
-*/
-public ${classInfo.className} selectById(@Param("${classInfo.primaryField.fieldName}") int id);
+    /**
+    * Load查询
+    */
+    ${classInfo.className} selectById(@Param("${classInfo.primaryField.fieldName}") ${classInfo.primaryField.fieldClass} id);
 
-/**
-* 分页查询Data
-*/
-public List<${classInfo.className}> pageList(@Param("offset") int offset, @Param("pagesize") int pagesize);
+    /**
+    * 分页查询Data
+    */
+	List<${classInfo.className}> pageList(@Param("offset") int offset, @Param("pagesize") int pagesize);
 
-/**
-* 分页查询Count
-*/
-public int pageListCount(@Param("offset") int offset, @Param("pagesize") int pagesize);
+    /**
+    * 分页查询Count
+    */
+    int pageListCount(@Param("offset") int offset, @Param("pagesize") int pagesize);
 
 }

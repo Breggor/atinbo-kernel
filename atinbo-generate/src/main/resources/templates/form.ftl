@@ -1,4 +1,4 @@
-package ${classInfo.packageName}.entity;
+package ${classInfo.packageName}.vo;
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >
@@ -14,10 +14,10 @@ import lombok.Data;
 
 import java.io.Serializable;
 <#if importDdate??>
-    import java.util.Date;
+import java.util.Date;
 </#if>
 <#if importBigDecimal??>
-    import java.math.BigDecimal;
+import java.math.BigDecimal;
 </#if>
 
 /**
@@ -30,12 +30,12 @@ import java.io.Serializable;
 public class ${classInfo.className} implements Serializable {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
-    <#list classInfo.fieldList as fieldItem >
-        /**
-        * ${fieldItem.fieldComment}
-        */
-        private ${fieldItem.fieldClass} ${fieldItem.fieldName};
+<#list classInfo.fieldList as fieldItem >
+    /**
+    * ${fieldItem.fieldComment}
+    */
+    private ${fieldItem.fieldClass} ${fieldItem.fieldName};
 
-    </#list>
+</#list>
 </#if>
 }

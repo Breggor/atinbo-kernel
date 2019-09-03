@@ -1,8 +1,8 @@
 package com.atinbo.generate.service.impl;
 
 import com.atinbo.generate.config.GenerateProperties;
-import com.atinbo.generate.core.Constant;
 import com.atinbo.generate.core.GenerateUtil;
+import com.atinbo.generate.core.TemplatePathEnum;
 import com.atinbo.generate.mapper.GenerateMapper;
 import com.atinbo.generate.model.ColumnInfo;
 import com.atinbo.generate.model.TableInfo;
@@ -24,9 +24,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.atinbo.generate.core.GenerateUtil.genFilePath;
+
 /**
  * 表查询服务实现
- *
  * @author code-generator
  * @date 2019-8-20
  */
@@ -44,14 +45,14 @@ public class GenerateServiceImpl implements GenerateService {
     public List<ClassInfo> findAllTable() {
         List<ClassInfo> result = new ArrayList<>();
         List<TableInfo> list = generateMapper.selectTableList();
-        if (!CollectionUtils.isEmpty(list)) {
+        if(!CollectionUtils.isEmpty(list)) {
             ClassInfo classInfo;
             for (TableInfo tableInfo : list) {
                 classInfo = new ClassInfo();
                 classInfo.setPackageName(generateProperties.getPackageName());
                 classInfo.setAuthor(generateProperties.getAuthor());
 
-                String className = tableInfo.getTableName().replaceFirst(generateProperties.getTablePrefix(), "");
+                String className = tableInfo.getTableName().replaceFirst(generateProperties.getTablePrefix(),"");
                 classInfo.setClassName(GenerateUtil.genClassName(className));
                 classInfo.setTableName(tableInfo.getTableName());
                 classInfo.setClassComment(tableInfo.getTableComment());
@@ -68,13 +69,13 @@ public class GenerateServiceImpl implements GenerateService {
         classInfo.setPackageName(generateProperties.getPackageName());
         classInfo.setAuthor(generateProperties.getAuthor());
 
-        String className = tableInfo.getTableName().replaceFirst(generateProperties.getTablePrefix(), "");
+        String className = tableInfo.getTableName().replaceFirst(generateProperties.getTablePrefix(),"");
         classInfo.setClassName(GenerateUtil.genClassName(className));
         classInfo.setTableName(tableInfo.getTableName());
         classInfo.setClassComment(tableInfo.getTableComment());
 
         List<ColumnInfo> columnList = generateMapper.selectColumnList(tableInfo.getTableName());
-        if (!CollectionUtils.isEmpty(columnList)) {
+        if(!CollectionUtils.isEmpty(columnList)) {
             List<FieldInfo> fieldInfoList = new ArrayList<>();
             FieldInfo fieldInfo;
             for (ColumnInfo column : columnList) {
@@ -85,7 +86,7 @@ public class GenerateServiceImpl implements GenerateService {
                 fieldInfo.setFieldComment(column.getColumnComment());
                 fieldInfo.setFieldClass(GenerateUtil.getJavaClass(column.getDataType()));
 
-                if ("PRI".equalsIgnoreCase(column.getColumnKey())) {
+                if("PRI".equalsIgnoreCase(column.getColumnKey())){
                     fieldInfo.setPrimaryKey(true);
                     classInfo.setPrimaryField(fieldInfo);
                 }
@@ -98,22 +99,17 @@ public class GenerateServiceImpl implements GenerateService {
 
     @Override
     public void generateClass(ClassInfo classInfo) throws IOException, TemplateException {
-        Map<String, Object> params = new HashMap<>();
-        params.put("classInfo", classInfo);
-        String prefixPath = GenerateUtil.genFilePath(generateProperties.getOutPath(), generateProperties.getPackageName());
-
-        processFile(Constant.MODEL_TEMPLATE_PATH, genFilePath(prefixPath, String.format(Constant.MODEL_PATH, classInfo.getClassName())), params);
-        processFile(Constant.MAPPER_TEMPLATE_PATH, genFilePath(prefixPath, String.format(Constant.MAPPER_PATH, classInfo.getClassName())), params);
-        processFile(Constant.MYBATIS_TEMPLATE_PATH, genFilePath(prefixPath, String.format(Constant.MYBATIS_PATH, classInfo.getClassName())), params);
-
-        processFile(Constant.SERVICE_TEMPLATE_PATH, genFilePath(prefixPath, String.format(Constant.SERVICE_IMPL_PATH, classInfo.getClassName())), params);
-        processFile(Constant.SERVICE_IMPL_TEMPLATE_PATH, genFilePath(prefixPath, String.format(Constant.SERVICE_IMPL_PATH, classInfo.getClassName())), params);
-        processFile(Constant.CONTROLLER_TEMPLATE_PATH, genFilePath(prefixPath, String.format(Constant.CONTROLLER_PATH, classInfo.getClassName())), params);
+        String prefixPath = genFilePath(generateProperties.getOutPath(),generateProperties.getPackageName());
+        for (TemplatePathEnum pathEnum : TemplatePathEnum.values()) {
+            processFile(pathEnum , prefixPath, classInfo);
+        }
     }
 
+    private void processFile(TemplatePathEnum entity, String prefix, ClassInfo classInfo) throws IOException, TemplateException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("classInfo", classInfo);
 
-    private String genFilePath(String prefix, String path) throws IOException {
-        String filePath = prefix + File.separator + path;
+        String filePath = prefix + File.separator + TemplatePathEnum.genOutPath(entity , classInfo.getClassName());
         File file = new File(filePath);
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
@@ -121,25 +117,11 @@ public class GenerateServiceImpl implements GenerateService {
         if (!file.exists()) {
             file.createNewFile();
         }
-        return filePath;
-    }
 
-    /**
-     * process File
-     *
-     * @param templatePath
-     * @param filePath
-     * @param params
-     * @return
-     * @throws IOException
-     * @throws TemplateException
-     */
-    public void processFile(String templatePath, String filePath, Map<String, Object> params)
-            throws IOException, TemplateException {
-
-        Template template = configuration.getTemplate(templatePath);
+        Template template = configuration.getTemplate(filePath);
         FileWriter writer = new FileWriter(filePath);
         template.process(params, writer);
         writer.close();
     }
+
 }

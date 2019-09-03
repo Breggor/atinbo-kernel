@@ -1,4 +1,4 @@
-package ${classInfo.packageName}.entity;
+package ${classInfo.packageName}.model;
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >
@@ -12,30 +12,31 @@ package ${classInfo.packageName}.entity;
 </#if>
 import lombok.Data;
 
-import java.io.Serializable;
+import com.atinbo.model.PageParam;
+import com.atinbo.model.QueryParam;
 <#if importDdate??>
-    import java.util.Date;
+import java.util.Date;
 </#if>
 <#if importBigDecimal??>
-    import java.math.BigDecimal;
+import java.math.BigDecimal;
 </#if>
 
 /**
-*  ${classInfo.classComment}
+*  ${classInfo.classComment} PARAM
 *
 *  @author ${classInfo.author}
 *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
 */
 @Data
-public class ${classInfo.className} implements Serializable {
+public class ${classInfo.className} extends PageParam implements QueryParam {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
-    <#list classInfo.fieldList as fieldItem >
-        /**
-        * ${fieldItem.fieldComment}
-        */
-        private ${fieldItem.fieldClass} ${fieldItem.fieldName};
+<#list classInfo.fieldList as fieldItem >
+    /**
+    * ${fieldItem.fieldComment}
+    */
+    private ${fieldItem.fieldClass} ${fieldItem.fieldName};
 
-    </#list>
+</#list>
 </#if>
 }
