@@ -26,7 +26,7 @@ public class Base4UserController {
     protected HttpServletResponse response;
 
 
-    protected JwtUser getJwtUser() throws HttpAPIException {
+    protected JwtUser getCurrentUser() throws HttpAPIException {
         JwtUser user = null;
         if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().getPrincipal() != null) {
             user = (JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
