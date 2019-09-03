@@ -135,7 +135,7 @@
 
             <dependency>
                 <groupId>com.atinbo</groupId>
-                <artifactId>atinbo-deps</artifactId>
+                <artifactId>atinbo-dependencies</artifactId>
                 <version>${atinbo-kernel.version}</version>
                 <type>pom</type>
                 <scope>import</scope>

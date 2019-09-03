@@ -18,6 +18,7 @@
         <module>atinbo-model</module>
         <module>atinbo-core</module>
         <module>atinbo-dal</module>
+        <module>atinbo-security</module>
         <module>atinbo-web</module>
         <module>atinbo-starter</module>
         <module>atinbo-dependencies</module>
