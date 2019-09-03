@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,7 +36,7 @@ import java.util.Map;
 public class CustomUsernamePasswordProcessingFilterFilter extends AbstractAuthenticationProcessingFilter {
     public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
     public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
-    private static final String CONTENT_TYPE_JSON = "application/json;charset=UTF-8";
+
     @Autowired
     ObjectMapper objectMapper;
     @Autowired
@@ -57,7 +58,7 @@ public class CustomUsernamePasswordProcessingFilterFilter extends AbstractAuthen
     }
 
     public boolean isContentTypeJson(HttpServletRequest request) {
-        return request.getHeader(HttpHeaders.CONTENT_TYPE).contains(CONTENT_TYPE_JSON);
+        return request.getHeader(HttpHeaders.CONTENT_TYPE).contains(MediaType.APPLICATION_JSON_VALUE);
     }
 
 
@@ -103,7 +104,7 @@ public class CustomUsernamePasswordProcessingFilterFilter extends AbstractAuthen
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         try {
-            response.setContentType(CONTENT_TYPE_JSON);
+            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
             response.setStatus(HttpServletResponse.SC_OK);
             JwtUser principal = (JwtUser) authResult.getPrincipal();
             String token = jwtTokenOps.generateToken(principal);
@@ -120,7 +121,7 @@ public class CustomUsernamePasswordProcessingFilterFilter extends AbstractAuthen
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        response.setContentType(CONTENT_TYPE_JSON);
+        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         objectMapper.writeValue(response.getWriter(), Result.failure().setMessage(failed.getMessage()).setData(failed));
     }
