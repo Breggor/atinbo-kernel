@@ -33,7 +33,7 @@ public class JwtTokenAuthorizationFilter extends OncePerRequestFilter {
     @Value("${jwt.header:Authorization}")
     private String tokenHeader;
 
-    @Value("${jwt.tokenHead:'Bearer '}")
+    @Value("${jwt.tokenHead:Bearer}")
     private String tokenHead;
 
 
