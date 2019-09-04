@@ -39,8 +39,10 @@ public class CustomUsernamePasswordProcessingFilterFilter extends AbstractAuthen
 
     @Autowired
     ObjectMapper objectMapper;
+
     @Autowired
     JwtTokenOps jwtTokenOps;
+
     private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
     private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
 
@@ -103,26 +105,22 @@ public class CustomUsernamePasswordProcessingFilterFilter extends AbstractAuthen
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        try {
-            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-            response.setStatus(HttpServletResponse.SC_OK);
-            JwtUser principal = (JwtUser) authResult.getPrincipal();
-            String token = jwtTokenOps.generateToken(principal);
-            Map<String, Object> data = new HashMap<>();
-            data.put("token", token);
-            data.put("userId", principal.getUserId());
-            response.setHeader("Authorization", token);
-            objectMapper.writeValue(response.getWriter(), Result.success().setData(data));
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.getMessage(), e);
-        }
+        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+        response.setStatus(HttpServletResponse.SC_OK);
+        JwtUser principal = (JwtUser) authResult.getPrincipal();
+        String token = jwtTokenOps.generateToken(principal);
+        Map<String, Object> data = new HashMap<>();
+        data.put("token", token);
+        data.put("userId", principal.getUserId());
+        response.setHeader("Authorization", token);
+        objectMapper.writeValue(response.getWriter(), Result.success().setData(data));
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        objectMapper.writeValue(response.getWriter(), Result.failure().setMessage(failed.getMessage()).setData(failed));
+        objectMapper.writeValue(response.getWriter(), Result.failure().setMessage(failed.getMessage()));
+        log.error(failed.getMessage(), failed);
     }
 }
