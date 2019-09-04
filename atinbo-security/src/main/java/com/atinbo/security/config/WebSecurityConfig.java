@@ -94,7 +94,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 基于token，所以不需要session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
+                // 允许对于网站静态资源的无授权访问
+                .antMatchers(HttpMethod.GET, "/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").anonymous()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
