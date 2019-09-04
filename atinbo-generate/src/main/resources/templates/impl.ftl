@@ -1,15 +1,23 @@
-package ${classInfo.packageName}.service.impl;
+package ${classInfo.packageName}.impl;
 
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.atinbo.jpa.DynamicSpecifications;
+import com.atinbo.model.Outcome;
+import com.atinbo.model.PageOutcome;
+import com.atinbo.model.Pagination;
+import ${classInfo.packageName}.entity.${classInfo.className};
+import ${classInfo.packageName}.model.${classInfo.className}Param;
+import ${classInfo.packageName}.model.${classInfo.className}BO;
+import ${classInfo.packageName}.mapper.${classInfo.className}Mapper;
+import ${classInfo.packageName}.repository.${classInfo.packageName}Repository;
 import ${classInfo.packageName}.service.${classInfo.className}Service;
-import ${classInfo.packageName}.model.${classInfo.className};
+
+import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
+import java.util.List;
 
 /**
 *  ${classInfo.classComment}
@@ -20,75 +28,63 @@ import ${classInfo.packageName}.model.${classInfo.className};
 @Service("${classInfo.className?uncap_first}Service")
 public class ${classInfo.className}ServiceImpl implements ${classInfo.className}Service {
 
-@Resource
-private ${classInfo.className}Mapper ${classInfo.className?uncap_first}Mapper;
+    @Autowired
+    private ${classInfo.className}Repository ${classInfo.className?uncap_first}Repository;
 
-/**
-* 新增
-*/
-@Override
-public ReturnT
-<String> insert(${classInfo.className} ${classInfo.className?uncap_first}) {
+    /**
+     * 新增
+     */
+    @Override
+    public Outcome<${classInfo.className}BO> save(${classInfo.className}Param ${classInfo.className?uncap_first}Param) {
+        ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className?uncap_first}Repository.saveAndFlush(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}(${classInfo.className?uncap_first}Param));
+        return Outcome.ofSuccess(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bo(${classInfo.className?uncap_first}));
+    }
 
-    // valid
-    if (${classInfo.className?uncap_first} == null) {
-    return new ReturnT
-    <String>(ReturnT.FAIL_CODE, "必要参数缺失");
+    /**
+     * 删除
+     */
+    @Override
+    public boolean deleteById(${classInfo.primaryField.fieldClass} id) {
+        if (id == null) {
+            return false;
         }
+        ${classInfo.className?uncap_first}Repository.deleteById(id);
+        return true;
+    }
 
-        ${classInfo.className?uncap_first}Mapper.insert(${classInfo.className?uncap_first});
-        return ReturnT.SUCCESS;
+    /**
+     * 更新
+     */
+    @Override
+    public boolean update(${classInfo.className}Param ${classInfo.className?uncap_first}Param) {
+        if (${classInfo.className?uncap_first}Param.get${classInfo.primaryField.fieldName?cap_first}() == null) {
+            return false;
         }
+        ${classInfo.className} entity = ${classInfo.className?uncap_first}Repository.getOne(${classInfo.className?uncap_first}Param.get${classInfo.primaryField.fieldName?cap_first}());
+        ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}(${classInfo.className?uncap_first}Param, entity);
+        ${classInfo.className?uncap_first}Repository.saveAndFlush(${classInfo.className?uncap_first});
+        return true;
+    }
 
-        /**
-        * 删除
-        */
-        @Override
-        public ReturnT
-        <String> delete(int id) {
-            int ret = ${classInfo.className?uncap_first}Mapper.delete(id);
-            return ret>0?ReturnT.SUCCESS:ReturnT.FAIL;
-            }
+    /**
+     * 根据主键查询
+     */
+    @Override
+    public Outcome<${classInfo.className}BO> findById(${classInfo.primaryField.fieldClass} id) {
+        ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className?uncap_first}Repository.getOne(id);
+        ${classInfo.className}BO ${classInfo.className?uncap_first}BO = ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bo(${classInfo.className?uncap_first});
+        return Outcome.ofSuccess(${classInfo.className?uncap_first}BO);
+    }
 
-            /**
-            * 更新
-            */
-            @Override
-            public ReturnT
-            <String> update(${classInfo.className} ${classInfo.className?uncap_first}) {
-                int ret = ${classInfo.className?uncap_first}Mapper.update(${classInfo.className?uncap_first});
-                return ret>0?ReturnT.SUCCESS:ReturnT.FAIL;
-                }
+    /**
+     * 分页查询
+     */
+    @Override
+    public PageOutcome<${classInfo.className}BO> pageList(${classInfo.className}Param ${classInfo.className?uncap_first}Param){
+        PageRequest pageRequest = PageRequest.of(${classInfo.className?uncap_first}Param.getPage(), ${classInfo.className?uncap_first}Param.getSize());
+        Page<${classInfo.className}> page = ${classInfo.className?uncap_first}Repository.findAll(DynamicSpecifications.toSpecification(${classInfo.className?uncap_first}Param), pageRequest);
 
-                /**
-                * Load查询
-                */
-                @Override
-                public ${classInfo.className} findById(int id) {
-                return ${classInfo.className?uncap_first}Mapper.selectById(id);
-                }
-
-                /**
-                * 分页查询
-                */
-                @Override
-                public Map
-                <String
-                ,Object> pageList(int offset, int pagesize) {
-
-                List<${classInfo.className}> pageList = ${classInfo.className?uncap_first}Mapper.pageList(offset, pagesize);
-                int totalCount = ${classInfo.className?uncap_first}Mapper.pageListCount(offset, pagesize);
-
-                // result
-                Map
-                <String
-                , Object> result = new HashMap
-                <String
-                , Object>();
-                maps.put("pageList", pageList);
-                maps.put("totalCount", totalCount);
-
-                return result;
-                }
-
-                }
+        List<${classInfo.className}BO> ${classInfo.className?uncap_first}Bos = ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bos(page.getContent());
+        return PageOutcome.ofSuccess(Pagination.of(page.getNumber(), page.getSize(), page.getTotalPages(), page.getTotalElements()), ${classInfo.className?uncap_first}Bos);
+    }
+}

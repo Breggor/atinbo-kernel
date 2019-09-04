@@ -1,11 +1,14 @@
 package ${classInfo.packageName}.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+import ${classInfo.packageName}.entity.${classInfo.className};
+import ${classInfo.packageName}.model.${classInfo.className}BO;
+import ${classInfo.packageName}.model.${classInfo.className}Param;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
-
-import ${classInfo.packageName}.model.${classInfo.className};
 
 /**
 *  ${classInfo.classComment}
@@ -16,34 +19,25 @@ import ${classInfo.packageName}.model.${classInfo.className};
 @Mapper
 public interface ${classInfo.className}Mapper {
 
-    /**
-    * 新增
-    */
-    int insert(@Param("${classInfo.className?uncap_first}") ${classInfo.className} ${classInfo.className?uncap_first});
+    ${classInfo.className}Mapper INSTANCE = Mappers.getMapper(${classInfo.className}Mapper.class);
 
     /**
-    * 删除
-    */
-    int delete(@Param("${classInfo.primaryField.fieldName}") ${classInfo.primaryField.fieldClass} id);
+     * param to entity
+     */
+    ${classInfo.className} to${classInfo.className}(${classInfo.className}Param ${classInfo.className?uncap_first}Param);
 
     /**
-    * 更新
-    */
-    int update(@Param("${classInfo.className?uncap_first}") ${classInfo.className} ${classInfo.className?uncap_first});
+     * entity to BO
+     */
+    ${classInfo.className}BO to${classInfo.className?uncap_first}Bo(${classInfo.className} ${classInfo.className?uncap_first});
 
     /**
-    * Load查询
-    */
-    ${classInfo.className} selectById(@Param("${classInfo.primaryField.fieldName}") ${classInfo.primaryField.fieldClass} id);
+     * param to entity for update
+     */
+    ${classInfo.className} to${classInfo.className?uncap_first}(${classInfo.className}Param ${classInfo.className?uncap_first}Param, @MappingTarget ${classInfo.className} ${classInfo.className?uncap_first});
 
     /**
-    * 分页查询Data
-    */
-	List<${classInfo.className}> pageList(@Param("offset") int offset, @Param("pagesize") int pagesize);
-
-    /**
-    * 分页查询Count
-    */
-    int pageListCount(@Param("offset") int offset, @Param("pagesize") int pagesize);
-
+     * entityList to BOList
+     */
+    List<${classInfo.className}BO> to${classInfo.className}Bos(List<${classInfo.className}> ${classInfo.className?uncap_first}List);
 }

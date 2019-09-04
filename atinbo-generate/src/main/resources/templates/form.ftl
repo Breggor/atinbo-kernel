@@ -1,4 +1,4 @@
-package ${classInfo.packageName}.vo;
+package ${classInfo.packageName}.openapi.model;
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >
@@ -12,7 +12,8 @@ package ${classInfo.packageName}.vo;
 </#if>
 import lombok.Data;
 
-import java.io.Serializable;
+import io.swagger.annotations.ApiModelProperty;
+
 <#if importDdate??>
 import java.util.Date;
 </#if>
@@ -21,19 +22,18 @@ import java.math.BigDecimal;
 </#if>
 
 /**
-*  ${classInfo.classComment}
+*  ${classInfo.classComment} 入参参数
 *
 *  @author ${classInfo.author}
 *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
 */
 @Data
-public class ${classInfo.className} implements Serializable {
+public class ${classInfo.className}Form {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
 <#list classInfo.fieldList as fieldItem >
-    /**
-    * ${fieldItem.fieldComment}
-    */
+
+    @ApiModelProperty(value = "${fieldItem.fieldComment}")
     private ${fieldItem.fieldClass} ${fieldItem.fieldName};
 
 </#list>

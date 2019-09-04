@@ -28,7 +28,7 @@ import java.math.BigDecimal;
 *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
 */
 @Data
-public class ${classInfo.className} extends PageParam implements QueryParam {
+public class ${classInfo.className}Param extends PageParam implements QueryParam {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
 <#list classInfo.fieldList as fieldItem >

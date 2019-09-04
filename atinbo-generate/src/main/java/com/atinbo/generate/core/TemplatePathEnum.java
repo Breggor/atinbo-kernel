@@ -13,14 +13,17 @@ public enum TemplatePathEnum {
 
     ENTITY("entity.ftl", "entity/%s.java"),
     MAPPER("mapper.ftl", "mapper/%sMapper.java"),
-    MYBATIS("mybatis.ftl", "mybatis/%sMapper.xml"),
+//    DAO("dao.ftl", "dao/%sDao.java"),
+//    MYBATIS("mybatis.ftl", "mybatis/%sDao.xml"),
+    REPOSITORY("repository.ftl", "repository/%sRepository.java"),
     BO("bo.ftl", "model/%sBO.java"),
     PARAM("param.ftl", "model/%sParam.java"),
-    SERVICE("service.ftl", "api/%sService.java"),
-    IMPL("impl.ftl", "service/%sServiceImpl.java"),
-    VO("vo.ftl", "vo/%sVO.java"),
-    FORM("form.ftl", "vo/%sForm.java"),
-    CONTROLLER("controller.ftl", "controller/%sController.java");
+    SERVICE("service.ftl", "service/%sService.java"),
+    IMPL("impl.ftl", "impl/%sServiceImpl.java"),
+    VO("vo.ftl", "openapi/model/%sVO.java"),
+    FORM("form.ftl", "openapi/model/%sForm.java"),
+    OPENAPI_MAPPER("openapi_mapper.ftl", "openapi/mapper/%sMapper.java"),
+    CONTROLLER("controller.ftl", "openapi/controller/%sController.java");
 
     private String templatePath;
     private String outPath;
