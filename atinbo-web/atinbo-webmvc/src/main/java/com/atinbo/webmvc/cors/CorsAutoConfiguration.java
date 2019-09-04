@@ -41,15 +41,20 @@ public class CorsAutoConfiguration {
     @ConditionalOnProperty(prefix = "cors", name = "enabled", havingValue = "true", matchIfMissing = false)
     public FilterRegistrationBean corsFilter(CorsProperties corsProperties) {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        Arrays.stream(corsProperties.getAllowedOrigins()).forEach(config::addAllowedOrigin);
-        Arrays.stream(corsProperties.getAllowedHeaders()).forEach(config::addAllowedHeader);
-        Arrays.stream(corsProperties.getAllowedMethods()).forEach(config::addAllowedMethod);
-        source.registerCorsConfiguration("/**", config);
-
+        source.registerCorsConfiguration("/**", corsConfiguration(corsProperties));
         FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
         bean.setOrder(1);
         return bean;
+    }
+
+    @Bean
+    public CorsConfiguration corsConfiguration(CorsProperties corsProperties) {
+        CorsConfiguration config = new CorsConfiguration();
+        Arrays.stream(corsProperties.getAllowedOrigins()).forEach(config::addAllowedOrigin);
+        Arrays.stream(corsProperties.getAllowedHeaders()).forEach(config::addAllowedHeader);
+        Arrays.stream(corsProperties.getAllowedMethods()).forEach(config::addAllowedMethod);
+        config.setAllowCredentials(true);
+        config.setMaxAge(corsProperties.getMaxAge());
+        return config;
     }
 }
