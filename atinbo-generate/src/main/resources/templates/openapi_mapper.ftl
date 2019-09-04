@@ -6,7 +6,6 @@ import ${classInfo.packageName}.openapi.model.${classInfo.className}VO;
 import ${classInfo.packageName}.openapi.model.${classInfo.className}Form;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public interface ${classInfo.className}Mapper {
     /**
      * BO to VO
      */
-    ${classInfo.className}VO to${classInfo.className?uncap_first}Vo(${classInfo.className}BO ${classInfo.className?uncap_first});
+    ${classInfo.className}VO to${classInfo.className}Vo(${classInfo.className}BO ${classInfo.className?uncap_first});
 
     /**
      * BOList to VOList

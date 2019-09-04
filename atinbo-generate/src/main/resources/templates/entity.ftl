@@ -14,10 +14,10 @@ import lombok.Data;
 
 import java.io.Serializable;
 <#if importDdate??>
-    import java.util.Date;
+import java.util.Date;
 </#if>
 <#if importBigDecimal??>
-    import java.math.BigDecimal;
+import java.math.BigDecimal;
 </#if>
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

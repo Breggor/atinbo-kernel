@@ -13,6 +13,6 @@ import ${classInfo.packageName}.entity.${classInfo.className};
 *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
 */
 @Repository
-public interface ${classInfo.className}Repository extends JpaRepository<${classInfo.className}, ${classInfo.primaryField.fieldClass}>, JpaSpecificationExecutor<${classInfo.className}>{
+public interface ${classInfo.className}Repository extends JpaRepository<${classInfo.className}, ${classInfo.primaryField.fieldClass}>, JpaSpecificationExecutor<${classInfo.className}> {
 
 }

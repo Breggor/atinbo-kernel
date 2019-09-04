@@ -11,8 +11,8 @@ package ${classInfo.packageName}.model;
     </#list>
 </#if>
 import lombok.Data;
-import com.atinbo.model.BaseBO;
 
+import com.atinbo.model.BaseBO;
 <#if importDdate??>
 import java.util.Date;
 </#if>

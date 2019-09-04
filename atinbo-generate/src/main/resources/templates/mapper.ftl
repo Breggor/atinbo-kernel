@@ -29,12 +29,12 @@ public interface ${classInfo.className}Mapper {
     /**
      * entity to BO
      */
-    ${classInfo.className}BO to${classInfo.className?uncap_first}Bo(${classInfo.className} ${classInfo.className?uncap_first});
+    ${classInfo.className}BO to${classInfo.className}Bo(${classInfo.className} ${classInfo.className?uncap_first});
 
     /**
      * param to entity for update
      */
-    ${classInfo.className} to${classInfo.className?uncap_first}(${classInfo.className}Param ${classInfo.className?uncap_first}Param, @MappingTarget ${classInfo.className} ${classInfo.className?uncap_first});
+    ${classInfo.className} to${classInfo.className}(${classInfo.className}Param ${classInfo.className?uncap_first}Param, @MappingTarget ${classInfo.className} ${classInfo.className?uncap_first});
 
     /**
      * entityList to BOList

@@ -8,7 +8,7 @@ import ${classInfo.packageName}.entity.${classInfo.className};
 import ${classInfo.packageName}.model.${classInfo.className}Param;
 import ${classInfo.packageName}.model.${classInfo.className}BO;
 import ${classInfo.packageName}.mapper.${classInfo.className}Mapper;
-import ${classInfo.packageName}.repository.${classInfo.packageName}Repository;
+import ${classInfo.packageName}.repository.${classInfo.className}Repository;
 import ${classInfo.packageName}.service.${classInfo.className}Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ import java.util.List;
 *  @author ${classInfo.author}
 *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
 */
-@Service("${classInfo.className?uncap_first}Service")
+@Service
 public class ${classInfo.className}ServiceImpl implements ${classInfo.className}Service {
 
     @Autowired
