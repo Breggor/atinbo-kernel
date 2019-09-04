@@ -75,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     @ConditionalOnMissingBean
     public CustomUsernamePasswordProcessingFilterFilter customUsernamePasswordProcessingFilterFilter() throws Exception {
-        return new CustomUsernamePasswordProcessingFilterFilter("/login", authenticationManager());
+        return new CustomUsernamePasswordProcessingFilterFilter(authenticationManager());
     }
 
     // 装载BCrypt密码编码器

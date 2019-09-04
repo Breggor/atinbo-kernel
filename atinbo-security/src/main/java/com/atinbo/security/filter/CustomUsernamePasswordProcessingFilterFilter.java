@@ -44,8 +44,8 @@ public class CustomUsernamePasswordProcessingFilterFilter extends AbstractAuthen
     private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
     private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
 
-    public CustomUsernamePasswordProcessingFilterFilter(String url, AuthenticationManager authenticationManager) {
-        super(new AntPathRequestMatcher(url));
+    public CustomUsernamePasswordProcessingFilterFilter(AuthenticationManager authenticationManager) {
+        super(new AntPathRequestMatcher("/login", "POST"));
         setAuthenticationManager(authenticationManager);
     }
 
