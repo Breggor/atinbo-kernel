@@ -118,7 +118,7 @@ public class GenerateServiceImpl implements GenerateService {
             file.createNewFile();
         }
 
-        Template template = configuration.getTemplate(filePath);
+        Template template = configuration.getTemplate(entity.getTemplatePath());
         FileWriter writer = new FileWriter(filePath);
         template.process(params, writer);
         writer.close();
