@@ -2,13 +2,11 @@ package com.atinbo.webmvc.cors;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 
@@ -38,16 +36,6 @@ public class CorsAutoConfiguration {
      *
      * @param corsProperties
      */
-//    @Bean
-//    @ConditionalOnProperty(prefix = "cors", name = "enabled", havingValue = "true", matchIfMissing = false)
-//    public FilterRegistrationBean corsFilter(CorsProperties corsProperties) {
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", corsConfiguration(corsProperties));
-//        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
-//        bean.setOrder(1);
-//        return bean;
-//    }
-
     @Bean
     @ConditionalOnProperty(prefix = "cors", name = "enabled", havingValue = "true")
     public CorsConfigurationSource corsConfigurationSource(CorsProperties corsProperties) {
