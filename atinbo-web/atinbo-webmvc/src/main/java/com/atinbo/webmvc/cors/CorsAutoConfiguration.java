@@ -2,10 +2,14 @@ package com.atinbo.webmvc.cors;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.util.Arrays;
 
 /**
  * 跨域自动配置
@@ -35,16 +39,17 @@ public class CorsAutoConfiguration {
      */
     @Bean
     @ConditionalOnProperty(prefix = "cors", name = "enabled", havingValue = "true", matchIfMissing = false)
-    public WebMvcConfigurer corsConfigurer(CorsProperties corsProperties) {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping(corsProperties.getPathPattern())
-                        .allowedHeaders(corsProperties.getAllowedHeaders())
-                        .allowedMethods(corsProperties.getAllowedMethods())
-                        .allowedOrigins(corsProperties.getAllowedOrigins())
-                        .allowCredentials(corsProperties.isAllowCredentials()).maxAge(corsProperties.getMaxAge());
-            }
-        };
+    public FilterRegistrationBean corsFilter(CorsProperties corsProperties) {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        Arrays.stream(corsProperties.getAllowedOrigins()).forEach(config::addAllowedOrigin);
+        Arrays.stream(corsProperties.getAllowedHeaders()).forEach(config::addAllowedHeader);
+        Arrays.stream(corsProperties.getAllowedMethods()).forEach(config::addAllowedMethod);
+        source.registerCorsConfiguration("/**", config);
+
+        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+        bean.setOrder(0);
+        return bean;
     }
 }
