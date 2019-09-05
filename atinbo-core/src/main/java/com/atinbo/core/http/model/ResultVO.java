@@ -33,7 +33,7 @@ public class ResultVO<T> implements Serializable {
     /**
      * 状态码: 0:成功，-1：失败，业务异常：非零或非-1
      */
-    private int code = 0;
+    private int code;
     /**
      * 信息
      */
@@ -48,6 +48,7 @@ public class ResultVO<T> implements Serializable {
         this.page = Pagination.of(page.getCurrent(), page.getSize(), page.getTotal(), page.getRows());
         this.data = data;
     }
+
     /**
      * @param data
      * @param <E>
