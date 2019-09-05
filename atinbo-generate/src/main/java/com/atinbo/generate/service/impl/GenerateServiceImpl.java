@@ -12,6 +12,7 @@ import com.atinbo.generate.vo.FieldInfo;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -28,6 +29,7 @@ import static com.atinbo.generate.core.GenerateUtil.genFilePath;
 
 /**
  * 表查询服务实现
+ *
  * @author code-generator
  * @date 2019-8-20
  */
@@ -45,14 +47,14 @@ public class GenerateServiceImpl implements GenerateService {
     public List<ClassInfo> findAllTable() {
         List<ClassInfo> result = new ArrayList<>();
         List<TableInfo> list = generateMapper.selectTableList();
-        if(!CollectionUtils.isEmpty(list)) {
+        if (!CollectionUtils.isEmpty(list)) {
             ClassInfo classInfo;
             for (TableInfo tableInfo : list) {
                 classInfo = new ClassInfo();
                 classInfo.setPackageName(generateProperties.getPackageName());
                 classInfo.setAuthor(generateProperties.getAuthor());
 
-                String className = tableInfo.getTableName().replaceFirst(generateProperties.getTablePrefix(),"");
+                String className = tableInfo.getTableName().replaceFirst(generateProperties.getTablePrefix(), "");
                 classInfo.setClassName(GenerateUtil.genClassName(className));
                 classInfo.setTableName(tableInfo.getTableName());
                 classInfo.setClassComment(tableInfo.getTableComment());
@@ -69,13 +71,13 @@ public class GenerateServiceImpl implements GenerateService {
         classInfo.setPackageName(generateProperties.getPackageName());
         classInfo.setAuthor(generateProperties.getAuthor());
 
-        String className = tableInfo.getTableName().replaceFirst(generateProperties.getTablePrefix(),"");
+        String className = tableInfo.getTableName().replaceFirst(generateProperties.getTablePrefix(), "");
         classInfo.setClassName(GenerateUtil.genClassName(className));
         classInfo.setTableName(tableInfo.getTableName());
         classInfo.setClassComment(tableInfo.getTableComment());
 
         List<ColumnInfo> columnList = generateMapper.selectColumnList(tableInfo.getTableName());
-        if(!CollectionUtils.isEmpty(columnList)) {
+        if (!CollectionUtils.isEmpty(columnList)) {
             List<FieldInfo> fieldInfoList = new ArrayList<>();
             FieldInfo fieldInfo;
             for (ColumnInfo column : columnList) {
@@ -86,7 +88,7 @@ public class GenerateServiceImpl implements GenerateService {
                 fieldInfo.setFieldComment(column.getColumnComment());
                 fieldInfo.setFieldClass(GenerateUtil.getJavaClass(column.getDataType()));
 
-                if("PRI".equalsIgnoreCase(column.getColumnKey())){
+                if ("PRI".equalsIgnoreCase(column.getColumnKey())) {
                     fieldInfo.setPrimaryKey(true);
                     classInfo.setPrimaryField(fieldInfo);
                 }
@@ -99,9 +101,10 @@ public class GenerateServiceImpl implements GenerateService {
 
     @Override
     public void generateClass(ClassInfo classInfo) throws IOException, TemplateException {
-        String prefixPath = genFilePath(generateProperties.getOutPath(),generateProperties.getPackageName());
+        String prefixPath = genFilePath(generateProperties.getOutPath(), generateProperties.getPackageName());
+
         for (TemplatePathEnum pathEnum : TemplatePathEnum.values()) {
-            processFile(pathEnum , prefixPath, classInfo);
+            processFile(pathEnum, prefixPath, classInfo);
         }
     }
 
@@ -109,7 +112,15 @@ public class GenerateServiceImpl implements GenerateService {
         Map<String, Object> params = new HashMap<>();
         params.put("classInfo", classInfo);
 
-        String filePath = prefix + File.separator + TemplatePathEnum.genOutPath(entity , classInfo.getClassName());
+        String modulePath = "";
+        if(generateProperties.getModule() != null){
+            modulePath = StringUtils.defaultString(generateProperties.getModule().getName(), modulePath);
+            if (generateProperties.getModule().isMultiple()) {
+                modulePath = modulePath.concat("-").concat(entity.getModule());
+            }
+            modulePath = modulePath.concat(File.separator);
+        }
+        String filePath = modulePath + prefix + File.separator + TemplatePathEnum.genOutPath(entity, classInfo.getClassName());
         File file = new File(filePath);
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();

@@ -64,7 +64,7 @@ public class ${classInfo.className}Controller {
     public Result findById(@PathVariable("id") @Validated @ApiParam("${classInfo.primaryField.fieldComment}") ${classInfo.primaryField.fieldClass} id) throws HttpAPIException {
         Outcome<${classInfo.className}BO> outcome = ${classInfo.className?uncap_first}Service.findById(id);
         if (outcome.isSuccess()) {
-            return ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Vo(outcome.getData());
+            return Result.of(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Vo(outcome.getData()));
         } else {
             throw new HttpAPIException(HttpStatusCode.ERR_500);
         }
@@ -82,7 +82,7 @@ public class ${classInfo.className}Controller {
     public Result add(@RequestBody @Validated @ApiParam("${classInfo.classComment}信息") ${classInfo.className}Form form) throws HttpAPIException {
         Outcome<${classInfo.className}BO> outcome = ${classInfo.className?uncap_first}Service.save(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Param(form));
         if (outcome.isSuccess()) {
-            return ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Vo(outcome.getData());
+            return Result.of(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Vo(outcome.getData()));
         } else {
             throw new HttpAPIException(HttpStatusCode.ERR_500);
         }

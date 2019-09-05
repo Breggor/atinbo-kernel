@@ -25,7 +25,12 @@ public class GenerateProperties {
     /**
      * 生成包路径
      */
-    private String packageName = "";
+    private String packageName;
+
+    /**
+     * 模块配置
+     */
+    private Module module;
 
     /**
      * 表前缀(类名不会包含表前缀)
@@ -36,4 +41,18 @@ public class GenerateProperties {
      * 文件输出路径
      */
     private String outPath;
+
+    @Data
+    public static class Module {
+
+        /**
+         * 是否开启多模块
+         */
+        private boolean multiple;
+
+        /**
+         * 模块名称
+         */
+        private String name;
+    }
 }
