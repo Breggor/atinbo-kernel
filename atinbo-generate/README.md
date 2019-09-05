@@ -20,6 +20,8 @@
 #### 使用说明
 
 在项目中配置文件（bootstrap.yml或者applicaiton.yml）中增加相关配置
+
+配置示例：
 <pre>
     <code>
 atinbo:
@@ -37,10 +39,15 @@ atinbo:
 
 配置说明
 
-KEY|说明|必填|默认值
-atinbo.generate.enabled|是否启用|true|false
-atinbo.generate.author|生成文件作者|false|atinbo generator
-atinbo.generate.table-prefix|表名前缀|false|
+|KEY|说明|必填|默认值|描述
+|:------------- |:-------:|:------|-----:|:------------|
+|atinbo.generate.enabled|是否启用|true|false
+|atinbo.generate.author|作者|false|atinbo generator|生成类文件作者注释
+|atinbo.generate.table-prefix|表名前缀|false| |生成类文件名将去掉该前缀
+|atinbo.generate.package-name|包名|false| |生成类文件包名前缀
+|atinbo.generate.out-path|输出路径|false| |生成文件地址。当前项目相对地址
+|atinbo.generate.module.multiple|是否开启多模块|false|开启后将生成的代码按 openapi、api、service 模块分开并放入相应的目录下
+|atinbo.generate.module.name|模块名称|false|代码生成在该模块目录下。如果同时开启多模块，文件将分开放入 模块名+openapi、api、service 目录下
 
 然后启动服务启动
 打开 http://ip:post/gen.html 生成代码
