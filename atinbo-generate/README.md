@@ -47,7 +47,7 @@ atinbo:
 |atinbo.generate.author|作者|false|atinbo generator|生成类文件作者注释
 |atinbo.generate.table-prefix|表名前缀|false| |生成类文件名将去掉该前缀
 |atinbo.generate.package-name|包名|false| |生成类文件包名前缀
-|atinbo.generate.out-path|输出路径|false| |生成文件地址。当前项目相对地址
+|atinbo.generate.out-path|输出路径|false|src/java/main|生成文件地址。当前项目相对地址
 |atinbo.generate.module.multiple|是否开启多模块|false| |开启后将生成的代码按 openapi、api、service 模块分开并放入相应的目录下
 |atinbo.generate.module.name|模块名称|false| |代码生成在该模块目录下。如果同时开启多模块，文件将分开放入 模块名+openapi、api、service 目录下
 

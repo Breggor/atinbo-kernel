@@ -28,6 +28,11 @@ public class GenerateProperties {
     private String packageName;
 
     /**
+     * 生成类型  hibernate 或者 mybatis
+     */
+    private String category = "mybatis";
+
+    /**
      * 表前缀(类名不会包含表前缀)
      */
     private String tablePrefix;
@@ -35,7 +40,7 @@ public class GenerateProperties {
     /**
      * 文件输出路径
      */
-    private String outPath;
+    private String outPath = "src/java/main";
 
     /**
      * 模块配置
@@ -55,4 +60,5 @@ public class GenerateProperties {
          */
         private String name;
     }
+
 }

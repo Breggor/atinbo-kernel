@@ -12,6 +12,7 @@ import com.atinbo.generate.vo.FieldInfo;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -102,13 +103,19 @@ public class GenerateServiceImpl implements GenerateService {
     @Override
     public void generateClass(ClassInfo classInfo) throws IOException, TemplateException {
         String prefixPath = genFilePath(generateProperties.getOutPath(), generateProperties.getPackageName());
+        String category = generateProperties.getCategory();
+        if(!ArrayUtils.contains(GenerateUtil.SUPPORT_CATEGORY, category)){
+            category = GenerateUtil.SUPPORT_CATEGORY[0];
+        }
 
         for (TemplatePathEnum pathEnum : TemplatePathEnum.values()) {
-            processFile(pathEnum, prefixPath, classInfo);
+            if(StringUtils.isBlank(pathEnum.getCategroy()) ||pathEnum.getCategroy().equals(category)) {
+                processFile(pathEnum, prefixPath, classInfo, category);
+            }
         }
     }
 
-    private void processFile(TemplatePathEnum entity, String prefix, ClassInfo classInfo) throws IOException, TemplateException {
+    private void processFile(TemplatePathEnum entity, String prefix, ClassInfo classInfo, String category) throws IOException, TemplateException {
         Map<String, Object> params = new HashMap<>();
         params.put("classInfo", classInfo);
 
@@ -120,7 +127,7 @@ public class GenerateServiceImpl implements GenerateService {
             }
             modulePath = modulePath.concat(File.separator);
         }
-        String filePath = modulePath + prefix + File.separator + TemplatePathEnum.genOutPath(entity, classInfo.getClassName());
+        String filePath = modulePath + prefix + File.separator + entity.genOutPath(classInfo.getClassName());
         File file = new File(filePath);
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
@@ -129,7 +136,7 @@ public class GenerateServiceImpl implements GenerateService {
             file.createNewFile();
         }
 
-        Template template = configuration.getTemplate(entity.getTemplatePath());
+        Template template = configuration.getTemplate(entity.genTemplatePath(category));
         FileWriter writer = new FileWriter(filePath);
         template.process(params, writer);
         writer.close();

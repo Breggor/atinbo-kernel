@@ -38,6 +38,8 @@ public class GenerateUtil {
     }
 
 
+    public static String[] SUPPORT_CATEGORY = {"mybatis", "hibernate"};
+
     public static String getJavaClass(String dbType) {
         if (StringUtils.isNotBlank(dbType) && TYPE_MAPPING.containsKey(dbType.toUpperCase())) {
             return TYPE_MAPPING.get(dbType.toUpperCase());

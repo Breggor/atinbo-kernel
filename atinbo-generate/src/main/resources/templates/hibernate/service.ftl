@@ -1,7 +1,6 @@
 package ${classInfo.packageName}.service;
 
 import com.atinbo.model.Outcome;
-import com.atinbo.model.PageOutcome;
 
 import ${classInfo.packageName}.model.${classInfo.className}BO;
 import ${classInfo.packageName}.model.${classInfo.className}Param;
@@ -37,6 +36,6 @@ public interface ${classInfo.className}Service {
     /**
     * 分页查询
     */
-    PageOutcome<${classInfo.className}BO> pageList(${classInfo.className}Param ${classInfo.className?uncap_first}Param);
+    Outcome<${classInfo.className}BO> pageList(${classInfo.className}Param ${classInfo.className?uncap_first}Param);
 
 }
