@@ -45,7 +45,7 @@ public class ResultVO<T> implements Serializable {
     }
 
     public ResultVO(Pagination page, T data) {
-        this.page = Pagination.of(page.getCurrent(), page.getSize(), page.getTotal(), page.getRows());
+        this.page = Pagination.of(page.getCurrent(), page.getSize(), page.getTotalRows(), page.getTotalPages());
         this.data = data;
     }
 

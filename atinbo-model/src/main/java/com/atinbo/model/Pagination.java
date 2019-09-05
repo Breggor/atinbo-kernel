@@ -29,24 +29,25 @@ public final class Pagination implements Serializable {
      */
     private int size;
     /**
-     * 总页数
-     */
-    private int total;
-    /**
      * 总行数
      */
-    private long rows;
+    private long totalRows;
+
+    /**
+     * 总页数
+     */
+    private int totalPages;
 
     /**
      * 创建分页
      *
-     * @param current 当前页
-     * @param size    每页行数
-     * @param total   总页数
-     * @param rows    总行数
+     * @param current    当前页
+     * @param size       每页行数
+     * @param totalRows  总行数
+     * @param totalPages 总页数
      * @return
      */
-    public static Pagination of(int current, int size, int total, long rows) {
-        return new Pagination(current, size, total, rows);
+    public static Pagination of(int current, int size, long totalRows, int totalPages) {
+        return new Pagination(current, size, totalRows, totalPages);
     }
 }
