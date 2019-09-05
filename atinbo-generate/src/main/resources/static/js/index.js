@@ -32,6 +32,13 @@ $(function () {
         },
         columns: [
             {
+                "orderable": false,
+                'sClass': "text-center",
+                render: function (data, type, row, meta) {
+                    return "<input type=\"checkbox\" class=\"gen-table\" value=\"" + row.tableName + "\">";
+                }
+            },
+            {
                 "data": "tableName",
                 "name": "tableName",
                 "sDefaultContent": "",  //默认空字符串
@@ -65,7 +72,7 @@ $(function () {
         initComplete: function () {
             //表格加载完毕，手动添加按钮到表格上
             $("#table_length").append("<a href='javascript:void(0);' " +
-                "class='btn btn-default btn-sm codeGenerate' style='margin-left: 5px;'>全部生成</a>");
+                "class='btn btn-default btn-sm checked-generate' style='margin-left: 5px;'>批量生成</a>");
         }
 
     });
@@ -73,7 +80,28 @@ $(function () {
      * 生成代码
      */
     $(".table-content").on("click", ".codeGenerate", function () {
-        var tableName = $(this).data("name");
+        genTable($(this).data("name"));
+    });
+
+    $(".table-content").on("click", ".checked-generate", function () {
+        var checked = $(".gen-table:checked");
+        if(checked.length != 0){
+            var tables = [];
+            checked.each(function (i, e) {
+                tables[i] = $(e).val();
+            });
+            genTable(tables.join(","));
+        }
+    });
+
+    /**
+     * 全选
+     */
+    $("#checkAll").click(function () {
+        $(".gen-table").prop("checked",$(this).prop("checked"));
+    });
+
+    function genTable(tableName) {
         $.ajax({
             url: "gen",
             type: "POST",
@@ -90,6 +118,5 @@ $(function () {
                 layer.alert("代码生成异常");
             }
         });
-    });
-
+    }
 });

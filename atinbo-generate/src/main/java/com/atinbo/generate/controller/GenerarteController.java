@@ -3,6 +3,7 @@ package com.atinbo.generate.controller;
 import com.atinbo.core.http.model.Result;
 import com.atinbo.generate.service.GenerateService;
 import com.atinbo.generate.vo.ClassInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import java.util.List;
  * @author zenghao
  * @date 2019-09-02
  */
+@Slf4j
 @RestController
 public class GenerarteController {
 
@@ -31,10 +33,23 @@ public class GenerarteController {
     @PostMapping("/gen")
     public Result gen(@RequestParam(name = "tableName", required = false) String tableName) {
         if (StringUtils.isNotBlank(tableName)) {
-            ClassInfo classInfo = generateService.findClassInfo(tableName);
-            try {
-                generateService.generateClass(classInfo);
-            } catch (Exception e) {
+            if(StringUtils.contains(tableName,",")){
+                String[] tables = StringUtils.split(tableName,",");
+                for (String table : tables) {
+                    ClassInfo classInfo = generateService.findClassInfo(table);
+                    try {
+                        generateService.generateClass(classInfo);
+                    } catch (Exception e) {
+                        log.error("gen table:{} error:", table, e);
+                    }
+                }
+            }else {
+                ClassInfo classInfo = generateService.findClassInfo(tableName);
+                try {
+                    generateService.generateClass(classInfo);
+                } catch (Exception e) {
+                    log.error("gen table:{} error:", tableName, e);
+                }
             }
         } else {
             List<ClassInfo> classInfoList = generateService.findAllTable();
@@ -42,6 +57,7 @@ public class GenerarteController {
                 try {
                     generateService.generateClass(classInfo);
                 } catch (Exception e) {
+                    log.error("gen table error:", e);
                     continue;
                 }
             }

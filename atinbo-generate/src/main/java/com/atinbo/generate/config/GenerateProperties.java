@@ -28,11 +28,6 @@ public class GenerateProperties {
     private String packageName;
 
     /**
-     * 模块配置
-     */
-    private Module module;
-
-    /**
      * 表前缀(类名不会包含表前缀)
      */
     private String tablePrefix;
@@ -41,6 +36,11 @@ public class GenerateProperties {
      * 文件输出路径
      */
     private String outPath;
+
+    /**
+     * 模块配置
+     */
+    private Module module;
 
     @Data
     public static class Module {
