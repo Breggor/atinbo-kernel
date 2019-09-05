@@ -76,4 +76,24 @@ public class ErrResult implements Serializable {
         }
         this.errors.add(new ErrorInfo().setReason(reason).setMessage(message));
     }
+
+
+    /**
+     * 错误信息
+     *
+     * @author breggor
+     */
+    @Data
+    @Accessors(chain = true)
+    public static class ErrorInfo implements Serializable {
+        /**
+         * 原因
+         */
+        private String reason;
+
+        /**
+         * 消息
+         */
+        private String message;
+    }
 }

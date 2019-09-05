@@ -13,7 +13,13 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-public class Outcome<T extends Serializable> implements Serializable {
+public class Outcome<T> implements Serializable {
+
+    /**
+     * 分页信息
+     */
+    private Pagination page = Pagination.EMPTY;
+
     /**
      * 返回对象
      */
@@ -34,7 +40,7 @@ public class Outcome<T extends Serializable> implements Serializable {
      * @param <E>
      * @return
      */
-    public static <E extends Serializable> Outcome<E> ofFail(String error) {
+    public static <E> Outcome<E> ofFail(String error) {
         return new Outcome<E>().setError(error);
     }
 
@@ -45,7 +51,18 @@ public class Outcome<T extends Serializable> implements Serializable {
      * @param <E>
      * @return
      */
-    public static <E extends Serializable> Outcome<E> ofSuccess(E data) {
+    public static <E> Outcome<E> ofSuccess(E data) {
         return new Outcome<E>().setSuccess(true).setData(data);
+    }
+
+    /**
+     * 成功返回结果
+     *
+     * @param data
+     * @param <E>
+     * @return
+     */
+    public static <E> Outcome<E> ofSuccess(Pagination page, E data) {
+        return new Outcome<E>().setSuccess(true).setPage(page).setData(data);
     }
 }

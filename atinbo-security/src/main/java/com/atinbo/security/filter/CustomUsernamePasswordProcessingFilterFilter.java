@@ -1,6 +1,6 @@
 package com.atinbo.security.filter;
 
-import com.atinbo.core.http.model.Result;
+import com.atinbo.core.http.model.ResultVO;
 import com.atinbo.security.jwt.JwtTokenOps;
 import com.atinbo.security.model.JwtUser;
 import com.atinbo.security.model.UserCredentials;
@@ -113,14 +113,14 @@ public class CustomUsernamePasswordProcessingFilterFilter extends AbstractAuthen
         data.put("token", token);
         data.put("userId", principal.getUserId());
         response.setHeader("Authorization", token);
-        objectMapper.writeValue(response.getWriter(), Result.success().setData(data));
+        objectMapper.writeValue(response.getWriter(), ResultVO.success().setData(data));
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        objectMapper.writeValue(response.getWriter(), Result.failure().setMessage(failed.getMessage()));
+        objectMapper.writeValue(response.getWriter(), ResultVO.failure().setMessage(failed.getMessage()));
         log.error(failed.getMessage(), failed);
     }
 }
