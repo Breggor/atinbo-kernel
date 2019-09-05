@@ -1,6 +1,6 @@
 package com.atinbo.webmvc.handler;
 
-import com.atinbo.core.exception.HttpAPIException;
+import com.atinbo.core.exception.HttpApiException;
 import com.atinbo.core.http.model.ErrResult;
 import com.atinbo.core.http.status.ErrorType;
 import com.atinbo.core.http.status.HttpStatusCode;
@@ -91,9 +91,9 @@ public class HttpExceptoinHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler(HttpAPIException.class)
+    @ExceptionHandler(HttpApiException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrResult handleHttpAPIException(HttpAPIException e) {
+    public ErrResult handleHttpAPIException(HttpApiException e) {
         log.error(e.getMessage(), e);
         return ErrResult.error(ERR_500.getHttpCode(), ERR_500.getMessage(), e.getMessage());
     }

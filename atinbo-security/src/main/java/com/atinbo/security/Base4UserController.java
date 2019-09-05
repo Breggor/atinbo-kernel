@@ -1,6 +1,5 @@
 package com.atinbo.security;
 
-import com.atinbo.core.exception.HttpAPIException;
 import com.atinbo.security.model.JwtUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

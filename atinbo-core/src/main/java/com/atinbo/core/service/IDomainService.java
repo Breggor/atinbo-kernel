@@ -1,7 +1,7 @@
 package com.atinbo.core.service;
 
 
-import com.atinbo.core.exception.ServiceAPIException;
+import com.atinbo.core.exception.ServiceApiException;
 
 import java.util.Optional;
 
@@ -25,25 +25,25 @@ public interface IDomainService<T> {
      *
      * @param entity
      * @return
-     * @throws ServiceAPIException
+     * @throws ServiceApiException
      */
-    T create(T entity) throws ServiceAPIException;
+    T create(T entity) throws ServiceApiException;
 
     /**
      * 更新
      *
      * @param entity
      * @return
-     * @throws ServiceAPIException
+     * @throws ServiceApiException
      */
-    T update(T entity) throws ServiceAPIException;
+    T update(T entity) throws ServiceApiException;
 
     /**
      * 删除
      *
      * @param id
      * @return
-     * @throws ServiceAPIException
+     * @throws ServiceApiException
      */
-    T deleteById(Long id) throws ServiceAPIException;
+    T deleteById(Long id) throws ServiceApiException;
 }

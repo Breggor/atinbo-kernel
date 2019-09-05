@@ -1,6 +1,6 @@
 package com.atinbo.webmvc.controller;
 
-import com.atinbo.core.exception.HttpAPIException;
+import com.atinbo.core.exception.HttpApiException;
 import com.atinbo.core.http.status.HttpStatusCode;
 import com.atinbo.model.GatewayUser;
 import com.atinbo.webmvc.exceptions.UserNotFoundException;
@@ -28,19 +28,19 @@ public class BasicController {
     protected HttpServletResponse response;
 
 
-    protected GatewayUser getSessionUser() throws HttpAPIException {
+    protected GatewayUser getSessionUser() throws HttpApiException {
         return this.getSessionUser(this.request);
     }
 
-    protected GatewayUser getSessionUser(GatewayUser defaultUser) throws HttpAPIException {
+    protected GatewayUser getSessionUser(GatewayUser defaultUser) throws HttpApiException {
         return this.getSessionUser(this.request, defaultUser);
     }
 
-    protected GatewayUser getSessionUser(HttpServletRequest request) throws HttpAPIException {
+    protected GatewayUser getSessionUser(HttpServletRequest request) throws HttpApiException {
         return this.getSessionUser(request, GatewayUser.ANONYMOUS);
     }
 
-    protected GatewayUser getSessionUser(HttpServletRequest request, GatewayUser defaultUser) throws HttpAPIException {
+    protected GatewayUser getSessionUser(HttpServletRequest request, GatewayUser defaultUser) throws HttpApiException {
         GatewayUser user = null;
         try {
             user = SessionUserResolver.getSessionUser(request);
@@ -49,7 +49,7 @@ public class BasicController {
             String strictEvnValue = System.getenv(ENV_STRICT_KEY);
             boolean isStrictMode = !StringUtils.isEmpty(strictEvnValue);
             if (isStrictMode) {
-                throw new HttpAPIException(HttpStatusCode.ERR_401);
+                throw new HttpApiException(HttpStatusCode.ERR_401);
             }
             user = defaultUser;
         }

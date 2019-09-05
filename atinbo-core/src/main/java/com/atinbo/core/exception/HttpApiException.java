@@ -8,8 +8,8 @@ import com.atinbo.core.http.status.HttpStatusCode;
  *
  * @author breggor
  */
-public class HttpAPIException extends FrameworkException {
-    public HttpAPIException(HttpStatusCode error) {
+public class HttpApiException extends FrameworkException {
+    public HttpApiException(HttpStatusCode error) {
         super(error);
     }
 
