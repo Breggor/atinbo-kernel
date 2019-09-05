@@ -10,7 +10,7 @@ import java.util.StringJoiner;
  *
  * @author breggor
  */
-public class PageParam implements Serializable {
+public final class PageParam implements Serializable {
     /**
      * 默认单页记录数
      */

@@ -16,7 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class Pagination implements Serializable {
+public final class Pagination implements Serializable {
 
     public static final Pagination EMPTY = new Pagination(0, 10, 0, 0);
 
