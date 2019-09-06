@@ -58,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             paths = new String[allowPathArrs.length + ALLOW_VISIT_PATH.length];
 
             System.arraycopy(ALLOW_VISIT_PATH, 0, paths, 0, ALLOW_VISIT_PATH.length);
-            System.arraycopy(allowPathArrs, 0, paths, ALLOW_VISIT_PATH.length - 1, allowPathArrs.length);
+            System.arraycopy(allowPathArrs, 0, paths, ALLOW_VISIT_PATH.length, allowPathArrs.length);
         }
         log.info("web securty allow paths={}", paths);
 
