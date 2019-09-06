@@ -38,6 +38,7 @@ import java.util.Objects;
 @Order(2)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final static String[] ALLOW_VISIT_PATH = new String[]{"/", "/*.html", "/actuator/**", "/v2/**", "/webjars/**", "/swagger-resources", "/swagger-resources/**", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js"};
 
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
@@ -46,21 +47,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * 多个路径逗号分隔
      */
     @Value("${security.allowPath}")
-    private String allowPaths;
+    private String allowPath;
 
-    private final static String[] ALLOW_VISIT_PATH = new String[]{"/", "/*.html", "/actuator/**", "/v2/**", "/webjars/**", "/swagger-resources", "/swagger-resources/**", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js"};
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        String[] paths = ALLOW_VISIT_PATH;
-        if (!StringUtils.isEmpty(allowPaths)) {
-            String[] allowPathArrs = allowPaths.split(",");
-            paths = new String[allowPathArrs.length + ALLOW_VISIT_PATH.length];
+        String[] allowPathArr = ALLOW_VISIT_PATH;
+        if (!StringUtils.isEmpty(this.allowPath)) {
+            String[] arr = this.allowPath.split(",");
+            allowPathArr = new String[arr.length + ALLOW_VISIT_PATH.length];
 
-            System.arraycopy(ALLOW_VISIT_PATH, 0, paths, 0, ALLOW_VISIT_PATH.length);
-            System.arraycopy(allowPathArrs, 0, paths, ALLOW_VISIT_PATH.length, allowPathArrs.length);
+            System.arraycopy(ALLOW_VISIT_PATH, 0, allowPathArr, 0, ALLOW_VISIT_PATH.length);
+            System.arraycopy(arr, 0, allowPathArr, ALLOW_VISIT_PATH.length, arr.length);
         }
-        log.info("web securty allow paths={}", paths);
+        log.info("web security allow paths={}", String.join(",", allowPathArr));
 
         httpSecurity.cors().and()
                 // 由于使用的是JWT，我们这里不需要csrf
@@ -70,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 // 允许对于网站静态资源的无授权访问
-                .antMatchers(HttpMethod.GET, paths).permitAll()
+                .antMatchers(HttpMethod.GET, allowPathArr).permitAll()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
