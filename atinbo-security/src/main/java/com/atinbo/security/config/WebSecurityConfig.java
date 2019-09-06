@@ -7,7 +7,9 @@ import com.atinbo.security.filter.JwtTokenAuthorizationFilter;
 import com.atinbo.security.jwt.JwtTokenOps;
 import com.atinbo.security.service.JwtUserDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +23,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.util.StringUtils;
 
 import java.util.Objects;
 
@@ -29,6 +32,7 @@ import java.util.Objects;
  *
  * @author breggor
  */
+@Slf4j
 @Configuration
 @EnableWebSecurity
 @Order(2)
@@ -38,9 +42,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
 
+    /**
+     * 多个路径逗号分隔
+     */
+    @Value("${security.allowPath}")
+    private String allowPaths;
+
+    private final static String[] ALLOW_VISIT_PATH = new String[]{"/", "/*.html", "/actuator/**", "/v2/**", "/webjars/**", "/swagger-resources", "/swagger-resources/**", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js"};
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+        String[] paths = ALLOW_VISIT_PATH;
+        if (!StringUtils.isEmpty(allowPaths)) {
+            String[] allowPathArrs = allowPaths.split(",");
+            paths = new String[allowPathArrs.length + ALLOW_VISIT_PATH.length];
+
+            System.arraycopy(ALLOW_VISIT_PATH, 0, paths, 0, ALLOW_VISIT_PATH.length);
+            System.arraycopy(allowPathArrs, 0, paths, ALLOW_VISIT_PATH.length - 1, allowPathArrs.length);
+        }
+        log.info("web securty allow paths={}", paths);
+
         httpSecurity.cors().and()
                 // 由于使用的是JWT，我们这里不需要csrf
                 .csrf().disable()
@@ -49,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 // 允许对于网站静态资源的无授权访问
-                .antMatchers(HttpMethod.GET, "/", "/*.html", "/actuator/**", "/v2/**", "/webjars/**", "/swagger-resources", "/swagger-resources/**", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
+                .antMatchers(HttpMethod.GET, paths).permitAll()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
