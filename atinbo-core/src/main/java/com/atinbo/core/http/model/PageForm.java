@@ -1,5 +1,7 @@
 package com.atinbo.core.http.model;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -7,6 +9,7 @@ import java.io.Serializable;
  *
  * @author breggor
  */
+@Data
 public class PageForm implements Serializable {
 
     /**
