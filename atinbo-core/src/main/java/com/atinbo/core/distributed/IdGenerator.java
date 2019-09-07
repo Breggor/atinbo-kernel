@@ -1,4 +1,4 @@
-package com.atinbo.core.distributed.id;
+package com.atinbo.core.distributed;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

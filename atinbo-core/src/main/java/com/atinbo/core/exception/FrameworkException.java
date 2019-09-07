@@ -1,7 +1,7 @@
 package com.atinbo.core.exception;
 
 
-import com.atinbo.core.http.status.HttpStatusCode;
+import com.atinbo.core.constants.HttpStatusCode;
 
 /**
  * @author breggor

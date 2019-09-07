@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import static com.atinbo.core.http.status.HttpStatusCode.ERR_500;
+import static com.atinbo.core.constants.HttpStatusCode.ERR_500;
 
 
 /**

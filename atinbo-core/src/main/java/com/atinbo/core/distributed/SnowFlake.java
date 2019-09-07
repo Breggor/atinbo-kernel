@@ -1,4 +1,4 @@
-package com.atinbo.core.distributed.id;
+package com.atinbo.core.distributed;
 
 import lombok.extern.slf4j.Slf4j;
 

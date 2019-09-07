@@ -1,7 +1,7 @@
 package com.atinbo.core.http.model;
 
 
-import com.atinbo.core.http.status.HttpStatusCode;
+import com.atinbo.core.constants.HttpStatusCode;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;

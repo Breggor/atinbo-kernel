@@ -1,7 +1,7 @@
 package com.atinbo.webmvc.controller;
 
 import com.atinbo.core.exception.HttpApiException;
-import com.atinbo.core.http.status.HttpStatusCode;
+import com.atinbo.core.constants.HttpStatusCode;
 import com.atinbo.model.GatewayUser;
 import com.atinbo.webmvc.exceptions.UserNotFoundException;
 import com.atinbo.webmvc.resolver.SessionUserResolver;

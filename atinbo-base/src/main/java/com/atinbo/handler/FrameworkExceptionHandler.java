@@ -8,7 +8,7 @@ import org.springframework.web.util.NestedServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static com.atinbo.core.http.status.HttpStatusCode.ERR_500;
+import static com.atinbo.core.constants.HttpStatusCode.ERR_500;
 
 
 /**
