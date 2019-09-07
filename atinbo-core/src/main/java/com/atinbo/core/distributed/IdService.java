@@ -10,7 +10,7 @@ import java.util.Objects;
  * 分布式ID
  */
 @Component
-public class IdGenerator {
+public class IdService {
 
     /**
      * 每个服务器节点workerId
@@ -18,7 +18,7 @@ public class IdGenerator {
     private Long workerId;
     private SnowFlake flake;
 
-    public IdGenerator(@Value("${disId.workerId}") Long workerId) {
+    public IdService(@Value("${disId.workerId}") Long workerId) {
         this.workerId = workerId;
     }
 
