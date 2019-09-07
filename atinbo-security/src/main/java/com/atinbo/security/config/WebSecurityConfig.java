@@ -70,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 // 允许对于网站静态资源的无授权访问
-                .antMatchers(HttpMethod.GET, allowPathArr).permitAll()
+                .antMatchers(allowPathArr).permitAll()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
