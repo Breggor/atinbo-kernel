@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class PageForm implements Serializable {
 
     /**
-     * 起始行
+     * 起始页
      */
     private Integer offset;
 
