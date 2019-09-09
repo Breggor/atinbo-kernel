@@ -5,6 +5,8 @@ import com.atinbo.model.Outcome;
 import ${classInfo.packageName}.model.${classInfo.className}BO;
 import ${classInfo.packageName}.model.${classInfo.className}Param;
 
+import java.util.List;
+
 /**
 *  ${classInfo.classComment} Service
 *
@@ -36,6 +38,6 @@ public interface ${classInfo.className}Service {
     /**
     * 分页查询
     */
-    Outcome<${classInfo.className}BO> pageList(${classInfo.className}Param ${classInfo.className?uncap_first}Param);
+    Outcome<List<${classInfo.className}BO>> pageList(${classInfo.className}Param ${classInfo.className?uncap_first}Param);
 
 }

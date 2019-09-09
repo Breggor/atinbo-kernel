@@ -24,6 +24,7 @@ import java.util.List;
 *  @author ${classInfo.author}
 *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
 */
+@Slf4j
 @Service
 public class ${classInfo.className}ServiceImpl implements ${classInfo.className}Service {
 
@@ -79,11 +80,11 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
      * 分页查询
      */
     @Override
-    public Outcome<${classInfo.className}BO> pageList(${classInfo.className}Param ${classInfo.className?uncap_first}Param){
+    public Outcome<List<${classInfo.className}BO>> pageList(${classInfo.className}Param ${classInfo.className?uncap_first}Param){
         PageRequest pageRequest = PageRequest.of(${classInfo.className?uncap_first}Param.getPage(), ${classInfo.className?uncap_first}Param.getSize());
         Page<${classInfo.className}> page = ${classInfo.className?uncap_first}Repository.findAll(DynamicSpecifications.toSpecification(${classInfo.className?uncap_first}Param), pageRequest);
 
         List<${classInfo.className}BO> ${classInfo.className?uncap_first}Bos = ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bos(page.getContent());
-        return Outcome.ofSuccess(Pagination.of(page.getNumber(), page.getSize(), page.getTotalPages(), page.getTotalElements()), ${classInfo.className?uncap_first}Bos);
+        return Outcome.ofSuccess(Pagination.of(page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages()), ${classInfo.className?uncap_first}Bos);
     }
 }
