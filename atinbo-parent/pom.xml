@@ -55,6 +55,7 @@
         <swagger.version>2.7.0</swagger.version>
         <swagger-ui.version>1.9.6</swagger-ui.version>
         <easyexcel.version>2.0.0-beta1</easyexcel.version>
+        <justAuth.version>1.11.0</justAuth.version>
 
         <skipTests>true</skipTests>
     </properties>
@@ -193,6 +194,12 @@
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>${jjwt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>me.zhyd.oauth</groupId>
+                <artifactId>JustAuth</artifactId>
+                <version>${justAuth.version}</version>
             </dependency>
 
             <dependency>
