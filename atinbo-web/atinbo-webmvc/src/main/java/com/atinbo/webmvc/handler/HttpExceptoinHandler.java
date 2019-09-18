@@ -3,6 +3,7 @@ package com.atinbo.webmvc.handler;
 import com.atinbo.core.constants.ErrorType;
 import com.atinbo.core.constants.HttpStatusCode;
 import com.atinbo.core.exception.HttpApiException;
+import com.atinbo.core.exception.RequestParamException;
 import com.atinbo.core.http.model.ErrResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -64,7 +65,7 @@ public class HttpExceptoinHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler(value = {RequestParamException.class, RuntimeException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrResult handleException(Exception e) {
         log.error(e.getMessage(), e);
