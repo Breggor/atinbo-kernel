@@ -1,9 +1,9 @@
 package com.atinbo.webmvc.handler;
 
-import com.atinbo.core.exception.HttpApiException;
-import com.atinbo.core.http.model.ErrResult;
 import com.atinbo.core.constants.ErrorType;
 import com.atinbo.core.constants.HttpStatusCode;
+import com.atinbo.core.exception.HttpApiException;
+import com.atinbo.core.http.model.ErrResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -58,6 +58,19 @@ public class HttpExceptoinHandler {
         return ErrResult.error(HttpStatusCode.ERR_400.getHttpCode(), ErrorType.DATA_INVALID.getLabel());
     }
 
+    /**
+     * 系统内部运行期异常
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrResult handleException(Exception e) {
+        log.error(e.getMessage(), e);
+        return ErrResult.error(ERR_400.getHttpCode(), ERR_400.getMessage(), e.getMessage());
+    }
+
 
     /**
      * 请求方法不被服务支持异常拦截
@@ -97,20 +110,6 @@ public class HttpExceptoinHandler {
         log.error(e.getMessage(), e);
         return ErrResult.error(ERR_500.getHttpCode(), ERR_500.getMessage(), e.getMessage());
     }
-
-    /**
-     * 系统内部运行期异常
-     *
-     * @param e
-     * @return
-     */
-    @ExceptionHandler(value = {Exception.class, RuntimeException.class})
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrResult handleException(Exception e) {
-        log.error(e.getMessage(), e);
-        return ErrResult.error(ERR_500.getHttpCode(), ERR_500.getMessage(), e.getMessage());
-    }
-
 
     private ErrResult doErr(HttpStatusCode code, BindingResult br) {
         Map<String, String> errs = new HashMap<>();
