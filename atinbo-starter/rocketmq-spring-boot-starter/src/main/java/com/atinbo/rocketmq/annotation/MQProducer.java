@@ -14,4 +14,17 @@ import java.lang.annotation.*;
 @Documented
 @Component
 public @interface MQProducer {
+    /**
+     * 消息topic
+     *
+     * @return
+     */
+    String topic();
+
+    /**
+     * tag标签
+     *
+     * @return
+     */
+    String tag() default "*";
 }
