@@ -19,7 +19,7 @@ public @interface MQProducer {
      *
      * @return
      */
-    String topic();
+    String topic() default "";
 
     /**
      * tag标签
