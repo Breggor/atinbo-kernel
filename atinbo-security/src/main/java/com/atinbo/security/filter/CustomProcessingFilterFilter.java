@@ -33,7 +33,7 @@ import java.util.Map;
  * @author breggor
  */
 @Slf4j
-public class CustomUsernamePasswordProcessingFilterFilter extends AbstractAuthenticationProcessingFilter {
+public class CustomProcessingFilterFilter extends AbstractAuthenticationProcessingFilter {
     public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
     public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
 
@@ -46,7 +46,7 @@ public class CustomUsernamePasswordProcessingFilterFilter extends AbstractAuthen
     private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
     private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
 
-    public CustomUsernamePasswordProcessingFilterFilter(AuthenticationManager authenticationManager) {
+    public CustomProcessingFilterFilter(AuthenticationManager authenticationManager) {
         super(new AntPathRequestMatcher("/login", "POST"));
         setAuthenticationManager(authenticationManager);
     }

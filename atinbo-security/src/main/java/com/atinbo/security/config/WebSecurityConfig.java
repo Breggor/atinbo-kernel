@@ -2,7 +2,7 @@ package com.atinbo.security.config;
 
 
 import com.atinbo.security.JwtAuthenticationEntryPoint;
-import com.atinbo.security.filter.CustomUsernamePasswordProcessingFilterFilter;
+import com.atinbo.security.filter.CustomProcessingFilterFilter;
 import com.atinbo.security.filter.JwtTokenAuthorizationFilter;
 import com.atinbo.security.jwt.JwtTokenOps;
 import com.atinbo.security.service.JwtUserDetailsService;
@@ -79,7 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 添加JWT filter
         httpSecurity.addFilterBefore(jwtTokenAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 
-        httpSecurity.addFilterBefore(customUsernamePasswordProcessingFilterFilter(), UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(customProcessingFilterFilter(), UsernamePasswordAuthenticationFilter.class);
         // 禁用缓存
         httpSecurity.headers().cacheControl();
     }
@@ -121,8 +121,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     @ConditionalOnMissingBean
-    public CustomUsernamePasswordProcessingFilterFilter customUsernamePasswordProcessingFilterFilter() throws Exception {
-        return new CustomUsernamePasswordProcessingFilterFilter(authenticationManager());
+    public CustomProcessingFilterFilter customProcessingFilterFilter() throws Exception {
+        return new CustomProcessingFilterFilter(authenticationManager());
     }
 
     @Bean
