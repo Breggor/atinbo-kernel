@@ -106,6 +106,12 @@
                 <artifactId>rocketmq-spring-boot-starter</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.atinbo</groupId>
+                <artifactId>wx-mp-spring-boot-starter</artifactId>
+                <version>${atinbo-kernel.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
