@@ -17,6 +17,7 @@
         <module>rocketmq-spring-boot-starter</module>
         <module>swagger-spring-boot-starter</module>
         <module>dislock-spring-boot-starter</module>
+        <module>wx-mp-spring-boot-starter</module>
     </modules>
 
     <build>
