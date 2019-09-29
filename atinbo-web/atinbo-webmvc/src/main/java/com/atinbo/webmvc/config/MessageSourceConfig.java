@@ -1,4 +1,4 @@
-package com.atinbo.security.config;
+package com.atinbo.webmvc.config;
 
 
 import org.springframework.context.annotation.Bean;
