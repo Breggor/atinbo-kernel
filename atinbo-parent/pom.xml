@@ -41,8 +41,8 @@
         <hutool.version>4.5.17</hutool.version>
         <disruptor.version>3.4.2</disruptor.version>
 
-        <spring.version>5.1.9.RELEASE</spring.version>
-        <spring-boot.version>2.1.8.RELEASE</spring-boot.version>
+        <spring.version>5.1.10.RELEASE</spring.version>
+        <spring-boot.version>2.1.9.RELEASE</spring-boot.version>
         <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
         <spring-cloud-alibaba.version>2.1.0.RELEASE</spring-cloud-alibaba.version>
         <spring-boot-admin.version>2.1.6</spring-boot-admin.version>
