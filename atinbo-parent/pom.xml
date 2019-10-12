@@ -55,7 +55,7 @@
         <HikariCP.version>3.3.1</HikariCP.version>
         <jjwt.version>0.9.1</jjwt.version>
         <swagger.version>2.7.0</swagger.version>
-        <swagger-ui.version>1.9.6</swagger-ui.version>
+        <knife4j.version>1.9.6</knife4j.version>
         <easyexcel.version>2.0.0-beta1</easyexcel.version>
         <justAuth.version>1.11.0</justAuth.version>
 
@@ -243,7 +243,20 @@
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>swagger-bootstrap-ui</artifactId>
-                <version>${swagger-ui.version}</version>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <!-- 微服务不含UI-->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-micro-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
