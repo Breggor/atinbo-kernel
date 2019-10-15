@@ -2,6 +2,9 @@ package com.atinbo.swagger.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import springfox.documentation.service.ApiKey;
+
+import java.util.List;
 
 /**
  * swagger API文档配置
@@ -55,4 +58,9 @@ public class SwaggerProperties {
      * 联系邮箱
      */
     private String contactEmail;
+
+    /**
+     * 全局api key定义
+     */
+    private List<ApiKey> apiKeys;
 }

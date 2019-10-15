@@ -44,7 +44,7 @@ public class SwaggerAutoConfiguration {
                 .select()
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(Predicates.not(Predicates.or(buildExcludePredicates())))
-                .build().securityContexts(Lists.newArrayList(securityContext())).securitySchemes(Lists.<SecurityScheme>newArrayList(apiKey()));
+                .build().securityContexts(buildSecurityContexts()).securitySchemes(buildApiKeys());
     }
 
     // 忽略路径
@@ -70,21 +70,32 @@ public class SwaggerAutoConfiguration {
                 .build();
     }
 
-    private ApiKey apiKey() {
-        return new ApiKey("BearerToken", "Authorization", "header");
+    private List<ApiKey> buildApiKeys() {
+        List<ApiKey> result = Lists.newArrayList();
+        result.add(new ApiKey("Authorization", "Authorization", "header"));
+        if (null != swaggerProperties.getApiKeys() && !swaggerProperties.getApiKeys().isEmpty()) {
+            result.addAll(swaggerProperties.getApiKeys());
+        }
+        return result;
     }
 
-    private SecurityContext securityContext() {
-        return SecurityContext.builder()
+    private List<SecurityContext> buildSecurityContexts() {
+        List<SecurityContext> result = Lists.newArrayList();
+        SecurityContext sc = SecurityContext.builder()
                 .securityReferences(defaultAuth())
                 .forPaths(PathSelectors.regex("/.*"))
                 .build();
+
+        return result;
     }
 
     private List<SecurityReference> defaultAuth() {
-        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
-        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
-        authorizationScopes[0] = authorizationScope;
-        return Lists.newArrayList(new SecurityReference("BearerToken", authorizationScopes));
+        List<SecurityReference> result = Lists.newArrayList();
+        AuthorizationScope[] authScopes = new AuthorizationScope[]{new AuthorizationScope("global", "全局设置")};
+
+        buildApiKeys().forEach(o -> {
+            result.add(new SecurityReference(o.getName(), authScopes));
+        });
+        return result;
     }
 }
