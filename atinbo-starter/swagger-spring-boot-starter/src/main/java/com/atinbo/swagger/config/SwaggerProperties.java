@@ -2,7 +2,6 @@ package com.atinbo.swagger.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import springfox.documentation.service.ApiKey;
 
 import java.util.List;
 
@@ -62,5 +61,13 @@ public class SwaggerProperties {
     /**
      * 全局api key定义
      */
-    private List<ApiKey> apiKeys;
+    private List<GlobalKey> apiKeys;
+
+
+    @Data
+    public static class GlobalKey {
+        private String name;
+        private String keyname;
+        private String passAs;
+    }
 }

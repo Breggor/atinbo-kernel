@@ -74,7 +74,9 @@ public class SwaggerAutoConfiguration {
         List<ApiKey> result = Lists.newArrayList();
         result.add(new ApiKey("Authorization", "Authorization", "header"));
         if (null != swaggerProperties.getApiKeys() && !swaggerProperties.getApiKeys().isEmpty()) {
-            result.addAll(swaggerProperties.getApiKeys());
+            swaggerProperties.getApiKeys().forEach(o -> {
+                result.add(new ApiKey(o.getName(), o.getKeyname(), o.getPassAs()));
+            });
         }
         return result;
     }
