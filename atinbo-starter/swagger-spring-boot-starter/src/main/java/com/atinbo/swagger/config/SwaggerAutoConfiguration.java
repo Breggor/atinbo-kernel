@@ -1,5 +1,6 @@
 package com.atinbo.swagger.config;
 
+import com.github.xiaoymin.knife4j.spring.annotations.EnableSwaggerBootstrapUi;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
  * @date 2019-07-18
  */
 @Configuration
+@EnableSwaggerBootstrapUi
 @EnableConfigurationProperties(SwaggerProperties.class)
 @ConditionalOnBean(annotation = EnableSwagger2.class)
 public class SwaggerAutoConfiguration {
