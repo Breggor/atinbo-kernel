@@ -12,6 +12,11 @@ import java.time.LocalDateTime;
  */
 @Data
 public class SysLogSource implements Serializable {
+
+    /**
+     * 删除标记：未删除
+     */
+    public static final boolean DEL_FALSE = false;
     /**
      * 日志类型
      */

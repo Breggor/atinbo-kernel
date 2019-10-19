@@ -19,4 +19,10 @@ public @interface SysLog {
      */
     String value();
 
+    /**
+     * 类型
+     * @return
+     */
+    String type() default "default";
+
 }
