@@ -19,12 +19,11 @@ import java.util.Date;
 <#if importBigDecimal??>
 import java.math.BigDecimal;
 </#if>
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.GenerationType;
-import javax.persistence.TableGenerator;
+
+import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.annotations.TableId;
 
 /**
 *  ${classInfo.classComment}
@@ -33,9 +32,8 @@ import javax.persistence.TableGenerator;
 *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
 */
 @Data
-@Entity
-@Table(name = "${classInfo.tableName}")
-public class ${classInfo.className} implements Serializable {
+@TableName("${classInfo.tableName}")
+public class ${classInfo.className} extends Model<${classInfo.className}> implements Serializable {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >
