@@ -41,7 +41,7 @@ public class SwaggerAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(Docket.class)
     public Docket swaggerDocket() {
-        return new Docket(DocumentationType.SWAGGER_2).groupName(swaggerProperties.getName())
+        return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(buildApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
