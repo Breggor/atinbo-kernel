@@ -2,7 +2,7 @@ package com.atinbo.log;
 
 import com.atinbo.log.aspect.SysLogAspect;
 import com.atinbo.log.event.SysLogListener;
-import com.atinbo.log.processer.ISysLogProcesser;
+import com.atinbo.log.processer.DefaultSysLogProcesser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -22,7 +22,7 @@ public class LogAutoConfiguration {
     }
 
     @Bean
-    public SysLogListener sysLogListener(ISysLogProcesser processer) {
-        return new SysLogListener(processer);
+    public SysLogListener sysLogListener() {
+        return new SysLogListener(new DefaultSysLogProcesser());
     }
 }
