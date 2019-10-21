@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.StringUtils;
+import org.springframework.util.CollectionUtils;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -22,7 +22,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,11 +50,9 @@ public class SwaggerAutoConfiguration {
 
     // 忽略路径
     private List<Predicate<String>> buildExcludePredicates() {
-        String excludePaths = swaggerProperties.getExcludePaths();
         List<Predicate<String>> exclude = new ArrayList<>();
-        if (!StringUtils.isEmpty(excludePaths)) {
-            exclude = Arrays.stream(excludePaths.split(","))
-                    .map(PathSelectors::ant)
+        if (!CollectionUtils.isEmpty(swaggerProperties.getExcludePaths())) {
+            exclude = swaggerProperties.getExcludePaths().stream().map(PathSelectors::ant)
                     .collect(Collectors.toList());
         }
         return exclude;

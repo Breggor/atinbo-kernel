@@ -39,7 +39,7 @@ public class SwaggerProperties {
     /**
      * 排除路径
      */
-    private String excludePaths;
+    private List<String> excludePaths;
     /**
      * 联系人
      */
