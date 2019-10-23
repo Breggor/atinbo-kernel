@@ -11,6 +11,7 @@ package ${classInfo.packageName}.entity;
     </#list>
 </#if>
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 <#if importDdate??>
@@ -34,6 +35,7 @@ import javax.persistence.TableGenerator;
 */
 @Data
 @Entity
+@Accessors(chain = true)
 @Table(name = "${classInfo.tableName}")
 public class ${classInfo.className} implements Serializable {
 
