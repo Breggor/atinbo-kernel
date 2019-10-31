@@ -90,6 +90,7 @@ public class DynamicSpecifications {
                         if(field.getType() == Collection.class || field.getType().isArray()){
                             Stream.of(fieldValue).forEach(o -> predicate.value(o));
                         }
+                        predicates.add(predicate);
                         break;
                     default:
                         break;
