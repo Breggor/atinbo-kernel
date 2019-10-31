@@ -20,7 +20,7 @@ public class SortInfo implements Serializable {
 
     private List<Field> orders = new ArrayList<>();
 
-    private boolean isEmpty() {
+    public boolean isEmpty() {
         return this.orders.isEmpty();
     }
 
