@@ -16,5 +16,6 @@ public enum Operator {
     NOTNULL,
     ISNULL,
     ENUMEQ,
+    IN,
     ;
 }

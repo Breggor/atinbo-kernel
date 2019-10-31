@@ -7,12 +7,18 @@ import com.atinbo.model.PageParam;
 import com.atinbo.model.Query;
 import com.atinbo.model.QueryParam;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.query.criteria.internal.predicate.InPredicate;
 import org.springframework.data.jpa.domain.Specification;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * 使用方法： 为（数据库）实体类创建一个查询对象类，该类需要实现 QueryParam 接口
@@ -78,6 +84,12 @@ public class DynamicSpecifications {
                         break;
                     case ISNULL:
                         predicates.add(builder.isNull(root.get(fieldName)));
+                        break;
+                    case IN:
+                        CriteriaBuilder.In predicate = builder.in(root.get(fieldName));
+                        if(field.getType() == Collection.class || field.getType().isArray()){
+                            Stream.of(fieldValue).forEach(o -> predicate.value(o));
+                        }
                         break;
                     default:
                         break;
