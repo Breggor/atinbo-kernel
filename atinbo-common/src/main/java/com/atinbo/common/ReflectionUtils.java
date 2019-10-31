@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 反射工具类.
@@ -216,7 +218,7 @@ public abstract class ReflectionUtils {
         for (; clazz != Object.class; clazz = clazz.getSuperclass()) {
             Field[] fields = clazz.getDeclaredFields();
             if (fields != null && fields.length > 0) {
-                fieldList.addAll(Arrays.asList(fields));
+                fieldList.addAll(Stream.of(fields).filter(field -> !Modifier.isFinal(field.getModifiers())).collect(Collectors.toList()));
             }
         }
         return fieldList;
@@ -233,7 +235,7 @@ public abstract class ReflectionUtils {
         for (; clazz != Object.class && clazz != ignoreClazz; clazz = clazz.getSuperclass()) {
             Field[] fields = clazz.getDeclaredFields();
             if (fields != null && fields.length > 0) {
-                fieldList.addAll(Arrays.asList(fields));
+                fieldList.addAll(Stream.of(fields).filter(field -> !Modifier.isFinal(field.getModifiers())).collect(Collectors.toList()));
             }
         }
         return fieldList;
