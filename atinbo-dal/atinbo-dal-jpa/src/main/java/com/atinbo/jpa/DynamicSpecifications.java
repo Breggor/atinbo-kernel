@@ -87,7 +87,7 @@ public class DynamicSpecifications {
                         break;
                     case IN:
                         CriteriaBuilder.In predicate = builder.in(root.get(fieldName));
-                        if(field.getType() == Collection.class || field.getType().isArray()){
+                        if(Collection.class.isAssignableFrom(field.getType()) || field.getType().isArray()){
                             Stream.of(fieldValue).forEach(o -> predicate.value(o));
                         }
                         predicates.add(predicate);
