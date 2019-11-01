@@ -23,11 +23,11 @@ public final class Pagination implements Serializable {
     /**
      * 当前页
      */
-    private int current;
+    private long current;
     /**
      * 每页行数
      */
-    private int size;
+    private long size;
     /**
      * 总行数
      */
@@ -36,7 +36,7 @@ public final class Pagination implements Serializable {
     /**
      * 总页数
      */
-    private int totalPages;
+    private long totalPages;
 
     /**
      * 创建分页
@@ -47,7 +47,7 @@ public final class Pagination implements Serializable {
      * @param totalPages 总页数
      * @return
      */
-    public static Pagination of(int current, int size, long totalRows, int totalPages) {
+    public static Pagination of(long current, long size, long totalRows, long totalPages) {
         return new Pagination(current, size, totalRows, totalPages);
     }
 }
