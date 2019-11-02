@@ -22,11 +22,11 @@ import java.math.BigDecimal;
 </#if>
 
 /**
-*  ${classInfo.classComment} 入参参数
-*
-*  @author ${classInfo.author}
-*  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
-*/
+ *  ${classInfo.classComment} 入参参数
+ *
+ *  @author ${classInfo.author}
+ *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ */
 @Data
 public class ${classInfo.className}Form {
 

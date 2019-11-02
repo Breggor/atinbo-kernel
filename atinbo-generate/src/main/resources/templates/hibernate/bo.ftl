@@ -21,11 +21,11 @@ import java.math.BigDecimal;
 </#if>
 
 /**
-*  ${classInfo.classComment} BO
-*
-*  @author ${classInfo.author}
-*  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
-*/
+ *  ${classInfo.classComment} BO
+ *
+ *  @author ${classInfo.author}
+ *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ */
 @Data
 public class ${classInfo.className}BO implements BaseBO {
 

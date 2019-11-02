@@ -12,7 +12,6 @@ package ${classInfo.packageName}.model;
 </#if>
 import lombok.Data;
 
-import com.atinbo.model.PageParam;
 import com.atinbo.model.QueryParam;
 <#if importDdate??>
 import java.util.Date;
@@ -22,13 +21,13 @@ import java.math.BigDecimal;
 </#if>
 
 /**
-*  ${classInfo.classComment} PARAM
-*
-*  @author ${classInfo.author}
-*  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
-*/
+ *  ${classInfo.classComment} PARAM
+ *
+ *  @author ${classInfo.author}
+ *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ */
 @Data
-public class ${classInfo.className}Param extends PageParam implements QueryParam {
+public class ${classInfo.className}Param implements QueryParam {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
 <#list classInfo.fieldList as fieldItem >

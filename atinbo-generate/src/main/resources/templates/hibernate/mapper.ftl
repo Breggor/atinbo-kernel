@@ -11,11 +11,11 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 /**
-*  ${classInfo.classComment}
-*
-*  @author ${classInfo.author}
-*  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
-*/
+ *  ${classInfo.classComment} 类型转换
+ *
+ *  @author ${classInfo.author}
+ *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ */
 @Mapper
 public interface ${classInfo.className}Mapper {
 

@@ -20,11 +20,11 @@ import ${classInfo.packageName}.model.${classInfo.className}BO;
 import ${classInfo.packageName}.service.${classInfo.className}Service;
 
 /**
-*  ${classInfo.classComment}
-*
-*  @author ${classInfo.author}
-*  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
-*/
+ *  ${classInfo.classComment}
+ *
+ *  @author ${classInfo.author}
+ *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ */
 @Api(value = "${classInfo.className?uncap_first}", tags = "${classInfo.classComment}")
 @RestController
 @RequestMapping("/${classInfo.className?uncap_first}")
