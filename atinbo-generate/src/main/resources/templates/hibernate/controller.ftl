@@ -43,7 +43,8 @@ public class ${classInfo.className}Controller {
     @ApiResponses(@ApiResponse(code = 500001, message = "系统错误"))
     @GetMapping
     public PageResult findPage(@Validated @ApiParam("${classInfo.classComment}查询参数") ${classInfo.className}Form form) throws HttpAPIException {
-        PageOutcome outcome = ${classInfo.className?uncap_first}Service.pageList(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Param(form));
+        PageParam pageParam = PageParam.of(form.getPageNum(), form.getPageSize());
+        PageOutcome outcome = ${classInfo.className?uncap_first}Service.pageList(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Param(form), pageParam);
 
         if (outcome.isSuccess()) {
             return PageResult.of(outcome.getPage(), ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Vos(outcome.getData()));

@@ -38,4 +38,10 @@ public class ${classInfo.className}Form {
 
 </#list>
 </#if>
+
+    @ApiModelProperty(value = "当前页数")
+    private Integer pageNum = 1;
+
+    @ApiModelProperty(value = "每页记录数")
+    private Integer pageSize = 10;
 }
