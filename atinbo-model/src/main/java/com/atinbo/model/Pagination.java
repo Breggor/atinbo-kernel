@@ -47,6 +47,20 @@ public final class Pagination implements Serializable {
      * @param totalPages 总页数
      * @return
      */
+    public static Pagination of(int current, int size, long totalRows, int totalPages) {
+        return new Pagination(current, size, totalRows, totalPages);
+    }
+
+
+    /**
+     * 创建分页
+     *
+     * @param current    当前页
+     * @param size       每页行数
+     * @param totalRows  总行数
+     * @param totalPages 总页数
+     * @return
+     */
     public static Pagination of(long current, long size, long totalRows, long totalPages) {
         return new Pagination(current, size, totalRows, totalPages);
     }
