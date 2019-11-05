@@ -1,10 +1,8 @@
 package ${classInfo.packageName}.dao;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
-
 import ${classInfo.packageName}.entity.${classInfo.className};
 
 /**
@@ -13,7 +11,6 @@ import ${classInfo.packageName}.entity.${classInfo.className};
 *  @author ${classInfo.author}
 *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
 */
-@Mapper
-public interface ${classInfo.className}Dao {
+public interface ${classInfo.className}Dao extends BaseMapper<${classInfo.className}> {
 
 }
