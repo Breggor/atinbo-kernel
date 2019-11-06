@@ -75,11 +75,10 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
      * 分页查询
      */
     @Override
-    public Outcome<List<${classInfo.className}BO> pageList(${classInfo.className}Param ${classInfo.className?uncap_first}Param, PageParam pageParam){
-        PageRequest pageRequest = PageRequest.of(${classInfo.className?uncap_first}Param.getPage(), ${classInfo.className?uncap_first}Param.getSize());
-        Page<${classInfo.className}> page = ${classInfo.className?uncap_first}Dao.findAll(DynamicSpecifications.toSpecification(${classInfo.className?uncap_first}Param), pageRequest);
+    public Outcome<List<${classInfo.className}BO>> pageList(${classInfo.className}Param param, PageParam pageParam){
+        Page<${classInfo.className}> page = PageUtil.toPage(pageParam);
+        IPage<${classInfo.className}> pageData = ${classInfo.className?uncap_first}Dao.selectPage(page, DynamicCondition.toWrapper(param));
 
-        List<${classInfo.className}BO> ${classInfo.className?uncap_first}Bos = ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bos(page.getContent());
-        return Outcome.ofSuccess(Pagination.of(page.getNumber(), page.getSize(), page.getTotalPages(), page.getTotalElements()), ${classInfo.className?uncap_first}Bos);
+        return Outcome.ofSuccess(PageUtil.toPagination(pageData), ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bos(pageData.getRecords()));
     }
 }

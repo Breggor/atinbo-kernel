@@ -67,6 +67,12 @@
 
             <dependency>
                 <groupId>com.atinbo</groupId>
+                <artifactId>atinbo-dal-mybatis</artifactId>
+                <version>${atinbo-kernel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atinbo</groupId>
                 <artifactId>atinbo-webmvc</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>

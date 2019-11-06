@@ -17,6 +17,7 @@
         <module>atinbo-dal-jpa</module>
         <module>atinbo-dal-redis</module>
         <module>atinbo-dal-mongo</module>
+        <module>atinbo-dal-mybatis</module>
     </modules>
     <artifactId>atinbo-dal</artifactId>
 
