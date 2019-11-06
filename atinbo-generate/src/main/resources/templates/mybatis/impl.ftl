@@ -3,12 +3,16 @@ package ${classInfo.packageName}.impl;
 import com.atinbo.model.Outcome;
 import com.atinbo.model.Pagination;
 import com.atinbo.model.PageParam;
+import com.atinbo.mybatis.DynamicCondition;
+import com.atinbo.mybatis.utils.PageUtil;
 import ${classInfo.packageName}.entity.${classInfo.className};
 import ${classInfo.packageName}.model.${classInfo.className}Param;
 import ${classInfo.packageName}.model.${classInfo.className}BO;
 import ${classInfo.packageName}.mapper.${classInfo.className}Mapper;
 import ${classInfo.packageName}.dao.${classInfo.className}Dao;
 import ${classInfo.packageName}.service.${classInfo.className}Service;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Service;
