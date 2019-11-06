@@ -59,8 +59,7 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
             return false;
         }
         ${classInfo.className} entity = ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}(${classInfo.className?uncap_first}Param);
-        ${classInfo.className?uncap_first}Dao.updateById(entity);
-        return true;
+        return ${classInfo.className?uncap_first}Dao.updateById(entity) > 0;
     }
 
     /**
