@@ -1,4 +1,4 @@
-package com.atinbo.entity.mongo;
+package com.atinbo.mongo;
 
 import com.mongodb.*;
 import org.springframework.beans.factory.config.AbstractFactoryBean;

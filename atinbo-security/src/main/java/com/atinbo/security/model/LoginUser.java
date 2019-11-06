@@ -12,12 +12,17 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 登录用户信息
+ */
 @Setter
-public class JwtUser implements UserDetails {
+public class LoginUser implements UserDetails {
+    private static final long serialVersionUID = 1L;
+
     /**
      * 测试用户
      */
-    public static final JwtUser TEST = new JwtUser("-1", "test", "$2a$10$9jArgnaZMLNj.hm4GtnSv.iKMtr.rq3oYQB/izJo9TG2Z6Rq9g59S", Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
+    public static final LoginUser TEST = new LoginUser("-1", "test", "$2a$10$9jArgnaZMLNj.hm4GtnSv.iKMtr.rq3oYQB/izJo9TG2Z6Rq9g59S", Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
 
     /**
      * 用户ID
@@ -46,8 +51,50 @@ public class JwtUser implements UserDetails {
     @Getter
     private Map<String, Object> extra = new HashMap<>();
 
+    /**
+     * 用户唯一标识
+     */
+    @Getter
+    private String token;
 
-    public JwtUser(String userId, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    /**
+     * 登陆时间
+     */
+    @Getter
+    private Long loginTime;
+
+    /**
+     * 过期时间
+     */
+    @Getter
+    private Long expireTime;
+
+    /**
+     * 登录IP地址
+     */
+    @Getter
+    private String ip;
+
+    /**
+     * 登录地点
+     */
+    @Getter
+    private String location;
+
+    /**
+     * 浏览器类型
+     */
+    @Getter
+    private String browser;
+
+    /**
+     * 操作系统
+     */
+    @Getter
+    private String os;
+
+
+    public LoginUser(String userId, String username, String password, Collection<? extends GrantedAuthority> authorities) {
         this.userId = userId;
         this.username = username;
         this.password = password;

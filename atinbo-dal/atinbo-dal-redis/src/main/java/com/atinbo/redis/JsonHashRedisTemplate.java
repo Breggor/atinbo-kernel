@@ -1,4 +1,4 @@
-package com.atinbo.entity.redis;
+package com.atinbo.redis;
 
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;

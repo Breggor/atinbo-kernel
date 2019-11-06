@@ -1,4 +1,4 @@
-package com.atinbo.entity.mongo;
+package com.atinbo.mongo;
 
 
 import org.mongodb.morphia.Morphia;

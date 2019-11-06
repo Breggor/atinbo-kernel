@@ -1,21 +1,21 @@
 package com.atinbo.security.service;
 
 
-import com.atinbo.security.model.JwtUser;
+import com.atinbo.security.model.LoginUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-public abstract class JwtUserDetailsService implements UserDetailsService {
+public abstract class BaseUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        JwtUser user = findByUsername(username);
+        LoginUser user = findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
         }
         return user;
     }
 
-    protected abstract JwtUser findByUsername(String username);
+    protected abstract LoginUser findByUsername(String username);
 }

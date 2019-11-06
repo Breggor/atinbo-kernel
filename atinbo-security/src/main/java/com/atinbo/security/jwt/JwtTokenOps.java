@@ -1,6 +1,6 @@
 package com.atinbo.security.jwt;
 
-import com.atinbo.security.model.JwtUser;
+import com.atinbo.security.model.LoginUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -81,7 +81,7 @@ public class JwtTokenOps implements Serializable {
         return expiration.before(new Date());
     }
 
-    public String generateToken(JwtUser userDetails) {
+    public String generateToken(LoginUser userDetails) {
         Map<String, Object> claims = new HashMap<>();
         claims.put(CLAIM_KEY_SUB, userDetails.getUsername());
         claims.put(CLAIM_KEY_CREATED, new Date());
@@ -110,7 +110,7 @@ public class JwtTokenOps implements Serializable {
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
-        JwtUser user = (JwtUser) userDetails;
+        LoginUser user = (LoginUser) userDetails;
         final String username = getUsernameFromToken(token);
         return (username.equals(user.getUsername()) && !isTokenExpired(token));
     }

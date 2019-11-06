@@ -1,4 +1,4 @@
-package com.atinbo.entity.redis;
+package com.atinbo.redis;
 
 
 import org.springframework.dao.DataAccessException;

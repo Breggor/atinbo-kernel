@@ -1,23 +1,22 @@
 package com.atinbo.security.config;
 
 
-import com.atinbo.security.JwtAuthenticationEntryPoint;
-import com.atinbo.security.filter.CustomProcessingFilterFilter;
-import com.atinbo.security.filter.JwtTokenAuthorizationFilter;
+import com.atinbo.security.filter.JwtAuthenticationTokenFilter;
+import com.atinbo.security.handler.AuthenticationEntryPointImpl;
+import com.atinbo.security.handler.LogoutSuccessHandlerImpl;
 import com.atinbo.security.jwt.JwtTokenOps;
-import com.atinbo.security.service.JwtUserDetailsService;
+import com.atinbo.security.service.BaseUserDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -33,15 +32,36 @@ import java.util.Objects;
  * @author breggor
  */
 @Slf4j
-@Configuration
-@EnableWebSecurity
-@Order(2)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final static String[] ALLOW_VISIT_PATH = new String[]{"/", "/*.html", "/actuator/**", "/v2/**", "/webjars/**", "/swagger-resources", "/swagger-resources/**", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js"};
+    private final static String[] ALLOW_VISIT_PATH = new String[]{"/*.ico", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js",
+            "/profile/**", "/actuator/**", "/druid/**", "/swagger-ui.html", "/*/api-docs", "/webjars/**", "/swagger-resources/**"};
 
+    /**
+     * 自定义用户认证逻辑
+     */
     @Autowired
-    private JwtUserDetailsService jwtUserDetailsService;
+    private BaseUserDetailsService userDetailsService;
+
+    /**
+     * 认证失败处理类
+     */
+    @Autowired
+    private AuthenticationEntryPointImpl unauthorizedHandler;
+
+    /**
+     * 退出处理类
+     */
+    @Autowired
+    private LogoutSuccessHandlerImpl logoutSuccessHandler;
+
+    /**
+     * token认证过滤器
+     */
+    @Autowired
+    private JwtAuthenticationTokenFilter authenticationTokenFilter;
+
 
     /**
      * 多个路径逗号分隔
@@ -49,6 +69,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${security.allowPath}")
     private String allowPath;
 
+    /**
+     * 解决 无法直接注入 AuthenticationManager
+     *
+     * @return
+     * @throws Exception
+     */
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -62,35 +93,33 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         }
         log.info("web security allow paths={}", String.join(",", allowPathArr));
 
-        httpSecurity.cors().and()
-                // 由于使用的是JWT，我们这里不需要csrf
+        httpSecurity
+                // CRSF禁用，因为不使用session
                 .csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint()).and()
+                // 认证失败处理类
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 // 基于token，所以不需要session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                // 过滤请求
                 .authorizeRequests()
                 // 允许对于网站静态资源的无授权访问
                 .antMatchers(allowPathArr).permitAll()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
-                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .antMatchers("/login", "/captchaImage").anonymous()
                 // 除上面外的所有请求全部需要鉴权认证
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and().headers().frameOptions().disable();
 
-        // 添加JWT filter
-        httpSecurity.addFilterBefore(jwtTokenAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
-
-        httpSecurity.addFilterBefore(customProcessingFilterFilter(), UsernamePasswordAuthenticationFilter.class);
-        // 禁用缓存
-        httpSecurity.headers().cacheControl();
+        httpSecurity.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
+        httpSecurity.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Autowired
     public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        Objects.requireNonNull(jwtUserDetailsService, "jwtUserDetailsService为空，请项目中实现JwtUserDetailsService");
-
+        Objects.requireNonNull(userDetailsService, "userDetailsService 为空，请项目中实现  BaseUserDetailsService.class");
         authenticationManagerBuilder
                 // 设置UserDetailsService
-                .userDetailsService(this.jwtUserDetailsService)
+                .userDetailsService(this.userDetailsService)
                 // 使用BCrypt进行密码的hash
                 .passwordEncoder(passwordEncoder());
     }
@@ -105,24 +134,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @ConditionalOnMissingBean
     public JwtTokenOps jwtTokenOps() {
         return new JwtTokenOps();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint() {
-        return new JwtAuthenticationEntryPoint();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public JwtTokenAuthorizationFilter jwtTokenAuthorizationFilter() {
-        return new JwtTokenAuthorizationFilter();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public CustomProcessingFilterFilter customProcessingFilterFilter() throws Exception {
-        return new CustomProcessingFilterFilter(authenticationManager());
     }
 
     @Bean

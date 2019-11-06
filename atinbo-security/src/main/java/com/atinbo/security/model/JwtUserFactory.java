@@ -12,8 +12,8 @@ public final class JwtUserFactory {
     }
 
 
-    public static JwtUser create(String userId, String username, String password, List<String> roles) {
-        return new JwtUser(userId, username, password, mapToGrantedAuthorities(roles));
+    public static LoginUser create(String userId, String username, String password, List<String> roles) {
+        return new LoginUser(userId, username, password, mapToGrantedAuthorities(roles));
     }
 
     private static List<GrantedAuthority> mapToGrantedAuthorities(List<String> authorities) {
