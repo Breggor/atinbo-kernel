@@ -26,6 +26,7 @@ public class GenerateUtil {
         TYPE_MAPPING.put("DOUBLE", "Double");
         TYPE_MAPPING.put("DATETIME", "Date");
         TYPE_MAPPING.put("TIMESTAMP", "Date");
+        TYPE_MAPPING.put("BIT", "Boolean");
         TYPE_MAPPING.put("DATE", "Date");
         TYPE_MAPPING.put("TIME", "Date");
         TYPE_MAPPING.put("VARCHAR", "String");
