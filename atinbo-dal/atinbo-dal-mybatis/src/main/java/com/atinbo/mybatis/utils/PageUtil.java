@@ -4,6 +4,7 @@ import com.atinbo.model.PageParam;
 import com.atinbo.model.Pagination;
 import com.atinbo.model.SortDirection;
 import com.atinbo.model.SortInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.ObjectUtils;
@@ -50,7 +51,7 @@ public class PageUtil {
      * @param page
      * @return
      */
-    public static Pagination toPagination(Page page){
+    public static Pagination toPagination(IPage page){
         return Pagination.of(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages());
     }
 }
