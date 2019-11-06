@@ -29,7 +29,7 @@ import java.math.BigDecimal;
 */
 @Data
 @Accessors(chain = true)
-@KeySequence("${classInfo.tableName?capitalize}_SEQ")
+@KeySequence("${classInfo.tableName?upper_case}_SEQ")
 public class ${classInfo.className} implements Serializable {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
