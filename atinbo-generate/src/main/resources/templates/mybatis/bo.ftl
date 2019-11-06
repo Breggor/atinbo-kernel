@@ -13,13 +13,13 @@ package ${classInfo.packageName}.model;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import com.atinbo.model.BaseBO;
 <#if importDdate??>
 import java.util.Date;
 </#if>
 <#if importBigDecimal??>
 import java.math.BigDecimal;
 </#if>
+import java.io.Serializable;
 
 /**
  *  ${classInfo.classComment} BO
@@ -29,7 +29,7 @@ import java.math.BigDecimal;
  */
 @Data
 @Accessors(chain = true)
-public class ${classInfo.className}BO implements BaseBO {
+public class ${classInfo.className}BO implements Serializable {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
 <#list classInfo.fieldList as fieldItem >
