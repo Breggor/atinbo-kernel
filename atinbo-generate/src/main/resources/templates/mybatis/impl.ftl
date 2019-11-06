@@ -7,9 +7,8 @@ import ${classInfo.packageName}.entity.${classInfo.className};
 import ${classInfo.packageName}.model.${classInfo.className}Param;
 import ${classInfo.packageName}.model.${classInfo.className}BO;
 import ${classInfo.packageName}.mapper.${classInfo.className}Mapper;
-import ${classInfo.packageName}.repository.${classInfo.className}Dao;
+import ${classInfo.packageName}.dao.${classInfo.className}Dao;
 import ${classInfo.packageName}.service.${classInfo.className}Service;
-
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Service;
@@ -23,6 +22,7 @@ import java.util.List;
 *  @author ${classInfo.author}
 *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
 */
+@Slf4j
 @Service
 public class ${classInfo.className}ServiceImpl implements ${classInfo.className}Service {
 
