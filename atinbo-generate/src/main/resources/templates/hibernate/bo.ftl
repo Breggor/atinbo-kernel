@@ -11,6 +11,7 @@ package ${classInfo.packageName}.model;
     </#list>
 </#if>
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import com.atinbo.model.BaseBO;
 <#if importDdate??>
@@ -27,13 +28,14 @@ import java.math.BigDecimal;
  *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
  */
 @Data
+@Accessors(chain = true)
 public class ${classInfo.className}BO implements BaseBO {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
 <#list classInfo.fieldList as fieldItem >
     /**
-    * ${fieldItem.fieldComment}
-    */
+     * ${fieldItem.fieldComment}
+     */
     private ${fieldItem.fieldClass} ${fieldItem.fieldName};
 
 </#list>

@@ -11,6 +11,7 @@ package ${classInfo.packageName}.model;
     </#list>
 </#if>
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import com.atinbo.model.QueryParam;
 <#if importDdate??>
@@ -27,6 +28,7 @@ import java.math.BigDecimal;
  *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
  */
 @Data
+@Accessors(chain = true)
 public class ${classInfo.className}Param implements QueryParam {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>

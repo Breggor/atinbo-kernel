@@ -11,6 +11,7 @@ package ${classInfo.packageName}.openapi.model;
     </#list>
 </#if>
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -22,12 +23,13 @@ import java.math.BigDecimal;
 </#if>
 
 /**
-*  ${classInfo.classComment} 入参参数
-*
-*  @author ${classInfo.author}
-*  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
-*/
+ *  ${classInfo.classComment} 入参参数
+ *
+ *  @author ${classInfo.author}
+ *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ */
 @Data
+@Accessors(chain = true)
 public class ${classInfo.className}Form {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
