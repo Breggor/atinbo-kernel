@@ -37,6 +37,12 @@
 
             <dependency>
                 <groupId>com.atinbo</groupId>
+                <artifactId>atinbo-dal-base</artifactId>
+                <version>${atinbo-kernel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atinbo</groupId>
                 <artifactId>atinbo-dal-mongo</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>

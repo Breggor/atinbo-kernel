@@ -1,19 +1,16 @@
 package com.atinbo.jpa;
 
 
-import com.atinbo.common.ReflectionUtils;
+import com.atinbo.common.reflections.ReflectionUtils;
 import com.atinbo.model.Operator;
 import com.atinbo.model.PageParam;
 import com.atinbo.model.Query;
 import com.atinbo.model.QueryParam;
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.query.criteria.internal.predicate.InPredicate;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;

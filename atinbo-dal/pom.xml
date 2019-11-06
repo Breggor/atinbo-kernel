@@ -12,10 +12,11 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>atinbo-dal-mongo</module>
-        <module>atinbo-dal-redis</module>
+        <module>atinbo-dal-base</module>
         <module>atinbo-dal-cache</module>
         <module>atinbo-dal-jpa</module>
+        <module>atinbo-dal-redis</module>
+        <module>atinbo-dal-mongo</module>
     </modules>
     <artifactId>atinbo-dal</artifactId>
 

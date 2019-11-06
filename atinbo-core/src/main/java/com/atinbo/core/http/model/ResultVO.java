@@ -20,6 +20,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class ResultVO<T> implements Serializable {
+
     /**
      * 分页数据列表
      */
@@ -34,6 +35,7 @@ public class ResultVO<T> implements Serializable {
      * 状态码: 0:成功，-1：失败，业务异常：非零或非-1
      */
     private int code;
+
     /**
      * 信息
      */
@@ -50,6 +52,8 @@ public class ResultVO<T> implements Serializable {
     }
 
     /**
+     * 数据返回结果
+     *
      * @param data
      * @param <E>
      * @return
@@ -58,15 +62,53 @@ public class ResultVO<T> implements Serializable {
         return new ResultVO(data);
     }
 
+    /**
+     * 分页与数据返回结果
+     *
+     * @param page
+     * @param data
+     * @param <T>
+     * @return
+     */
     public static <T> ResultVO of(Pagination page, T data) {
         return new ResultVO(page, data);
     }
 
+    /**
+     * 根据状态判断是否成功
+     *
+     * @param status > 0 成功否则失败
+     * @return
+     */
+    public static ResultVO status(int status) {
+        return (status > 0) ? success() : failure();
+    }
+
+    /**
+     * 默认成功
+     *
+     * @return
+     */
     public static ResultVO success() {
         return new ResultVO().setMessage("成功");
     }
 
+    /**
+     * 默认失败
+     *
+     * @return
+     */
     public static ResultVO failure() {
         return new ResultVO().setCode(-1).setMessage("失败");
+    }
+
+    /**
+     * 原因失败
+     *
+     * @param msg
+     * @return
+     */
+    public static ResultVO failure(String msg) {
+        return new ResultVO().setCode(-1).setMessage(msg);
     }
 }
