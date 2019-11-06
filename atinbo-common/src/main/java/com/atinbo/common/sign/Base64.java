@@ -3,7 +3,7 @@ package com.atinbo.common.sign;
 /**
  * Base64工具类
  *
- * @author ruoyi
+ * @author breggor
  */
 public final class Base64
 {

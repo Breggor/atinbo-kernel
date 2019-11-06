@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 转义和反转义工具类
  *
- * @author ruoyi
+ * @author breggor
  */
 public class EscapeUtil
 {
