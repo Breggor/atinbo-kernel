@@ -21,6 +21,12 @@ public class MybatisPlusAutoConfig {
     public GlobalConfig globalConfiguration() {
         GlobalConfig conf = new GlobalConfig();
 
+//        CREATE TABLE IF NOT EXISTS `id_seq`(
+//            `pk_name` VARCHAR(50) NOT NULL COMMENT '主键',
+//            `next_val` bigint(20) DEFAULT 0 COMMENT '店铺主键',
+//            PRIMARY KEY (`pk_name`)
+//        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='主键自增表';
+//
 //        CREATE FUNCTION next_val(pk_name varchar(50)) RETURNS BIGINT(20)
 //        BEGIN
 //            DECLARE maxId BIGINT(20);
