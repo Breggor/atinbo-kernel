@@ -66,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 多个路径逗号分隔
      */
-    @Value("${security.allowPath}")
+    @Value("${security.allowPath:''}")
     private String allowPath;
 
     /**

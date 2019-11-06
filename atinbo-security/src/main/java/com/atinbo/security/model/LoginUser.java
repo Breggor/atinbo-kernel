@@ -1,12 +1,12 @@
 package com.atinbo.security.model;
 
 
+import com.google.common.collect.Sets;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,7 +21,7 @@ public class LoginUser implements UserDetails {
     /**
      * 测试用户
      */
-    public static final LoginUser TEST = new LoginUser("-1", "test", "$2a$10$9jArgnaZMLNj.hm4GtnSv.iKMtr.rq3oYQB/izJo9TG2Z6Rq9g59S", Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
+    public static final LoginUser TEST = new LoginUser("-1", "test", "$2a$10$9jArgnaZMLNj.hm4GtnSv.iKMtr.rq3oYQB/izJo9TG2Z6Rq9g59S", Sets.newHashSet("ROLE_USER"));
 
     /**
      * 用户ID
@@ -42,6 +42,7 @@ public class LoginUser implements UserDetails {
     /**
      * 角色 ROLE_USER
      */
+    @Getter
     private final Collection<? extends GrantedAuthority> authorities;
 
     /**
@@ -93,45 +94,48 @@ public class LoginUser implements UserDetails {
     private String os;
 
     /**
+     * 权限列表
+     */
+    @Getter
+    private Set<String> permissions;
+
+    /**
      * 创建用户
      *
      * @param userId
      * @param username
      * @param password
-     * @param roles
+     * @param authorities
      * @return
      */
-    public static LoginUser of(String userId, String username, String password, List<String> roles) {
-        return new LoginUser(userId, username, password, mapToGrantedAuthorities(roles));
+    public static LoginUser of(String userId, String username, String password, Set<String> authorities) {
+        return new LoginUser(userId, username, password, authorities);
     }
 
-    private static List<GrantedAuthority> mapToGrantedAuthorities(List<String> authorities) {
+    /**
+     * 创建用户
+     *
+     * @param userId
+     * @param username
+     * @param password
+     * @param authorities
+     * @return
+     */
+    public static LoginUser of(Long userId, String username, String password, Set<String> authorities) {
+        return new LoginUser(userId + "", username, password, authorities);
+    }
+
+
+    private static List<GrantedAuthority> mapToGrantedAuthorities(Set<String> authorities) {
         return authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
-    public LoginUser(String userId, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public LoginUser(String userId, String username, String password, Set<String> authorities) {
         this.userId = userId;
         this.username = username;
         this.password = password;
-        this.authorities = authorities;
-    }
-
-    /**
-     * 权限列表
-     */
-    public Set<String> getPermissions() {
-        if (CollectionUtils.isEmpty(authorities)) {
-            return Collections.EMPTY_SET;
-        }
-        return authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
-    }
-
-    /**
-     * 返回分配给用户的角色列表
-     */
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        this.authorities = mapToGrantedAuthorities(authorities);
+        this.permissions = authorities;
     }
 
 
