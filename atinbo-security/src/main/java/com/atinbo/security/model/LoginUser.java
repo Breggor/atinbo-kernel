@@ -176,4 +176,21 @@ public class LoginUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
+    /**
+     * 扩展map中直接获取对象
+     *
+     * @param key
+     * @param defVal 默认值
+     * @param <T>
+     * @return
+     */
+    public <T> T getObjectFromExtra(String key, T defVal) {
+        Object value = getExtra().get(key);
+        if (value == null && defVal != null) {
+            return defVal;
+        }
+        return (T) value;
+    }
 }
