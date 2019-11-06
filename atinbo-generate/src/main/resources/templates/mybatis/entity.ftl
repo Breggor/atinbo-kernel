@@ -11,6 +11,7 @@ package ${classInfo.packageName}.entity;
     </#list>
 </#if>
 import lombok.Data;
+import com.baomidou.mybatisplus.annotation.KeySequence;
 
 import java.io.Serializable;
 <#if importDdate??>
@@ -28,6 +29,7 @@ import java.math.BigDecimal;
 */
 @Data
 @Accessors(chain = true)
+@KeySequence("${classInfo.tableName?capitalize}_SEQ")
 public class ${classInfo.className} implements Serializable {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
