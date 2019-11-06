@@ -21,6 +21,7 @@ import java.util.Date;
 <#if importBigDecimal??>
 import java.math.BigDecimal;
 </#if>
+import java.io.Serializable;
 
 /**
  *  ${classInfo.classComment} 出参参数
@@ -30,7 +31,7 @@ import java.math.BigDecimal;
  */
 @Data
 @Accessors(chain = true)
-public class ${classInfo.className}VO {
+public class ${classInfo.className}VO implements Serializable {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
 <#list classInfo.fieldList as fieldItem >
