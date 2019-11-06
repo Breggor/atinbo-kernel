@@ -7,10 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 登录用户信息
@@ -93,6 +91,22 @@ public class LoginUser implements UserDetails {
     @Getter
     private String os;
 
+    /**
+     * 创建用户
+     *
+     * @param userId
+     * @param username
+     * @param password
+     * @param roles
+     * @return
+     */
+    public static LoginUser of(String userId, String username, String password, List<String> roles) {
+        return new LoginUser(userId, username, password, mapToGrantedAuthorities(roles));
+    }
+
+    private static List<GrantedAuthority> mapToGrantedAuthorities(List<String> authorities) {
+        return authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+    }
 
     public LoginUser(String userId, String username, String password, Collection<? extends GrantedAuthority> authorities) {
         this.userId = userId;
