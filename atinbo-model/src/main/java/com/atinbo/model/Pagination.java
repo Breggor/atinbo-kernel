@@ -1,5 +1,6 @@
 package com.atinbo.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,19 +24,23 @@ public final class Pagination implements Serializable {
     /**
      * 当前页
      */
+    @ApiModelProperty(value = "当前页")
     private long current;
     /**
      * 每页行数
      */
+    @ApiModelProperty(value = "每页行数")
     private long size;
     /**
      * 总行数
      */
+    @ApiModelProperty(value = "总行数")
     private long totalRows;
 
     /**
      * 总页数
      */
+    @ApiModelProperty(value = "总页数")
     private long totalPages;
 
     /**

@@ -2,6 +2,7 @@ package com.atinbo.core.http.model;
 
 
 import com.atinbo.model.Pagination;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,21 +25,25 @@ public class ResultVO<T> implements Serializable {
     /**
      * 分页数据列表
      */
+    @ApiModelProperty(value = "数据列表")
     private T data;
 
     /**
      * 分页信息
      */
+    @ApiModelProperty(value = "分页信息")
     private Pagination page;
 
     /**
      * 状态码: 0:成功，-1：失败，业务异常：非零或非-1
      */
+    @ApiModelProperty(value = "状态码")
     private int code;
 
     /**
      * 信息
      */
+    @ApiModelProperty(value = "信息")
     private String message;
 
 

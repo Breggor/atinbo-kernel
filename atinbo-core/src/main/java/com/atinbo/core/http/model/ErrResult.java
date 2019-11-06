@@ -2,6 +2,7 @@ package com.atinbo.core.http.model;
 
 
 import com.atinbo.core.constants.HttpStatusCode;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -25,14 +26,19 @@ public class ErrResult implements Serializable {
     /**
      * 状态码
      */
+    @ApiModelProperty(value = "状态码")
     private Integer code;
+
     /**
      * 信息
      */
+    @ApiModelProperty(value = "信息")
     private String message;
+
     /**
      * 错误信息列表
      */
+    @ApiModelProperty(value = "错误信息列表")
     private List<ErrorInfo> errors;
 
 
@@ -89,11 +95,13 @@ public class ErrResult implements Serializable {
         /**
          * 原因
          */
+        @ApiModelProperty(value = "错误原因")
         private String reason;
 
         /**
          * 消息
          */
+        @ApiModelProperty(value = "错误明细")
         private String message;
     }
 }
