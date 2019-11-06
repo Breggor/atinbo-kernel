@@ -123,9 +123,8 @@ public class GenerateServiceImpl implements GenerateService {
         if(generateProperties.getModule() != null){
             modulePath = StringUtils.defaultString(generateProperties.getModule().getName(), modulePath);
             if (generateProperties.getModule().isMultiple()) {
-                modulePath = modulePath.concat("-").concat(entity.getModule());
+                modulePath = File.separator.concat(modulePath).concat("-").concat(entity.getModule());
             }
-            modulePath = modulePath.concat(File.separator);
         }
         String filePath = modulePath + prefix + File.separator + entity.genOutPath(classInfo.getClassName());
         File file = new File(filePath);
