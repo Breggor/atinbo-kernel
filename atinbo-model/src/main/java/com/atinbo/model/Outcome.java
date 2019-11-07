@@ -22,7 +22,7 @@ public class Outcome<T> implements Serializable {
      * 分页信息
      */
     @ApiModelProperty(value = "分页信息")
-    private Page page = Page.EMPTY;
+    private Page page;
 
     /**
      * 数据列表

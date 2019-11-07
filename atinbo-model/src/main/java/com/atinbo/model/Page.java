@@ -19,8 +19,6 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public final class Page implements Serializable {
 
-    public static final Page EMPTY = new Page(0, 10, 0, 0);
-
     /**
      * 当前页
      */
