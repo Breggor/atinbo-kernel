@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * 服务接口层返回对象
  *
- * @param <T>
+ * @param <T> 特别说明：不指定泛型类型时，表示data无返回值
  * @author breggor
  */
 @Data
