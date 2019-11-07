@@ -22,17 +22,21 @@ public class MybatisPlusAutoConfig {
     public IKeyGenerator keyGenerator() {
 //        CREATE TABLE IF NOT EXISTS `id_seq`(
 //            `pk_name` VARCHAR(50) NOT NULL COMMENT '主键',
-//            `next_val` bigint(20) DEFAULT 0 COMMENT '店铺主键',
+//            `next_val` bigint(20) DEFAULT 0 COMMENT '值',
 //            PRIMARY KEY (`pk_name`)
 //        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='主键自增表';
 //
-//        CREATE FUNCTION next_val(pk_name varchar(50)) RETURNS BIGINT(20)
+//        CREATE FUNCTION next_val(table_key varchar(50)) RETURNS BIGINT(20)
 //        BEGIN
-//            DECLARE maxId BIGINT(20);
-//            SET maxId = 0;
-//            SELECT `next_val` INTO maxId FROM `id_seq` WHERE `pk_name` = pk_name for update;
-//            SET maxId = maxId + 1;
-//            INSERT INTO `id_seq`(`pk_name`,`next_val`) VALUES (pk_name, maxId) ON DUPLICATE KEY UPDATE `next_val` = maxId;
+//            DECLARE maxId BIGINT(20) DEFAULT 0;
+//            SELECT `next_val` + 1 INTO maxId from `id_seq` where `pk_name` = table_key for update;
+//
+//        		IF maxId = 0 THEN
+//        			SET maxId = 1;
+//        			INSERT INTO `id_seq` (`pk_name`, `next_val`) VALUES (table_key, maxId);
+//        		ELSE
+//        			UPDATE `id_seq` SET `next_val` = maxId where `pk_name` = table_key;
+//        		END IF;
 //            RETURN maxId;
 //        END
         return new MysqlKeyGenerator();
