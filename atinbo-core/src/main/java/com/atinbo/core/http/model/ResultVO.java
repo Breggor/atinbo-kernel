@@ -37,7 +37,7 @@ public class ResultVO<T> implements Serializable {
     /**
      * 状态码: 0:成功，-1：失败，业务异常：非零或非-1
      */
-    @ApiModelProperty(value = "状态码")
+    @ApiModelProperty(value = "状态码", example = "状态码: 0:成功，-1：失败，业务异常：非零或非-1")
     private int code;
 
     /**
@@ -64,7 +64,7 @@ public class ResultVO<T> implements Serializable {
      * @return
      */
     public static <E> ResultVO of(E data) {
-        return new ResultVO(data);
+        return new ResultVO(data).setMessage("成功");
     }
 
     /**
