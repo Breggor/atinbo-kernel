@@ -11,7 +11,9 @@ package ${classInfo.packageName}.entity;
     </#list>
 </#if>
 import lombok.Data;
+import lombok.experimental.Accessors;
 import com.baomidou.mybatisplus.annotation.KeySequence;
+import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
 <#if importDdate??>
@@ -37,6 +39,9 @@ public class ${classInfo.className} implements Serializable {
     /**
      * ${fieldItem.fieldComment}
      */
+    <#if fieldItem.primaryKey>
+    @TableId
+    </#if>
     private ${fieldItem.fieldClass} ${fieldItem.fieldName};
     </#list>
 </#if>
