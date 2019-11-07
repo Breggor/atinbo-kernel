@@ -21,11 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
-*  ${classInfo.classComment}
-*
-*  @author ${classInfo.author}
-*  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
-*/
+ *  ${classInfo.classComment}
+ *
+ *  @author ${classInfo.author}
+ *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ */
 @Slf4j
 @Service
 public class ${classInfo.className}ServiceImpl implements ${classInfo.className}Service {

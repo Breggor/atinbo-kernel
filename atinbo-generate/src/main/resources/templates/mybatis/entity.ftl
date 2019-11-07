@@ -24,11 +24,11 @@ import java.math.BigDecimal;
 </#if>
 
 /**
-*  ${classInfo.classComment}
-*
-*  @author ${classInfo.author}
-*  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
-*/
+ *  ${classInfo.classComment}
+ *
+ *  @author ${classInfo.author}
+ *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ */
 @Data
 @Accessors(chain = true)
 @KeySequence("${classInfo.tableName?upper_case}_SEQ")
