@@ -1,6 +1,7 @@
 package com.atinbo.mybatis;
 
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
+import com.baomidou.mybatisplus.core.incrementer.IKeyGenerator;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,9 +19,7 @@ public class MybatisPlusAutoConfig {
     }
 
     @Bean
-    public GlobalConfig globalConfiguration() {
-        GlobalConfig conf = new GlobalConfig();
-
+    public IKeyGenerator keyGenerator() {
 //        CREATE TABLE IF NOT EXISTS `id_seq`(
 //            `pk_name` VARCHAR(50) NOT NULL COMMENT '主键',
 //            `next_val` bigint(20) DEFAULT 0 COMMENT '店铺主键',
@@ -36,8 +35,6 @@ public class MybatisPlusAutoConfig {
 //            INSERT INTO `id_seq`(`pk_name`,`next_val`) VALUES (pk_name, maxId) ON DUPLICATE KEY UPDATE `next_val` = maxId;
 //            RETURN maxId;
 //        END
-
-        conf.setDbConfig(new GlobalConfig.DbConfig().setKeyGenerator(new MysqlKeyGenerator()));
-        return conf;
+        return new MysqlKeyGenerator();
     }
 }
