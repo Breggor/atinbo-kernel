@@ -1,10 +1,9 @@
 package com.atinbo.utils;
 
 import com.atinbo.model.PageParam;
-import com.atinbo.model.Pagination;
+import com.atinbo.model.Page;
 import com.atinbo.model.SortDirection;
 import com.atinbo.model.SortInfo;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
@@ -41,7 +40,7 @@ public class PageUtil {
         return Sort.unsorted();
     }
 
-    public static Pagination toPagination(Page page){
-        return Pagination.of(page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages());
+    public static Page toPagination(org.springframework.data.domain.Page page){
+        return Page.of(page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages());
     }
 }

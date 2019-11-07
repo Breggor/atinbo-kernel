@@ -17,9 +17,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public final class Pagination implements Serializable {
+public final class Page implements Serializable {
 
-    public static final Pagination EMPTY = new Pagination(0, 10, 0, 0);
+    public static final Page EMPTY = new Page(0, 10, 0, 0);
 
     /**
      * 当前页
@@ -52,8 +52,8 @@ public final class Pagination implements Serializable {
      * @param totalPages 总页数
      * @return
      */
-    public static Pagination of(int current, int size, long totalRows, int totalPages) {
-        return new Pagination(current, size, totalRows, totalPages);
+    public static Page of(int current, int size, long totalRows, int totalPages) {
+        return new Page(current, size, totalRows, totalPages);
     }
 
 
@@ -66,7 +66,7 @@ public final class Pagination implements Serializable {
      * @param totalPages 总页数
      * @return
      */
-    public static Pagination of(long current, long size, long totalRows, long totalPages) {
-        return new Pagination(current, size, totalRows, totalPages);
+    public static Page of(long current, long size, long totalRows, long totalPages) {
+        return new Page(current, size, totalRows, totalPages);
     }
 }

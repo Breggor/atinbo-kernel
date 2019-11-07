@@ -1,8 +1,8 @@
 package com.atinbo.security.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.atinbo.core.http.model.ResultVO;
 import com.atinbo.core.utils.ServletUtils;
+import com.atinbo.model.Outcome;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -25,6 +25,6 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint, S
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException {
         String msg = String.format("请求访问：{}，{}: 认证失败，无法访问系统资源", request.getRequestURI(), HttpStatus.UNAUTHORIZED);
-        ServletUtils.renderString(response, JSON.toJSONString(ResultVO.failure(msg)));
+        ServletUtils.renderString(response, JSON.toJSONString(Outcome.failure(msg)));
     }
 }

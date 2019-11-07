@@ -1,6 +1,7 @@
 package com.atinbo.generate.controller;
 
-import com.atinbo.core.http.model.ResultVO;
+import com.atinbo.model.Outcome;
+
 import com.atinbo.generate.service.GenerateService;
 import com.atinbo.generate.vo.ClassInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,7 @@ public class GenerarteController {
     }
 
     @PostMapping("/gen")
-    public ResultVO gen(@RequestParam(name = "tableName", required = false) String tableName) {
+    public Outcome gen(@RequestParam(name = "tableName", required = false) String tableName) {
         if (StringUtils.isNotBlank(tableName)) {
             if(StringUtils.contains(tableName,",")){
                 String[] tables = StringUtils.split(tableName,",");
@@ -63,7 +64,7 @@ public class GenerarteController {
             }
         }
 
-        return ResultVO.success();
+        return Outcome.success();
     }
 
 }

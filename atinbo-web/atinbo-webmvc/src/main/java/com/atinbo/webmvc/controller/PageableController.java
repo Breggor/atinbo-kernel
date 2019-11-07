@@ -4,9 +4,10 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.atinbo.common.ObjectUtils;
 import com.atinbo.common.sql.SqlUtils;
 import com.atinbo.core.http.model.PageForm;
-import com.atinbo.core.http.model.ResultVO;
+
 import com.atinbo.core.resolver.PageResolver;
-import com.atinbo.model.Pagination;
+import com.atinbo.model.Outcome;
+import com.atinbo.model.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -35,12 +36,12 @@ public abstract class PageableController {
     /**
      * 响应请求分页数据
      */
-    protected ResultVO endPage(List<?> list) {
+    protected Outcome endPage(List<?> list) {
         if (CollectionUtil.isEmpty(list)) {
             return null;
         }
         PageInfo page = new PageInfo(list);
-        return ResultVO.of(Pagination.of(page.getPageNum(), page.getPageSize(), page.getTotal(), page.getPages()), list);
+        return Outcome.ofSuccess(Page.of(page.getPageNum(), page.getPageSize(), page.getTotal(), page.getPages()), list);
     }
 
 }

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 
 import com.atinbo.core.exception.HttpApiException;
-import com.atinbo.core.http.model.ResultVO;
+import com.atinbo.model.ResultVO;
 import com.atinbo.core.http.status.HttpStatusCode;
 import com.atinbo.model.Outcome;
 import com.atinbo.model.PageOutcome;

@@ -1,8 +1,8 @@
 package com.atinbo.security.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.atinbo.core.http.model.ResultVO;
 import com.atinbo.core.utils.ServletUtils;
+import com.atinbo.model.Outcome;
 import com.atinbo.security.model.LoginUser;
 import com.atinbo.security.service.UserTokenService;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +43,6 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {
             // 记录用户退出日志
             log.info(userName + "-- 退出成功");
         }
-        ServletUtils.renderString(response, JSON.toJSONString(ResultVO.success().setMessage("退出成功")));
+        ServletUtils.renderString(response, JSON.toJSONString(Outcome.success().setMsg("退出成功")));
     }
 }
