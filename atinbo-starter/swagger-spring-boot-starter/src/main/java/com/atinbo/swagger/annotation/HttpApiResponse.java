@@ -14,11 +14,11 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@ApiResponses({@ApiResponse(code = 200, message = "OK"),
-        @ApiResponse(code = 201, message = "Created"),
-        @ApiResponse(code = 401, message = "Unauthorized"),
-        @ApiResponse(code = 403, message = "Forbidden"),
-        @ApiResponse(code = 404, message = "Not Found"),
+@ApiResponses({@ApiResponse(code = 200, message = "成功"),
+        @ApiResponse(code = 201, message = "请求成功并且服务器创建了新的资源"),
+        @ApiResponse(code = 401, message = "没有权限"),
+        @ApiResponse(code = 403, message = "服务器拒绝请求"),
+        @ApiResponse(code = 404, message = "未找到"),
         @ApiResponse(code = 500, message = "系统错误")})
 public @interface HttpApiResponse {
 
