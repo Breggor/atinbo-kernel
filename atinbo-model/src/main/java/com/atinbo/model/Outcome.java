@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.beans.Transient;
 import java.io.Serializable;
 
 /**
@@ -48,7 +49,8 @@ public class Outcome<T> implements Serializable {
     private int code;
 
 
-    public boolean isSuccess() {
+    @Transient
+    public boolean ok() {
         return code == 0;
     }
 
