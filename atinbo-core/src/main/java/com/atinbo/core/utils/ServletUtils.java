@@ -1,4 +1,5 @@
-package com.atinbo.core;
+package com.atinbo.core.utils;
+
 
 import com.atinbo.common.Converts;
 import com.atinbo.common.Strings;

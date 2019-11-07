@@ -1,9 +1,9 @@
 package com.atinbo.security.service;
 
 import com.atinbo.common.IdUtils;
-import com.atinbo.common.ip.AddressUtils;
-import com.atinbo.common.ip.IpUtils;
-import com.atinbo.core.ServletUtils;
+import com.atinbo.core.utils.AddressUtils;
+import com.atinbo.core.utils.IpUtils;
+import com.atinbo.core.utils.ServletUtils;
 import com.atinbo.security.model.LoginUser;
 import eu.bitwalker.useragentutils.UserAgent;
 import io.jsonwebtoken.Claims;

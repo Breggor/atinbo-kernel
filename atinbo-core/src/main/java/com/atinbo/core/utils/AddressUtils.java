@@ -1,4 +1,4 @@
-package com.atinbo.common.ip;
+package com.atinbo.core.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import com.atinbo.common.http.HttpUtils;

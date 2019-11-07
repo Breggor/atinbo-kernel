@@ -1,8 +1,8 @@
 package com.atinbo.security.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.atinbo.core.ServletUtils;
 import com.atinbo.core.http.model.ResultVO;
+import com.atinbo.core.utils.ServletUtils;
 import com.atinbo.security.model.LoginUser;
 import com.atinbo.security.service.UserTokenService;
 import lombok.extern.slf4j.Slf4j;

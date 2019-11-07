@@ -1,7 +1,8 @@
 package com.atinbo.core.resolver;
 
-import com.atinbo.core.ServletUtils;
+
 import com.atinbo.core.http.model.PageForm;
+import com.atinbo.core.utils.ServletUtils;
 
 public abstract class PageResolver {
     /**
