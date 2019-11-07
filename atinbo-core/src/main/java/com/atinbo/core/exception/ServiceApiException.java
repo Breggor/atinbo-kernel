@@ -6,7 +6,7 @@ package com.atinbo.core.exception;
  *
  * @author breggor
  */
-public class ServiceApiException extends Exception {
+public class ServiceApiException extends RuntimeException {
 
     public ServiceApiException() {
         super();
