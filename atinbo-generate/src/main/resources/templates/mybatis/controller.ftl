@@ -113,7 +113,7 @@ public class ${classInfo.className}Controller {
      */
     @ApiOperation(value = "根据id删除${classInfo.classComment}")
     @ApiResponses(@ApiResponse(code = 500001, message = "系统错误"))
-    @GetMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResultVO deleteById(@PathVariable("id") @Validated @ApiParam("${classInfo.primaryField.fieldComment}") ${classInfo.primaryField.fieldClass} id) throws HttpApiException {
         boolean flag = ${classInfo.className?uncap_first}Service.deleteById(id);
         if (flag) {
