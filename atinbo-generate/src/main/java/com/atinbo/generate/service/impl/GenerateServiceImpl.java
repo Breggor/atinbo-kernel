@@ -120,14 +120,22 @@ public class GenerateServiceImpl implements GenerateService {
         Map<String, Object> params = new HashMap<>();
         params.put("classInfo", classInfo);
 
-        String modulePath = "";
+        StringBuffer modulePath = new StringBuffer("");
         if(generateProperties.getModule() != null){
-            modulePath = StringUtils.defaultString(generateProperties.getModule().getName(), modulePath);
+            if(StringUtils.isNotBlank(generateProperties.getModule().getName())){
+                modulePath.append(generateProperties.getModule().getName());
+            }
             if (generateProperties.getModule().isMultiple()) {
-                modulePath = File.separator.concat(modulePath).concat("-").concat(entity.getModule());
+                if(modulePath.length() > 0){
+                    modulePath.append("-");
+                }
+                modulePath.append(entity.getModule());
+            }
+            if(modulePath.length() > 0) {
+                modulePath.append(File.separator);
             }
         }
-        String filePath = modulePath + prefix + File.separator + entity.genOutPath(classInfo.getClassName());
+        String filePath = modulePath.append(prefix).append(File.separator).append(entity.genOutPath(classInfo.getClassName())).toString();
         File file = new File(filePath);
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
