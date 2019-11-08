@@ -56,7 +56,7 @@ public class GenerateServiceImpl implements GenerateService {
                 classInfo.setPackageName(generateProperties.getPackageName());
                 classInfo.setAuthor(generateProperties.getAuthor());
 
-                String className = tableInfo.getTableName().replaceFirst(generateProperties.getTablePrefix(), "");
+                String className = RegExUtils.replaceFirst(tableInfo.getTableName(),generateProperties.getTablePrefix(), "") ;
                 classInfo.setClassName(GenerateUtil.genClassName(className));
                 classInfo.setTableName(tableInfo.getTableName());
                 classInfo.setClassComment(tableInfo.getTableComment());
