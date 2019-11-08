@@ -53,6 +53,14 @@ public final class Pageable<T> implements Serializable {
     @ApiModelProperty(value = "数据列表")
     private List<T> records = Collections.emptyList();
 
+    public Pageable(Pageable pageable, List<T> records) {
+        this.current = pageable.getCurrent();
+        this.size = pageable.getSize();
+        this.totalPages = pageable.getTotalPages();
+        this.totalRows = pageable.getTotalRows();
+        this.records = records;
+    }
+
     /**
      * 创建分页
      *
@@ -80,5 +88,16 @@ public final class Pageable<T> implements Serializable {
      */
     public static <E> Pageable<E> of(long current, long size, long totalRows, long totalPages, List<E> records) {
         return new Pageable(current, size, totalRows, totalPages, records);
+    }
+
+
+    /**
+     * 创建分页
+     *
+     * @param records 数据列表
+     * @return
+     */
+    public static <E> Pageable<E> of(Pageable pageable, List<E> records) {
+        return new Pageable(pageable, records);
     }
 }
