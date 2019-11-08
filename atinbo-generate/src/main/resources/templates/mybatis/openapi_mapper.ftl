@@ -1,10 +1,10 @@
 package ${classInfo.packageName}.openapi.mapper;
 
+import com.atinbo.model.Pageable;
 import ${classInfo.packageName}.model.${classInfo.className}BO;
 import ${classInfo.packageName}.model.${classInfo.className}Param;
 import ${classInfo.packageName}.openapi.model.${classInfo.className}VO;
 import ${classInfo.packageName}.openapi.model.${classInfo.className}Form;
-
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -35,4 +35,9 @@ public interface ${classInfo.className}Mapper {
      * BOList to VOList
      */
     List<${classInfo.className}VO> to${classInfo.className}Vos(List<${classInfo.className}BO> ${classInfo.className?uncap_first}List);
+
+    /**
+     * BOPage to VOPage
+     */
+    Pageable<${classInfo.className}VO> to${classInfo.className}Vos(Pageable<${classInfo.className}BO> ${classInfo.className?uncap_first}List);
 }

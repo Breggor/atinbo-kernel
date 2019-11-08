@@ -2,6 +2,7 @@ package ${classInfo.packageName}.impl;
 
 import com.atinbo.model.Outcome;
 import com.atinbo.model.PageParam;
+import com.atinbo.model.Pageable;
 import com.atinbo.mybatis.DynamicCondition;
 import com.atinbo.mybatis.utils.PageUtil;
 import ${classInfo.packageName}.entity.${classInfo.className};
@@ -16,8 +17,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 /**
  *  ${classInfo.classComment}
@@ -39,7 +38,7 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
     public Outcome<${classInfo.className}BO> save(${classInfo.className}Param ${classInfo.className?uncap_first}Param) {
         ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}(${classInfo.className?uncap_first}Param);
         ${classInfo.className?uncap_first}Dao.insert(${classInfo.className?uncap_first});
-        return Outcome.ofSuccess(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bo(${classInfo.className?uncap_first}));
+        return Outcome.success(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bo(${classInfo.className?uncap_first}));
     }
 
     /**
@@ -71,17 +70,17 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
     @Override
     public Outcome<${classInfo.className}BO> findById(${classInfo.primaryField.fieldClass} id) {
         ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className?uncap_first}Dao.selectById(id);
-        return Outcome.ofSuccess(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bo(${classInfo.className?uncap_first}));
+        return Outcome.success(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bo(${classInfo.className?uncap_first}));
     }
 
     /**
      * 分页查询
      */
     @Override
-    public Outcome<List<${classInfo.className}BO>> pageList(${classInfo.className}Param param, PageParam pageParam){
+    public Outcome<Pageable<${classInfo.className}BO>> pageList(${classInfo.className}Param param, PageParam pageParam){
         Page<${classInfo.className}> page = PageUtil.toPage(pageParam);
         IPage<${classInfo.className}> pageData = ${classInfo.className?uncap_first}Dao.selectPage(page, DynamicCondition.toWrapper(param));
 
-        return Outcome.ofSuccess(PageUtil.toPagination(pageData), ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bos(pageData.getRecords()));
+        return Outcome.success(PageUtil.toPageable(pageData, ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bos(pageData.getRecords())));
     }
 }

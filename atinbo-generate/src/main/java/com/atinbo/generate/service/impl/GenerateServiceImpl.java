@@ -13,6 +13,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,7 +73,7 @@ public class GenerateServiceImpl implements GenerateService {
         classInfo.setPackageName(generateProperties.getPackageName());
         classInfo.setAuthor(generateProperties.getAuthor());
 
-        String className = tableInfo.getTableName().replaceFirst(generateProperties.getTablePrefix(), "");
+        String className = RegExUtils.replaceFirst(tableInfo.getTableName(),generateProperties.getTablePrefix(), "") ;
         classInfo.setClassName(GenerateUtil.genClassName(className));
         classInfo.setTableName(tableInfo.getTableName());
         classInfo.setClassComment(tableInfo.getTableComment());
