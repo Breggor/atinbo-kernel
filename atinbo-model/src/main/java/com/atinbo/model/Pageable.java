@@ -94,7 +94,8 @@ public final class Pageable<T> implements Serializable {
     /**
      * 创建分页
      *
-     * @param records 数据列表
+     * @param pageable 分页
+     * @param records  数据列表
      * @return
      */
     public static <E> Pageable<E> of(Pageable pageable, List<E> records) {
