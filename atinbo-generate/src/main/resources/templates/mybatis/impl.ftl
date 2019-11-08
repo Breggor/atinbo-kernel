@@ -1,7 +1,6 @@
 package ${classInfo.packageName}.impl;
 
 import com.atinbo.model.Outcome;
-import com.atinbo.model.Pagination;
 import com.atinbo.model.PageParam;
 import com.atinbo.mybatis.DynamicCondition;
 import com.atinbo.mybatis.utils.PageUtil;

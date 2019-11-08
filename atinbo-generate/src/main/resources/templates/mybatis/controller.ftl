@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 
 import com.atinbo.core.exception.HttpApiException;
-import com.atinbo.model.ResultVO;
-import com.atinbo.core.http.status.HttpStatusCode;
+import com.atinbo.core.constants.HttpStatusCode;
 import com.atinbo.model.Outcome;
 import com.atinbo.model.PageOutcome;
+import com.atinbo.swagger.annotation.HttpApiResponse;
 
 import ${classInfo.packageName}.openapi.model.${classInfo.className}Form;
 import ${classInfo.packageName}.openapi.model.${classInfo.className}VO;
@@ -18,6 +18,7 @@ import ${classInfo.packageName}.model.${classInfo.className}Param;
 import ${classInfo.packageName}.model.${classInfo.className}BO;
 import ${classInfo.packageName}.service.${classInfo.className}Service;
 
+import java.util.List;
 /**
  *  ${classInfo.classComment}
  *
@@ -39,13 +40,13 @@ public class ${classInfo.className}Controller {
      * @throws HttpApiException
      */
     @ApiOperation(value = "${classInfo.classComment}分页查询")
-    @ApiResponses(@ApiResponse(code = 500001, message = "系统错误"))
+    @HttpApiResponse
     @GetMapping
-    public ResultVO findPage(@Validated @ApiParam("${classInfo.classComment}查询参数") ${classInfo.className}Form form) throws HttpApiException {
-        PageOutcome outcome = ${classInfo.className?uncap_first}Service.pageList(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Param(form));
+    public Outcome<List<${classInfo.className}VO>> findPage(@Validated @ApiParam("${classInfo.classComment}查询参数") ${classInfo.className}Form form) throws HttpApiException {
+        Outcome<List<${classInfo.className}BO>> outcome = ${classInfo.className?uncap_first}Service.pageList(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Param(form));
 
-        if (outcome.isSuccess()) {
-            return ResultVO.of(outcome.getPage(), ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Vos(outcome.getData()));
+        if (outcome.ok()) {
+            return Outcome.of(outcome.getPage(), ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Vos(outcome.getData()));
         } else {
             throw new HttpApiException(HttpStatusCode.ERR_500);
         }
@@ -58,12 +59,12 @@ public class ${classInfo.className}Controller {
      * @throws HttpApiException
      */
     @ApiOperation(value = "根据id查询${classInfo.classComment}")
-    @ApiResponses(@ApiResponse(code = 500001, message = "系统错误"))
+    @HttpApiResponse
     @GetMapping("/{id}")
-    public ResultVO findById(@PathVariable("id") @Validated @ApiParam("${classInfo.primaryField.fieldComment}") ${classInfo.primaryField.fieldClass} id) throws HttpApiException {
+    public Outcome<${classInfo.className}VO> findById(@PathVariable("id") @Validated @ApiParam("${classInfo.primaryField.fieldComment}") ${classInfo.primaryField.fieldClass} id) throws HttpApiException {
         Outcome<${classInfo.className}BO> outcome = ${classInfo.className?uncap_first}Service.findById(id);
-        if (outcome.isSuccess()) {
-            return ResultVO.of(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Vo(outcome.getData()));
+        if (outcome.ok()) {
+            return Outcome.of(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Vo(outcome.getData()));
         } else {
             throw new HttpApiException(HttpStatusCode.ERR_500);
         }
@@ -76,12 +77,12 @@ public class ${classInfo.className}Controller {
      * @throws HttpApiException
      */
     @ApiOperation(value = "添加${classInfo.classComment}")
-    @ApiResponses(@ApiResponse(code = 500001, message = "系统错误"))
+    @HttpApiResponse
     @PostMapping
-    public ResultVO add(@RequestBody @Validated @ApiParam("${classInfo.classComment}信息") ${classInfo.className}Form form) throws HttpApiException {
+    public Outcome add(@RequestBody @Validated @ApiParam("${classInfo.classComment}信息") ${classInfo.className}Form form) throws HttpApiException {
         Outcome<${classInfo.className}BO> outcome = ${classInfo.className?uncap_first}Service.save(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Param(form));
-        if (outcome.isSuccess()) {
-            return ResultVO.of(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Vo(outcome.getData()));
+        if (outcome.ok()) {
+            return Outcome.success();
         } else {
             throw new HttpApiException(HttpStatusCode.ERR_500);
         }
@@ -94,12 +95,12 @@ public class ${classInfo.className}Controller {
      * @throws HttpApiException
      */
     @ApiOperation(value = "修改${classInfo.classComment}")
-    @ApiResponses(@ApiResponse(code = 500001, message = "系统错误"))
+    @HttpApiResponse
     @PutMapping
-    public ResultVO edit(@RequestBody @Validated @ApiParam("${classInfo.classComment}信息") ${classInfo.className}Form form) throws HttpApiException {
+    public Outcome edit(@RequestBody @Validated @ApiParam("${classInfo.classComment}信息") ${classInfo.className}Form form) throws HttpApiException {
         boolean flag = ${classInfo.className?uncap_first}Service.update(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Param(form));
         if (flag) {
-            return ResultVO.success();
+            return Outcome.success();
         } else {
             throw new HttpApiException(HttpStatusCode.ERR_500);
         }
@@ -112,12 +113,12 @@ public class ${classInfo.className}Controller {
      * @throws HttpApiException
      */
     @ApiOperation(value = "根据id删除${classInfo.classComment}")
-    @ApiResponses(@ApiResponse(code = 500001, message = "系统错误"))
+    @HttpApiResponse
     @DeleteMapping("/{id}")
-    public ResultVO deleteById(@PathVariable("id") @Validated @ApiParam("${classInfo.primaryField.fieldComment}") ${classInfo.primaryField.fieldClass} id) throws HttpApiException {
+    public Outcome deleteById(@PathVariable("id") @Validated @ApiParam("${classInfo.primaryField.fieldComment}") ${classInfo.primaryField.fieldClass} id) throws HttpApiException {
         boolean flag = ${classInfo.className?uncap_first}Service.deleteById(id);
         if (flag) {
-            return ResultVO.success();
+            return Outcome.success();
         } else {
             throw new HttpApiException(HttpStatusCode.ERR_500);
         }
