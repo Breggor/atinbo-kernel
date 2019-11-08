@@ -6,8 +6,6 @@ import com.atinbo.model.Pageable;
 import ${classInfo.packageName}.model.${classInfo.className}BO;
 import ${classInfo.packageName}.model.${classInfo.className}Param;
 
-import java.util.List;
-
 /**
  *  ${classInfo.classComment} Service
  *

@@ -32,13 +32,11 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 public class ${classInfo.className}Form implements Serializable {
-
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
 <#list classInfo.fieldList as fieldItem >
 
     @ApiModelProperty(value = "${fieldItem.fieldComment}")
     private ${fieldItem.fieldClass} ${fieldItem.fieldName};
-
 </#list>
 </#if>
 }
