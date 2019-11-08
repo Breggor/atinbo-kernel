@@ -10,7 +10,7 @@ import java.beans.Transient;
 import java.io.Serializable;
 
 /**
- * 服务接口层返回对象
+ * 返回数据封装类
  *
  * @param <T> 特别说明：不指定泛型类型时，表示data无返回值
  * @author breggor
@@ -80,8 +80,8 @@ public class Outcome<T> implements Serializable {
      * @param <E>
      * @return
      */
-    public static <E> Outcome<E> success(E data) {
-        return new Outcome<E>().setData(data).setMessage("成功");
+    public static <T> Outcome<T> success(T data) {
+        return new Outcome(StatusCodeEnum.SUCCESS, data);
     }
 
     /**
