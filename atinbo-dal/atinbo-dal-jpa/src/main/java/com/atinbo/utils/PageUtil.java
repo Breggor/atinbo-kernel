@@ -1,7 +1,7 @@
 package com.atinbo.utils;
 
 import com.atinbo.model.PageParam;
-import com.atinbo.model.Page;
+import com.atinbo.model.Pageable;
 import com.atinbo.model.SortDirection;
 import com.atinbo.model.SortInfo;
 import org.springframework.data.domain.PageRequest;
@@ -16,18 +16,18 @@ import java.util.List;
  */
 public class PageUtil {
 
-    public static PageRequest toPageRequest(PageParam pageParam){
+    public static PageRequest toPageRequest(PageParam pageParam) {
         Sort sort = toSort(pageParam.getSort());
         return PageRequest.of(pageParam.getPage(), pageParam.getSize(), sort);
     }
 
-    public static PageRequest toPageRequest(PageParam pageParam, Sort defaultSort){
+    public static PageRequest toPageRequest(PageParam pageParam, Sort defaultSort) {
         Sort sort = toSort(pageParam.getSort());
         return PageRequest.of(pageParam.getPage(), pageParam.getSize(), sort.isSorted() ? sort : defaultSort);
     }
 
-    public static Sort toSort(SortInfo sortInfo){
-        if(sortInfo != null && !sortInfo.isEmpty()) {
+    public static Sort toSort(SortInfo sortInfo) {
+        if (sortInfo != null && !sortInfo.isEmpty()) {
             List<String> ascFields = sortInfo.get(SortDirection.ASC);
             List<String> descFields = sortInfo.get(SortDirection.DESC);
 
@@ -40,7 +40,7 @@ public class PageUtil {
         return Sort.unsorted();
     }
 
-    public static Page toPagination(org.springframework.data.domain.Page page){
-        return Page.of(page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages());
+    public static Pageable toPageable(org.springframework.data.domain.Page page) {
+        return Pageable.of(page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages(), page.getContent());
     }
 }

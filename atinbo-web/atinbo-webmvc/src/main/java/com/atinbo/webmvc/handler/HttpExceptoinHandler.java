@@ -1,10 +1,10 @@
 package com.atinbo.webmvc.handler;
 
 import com.atinbo.core.constants.ErrorType;
-import com.atinbo.core.constants.HttpStatusCode;
 import com.atinbo.core.exception.HttpApiException;
 import com.atinbo.core.exception.RequestParamException;
-import com.atinbo.core.http.model.ErrResult;
+import com.atinbo.core.model.ErrResult;
+import com.atinbo.model.StatusCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.atinbo.core.constants.HttpStatusCode.*;
+import static com.atinbo.model.StatusCodeEnum.*;
 
 
 /**
@@ -42,7 +42,7 @@ public class HttpExceptoinHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrResult bindException(MethodArgumentNotValidException e) {
         log.error(e.getMessage(), e);
-        return doErr(HttpStatusCode.ERR_400, e.getBindingResult());
+        return doErr(NOT_FOUND, e.getBindingResult());
     }
 
 
@@ -56,7 +56,7 @@ public class HttpExceptoinHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrResult handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         log.error(e.getMessage(), e);
-        return ErrResult.error(HttpStatusCode.ERR_400.getHttpCode(), ErrorType.DATA_INVALID.getLabel());
+        return ErrResult.error(NOT_FOUND.getCode(), ErrorType.DATA_INVALID.getLabel());
     }
 
     /**
@@ -69,7 +69,7 @@ public class HttpExceptoinHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrResult handleException(Exception e) {
         log.error(e.getMessage(), e);
-        return ErrResult.error(ERR_400.getHttpCode(), ERR_400.getMessage(), e.getMessage());
+        return ErrResult.error(FAILURE.getCode(), FAILURE.getMessage(), e.getMessage());
     }
 
 
@@ -83,7 +83,7 @@ public class HttpExceptoinHandler {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ErrResult handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
         log.error(e.getMessage(), e);
-        return ErrResult.error(ERR_405.getHttpCode(), ERR_405.getMessage());
+        return ErrResult.error(METHOD_NOT_SUPPORTED.getCode(), METHOD_NOT_SUPPORTED.getMessage());
     }
 
     /**
@@ -96,7 +96,7 @@ public class HttpExceptoinHandler {
     @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
     public ErrResult handleHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException e) {
         log.error(e.getMessage(), e);
-        return ErrResult.error(ERR_415.getHttpCode(), ERR_415.getMessage());
+        return ErrResult.error(MEDIA_TYPE_NOT_SUPPORTED.getCode(), MEDIA_TYPE_NOT_SUPPORTED.getMessage());
     }
 
     /**
@@ -109,10 +109,10 @@ public class HttpExceptoinHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrResult handleHttpAPIException(HttpApiException e) {
         log.error(e.getMessage(), e);
-        return ErrResult.error(ERR_500.getHttpCode(), ERR_500.getMessage(), e.getMessage());
+        return ErrResult.error(INTERNAL_SERVER_ERROR.getCode(), INTERNAL_SERVER_ERROR.getMessage(), e.getMessage());
     }
 
-    private ErrResult doErr(HttpStatusCode code, BindingResult br) {
+    private ErrResult doErr(StatusCodeEnum code, BindingResult br) {
         Map<String, String> errs = new HashMap<>();
         for (FieldError fieldError : br.getFieldErrors()) {
             errs.put(fieldError.getField(), fieldError.getDefaultMessage());

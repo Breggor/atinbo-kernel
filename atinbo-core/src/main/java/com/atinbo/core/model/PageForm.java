@@ -1,4 +1,4 @@
-package com.atinbo.core.http.model;
+package com.atinbo.core.model;
 
 import com.atinbo.common.Strings;
 import org.springframework.util.StringUtils;

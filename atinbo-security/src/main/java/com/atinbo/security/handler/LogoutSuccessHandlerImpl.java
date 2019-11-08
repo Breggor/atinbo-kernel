@@ -43,6 +43,6 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {
             // 记录用户退出日志
             log.info(userName + "-- 退出成功");
         }
-        ServletUtils.renderString(response, JSON.toJSONString(Outcome.success().setMsg("退出成功")));
+        ServletUtils.renderString(response, JSON.toJSONString(Outcome.success().setMessage("退出成功")));
     }
 }

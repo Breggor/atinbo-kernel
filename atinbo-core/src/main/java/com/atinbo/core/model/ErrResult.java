@@ -1,7 +1,7 @@
-package com.atinbo.core.http.model;
+package com.atinbo.core.model;
 
 
-import com.atinbo.core.constants.HttpStatusCode;
+import com.atinbo.model.StatusCode;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -42,18 +42,18 @@ public class ErrResult implements Serializable {
     private List<ErrorInfo> errors;
 
 
-    public ErrResult(HttpStatusCode error) {
+    public ErrResult(StatusCode error) {
         this.message = error.getMessage();
-        this.code = error.getHttpCode();
+        this.code = error.getCode();
     }
 
     public static ErrResult error(int code, String message) {
         return new ErrResult().setCode(code).setMessage(message);
     }
 
-    public static ErrResult error(HttpStatusCode statusCode, Map<String, String> errs) {
+    public static ErrResult error(StatusCode statusCode, Map<String, String> errs) {
         ErrResult result = new ErrResult();
-        result.setCode(statusCode.getHttpCode());
+        result.setCode(statusCode.getCode());
         result.setMessage(statusCode.getMessage());
         if (null != errs && !errs.isEmpty()) {
             errs.entrySet().stream().forEach(obj -> result.addError(obj.getKey(), obj.getValue()));

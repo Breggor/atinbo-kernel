@@ -1,6 +1,6 @@
 package com.atinbo.generate.vo;
 
-import com.atinbo.core.http.model.BaseVO;
+import com.atinbo.core.model.BaseVO;
 import lombok.Data;
 
 import java.util.List;

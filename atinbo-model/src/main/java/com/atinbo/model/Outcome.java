@@ -1,5 +1,6 @@
 package com.atinbo.model;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,30 +18,8 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
+@ApiModel(description = "返回信息")
 public class Outcome<T> implements Serializable {
-
-    /**
-     * 分页信息
-     */
-    @ApiModelProperty(value = "分页信息")
-    private Page page;
-
-    /**
-     * 数据列表
-     */
-    @ApiModelProperty(value = "数据列表")
-    private T data;
-
-    /**
-     * 错误信息
-     */
-    private String error;
-
-    /**
-     * 信息
-     */
-    @ApiModelProperty(value = "信息")
-    private String msg;
 
     /**
      * 状态码: 0:成功，-1：失败，业务异常：非零或非-1
@@ -48,30 +27,50 @@ public class Outcome<T> implements Serializable {
     @ApiModelProperty(value = "状态码", example = "状态码: 0:成功，-1：失败，业务异常：非零或非-1")
     private int code;
 
+    /**
+     * 信息
+     */
+    @ApiModelProperty(value = "信息")
+    private String message;
+
+    /**
+     * 数据列表
+     */
+    @ApiModelProperty(value = "数据列表")
+    private T data;
+
 
     @Transient
     public boolean ok() {
-        return code == 0;
-    }
-
-    public Outcome(T data) {
-        this.data = data;
-    }
-
-    public Outcome(Page page, T data) {
-        this.page = Page.of(page.getCurrent(), page.getSize(), page.getTotalRows(), page.getTotalPages());
-        this.data = data;
+        return (0 == code || StatusCodeEnum.SUCCESS.getCode() == code);
     }
 
     /**
-     * 失败返回结果
+     * 状态码构造器
      *
-     * @param error
-     * @param <E>
-     * @return
+     * @param statusCode
      */
-    public static <E> Outcome<E> ofFail(String error) {
-        return new Outcome<E>().setError(error);
+    private Outcome(StatusCode statusCode) {
+        this(statusCode.getCode(), statusCode.getMessage(), null);
+    }
+
+
+    private Outcome(StatusCode statusCode, String message) {
+        this(statusCode, message, null);
+    }
+
+    private Outcome(StatusCode statusCode, T data) {
+        this(statusCode, statusCode.getMessage(), data);
+    }
+
+    private Outcome(StatusCode statusCode, String message, T data) {
+        this(statusCode.getCode(), message, data);
+    }
+
+    private Outcome(int code, String message, T data) {
+        this.code = code;
+        this.data = data;
+        this.message = message;
     }
 
     /**
@@ -81,20 +80,39 @@ public class Outcome<T> implements Serializable {
      * @param <E>
      * @return
      */
-    public static <E> Outcome<E> ofSuccess(E data) {
-        return new Outcome<E>(data).setData(data).setMsg("成功");
+    public static <E> Outcome<E> success(E data) {
+        return new Outcome<E>().setData(data).setMessage("成功");
     }
 
     /**
-     * 分页与数据返回结果
+     * 成功返回结果
      *
-     * @param page
-     * @param data
-     * @param <E>
+     * @param code
      * @return
      */
-    public static <E> Outcome<E> ofSuccess(Page page, E data) {
-        return new Outcome<E>(page, data).setMsg("成功");
+    public static Outcome success(StatusCode code) {
+        return new Outcome(code);
+    }
+
+    /**
+     * 成功返回结果
+     *
+     * @param message
+     * @return
+     */
+    public static Outcome success(String message) {
+        return new Outcome(StatusCodeEnum.SUCCESS, message);
+    }
+
+    /**
+     * 成功返回结果
+     *
+     * @param code
+     * @param message
+     * @return
+     */
+    public static Outcome success(StatusCode code, String message) {
+        return new Outcome(code, message);
     }
 
     /**
@@ -103,7 +121,7 @@ public class Outcome<T> implements Serializable {
      * @return
      */
     public static Outcome success() {
-        return new Outcome().setMsg("成功");
+        return new Outcome(StatusCodeEnum.SUCCESS);
     }
 
 
@@ -113,20 +131,50 @@ public class Outcome<T> implements Serializable {
      * @return
      */
     public static Outcome failure() {
-        return new Outcome().setCode(-1).setMsg("失败");
+        return new Outcome(StatusCodeEnum.FAILURE);
+    }
+
+    /**
+     * 失败返回结果
+     *
+     * @param message
+     * @return
+     */
+    public static Outcome failure(String message) {
+        return new Outcome(StatusCodeEnum.FAILURE, message);
+    }
+
+    /**
+     * 失败返回结果
+     *
+     * @param code
+     * @param message
+     * @return
+     */
+    public static Outcome failure(int code, String message) {
+        return new Outcome(code, message, null);
     }
 
 
     /**
      * 原因失败
      *
-     * @param error
+     * @param statusCode
      * @return
      */
-    public static Outcome failure(String error) {
-        return new Outcome().setCode(-1).setMsg("失败").setError(error);
+    public static Outcome failure(StatusCode statusCode) {
+        return new Outcome(statusCode);
     }
 
+    /**
+     * 原因失败
+     *
+     * @param statusCode
+     * @return
+     */
+    public static Outcome failure(StatusCode statusCode, String message) {
+        return new Outcome(statusCode, message);
+    }
 
     /**
      * 根据状态判断是否成功
@@ -136,5 +184,15 @@ public class Outcome<T> implements Serializable {
      */
     public static Outcome status(int status) {
         return (status > 0) ? success() : failure();
+    }
+
+    /**
+     * 根据状态判断是否成功
+     *
+     * @param status
+     * @return
+     */
+    public static Outcome status(boolean status) {
+        return status ? success() : failure();
     }
 }

@@ -1,11 +1,12 @@
 package com.atinbo.mybatis.utils;
 
 import com.atinbo.model.PageParam;
-import com.atinbo.model.Page;
+import com.atinbo.model.Pageable;
 import com.atinbo.model.SortDirection;
 import com.atinbo.model.SortInfo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.List;
@@ -18,24 +19,26 @@ public class PageUtil {
 
     /**
      * 分页参数转换
+     *
      * @param pageParam 分页参数
      * @return
      */
-    public static <T> com.baomidou.mybatisplus.extension.plugins.pagination.Page toPage(PageParam pageParam){
+    public static <T> Page toPage(PageParam pageParam) {
         return toPage(pageParam, null);
     }
 
     /**
      * 分页参数转换
-     * @param pageParam 分页参数
+     *
+     * @param pageParam   分页参数
      * @param defaultSort 默认排序
      * @return
      */
-    public static <T> com.baomidou.mybatisplus.extension.plugins.pagination.Page toPage(PageParam pageParam, SortInfo defaultSort){
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page(pageParam.getPage(), pageParam.getSize());
+    public static <T> Page toPage(PageParam pageParam, SortInfo defaultSort) {
+        Page page = new Page(pageParam.getPage(), pageParam.getSize());
 
         SortInfo sortInfo = ObjectUtils.defaultIfNull(pageParam.getSort(), defaultSort);
-        if(sortInfo != null && !sortInfo.isEmpty()) {
+        if (sortInfo != null && !sortInfo.isEmpty()) {
             List<String> ascFields = sortInfo.get(SortDirection.ASC);
             List<String> descFields = sortInfo.get(SortDirection.DESC);
 
@@ -47,10 +50,11 @@ public class PageUtil {
 
     /**
      * 分页结果转换
+     *
      * @param page
      * @return
      */
-    public static Page toPagination(IPage page){
-        return Page.of(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages());
+    public static Pageable toPageable(IPage page) {
+        return Pageable.of(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), page.getRecords());
     }
 }

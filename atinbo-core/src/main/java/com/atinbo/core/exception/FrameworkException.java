@@ -1,29 +1,29 @@
 package com.atinbo.core.exception;
 
 
-import com.atinbo.core.constants.HttpStatusCode;
+import com.atinbo.model.StatusCode;
 
 /**
  * @author breggor
  */
-public abstract class FrameworkException extends Exception {
-    protected HttpStatusCode error;
+public abstract class FrameworkException extends RuntimeException {
+    protected StatusCode status;
 
-    public FrameworkException(HttpStatusCode error) {
-        this.error = error;
+    public FrameworkException(StatusCode status) {
+        this.status = status;
     }
 
-    public HttpStatusCode getError() {
-        return this.error;
+    public StatusCode getStatus() {
+        return this.status;
     }
 
-    public FrameworkException setErrorEnum(HttpStatusCode error) {
-        this.error = error;
+    public FrameworkException setStatus(StatusCode status) {
+        this.status = status;
         return this;
     }
 
     @Override
     public String toString() {
-        return "FrameworkException{errorEnum=" + this.error + '}';
+        return "FrameworkException{status=" + this.status + '}';
     }
 }

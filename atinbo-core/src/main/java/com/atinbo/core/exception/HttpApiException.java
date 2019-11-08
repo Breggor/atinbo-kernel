@@ -1,7 +1,7 @@
 package com.atinbo.core.exception;
 
 
-import com.atinbo.core.constants.HttpStatusCode;
+import com.atinbo.model.StatusCode;
 
 /**
  * 接口异常
@@ -9,12 +9,12 @@ import com.atinbo.core.constants.HttpStatusCode;
  * @author breggor
  */
 public class HttpApiException extends FrameworkException {
-    public HttpApiException(HttpStatusCode error) {
-        super(error);
+    public HttpApiException(StatusCode statusCode) {
+        super(statusCode);
     }
 
     @Override
     public String toString() {
-        return "APIException{http=" + super.error + '}';
+        return "APIException{http=" + super.status + '}';
     }
 }

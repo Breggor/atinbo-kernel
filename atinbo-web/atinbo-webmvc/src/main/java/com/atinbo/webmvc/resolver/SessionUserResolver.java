@@ -1,13 +1,15 @@
 package com.atinbo.webmvc.resolver;
 
 import com.alibaba.fastjson.JSON;
-import com.atinbo.model.GatewayUser;
+import com.atinbo.core.model.GatewayUser;
 import com.atinbo.webmvc.exceptions.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+
+
 
 
 /**

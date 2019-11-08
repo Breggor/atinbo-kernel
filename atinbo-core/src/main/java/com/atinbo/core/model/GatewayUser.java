@@ -1,4 +1,4 @@
-package com.atinbo.model;
+package com.atinbo.core.model;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -13,7 +13,7 @@ import java.util.Map;
  */
 @Data
 @Accessors(chain = true)
-public class GatewayUser extends AbstractOperator {
+public class GatewayUser {
     public static final GatewayUser ANONYMOUS = new GatewayUser().setUsername("anonymous").setUserId(-1L);
 
     /**

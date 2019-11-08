@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.atinbo</groupId>
-            <artifactId>atinbo-model</artifactId>
+            <artifactId>atinbo-core</artifactId>
         </dependency>
 
         <dependency>

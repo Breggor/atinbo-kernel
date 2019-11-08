@@ -1,7 +1,7 @@
 package com.atinbo.webflux;
 
 import com.alibaba.fastjson.JSON;
-import com.atinbo.model.GatewayUser;
+import com.atinbo.core.model.GatewayUser;
 import com.atinbo.webflux.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.server.reactive.ServerHttpRequest;

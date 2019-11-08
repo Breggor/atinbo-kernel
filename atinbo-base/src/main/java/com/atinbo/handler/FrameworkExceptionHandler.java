@@ -1,14 +1,14 @@
 package com.atinbo.handler;
 
+
 import com.atinbo.core.exception.HttpApiException;
-import com.atinbo.core.http.model.ErrResult;
+import com.atinbo.core.model.ErrResult;
+import com.atinbo.model.StatusCodeEnum;
 import com.atinbo.utils.HttpRequestUtils;
 import org.springframework.web.util.NestedServletException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import static com.atinbo.core.constants.HttpStatusCode.ERR_500;
 
 
 /**
@@ -45,15 +45,15 @@ public class FrameworkExceptionHandler extends Handler {
     }
 
     private void flushFrameworkException(HttpServletResponse response, HttpApiException ex) {
-        ErrResult result = new ErrResult(ex.getError());
-        response.setStatus(ex.getError().getHttpCode());
+        ErrResult result = new ErrResult(ex.getStatus());
+        response.setStatus(ex.getStatus().getCode());
         HttpRequestUtils.flushJson(response, result);
     }
 
 
     private void flushException500(HttpServletResponse response, Exception e) {
         response.setStatus(500);
-        ErrResult result = ErrResult.error(ERR_500.getHttpCode(), ERR_500.getMessage(), e.getMessage());
+        ErrResult result = ErrResult.error(StatusCodeEnum.INTERNAL_SERVER_ERROR.getCode(), StatusCodeEnum.INTERNAL_SERVER_ERROR.getMessage(), e.getMessage());
         HttpRequestUtils.flushJson(response, result);
     }
 }

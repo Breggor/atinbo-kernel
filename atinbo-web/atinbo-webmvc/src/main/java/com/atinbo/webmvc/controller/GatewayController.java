@@ -1,8 +1,9 @@
 package com.atinbo.webmvc.controller;
 
-import com.atinbo.core.constants.HttpStatusCode;
+
 import com.atinbo.core.exception.HttpApiException;
-import com.atinbo.model.GatewayUser;
+import com.atinbo.core.model.GatewayUser;
+import com.atinbo.model.StatusCodeEnum;
 import com.atinbo.webmvc.exceptions.UserNotFoundException;
 import com.atinbo.webmvc.resolver.SessionUserResolver;
 import lombok.extern.slf4j.Slf4j;
@@ -49,11 +50,10 @@ public abstract class GatewayController {
             String strictEvnValue = System.getenv(ENV_STRICT_KEY);
             boolean isStrictMode = !StringUtils.isEmpty(strictEvnValue);
             if (isStrictMode) {
-                throw new HttpApiException(HttpStatusCode.ERR_401);
+                throw new HttpApiException(StatusCodeEnum.UN_AUTHORIZED);
             }
             user = defaultUser;
         }
-        user.setOperatorId(1L);
         return user;
     }
 }
