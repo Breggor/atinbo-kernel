@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.atinbo.common;
+package com.atinbo.common.reflections;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Preconditions;

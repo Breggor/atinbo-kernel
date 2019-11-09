@@ -1,6 +1,6 @@
 package com.atinbo.security.service;
 
-import com.atinbo.common.IdUtils;
+import com.atinbo.common.id.IdUtils;
 import com.atinbo.core.utils.AddressUtils;
 import com.atinbo.core.utils.IpUtils;
 import com.atinbo.core.utils.ServletUtils;

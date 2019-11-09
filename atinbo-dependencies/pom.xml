@@ -109,6 +109,12 @@
 
             <dependency>
                 <groupId>com.atinbo</groupId>
+                <artifactId>disid-spring-boot-starter</artifactId>
+                <version>${atinbo-kernel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atinbo</groupId>
                 <artifactId>swagger-spring-boot-starter</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>

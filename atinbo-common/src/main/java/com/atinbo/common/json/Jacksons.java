@@ -1,4 +1,4 @@
-package com.atinbo.common;
+package com.atinbo.common.json;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;

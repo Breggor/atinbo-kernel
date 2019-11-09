@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.atinbo.common;
+package com.atinbo.common.reflections;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

@@ -18,6 +18,7 @@
         <module>swagger-spring-boot-starter</module>
         <module>dislock-spring-boot-starter</module>
         <module>wx-mp-spring-boot-starter</module>
+        <module>disid-spring-boot-starter</module>
     </modules>
 
     <build>

@@ -1,5 +1,6 @@
-package com.atinbo.common;
+package com.atinbo.common.json;
 
+import com.atinbo.common.Strings;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;

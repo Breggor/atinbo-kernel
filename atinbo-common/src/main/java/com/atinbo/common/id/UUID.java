@@ -1,4 +1,4 @@
-package com.atinbo.common;
+package com.atinbo.common.id;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
