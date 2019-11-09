@@ -54,7 +54,11 @@ public class PageUtil {
      * @param page
      * @return
      */
-    public static Pageable toPageable(IPage page) {
+    public static <T> Pageable<T> toPageable(IPage page) {
         return Pageable.of(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), page.getRecords());
+    }
+
+    public static <T> Pageable<T> toPageable(IPage page,List<T> list) {
+        return Pageable.of(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), list);
     }
 }

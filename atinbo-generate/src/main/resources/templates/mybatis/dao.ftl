@@ -1,8 +1,6 @@
 package ${classInfo.packageName}.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-
-import java.util.List;
 import ${classInfo.packageName}.entity.${classInfo.className};
 
 /**

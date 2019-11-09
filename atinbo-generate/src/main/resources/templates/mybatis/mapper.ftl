@@ -40,4 +40,5 @@ public interface ${classInfo.className}Mapper {
      * entityList to BOList
      */
     List<${classInfo.className}BO> to${classInfo.className}Bos(List<${classInfo.className}> ${classInfo.className?uncap_first}List);
+
 }
