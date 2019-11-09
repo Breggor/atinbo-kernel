@@ -1,11 +1,11 @@
 package com.atinbo.security.service;
 
+import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.atinbo.common.id.IdUtils;
 import com.atinbo.core.utils.AddressUtils;
 import com.atinbo.core.utils.IpUtils;
 import com.atinbo.core.utils.ServletUtils;
 import com.atinbo.security.model.LoginUser;
-import com.atinbo.security.seriallzer.FastJson2JsonRedisSerializer;
 import eu.bitwalker.useragentutils.UserAgent;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -77,7 +77,7 @@ public class UserTokenService {
         RedisSerializer stringSerializer = new StringRedisSerializer();
         redisTemplate.setKeySerializer(stringSerializer);
         redisTemplate.setHashKeySerializer(stringSerializer);
-        FastJson2JsonRedisSerializer serializer = new FastJson2JsonRedisSerializer(Object.class);
+        FastJsonRedisSerializer serializer = new FastJsonRedisSerializer(Object.class);
         redisTemplate.setValueSerializer(serializer);
         this.redisTemplate = redisTemplate;
     }
