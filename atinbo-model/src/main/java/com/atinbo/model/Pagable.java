@@ -21,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @Accessors(chain = true)
 @ApiModel(description = "分页数据")
-public final class Pageable<T> implements Serializable {
+public final class Pagable<T> implements Serializable {
 
     /**
      * 当前页
@@ -53,7 +53,7 @@ public final class Pageable<T> implements Serializable {
     @ApiModelProperty(value = "数据列表")
     private List<T> records = Collections.emptyList();
 
-    public Pageable(Pageable pageable, List<T> records) {
+    public Pagable(Pagable pageable, List<T> records) {
         this.current = pageable.getCurrent();
         this.size = pageable.getSize();
         this.totalPages = pageable.getTotalPages();
@@ -71,8 +71,8 @@ public final class Pageable<T> implements Serializable {
      * @param records    数据列表
      * @return
      */
-    public static <T> Pageable<T> of(int current, int size, long totalRows, int totalPages, List<T> records) {
-        return new Pageable<T>(current, size, totalRows, totalPages, records);
+    public static <T> Pagable<T> of(int current, int size, long totalRows, int totalPages, List<T> records) {
+        return new Pagable<T>(current, size, totalRows, totalPages, records);
     }
 
 
@@ -86,8 +86,8 @@ public final class Pageable<T> implements Serializable {
      * @param records    数据列表
      * @return
      */
-    public static <T> Pageable<T> of(long current, long size, long totalRows, long totalPages, List<T> records) {
-        return new Pageable(current, size, totalRows, totalPages, records);
+    public static <T> Pagable<T> of(long current, long size, long totalRows, long totalPages, List<T> records) {
+        return new Pagable(current, size, totalRows, totalPages, records);
     }
 
 
@@ -98,7 +98,7 @@ public final class Pageable<T> implements Serializable {
      * @param records  数据列表
      * @return
      */
-    public static <T> Pageable<T> of(Pageable pageable, List<T> records) {
-        return new Pageable(pageable, records);
+    public static <T> Pagable<T> of(Pagable pageable, List<T> records) {
+        return new Pagable(pageable, records);
     }
 }

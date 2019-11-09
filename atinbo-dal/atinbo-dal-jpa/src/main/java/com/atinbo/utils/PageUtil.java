@@ -1,7 +1,7 @@
 package com.atinbo.utils;
 
 import com.atinbo.model.PageParam;
-import com.atinbo.model.Pageable;
+import com.atinbo.model.Pagable;
 import com.atinbo.model.SortDirection;
 import com.atinbo.model.SortInfo;
 import org.springframework.data.domain.PageRequest;
@@ -40,7 +40,7 @@ public class PageUtil {
         return Sort.unsorted();
     }
 
-    public static Pageable toPageable(org.springframework.data.domain.Page page) {
-        return Pageable.of(page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages(), page.getContent());
+    public static Pagable toPageable(org.springframework.data.domain.Page page) {
+        return Pagable.of(page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages(), page.getContent());
     }
 }

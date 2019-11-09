@@ -1,7 +1,7 @@
 package com.atinbo.mybatis.utils;
 
 import com.atinbo.model.PageParam;
-import com.atinbo.model.Pageable;
+import com.atinbo.model.Pagable;
 import com.atinbo.model.SortDirection;
 import com.atinbo.model.SortInfo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -54,11 +54,11 @@ public class PageUtil {
      * @param page
      * @return
      */
-    public static <T> Pageable<T> toPageable(IPage page) {
-        return Pageable.of(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), page.getRecords());
+    public static <T> Pagable<T> toPageable(IPage page) {
+        return Pagable.of(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), page.getRecords());
     }
 
-    public static <T> Pageable<T> toPageable(IPage page,List<T> list) {
-        return Pageable.of(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), list);
+    public static <T> Pagable<T> toPageable(IPage page, List<T> list) {
+        return Pagable.of(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), list);
     }
 }

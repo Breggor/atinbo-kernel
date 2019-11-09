@@ -6,7 +6,7 @@ import com.atinbo.common.sql.SqlUtils;
 import com.atinbo.core.model.PageForm;
 import com.atinbo.core.resolver.PageResolver;
 import com.atinbo.model.Outcome;
-import com.atinbo.model.Pageable;
+import com.atinbo.model.Pagable;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +40,7 @@ public abstract class PageableController {
             return null;
         }
         PageInfo page = new PageInfo(list);
-        return Outcome.success(Pageable.of(page.getPageNum(), page.getPageSize(), page.getTotal(), page.getPages(), list));
+        return Outcome.success(Pagable.of(page.getPageNum(), page.getPageSize(), page.getTotal(), page.getPages(), list));
     }
 
 }
