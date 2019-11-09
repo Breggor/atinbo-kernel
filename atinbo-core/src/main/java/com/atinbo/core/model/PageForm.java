@@ -1,6 +1,7 @@
 package com.atinbo.core.model;
 
 import com.atinbo.common.Strings;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
@@ -16,21 +17,25 @@ public class PageForm implements Serializable {
     /**
      * 起始页
      */
+    @ApiModelProperty(value = "起始页")
     private Integer offset;
 
     /**
      * 每页行数
      */
+    @ApiModelProperty(value = "每页行数")
     private Integer limit;
 
     /**
      * 排序列
      */
+    @ApiModelProperty(value = "排序列")
     private String orderBy;
 
     /**
      * 排序的方向 "desc" 或者 "asc".
      */
+    @ApiModelProperty(value = "排序的方向 desc 或者 asc.")
     private String dir = "asc";
 
     public Integer getOffset() {
@@ -58,13 +63,6 @@ public class PageForm implements Serializable {
             return "";
         }
         return Strings.toUnderScoreCase(orderBy);
-    }
-
-    public String getOrder() {
-        if (StringUtils.isEmpty(orderBy)) {
-            return "";
-        }
-        return Strings.toUnderScoreCase(orderBy) + " " + dir;
     }
 
     public String getDir() {
