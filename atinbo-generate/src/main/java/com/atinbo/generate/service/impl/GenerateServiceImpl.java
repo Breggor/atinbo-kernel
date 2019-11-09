@@ -53,7 +53,7 @@ public class GenerateServiceImpl implements GenerateService {
             ClassInfo classInfo;
             for (TableInfo tableInfo : list) {
                 classInfo = new ClassInfo();
-                classInfo.setPackageName(generateProperties.getPackageName());
+                classInfo.setPackageName(GenerateUtil.getPackageName(generateProperties.getPackageName(), generateProperties.getModule().getName()));
                 classInfo.setAuthor(generateProperties.getAuthor());
 
                 String className = RegExUtils.replaceFirst(tableInfo.getTableName(),generateProperties.getTablePrefix(), "") ;
@@ -70,7 +70,7 @@ public class GenerateServiceImpl implements GenerateService {
     public ClassInfo findClassInfo(String tableName) {
         TableInfo tableInfo = generateMapper.selectTableInfo(tableName);
         ClassInfo classInfo = new ClassInfo();
-        classInfo.setPackageName(generateProperties.getPackageName());
+        classInfo.setPackageName(GenerateUtil.getPackageName(generateProperties.getPackageName(), generateProperties.getModule().getName()));
         classInfo.setAuthor(generateProperties.getAuthor());
 
         String className = RegExUtils.replaceFirst(tableInfo.getTableName(),generateProperties.getTablePrefix(), "") ;
@@ -103,7 +103,7 @@ public class GenerateServiceImpl implements GenerateService {
 
     @Override
     public void generateClass(ClassInfo classInfo) throws IOException, TemplateException {
-        String prefixPath = genFilePath(generateProperties.getOutPath(), generateProperties.getPackageName());
+        String prefixPath = genFilePath(generateProperties.getOutPath(), classInfo.getPackageName());
         String category = generateProperties.getCategory();
         if(!ArrayUtils.contains(GenerateUtil.SUPPORT_CATEGORY, category)){
             category = GenerateUtil.SUPPORT_CATEGORY[0];

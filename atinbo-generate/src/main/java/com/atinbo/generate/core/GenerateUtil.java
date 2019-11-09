@@ -45,7 +45,14 @@ public class GenerateUtil {
         if (StringUtils.isNotBlank(dbType) && TYPE_MAPPING.containsKey(dbType.toUpperCase())) {
             return TYPE_MAPPING.get(dbType.toUpperCase());
         }
-        throw new RuntimeException(String.format("cannot found javaType mapping for dbType: %s ,please add to TYPE_MAPPING", dbType));
+        throw new RuntimeException(String.format("cannot found javaType mapping for dbType: %s ,please add to GenerateUtil.TYPE_MAPPING", dbType));
+    }
+
+    public static String getPackageName(String packageName, String moduleName){
+        if(packageName == null || moduleName == null || moduleName.trim().length() == 0 || packageName.endsWith(moduleName)){
+            return packageName;
+        }
+        return packageName.concat(".").concat(moduleName.replace("-","."));
     }
 
     /**

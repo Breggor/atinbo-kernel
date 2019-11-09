@@ -25,7 +25,7 @@ public class GenerateProperties {
     /**
      * 生成包路径
      */
-    private String packageName;
+    private String packageName = "com.atinbo";
 
     /**
      * 生成类型  hibernate 或者 mybatis
@@ -35,7 +35,7 @@ public class GenerateProperties {
     /**
      * 表前缀(类名不会包含表前缀)
      */
-    private String tablePrefix;
+    private String tablePrefix = "";
 
     /**
      * 文件输出路径
