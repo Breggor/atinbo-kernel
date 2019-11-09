@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  * @author breggor
  **/
 @Component
-public class RedisCache {
+public class RedisOpsCache {
     @Autowired
     public RedisTemplate redisTemplate;
 
