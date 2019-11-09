@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 分页参数
+ * 分页数据封装类
  *
  * @author breggor
  */
@@ -71,8 +71,8 @@ public final class Pageable<T> implements Serializable {
      * @param records    数据列表
      * @return
      */
-    public static <E> Pageable<E> of(int current, int size, long totalRows, int totalPages, List<E> records) {
-        return new Pageable<E>(current, size, totalRows, totalPages, records);
+    public static <T> Pageable<T> of(int current, int size, long totalRows, int totalPages, List<T> records) {
+        return new Pageable<T>(current, size, totalRows, totalPages, records);
     }
 
 
@@ -86,7 +86,7 @@ public final class Pageable<T> implements Serializable {
      * @param records    数据列表
      * @return
      */
-    public static <E> Pageable<E> of(long current, long size, long totalRows, long totalPages, List<E> records) {
+    public static <T> Pageable<T> of(long current, long size, long totalRows, long totalPages, List<T> records) {
         return new Pageable(current, size, totalRows, totalPages, records);
     }
 
@@ -98,7 +98,7 @@ public final class Pageable<T> implements Serializable {
      * @param records  数据列表
      * @return
      */
-    public static <E> Pageable<E> of(Pageable pageable, List<E> records) {
+    public static <T> Pageable<T> of(Pageable pageable, List<T> records) {
         return new Pageable(pageable, records);
     }
 }
