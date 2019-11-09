@@ -7,6 +7,7 @@ import com.atinbo.mybatis.DynamicCondition;
 import com.atinbo.mybatis.utils.PageUtil;
 import ${classInfo.packageName}.entity.${classInfo.className};
 import ${classInfo.packageName}.model.${classInfo.className}Param;
+import ${classInfo.packageName}.model.${classInfo.className}QueryParam;
 import ${classInfo.packageName}.model.${classInfo.className}BO;
 import ${classInfo.packageName}.mapper.${classInfo.className}Mapper;
 import ${classInfo.packageName}.dao.${classInfo.className}Dao;
@@ -77,7 +78,7 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
      * 分页查询
      */
     @Override
-    public Outcome<Pageable<${classInfo.className}BO>> pageList(${classInfo.className}Param param, PageParam pageParam){
+    public Outcome<Pageable<${classInfo.className}BO>> pageList(${classInfo.className}QueryParam param, PageParam pageParam){
         Page<${classInfo.className}> page = PageUtil.toPage(pageParam);
         IPage<${classInfo.className}> pageData = ${classInfo.className?uncap_first}Dao.selectPage(page, DynamicCondition.toWrapper(param));
 

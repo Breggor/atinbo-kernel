@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import ${classInfo.packageName}.openapi.model.${classInfo.className}Form;
+import ${classInfo.packageName}.openapi.model.${classInfo.className}QueryForm;
 import ${classInfo.packageName}.openapi.model.${classInfo.className}VO;
 import ${classInfo.packageName}.openapi.mapper.${classInfo.className}Mapper;
 import ${classInfo.packageName}.model.${classInfo.className}BO;
@@ -42,7 +43,7 @@ public class ${classInfo.className}Controller {
     @ApiOperation(value = "${classInfo.classComment}分页查询")
     @HttpApiResponse
     @GetMapping
-    public Outcome<Pageable<${classInfo.className}VO>> findPage(@Validated @ApiParam("${classInfo.classComment}查询参数") ${classInfo.className}Form form, PageForm pageForm) throws HttpApiException {
+    public Outcome<Pageable<${classInfo.className}VO>> findPage(@Validated @ApiParam("${classInfo.classComment}查询参数") ${classInfo.className}QueryForm form, PageForm pageForm) throws HttpApiException {
         Outcome<Pageable<${classInfo.className}BO>> outcome = ${classInfo.className?uncap_first}Service.pageList(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Param(form),
             PageParam.of(pageForm.getOffset(), pageForm.getLimit()));
 

@@ -5,6 +5,7 @@ import com.atinbo.model.PageParam;
 import com.atinbo.model.Pageable;
 import ${classInfo.packageName}.model.${classInfo.className}BO;
 import ${classInfo.packageName}.model.${classInfo.className}Param;
+import ${classInfo.packageName}.model.${classInfo.className}QueryParam;
 
 /**
  *  ${classInfo.classComment} Service
@@ -37,6 +38,6 @@ public interface ${classInfo.className}Service {
     /**
      * 分页查询
      */
-    Outcome<Pageable<${classInfo.className}BO>> pageList(${classInfo.className}Param ${classInfo.className?uncap_first}Param, PageParam pageParam);
+    Outcome<Pageable<${classInfo.className}BO>> pageList(${classInfo.className}QueryParam param, PageParam pageParam);
 
 }

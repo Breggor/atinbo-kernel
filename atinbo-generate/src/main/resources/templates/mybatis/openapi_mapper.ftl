@@ -3,8 +3,10 @@ package ${classInfo.packageName}.openapi.mapper;
 import com.atinbo.model.Pageable;
 import ${classInfo.packageName}.model.${classInfo.className}BO;
 import ${classInfo.packageName}.model.${classInfo.className}Param;
+import ${classInfo.packageName}.model.${classInfo.className}QueryParam;
 import ${classInfo.packageName}.openapi.model.${classInfo.className}VO;
 import ${classInfo.packageName}.openapi.model.${classInfo.className}Form;
+import ${classInfo.packageName}.openapi.model.${classInfo.className}QueryForm;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -25,6 +27,11 @@ public interface ${classInfo.className}Mapper {
      * form to param
      */
     ${classInfo.className}Param to${classInfo.className}Param(${classInfo.className}Form ${classInfo.className?uncap_first}Form);
+
+    /**
+     * form to param
+     */
+    ${classInfo.className}QueryParam to${classInfo.className}Param(${classInfo.className}QueryForm ${classInfo.className?uncap_first}Form);
 
     /**
      * BO to VO

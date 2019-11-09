@@ -110,7 +110,7 @@ public class GenerateServiceImpl implements GenerateService {
         }
 
         for (TemplatePathEnum pathEnum : TemplatePathEnum.values()) {
-            if(StringUtils.isBlank(pathEnum.getCategroy()) ||pathEnum.getCategroy().equals(category)) {
+            if(StringUtils.isBlank(pathEnum.getCategory()) || pathEnum.getCategory().equals(category)) {
                 processFile(pathEnum, prefixPath, classInfo, category);
             }
         }
