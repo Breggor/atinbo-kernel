@@ -1,4 +1,4 @@
-package com.atinbo.common;
+package com.atinbo.common.id;
 
 
 /**

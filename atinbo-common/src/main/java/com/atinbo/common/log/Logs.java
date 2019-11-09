@@ -1,4 +1,4 @@
-package com.atinbo.common;
+package com.atinbo.common.log;
 
 import org.slf4j.Logger;
 

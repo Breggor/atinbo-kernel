@@ -1,4 +1,4 @@
-package com.atinbo.core.distributed;
+package com.atinbo.disid;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,7 +10,7 @@ import java.util.Random;
  * @author breggor
  */
 @Slf4j
-public class SnowFlake {
+public class Snowflake {
 
     /**
      * 起始的时间戳
@@ -37,7 +37,7 @@ public class SnowFlake {
     private long sequence = 0L;
     //上一次时间戳
     private long lastStamp = -1L;
-    public SnowFlake(long machineId) {
+    public Snowflake(long machineId) {
 
         if (machineId > MAX_MACHINE_NUM || machineId < 0) {
             throw new IllegalArgumentException("machineId can't be greater than MAX_MACHINE_NUM or less than 0");
@@ -48,7 +48,8 @@ public class SnowFlake {
     /**
      * 产生下一个ID
      */
-    public synchronized Long nextId() {
+    public synchronized Long
+    nextId() {
         long currStamp = getNewStamp();
         if (currStamp < lastStamp) {
             throw new TimeBackwardsException("Clock moved backwards.  Refusing to generate id");
