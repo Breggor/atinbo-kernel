@@ -2,6 +2,7 @@ package com.atinbo.common.json;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -31,6 +32,8 @@ public class Jacksons {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         //默认SerializationFeature.FAIL_ON_EMPTY_BEANS为true,实体不提供getter、setter方法时报错
         mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        //允许单引号
+        mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true) ;
 //		mapper.configure(Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
 //		mapper.setDateFormat(new SimpleDateFormat(DateUtil.defaultFormat));
     }
