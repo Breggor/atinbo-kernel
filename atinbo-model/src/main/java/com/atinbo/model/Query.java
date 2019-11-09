@@ -23,6 +23,12 @@ public @interface Query {
     Operator operator() default Operator.EQ;
 
     /**
+     * 排序方式 默认不排序
+     * @return
+     */
+    SortDirection order() default SortDirection.NULL;
+
+    /**
      * 查询字段名 不填写默认为注解属性名
      *
      * @return

@@ -6,5 +6,5 @@ package com.atinbo.model;
  * @author breggor
  */
 public enum SortDirection {
-    ASC, DESC;
+    ASC, DESC, NULL;
 }

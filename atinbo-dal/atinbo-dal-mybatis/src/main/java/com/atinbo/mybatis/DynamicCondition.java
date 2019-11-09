@@ -1,10 +1,7 @@
 package com.atinbo.mybatis;
 
 import com.atinbo.common.reflections.ReflectionUtils;
-import com.atinbo.model.Operator;
-import com.atinbo.model.PageParam;
-import com.atinbo.model.Query;
-import com.atinbo.model.QueryParam;
+import com.atinbo.model.*;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
@@ -26,7 +23,9 @@ public class DynamicCondition {
         String fieldName;
         Object fieldValue;
         Operator operator;
+        SortDirection sort;
         Query queryMode;
+        SortInfo sortInfo = new SortInfo();
         for (Field field : fieldList) {
             fieldValue = ReflectionUtils.invokeGetterMethod(queryParam, field.getName());
             if (fieldValue == null || (field.getType() == String.class && StringUtils.isEmpty((String) fieldValue))) {
@@ -40,11 +39,15 @@ public class DynamicCondition {
                 }
                 fieldName = StringUtils.isEmpty(queryMode.field()) ? field.getName() : queryMode.field();
                 operator = queryMode.operator();
+                sort = queryMode.order();
             } else {
                 fieldName = field.getName();
                 operator = Operator.EQ;
+                sort = SortDirection.NULL;
             }
             fieldName = StringUtils.camelToUnderline(fieldName);
+
+            /*************************拼接查询条件**************************/
             switch (operator) {
                 case EQ:
                 case ENUMEQ:
@@ -77,7 +80,16 @@ public class DynamicCondition {
                 default:
                     break;
             }
+            /*************************拼接排序条件**************************/
+            if(SortDirection.NULL != sort){
+                sortInfo.addField(sort,fieldName);
+            }
         }
+        if(!sortInfo.isEmpty()) {
+            wrapper.orderByDesc(sortInfo.get(SortDirection.DESC).toArray());
+            wrapper.orderByAsc(sortInfo.get(SortDirection.ASC).toArray());
+        }
+
         return wrapper;
     }
 }
