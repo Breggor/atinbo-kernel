@@ -12,7 +12,7 @@ import java.util.Date;
  * @author breggor
  */
 @Data
-public class BaseEntity implements Serializable {
+public abstract class BaseDomain implements Serializable {
     protected static final long serialVersionUID = 1L;
 
     /**
@@ -40,12 +40,6 @@ public class BaseEntity implements Serializable {
     private Date updateTime;
 
     /**
-     * 备注
-     */
-    @ApiModelProperty(value = "备注")
-    private String remark;
-
-    /**
      * 数据权限
      */
     @ApiModelProperty(value = "数据权限")
@@ -56,4 +50,10 @@ public class BaseEntity implements Serializable {
      */
     @ApiModelProperty(value = "排序")
     private Long sortBy;
+
+    /**
+     * 状态[0:未删除,1:删除]
+     */
+    @ApiModelProperty(value = "是否已删除")
+    private Integer isDeleted;
 }
