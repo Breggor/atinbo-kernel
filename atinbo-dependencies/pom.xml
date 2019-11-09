@@ -37,25 +37,19 @@
 
             <dependency>
                 <groupId>com.atinbo</groupId>
+                <artifactId>atinbo-cache-redis</artifactId>
+                <version>${atinbo-kernel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atinbo</groupId>
+                <artifactId>atinbo-cache-caffeine</artifactId>
+                <version>${atinbo-kernel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atinbo</groupId>
                 <artifactId>atinbo-dal-base</artifactId>
-                <version>${atinbo-kernel.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.atinbo</groupId>
-                <artifactId>atinbo-dal-mongo</artifactId>
-                <version>${atinbo-kernel.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.atinbo</groupId>
-                <artifactId>atinbo-dal-redis</artifactId>
-                <version>${atinbo-kernel.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.atinbo</groupId>
-                <artifactId>atinbo-dal-cache</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>
 
@@ -68,6 +62,12 @@
             <dependency>
                 <groupId>com.atinbo</groupId>
                 <artifactId>atinbo-dal-mybatis</artifactId>
+                <version>${atinbo-kernel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atinbo</groupId>
+                <artifactId>atinbo-dal-mongo</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>
 

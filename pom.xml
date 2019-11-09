@@ -23,6 +23,7 @@
         <module>atinbo-starter</module>
         <module>atinbo-dependencies</module>
         <module>atinbo-generate</module>
+        <module>atinbo-cache</module>
     </modules>
 
     <distributionManagement>
