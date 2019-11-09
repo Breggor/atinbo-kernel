@@ -57,6 +57,13 @@ public class PageForm implements Serializable {
         if (StringUtils.isEmpty(orderBy)) {
             return "";
         }
+        return Strings.toUnderScoreCase(orderBy);
+    }
+
+    public String getOrder() {
+        if (StringUtils.isEmpty(orderBy)) {
+            return "";
+        }
         return Strings.toUnderScoreCase(orderBy) + " " + dir;
     }
 
