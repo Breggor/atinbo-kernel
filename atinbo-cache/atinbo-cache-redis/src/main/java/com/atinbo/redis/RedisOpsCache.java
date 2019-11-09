@@ -1,8 +1,6 @@
 package com.atinbo.redis;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
-import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -12,10 +10,13 @@ import java.util.concurrent.TimeUnit;
  *
  * @author breggor
  **/
-@Component
 public class RedisOpsCache {
-    @Autowired
-    public RedisTemplate redisTemplate;
+
+    private final RedisTemplate redisTemplate;
+
+    public RedisOpsCache(RedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     /**
      * 缓存基本的对象，Integer、String、实体类等
