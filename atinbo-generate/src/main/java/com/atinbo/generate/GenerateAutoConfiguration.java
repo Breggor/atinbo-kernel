@@ -15,7 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @MapperScan("com.atinbo.generate.mapper")
 @EnableConfigurationProperties(GenerateProperties.class)
-@ComponentScan(basePackages = "com.atinbo.generate")
+@ComponentScan(basePackageClasses = GenerateAutoConfiguration.class)
 public class GenerateAutoConfiguration {
 
     @Bean

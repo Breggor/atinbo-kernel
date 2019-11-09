@@ -28,7 +28,6 @@
     <code>
 atinbo:
   generate:
-    enabled: true
     author: zenghao
     category: mybatis
     table-prefix: ls_
@@ -44,7 +43,6 @@ atinbo:
 
 |KEY|说明|类型|默认值|描述
 |:------------- |:-------:|:------|-----:|:------------|
-|atinbo.generate.enabled|是否启用|boolean|false
 |atinbo.generate.author|作者|string|atinbo generator|生成类文件作者注释
 |atinbo.generate.category|类型|enum|mybatis|mybatis/hibernate
 |atinbo.generate.table-prefix|表名前缀|string| |生成类文件名将去掉该前缀
