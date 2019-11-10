@@ -1,17 +1,16 @@
 package com.atinbo.core.model;
 
-import com.atinbo.common.Strings;
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.util.StringUtils;
+import lombok.Data;
 
 import java.io.Serializable;
-import java.util.StringJoiner;
 
 /**
  * 分页传入参数
  *
  * @author breggor
  */
+@Data
 public class PageForm implements Serializable {
 
     /**
@@ -29,57 +28,6 @@ public class PageForm implements Serializable {
     /**
      * 排序列
      */
-    @ApiModelProperty(value = "排序列")
-    private String orderBy;
-
-    /**
-     * 排序的方向 "desc" 或者 "asc".
-     */
-    @ApiModelProperty(value = "排序的方向 desc 或者 asc.")
-    private String dir = "asc";
-
-    public Integer getOffset() {
-        return offset;
-    }
-
-    public void setOffset(Integer offset) {
-        this.offset = offset;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
-
-    public void setOrderBy(String orderBy) {
-        this.orderBy = orderBy;
-    }
-
-    public String getOrderBy() {
-        if (StringUtils.isEmpty(orderBy)) {
-            return "";
-        }
-        return Strings.toUnderScoreCase(orderBy);
-    }
-
-    public String getDir() {
-        return dir;
-    }
-
-    public void setDir(String dir) {
-        this.dir = dir;
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", PageForm.class.getSimpleName() + "[", "]")
-                .add("offset=" + offset)
-                .add("limit=" + limit)
-                .add("orderBy='" + orderBy + "'")
-                .add("dir='" + dir + "'")
-                .toString();
-    }
+    @ApiModelProperty(value = "+为正序[asc], -为反序[desc],多字段排序用','分隔，如: sortBy=+name,-age")
+    private String sortBy;
 }
