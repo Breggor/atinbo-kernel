@@ -2,6 +2,7 @@ package com.atinbo.security.utils;
 
 
 import com.atinbo.security.exception.UnauthorizedException;
+import com.atinbo.security.model.LoginUser;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,11 +18,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class SecurityUtils {
     /**
-     * 获取用户账户
+     * 获取用户ID
+     **/
+    public static String getUserId() {
+        try {
+            return ((LoginUser) getUserDetails()).getUserId();
+        } catch (Exception e) {
+            throw new UnauthorizedException(HttpStatus.UNAUTHORIZED, "获取用户账户异常");
+        }
+    }
+
+    /**
+     * 获取用户名
      **/
     public static String getUsername() {
         try {
-            return getLoginUser().getUsername();
+            return getUserDetails().getUsername();
         } catch (Exception e) {
             throw new UnauthorizedException(HttpStatus.UNAUTHORIZED, "获取用户账户异常");
         }
@@ -30,7 +42,7 @@ public class SecurityUtils {
     /**
      * 获取用户
      **/
-    public static UserDetails getLoginUser() {
+    public static UserDetails getUserDetails() {
         try {
             return (UserDetails) getAuthentication().getPrincipal();
         } catch (Exception e) {

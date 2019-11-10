@@ -6,16 +6,19 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.User;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
  * 登录用户信息
  */
 @Setter
-public class LoginUser implements UserDetails {
+public class LoginUser extends User {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -28,22 +31,6 @@ public class LoginUser implements UserDetails {
      */
     @Getter
     private final String userId;
-
-    /**
-     * 用户名
-     */
-    private final String username;
-
-    /**
-     * 密码
-     */
-    private final String password;
-
-    /**
-     * 角色 ROLE_USER
-     */
-    @Getter
-    private final Collection<? extends GrantedAuthority> authorities;
 
     /**
      * 扩展业务属性
@@ -131,23 +118,11 @@ public class LoginUser implements UserDetails {
     }
 
     public LoginUser(String userId, String username, String password, Set<String> authorities) {
+        super(username, password, mapToGrantedAuthorities(authorities));
         this.userId = userId;
-        this.username = username;
-        this.password = password;
-        this.authorities = mapToGrantedAuthorities(authorities);
         this.permissions = authorities;
     }
 
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
 
     /**
      * 账户是否未过期
