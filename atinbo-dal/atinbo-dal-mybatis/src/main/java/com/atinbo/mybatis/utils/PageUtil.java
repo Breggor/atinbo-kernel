@@ -6,6 +6,7 @@ import com.atinbo.model.SortDir;
 import com.atinbo.model.SortInfo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.ObjectUtils;
 
@@ -42,8 +43,9 @@ public class PageUtil {
             List<String> ascFields = sortInfo.get(SortDir.ASC);
             List<String> descFields = sortInfo.get(SortDir.DESC);
 
-            ascFields.forEach(field -> page.addOrder(OrderItem.asc(field)));
-            descFields.forEach(field -> page.addOrder(OrderItem.desc(field)));
+            //传的驼峰命名的字段转换为下划线的数据库列名
+            ascFields.forEach(field -> page.addOrder(OrderItem.asc(StringUtils.camelToUnderline(field))));
+            descFields.forEach(field -> page.addOrder(OrderItem.desc(StringUtils.camelToUnderline(field))));
         }
         return page;
     }
