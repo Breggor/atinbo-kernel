@@ -8,29 +8,23 @@ public abstract class PageResolver {
     /**
      * 当前记录起始索引
      */
-    public static final String PAGE_NUM = "offset";
+    public static final String PAGE_NUM = "page";
 
     /**
      * 每页显示记录数
      */
-    public static final String PAGE_SIZE = "limit";
+    public static final String PAGE_SIZE = "size";
 
     /**
      * 排序列
      */
-    public static final String ORDER_BY = "orderBy";
-
-    /**
-     * 排序的方向 "desc" 或者 "asc".
-     */
-    public static final String DIRECTION = "dir";
-
+    public static final String SORT_BY = "sortBy";
 
     public static PageForm resolve() {
         PageForm form = new PageForm();
-        form.setOffset(ServletUtil.getParameterToInt(PAGE_NUM));
-        form.setLimit(ServletUtil.getParameterToInt(PAGE_SIZE));
-        form.setSortBy(ServletUtil.getParameter(ORDER_BY));
+        form.setPage(ServletUtil.getParameterToInt(PAGE_NUM));
+        form.setSize(ServletUtil.getParameterToInt(PAGE_SIZE));
+        form.setSortBy(ServletUtil.getParameter(SORT_BY));
         return form;
     }
 }

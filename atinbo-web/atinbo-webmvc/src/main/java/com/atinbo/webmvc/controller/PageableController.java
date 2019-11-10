@@ -26,9 +26,9 @@ public abstract class PageableController {
      */
     protected void beginPage() {
         PageForm page = PageResolver.resolve();
-        if (page != null && !ObjectUtil.isEmpty(page.getOffset()) && !ObjectUtil.isEmpty(page.getLimit())) {
+        if (page != null && !ObjectUtil.isEmpty(page.getPage()) && !ObjectUtil.isEmpty(page.getSize())) {
             String orderBy = SqlKeywords.escapeOrderBySql(page.getSortBy());
-            PageHelper.startPage(page.getOffset(), page.getLimit(), orderBy);
+            PageHelper.startPage(page.getPage(), page.getSize(), orderBy);
         }
     }
 
