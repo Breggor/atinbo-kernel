@@ -50,10 +50,4 @@ public abstract class BaseDomain implements Serializable {
      */
     @ApiModelProperty(value = "排序")
     private Long sortBy;
-
-    /**
-     * 状态[0:未删除,1:删除]
-     */
-    @ApiModelProperty(value = "是否已删除")
-    private Integer isDeleted;
 }

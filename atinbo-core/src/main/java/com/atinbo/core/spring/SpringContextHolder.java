@@ -28,22 +28,53 @@ import java.util.Objects;
 @Lazy(false)
 public class SpringContextHolder implements ApplicationContextAware, DisposableBean {
 
-
     private static ApplicationContext applicationContext = null;
 
-//    private static StringValueResolver stringValueResolver = null;
-
-    /**
-     * 取得存储在静态变量中的ApplicationContext.
-     */
     public static ApplicationContext getApplicationContext() {
         assertApplicationContextInjected();
         return applicationContext;
     }
 
-    /**
-     * 实现ApplicationContextAware接口, 注入Context到静态变量中.
-     */
+    public static <T> T getBean(String name) {
+        assertApplicationContextInjected();
+        return (T) applicationContext.getBean(name);
+    }
+
+    public static <T> T getBeanByType(Class requiredType) {
+        assertApplicationContextInjected();
+        return (T) applicationContext.getBean(requiredType);
+    }
+
+    public static <T> T getBean(Class<T> requiredType) {
+        assertApplicationContextInjected();
+        return applicationContext.getBean(requiredType);
+    }
+
+    public static <T> T getBean(String beanName, Class<T> clazz) {
+        if (null == beanName || "".equals(beanName.trim())) {
+            return null;
+        }
+        if (clazz == null) {
+            return null;
+        }
+        assertApplicationContextInjected();
+        return (T) applicationContext.getBean(beanName, clazz);
+    }
+
+    public static void publishEvent(ApplicationEvent event) {
+        assertApplicationContextInjected();
+        applicationContext.publishEvent(event);
+    }
+
+    private static void clearHolder() {
+        log.debug("清除SpringContextHolder中的ApplicationContext:{}", applicationContext);
+        applicationContext = null;
+    }
+
+    private static void assertApplicationContextInjected() {
+        Objects.requireNonNull(applicationContext, "applicaitonContext属性未注入, 请在applicationContext.xml中定义SpringContextHolder.");
+    }
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
         log.debug("注入ApplicationContext:{}", applicationContext);
@@ -53,78 +84,6 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
     }
 
     /**
-     * 从静态变量applicationContext中取得Bean, 自动转型为所赋值对象的类型.
-     */
-    @SuppressWarnings("unchecked")
-    public static <T> T getBean(String name) {
-        assertApplicationContextInjected();
-        return (T) applicationContext.getBean(name);
-    }
-
-    /**
-     * 从静态变量applicationContext中取得Bean, 自动转型为所赋值对象的类型.
-     */
-    @SuppressWarnings("unchecked")
-    public static <T> T getBeanByType(Class beanClazz) {
-        assertApplicationContextInjected();
-        return (T) applicationContext.getBean(beanClazz);
-    }
-
-    /**
-     * 从静态变量applicationContext中取得Bean, 自动转型为所赋值对象的类型.
-     */
-    public static <T> T getBean(Class<T> requiredType) {
-        assertApplicationContextInjected();
-        return applicationContext.getBean(requiredType);
-    }
-
-    /**
-     * 清除SpringContextHolder中的ApplicationContext为Null.
-     */
-    public static void clearHolder() {
-        log.debug("清除SpringContextHolder中的ApplicationContext:{}", applicationContext);
-        applicationContext = null;
-//        stringValueResolver = null;
-    }
-
-    /**
-     * 检查ApplicationContext不为空.
-     */
-    public static void assertApplicationContextInjected() {
-        Objects.requireNonNull(applicationContext, "applicaitonContext属性未注入, 请在applicationContext.xml中定义SpringContextHolder.");
-    }
-
-    /**
-     * 发布事件
-     *
-     * @param event
-     */
-    public static void publishEvent(ApplicationEvent event) {
-        if (applicationContext == null) {
-            return;
-        }
-        applicationContext.publishEvent(event);
-    }
-
-
-    /**
-     * 检查stringValueResolver不为空.
-     */
-//    public static void assertStringValueInjected() {
-//        Validate.validState(stringValueResolver != null, "stringValueResolver属性未注入");
-//    }
-
-    /**
-     * 从静态变量applicationContext中取得property, 自动转型为所赋值对象的类型.
-     */
-//    @SuppressWarnings("unchecked")
-//    public static <T> T getProperty(String name) {
-//        assertApplicationContextInjected();
-//        assertStringValueInjected();
-//        return (T) stringValueResolver.resolveStringValue(String.format("${%s}", name));
-//    }
-
-    /**
      * 实现DisposableBean接口, 在Context关闭时清理静态变量.
      */
     @Override
@@ -132,17 +91,4 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
     public void destroy() {
         SpringContextHolder.clearHolder();
     }
-
-    /**
-     * 实现EmbeddedValueResolverAware接口，将配置文件中的配置信息保存
-     *
-     * @param resolver
-     */
-//    @Override
-//    public void setEmbeddedValueResolver(StringValueResolver resolver) {
-//        logger.debug("注入stringValueResolver:{}", stringValueResolver);
-//        if (SpringContextHolder.stringValueResolver == null) {
-//            SpringContextHolder.stringValueResolver = stringValueResolver;
-//        }
-//    }
 }

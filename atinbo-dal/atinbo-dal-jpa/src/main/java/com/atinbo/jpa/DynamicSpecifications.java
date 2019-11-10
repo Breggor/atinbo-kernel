@@ -1,7 +1,7 @@
 package com.atinbo.jpa;
 
 
-import com.atinbo.common.reflections.ReflectionUtils;
+import com.atinbo.common.reflections.Reflections;
 import com.atinbo.model.Operator;
 import com.atinbo.model.PageParam;
 import com.atinbo.model.QueryField;
@@ -33,14 +33,14 @@ public class DynamicSpecifications {
     public static <T> Specification<T> toSpecification(final QueryParam queryParam) {
         return (Specification<T>) (root, query, builder) -> {
             List<Predicate> predicates = new ArrayList<>();
-            List<Field> fieldList = ReflectionUtils.getDeclaredFields(queryParam.getClass(), PageParam.class);
+            List<Field> fieldList = Reflections.getDeclaredFields(queryParam.getClass(), PageParam.class);
 
             String fieldName;
             Object fieldValue;
             Operator operator;
             QueryField queryMode;
             for (Field field : fieldList) {
-                fieldValue = ReflectionUtils.invokeGetterMethod(queryParam, field.getName());
+                fieldValue = Reflections.invokeGetterMethod(queryParam, field.getName());
                 if (fieldValue == null || (field.getType() == String.class && StringUtils.isBlank((String) fieldValue))) {
                     continue;
                 }
