@@ -14,6 +14,10 @@ import lombok.Data;
 @Data
 public class BaseEntity extends BaseDomain {
 
+    /** 1. 已删除 */
+    public static final int DELETED = 1;
+    /** 0. 未删除 */
+    public static final int UN_DELETED = 0;
 
     /**
      * 状态[0:未删除,1:删除]
