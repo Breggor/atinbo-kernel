@@ -23,7 +23,7 @@ public class GenerateProperties {
     private String author = "atinbo generator";
 
     /**
-     * 生成包路径
+     * 项目包名
      */
     private String packageName = "com.atinbo";
 

@@ -1,4 +1,4 @@
-package com.atinbo.utils;
+package com.atinbo.jpa.utils;
 
 import com.atinbo.model.PageParam;
 import com.atinbo.model.Pagable;
