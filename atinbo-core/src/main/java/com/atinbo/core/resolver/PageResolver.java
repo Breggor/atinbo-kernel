@@ -2,7 +2,7 @@ package com.atinbo.core.resolver;
 
 
 import com.atinbo.core.model.PageForm;
-import com.atinbo.core.utils.ServletUtils;
+import com.atinbo.core.utils.ServletUtil;
 
 public abstract class PageResolver {
     /**
@@ -28,10 +28,9 @@ public abstract class PageResolver {
 
     public static PageForm resolve() {
         PageForm form = new PageForm();
-        form.setOffset(ServletUtils.getParameterToInt(PAGE_NUM));
-        form.setLimit(ServletUtils.getParameterToInt(PAGE_SIZE));
-        form.setOrderBy(ServletUtils.getParameter(ORDER_BY));
-        form.setDir(ServletUtils.getParameter(DIRECTION));
+        form.setOffset(ServletUtil.getParameterToInt(PAGE_NUM));
+        form.setLimit(ServletUtil.getParameterToInt(PAGE_SIZE));
+        form.setSortBy(ServletUtil.getParameter(ORDER_BY));
         return form;
     }
 }

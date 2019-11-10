@@ -1,4 +1,4 @@
-package com.atinbo.generate.vo;
+package com.atinbo.generate.model;
 
 import lombok.Data;
 

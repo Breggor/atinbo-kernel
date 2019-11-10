@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Query {
+public @interface QueryField {
 
     /**
      * 查询方式 默认为全匹配

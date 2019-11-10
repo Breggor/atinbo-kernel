@@ -1,6 +1,7 @@
-package com.atinbo.core.utils;
+package com.atinbo.core.support;
 
 import com.atinbo.common.StringPool;
+import com.atinbo.core.utils.FuncUtil;
 
 /**
  * 字符串格式化
@@ -23,7 +24,7 @@ public class StrFormatter {
 	 * @return 结果
 	 */
 	public static String format(final String strPattern, final Object... argArray) {
-		if (Funcs.isBlank(strPattern) || Funcs.isEmpty(argArray)) {
+		if (FuncUtil.isBlank(strPattern) || FuncUtil.isEmpty(argArray)) {
 			return strPattern;
 		}
 		final int strPatternLength = strPattern.length();
@@ -68,7 +69,7 @@ public class StrFormatter {
 					if (delimIndex > 1 && strPattern.charAt(delimIndex - 2) == StringPool.BACK_SLASH) {
 						//转义符之前还有一个转义符，占位符依旧有效
 						sbuf.append(strPattern, handledPosition, delimIndex - 1);
-						sbuf.append(Funcs.toStr(argArray[argIndex]));
+						sbuf.append(FuncUtil.toStr(argArray[argIndex]));
 						handledPosition = delimIndex + 2;
 					} else {
 						//占位符被转义
@@ -79,7 +80,7 @@ public class StrFormatter {
 					}
 				} else {//正常占位符
 					sbuf.append(strPattern, handledPosition, delimIndex);
-					sbuf.append(Funcs.toStr(argArray[argIndex]));
+					sbuf.append(FuncUtil.toStr(argArray[argIndex]));
 					handledPosition = delimIndex + 2;
 				}
 			}

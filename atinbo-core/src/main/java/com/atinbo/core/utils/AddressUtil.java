@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author breggor
  */
-public class AddressUtils
+public class AddressUtil
 {
-    private static final Logger log = LoggerFactory.getLogger(AddressUtils.class);
+    private static final Logger log = LoggerFactory.getLogger(AddressUtil.class);
 
     public static final String IP_URL = "http://ip.taobao.com/service/getIpInfo.php";
 
@@ -21,7 +21,7 @@ public class AddressUtils
     {
         String address = "XX XX";
         // 内网不查询
-        if (IpUtils.internalIp(ip))
+        if (IpUtil.internalIp(ip))
         {
             return "内网IP";
         }

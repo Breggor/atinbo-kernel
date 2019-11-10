@@ -1,6 +1,5 @@
-package com.atinbo.generate.vo;
+package com.atinbo.generate.model;
 
-import com.atinbo.core.model.BaseVO;
 import lombok.Data;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
  * @date 2019-8-20
  */
 @Data
-public class ClassInfo implements BaseVO {
+public class ClassInfo {
 
     /**
      * 包名

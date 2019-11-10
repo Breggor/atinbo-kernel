@@ -17,6 +17,8 @@ package com.atinbo.core.utils;
 
 
 
+import com.atinbo.core.support.BaseBeanCopier;
+import com.atinbo.core.support.BeanProperty;
 import org.springframework.beans.BeansException;
 import org.springframework.cglib.beans.BeanGenerator;
 import org.springframework.cglib.beans.BeanMap;

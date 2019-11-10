@@ -1,6 +1,7 @@
 package com.atinbo.core.utils;
 
 import com.atinbo.common.StringPool;
+import com.atinbo.core.support.ConcurrentDateFormat;
 import lombok.experimental.UtilityClass;
 import org.springframework.util.Assert;
 

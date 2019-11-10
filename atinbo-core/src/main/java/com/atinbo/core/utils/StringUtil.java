@@ -16,7 +16,10 @@
 package com.atinbo.core.utils;
 
 import com.atinbo.common.StringPool;
- import org.springframework.util.Assert;
+import com.atinbo.core.support.RandomType;
+import com.atinbo.core.support.StrFormatter;
+import com.atinbo.core.support.StrSpliter;
+import org.springframework.util.Assert;
 import org.springframework.web.util.HtmlUtils;
 
 import java.io.StringReader;
@@ -256,7 +259,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 		if (null == template) {
 			return null;
 		}
-		if (Funcs.isEmpty(params) || isBlank(template)) {
+		if (FuncUtil.isEmpty(params) || isBlank(template)) {
 			return template.toString();
 		}
 		return StrFormatter.format(template.toString(), params);
@@ -293,7 +296,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 
 		String template2 = template.toString();
 		for (Map.Entry<?, ?> entry : map.entrySet()) {
-			template2 = template2.replace("{" + entry.getKey() + "}", Funcs.toStr(entry.getValue()));
+			template2 = template2.replace("{" + entry.getKey() + "}", FuncUtil.toStr(entry.getValue()));
 		}
 		return template2;
 	}
@@ -475,7 +478,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 * @since 3.2.0
 	 */
 	public static String getContainsStr(CharSequence str, CharSequence... testStrs) {
-		if (isEmpty(str) || Funcs.isEmpty(testStrs)) {
+		if (isEmpty(str) || FuncUtil.isEmpty(testStrs)) {
 			return null;
 		}
 		for (CharSequence checkStr : testStrs) {
@@ -524,7 +527,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 * @since 3.2.0
 	 */
 	public static String getContainsStrIgnoreCase(CharSequence str, CharSequence... testStrs) {
-		if (isEmpty(str) || Funcs.isEmpty(testStrs)) {
+		if (isEmpty(str) || FuncUtil.isEmpty(testStrs)) {
 			return null;
 		}
 		for (CharSequence testStr : testStrs) {
@@ -1301,7 +1304,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 * @return 查找到的个数
 	 */
 	public static int count(CharSequence content, CharSequence strForSearch) {
-		if (Funcs.hasEmpty(content, strForSearch) || strForSearch.length() > content.length()) {
+		if (FuncUtil.hasEmpty(content, strForSearch) || strForSearch.length() > content.length()) {
 			return 0;
 		}
 

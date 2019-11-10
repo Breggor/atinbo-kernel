@@ -1,6 +1,8 @@
-package com.atinbo.core.utils;
+package com.atinbo.core.support;
 
 import com.atinbo.common.StringPool;
+import com.atinbo.core.utils.FuncUtil;
+import com.atinbo.core.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -157,7 +159,7 @@ public class StrSpliter {
 		int len = str.length();
 		int start = 0;
 		for (int i = 0; i < len; i++) {
-			if (Funcs.equals(separator, str.charAt(i))) {
+			if (FuncUtil.equals(separator, str.charAt(i))) {
 				addToList(list, str.substring(start, i), isTrim, ignoreEmpty);
 				start = i + 1;
 
@@ -358,7 +360,7 @@ public class StrSpliter {
 		int len = str.length();
 		int start = 0;
 		for (int i = 0; i < len; i++) {
-			if (Funcs.isEmpty(str.charAt(i))) {
+			if (FuncUtil.isEmpty(str.charAt(i))) {
 				addToList(list, str.substring(start, i), true, true);
 				start = i + 1;
 				if (limit > 0 && list.size() > limit - 2) {

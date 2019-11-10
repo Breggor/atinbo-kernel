@@ -34,7 +34,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 /**
  * This class provides some helper methods to deal with files.
  */
-public final class FileUtils {
+public final class Files {
 
     /**
      * Get a file from the given path elements.
@@ -93,18 +93,18 @@ public final class FileUtils {
      * @throws IOException if IO error occurs during copying
      */
     public static void copyDirectory(Path source, Path target) throws IOException {
-        if (!Files.isDirectory(source)) {
+        if (!java.nio.file.Files.isDirectory(source)) {
             throw new IOException("Invalid source directory: " + source);
         }
-        if (Files.exists(target) && !Files.isDirectory(target)) {
+        if (java.nio.file.Files.exists(target) && !java.nio.file.Files.isDirectory(target)) {
             throw new IOException("Invalid target directory: " + target);
         }
-        if (!Files.exists(target)) {
-            Files.createDirectories(target);
+        if (!java.nio.file.Files.exists(target)) {
+            java.nio.file.Files.createDirectories(target);
         }
         final DirCopier copier = new DirCopier(source, target);
         final EnumSet<FileVisitOption> opts = EnumSet.of(FOLLOW_LINKS);
-        Files.walkFileTree(source, opts, Integer.MAX_VALUE, copier);
+        java.nio.file.Files.walkFileTree(source, opts, Integer.MAX_VALUE, copier);
     }
 
     /**
@@ -124,12 +124,12 @@ public final class FileUtils {
      * @throws IOException in case deletion is unsuccessful
      */
     public static void deleteDirectory(Path directory) throws IOException {
-        if (!Files.isDirectory(directory)) {
+        if (!java.nio.file.Files.isDirectory(directory)) {
             throw new IOException("Invalid directory: " + directory);
         }
         final DirCleaner cleaner = new DirCleaner();
         final EnumSet<FileVisitOption> opts = EnumSet.of(FOLLOW_LINKS);
-        Files.walkFileTree(directory, opts, Integer.MAX_VALUE, cleaner);
+        java.nio.file.Files.walkFileTree(directory, opts, Integer.MAX_VALUE, cleaner);
     }
 
     static class DirCopier extends SimpleFileVisitor<Path> {
@@ -145,7 +145,7 @@ public final class FileUtils {
         @Override
         public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
             final Path dest = target.resolve(source.relativize(file));
-            Files.copy(file, dest, COPY_ATTRIBUTES, REPLACE_EXISTING);
+            java.nio.file.Files.copy(file, dest, COPY_ATTRIBUTES, REPLACE_EXISTING);
             return CONTINUE;
         }
 
@@ -154,7 +154,7 @@ public final class FileUtils {
                 throws IOException {
             Path dest = target.resolve(source.relativize(dir));
             try {
-                Files.copy(dir, dest, COPY_ATTRIBUTES);
+                java.nio.file.Files.copy(dir, dest, COPY_ATTRIBUTES);
             } catch (FileAlreadyExistsException e) {
             }
             return CONTINUE;
@@ -165,8 +165,8 @@ public final class FileUtils {
             if (exc == null) {
                 Path dest = target.resolve(source.relativize(dir));
                 try {
-                    FileTime time = Files.getLastModifiedTime(dir);
-                    Files.setLastModifiedTime(dest, time);
+                    FileTime time = java.nio.file.Files.getLastModifiedTime(dir);
+                    java.nio.file.Files.setLastModifiedTime(dest, time);
                 } catch (IOException e) {
                 }
             }
@@ -178,13 +178,13 @@ public final class FileUtils {
 
         @Override
         public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-            Files.delete(file);
+            java.nio.file.Files.delete(file);
             return CONTINUE;
         }
 
         @Override
         public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-            Files.delete(dir);
+            java.nio.file.Files.delete(dir);
             return CONTINUE;
         }
     }

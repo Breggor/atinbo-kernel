@@ -1,4 +1,4 @@
-package com.atinbo.core.utils;
+package com.atinbo.core.support;
 
 import com.atinbo.common.StringPool;
 import org.springframework.lang.Nullable;

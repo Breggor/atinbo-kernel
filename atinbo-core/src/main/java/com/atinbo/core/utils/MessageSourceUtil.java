@@ -9,7 +9,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
  *
  * @author breggor
  */
-public class MessageSourceUtils {
+public class MessageSourceUtil {
 
     /**
      * 根据消息键和参数 获取消息 委托给spring messageSource

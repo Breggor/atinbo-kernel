@@ -1,6 +1,8 @@
 package com.atinbo.core.utils;
 
 import com.atinbo.common.Charsets;
+import com.atinbo.core.support.ConcurrentDateFormat;
+import com.atinbo.core.support.RandomType;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -30,7 +32,7 @@ import java.util.function.Supplier;
  *
  * @author L.cm
  */
-public class Funcs {
+public class FuncUtil {
 
     /**
      * Checks that the specified object reference is not {@code null}. This

@@ -31,7 +31,7 @@ public class SortInfo implements Serializable {
      * @param property
      * @return
      */
-    public SortInfo addField(SortDirection direction, String property) {
+    public SortInfo addField(SortDir direction, String property) {
         Field field = new Field(direction, property);
         if (!orders.contains(field)) {
             this.orders.add(field);
@@ -45,7 +45,7 @@ public class SortInfo implements Serializable {
      * @param direction
      * @return
      */
-    public List<String> get(SortDirection direction) {
+    public List<String> get(SortDir direction) {
         return orders.stream().filter(o -> o.direction == direction).map(Field::getProperty).collect(Collectors.toList());
     }
 
@@ -54,7 +54,7 @@ public class SortInfo implements Serializable {
     @AllArgsConstructor
     @EqualsAndHashCode(of = {"direction", "property"})
     public class Field implements Serializable {
-        private SortDirection direction;
+        private SortDir direction;
         private String property;
     }
 }

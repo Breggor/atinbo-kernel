@@ -1,4 +1,4 @@
-package com.atinbo.core.utils;
+package com.atinbo.core.support;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,11 +6,11 @@ import lombok.Getter;
 /**
  * Bean属性
  *
- * @author Chill
+ * @author breggor
  */
 @Getter
 @AllArgsConstructor
 public class BeanProperty {
-	private final String name;
-	private final Class<?> type;
+    private final String name;
+    private final Class<?> type;
 }

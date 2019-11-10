@@ -2,7 +2,7 @@ package com.atinbo.mybatis.utils;
 
 import com.atinbo.model.PageParam;
 import com.atinbo.model.Pagable;
-import com.atinbo.model.SortDirection;
+import com.atinbo.model.SortDir;
 import com.atinbo.model.SortInfo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
@@ -39,8 +39,8 @@ public class PageUtil {
 
         SortInfo sortInfo = ObjectUtils.defaultIfNull(pageParam.getSort(), defaultSort);
         if (sortInfo != null && !sortInfo.isEmpty()) {
-            List<String> ascFields = sortInfo.get(SortDirection.ASC);
-            List<String> descFields = sortInfo.get(SortDirection.DESC);
+            List<String> ascFields = sortInfo.get(SortDir.ASC);
+            List<String> descFields = sortInfo.get(SortDir.DESC);
 
             ascFields.forEach(field -> page.addOrder(OrderItem.asc(field)));
             descFields.forEach(field -> page.addOrder(OrderItem.desc(field)));

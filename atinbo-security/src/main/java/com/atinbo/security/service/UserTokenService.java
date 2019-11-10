@@ -2,9 +2,9 @@ package com.atinbo.security.service;
 
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.atinbo.common.id.IdUtils;
-import com.atinbo.core.utils.AddressUtils;
-import com.atinbo.core.utils.IpUtils;
-import com.atinbo.core.utils.ServletUtils;
+import com.atinbo.core.utils.AddressUtil;
+import com.atinbo.core.utils.IpUtil;
+import com.atinbo.core.utils.ServletUtil;
 import com.atinbo.security.model.LoginUser;
 import eu.bitwalker.useragentutils.UserAgent;
 import io.jsonwebtoken.Claims;
@@ -154,10 +154,10 @@ public class UserTokenService {
      * @param user 登录信息
      */
     public void setUserAgent(LoginUser user) {
-        UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));
-        String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
+        UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtil.getRequest().getHeader("User-Agent"));
+        String ip = IpUtil.getIpAddr(ServletUtil.getRequest());
         user.setIp(ip);
-        user.setLocation(AddressUtils.getRealAddressByIP(ip));
+        user.setLocation(AddressUtil.getRealAddressByIP(ip));
         user.setBrowser(userAgent.getBrowser().getName());
         user.setOs(userAgent.getOperatingSystem().getName());
     }

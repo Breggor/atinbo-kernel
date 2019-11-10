@@ -2,7 +2,7 @@ package com.atinbo.utils;
 
 import com.atinbo.model.PageParam;
 import com.atinbo.model.Pagable;
-import com.atinbo.model.SortDirection;
+import com.atinbo.model.SortDir;
 import com.atinbo.model.SortInfo;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -28,8 +28,8 @@ public class PageUtil {
 
     public static Sort toSort(SortInfo sortInfo) {
         if (sortInfo != null && !sortInfo.isEmpty()) {
-            List<String> ascFields = sortInfo.get(SortDirection.ASC);
-            List<String> descFields = sortInfo.get(SortDirection.DESC);
+            List<String> ascFields = sortInfo.get(SortDir.ASC);
+            List<String> descFields = sortInfo.get(SortDir.DESC);
 
             List<Sort.Order> orders = new ArrayList<>();
 

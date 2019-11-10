@@ -5,7 +5,7 @@ package com.atinbo.common.file;
  *
  * @author breggor
  */
-public class MimeTypeUtils
+public class MimeTypes
 {
     public static final String IMAGE_PNG = "image/png";
 

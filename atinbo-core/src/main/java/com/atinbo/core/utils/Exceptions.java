@@ -15,6 +15,8 @@
  */
 package com.atinbo.core.utils;
 
+import com.atinbo.core.support.FastStringWriter;
+
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.UndeclaredThrowableException;

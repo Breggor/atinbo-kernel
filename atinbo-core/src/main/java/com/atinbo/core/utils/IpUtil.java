@@ -10,7 +10,7 @@ import java.util.Objects;
  *
  * @author breggor
  */
-public class IpUtils {
+public class IpUtil {
     public static String getIpAddr(HttpServletRequest request) {
         if (request == null) {
             return "unknown";

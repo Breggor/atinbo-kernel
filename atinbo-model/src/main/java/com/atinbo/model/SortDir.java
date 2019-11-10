@@ -5,6 +5,6 @@ package com.atinbo.model;
  *
  * @author breggor
  */
-public enum SortDirection {
+public enum SortDir {
     ASC, DESC;
 }

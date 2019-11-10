@@ -1,10 +1,10 @@
 package com.atinbo.webmvc.controller;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.atinbo.common.ObjectUtils;
-import com.atinbo.common.sql.SqlUtils;
+import com.atinbo.common.sql.SqlKeywords;
 import com.atinbo.core.model.PageForm;
 import com.atinbo.core.resolver.PageResolver;
+import com.atinbo.core.utils.ObjectUtil;
 import com.atinbo.model.Outcome;
 import com.atinbo.model.Pagable;
 import com.github.pagehelper.PageHelper;
@@ -26,8 +26,8 @@ public abstract class PageableController {
      */
     protected void beginPage() {
         PageForm page = PageResolver.resolve();
-        if (page != null && !ObjectUtils.isEmpty(page.getOffset()) && !ObjectUtils.isEmpty(page.getLimit())) {
-            String orderBy = SqlUtils.escapeOrderBySql(page.getOrderBy());
+        if (page != null && !ObjectUtil.isEmpty(page.getOffset()) && !ObjectUtil.isEmpty(page.getLimit())) {
+            String orderBy = SqlKeywords.escapeOrderBySql(page.getSortBy());
             PageHelper.startPage(page.getOffset(), page.getLimit(), orderBy);
         }
     }

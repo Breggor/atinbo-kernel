@@ -3,7 +3,7 @@ package com.atinbo.mybatis;
 import com.atinbo.common.reflections.ReflectionUtils;
 import com.atinbo.model.Operator;
 import com.atinbo.model.PageParam;
-import com.atinbo.model.Query;
+import com.atinbo.model.QueryField;
 import com.atinbo.model.QueryParam;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -26,15 +26,15 @@ public class DynamicCondition {
         String fieldName;
         Object fieldValue;
         Operator operator;
-        Query queryMode;
+        QueryField queryMode;
         for (Field field : fieldList) {
             fieldValue = ReflectionUtils.invokeGetterMethod(queryParam, field.getName());
             if (fieldValue == null || (field.getType() == String.class && StringUtils.isEmpty((String) fieldValue))) {
                 continue;
             }
 
-            if (field.isAnnotationPresent(Query.class)) {
-                queryMode = field.getAnnotation(Query.class);
+            if (field.isAnnotationPresent(QueryField.class)) {
+                queryMode = field.getAnnotation(QueryField.class);
                 if (queryMode.ignore()) {
                     continue;
                 }

@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author breggor
  */
-public class EscapeUtil
+public class EscapeUtils
 {
     public static final String RE_HTML_MARK = "(<[^<]*?>)|(<[\\s]*?/[^<]*?>)|(<[^<]*?/[\\s]*?>)";
 
@@ -146,8 +146,8 @@ public class EscapeUtil
     public static void main(String[] args)
     {
         String html = "<script>alert(1);</script>";
-        System.out.println(EscapeUtil.clean(html));
-        System.out.println(EscapeUtil.escape(html));
-        System.out.println(EscapeUtil.unescape(html));
+        System.out.println(EscapeUtils.clean(html));
+        System.out.println(EscapeUtils.escape(html));
+        System.out.println(EscapeUtils.unescape(html));
     }
 }

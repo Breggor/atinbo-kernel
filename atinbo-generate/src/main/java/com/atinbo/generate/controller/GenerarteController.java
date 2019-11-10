@@ -3,7 +3,7 @@ package com.atinbo.generate.controller;
 import com.atinbo.model.Outcome;
 
 import com.atinbo.generate.service.GenerateService;
-import com.atinbo.generate.vo.ClassInfo;
+import com.atinbo.generate.model.ClassInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
