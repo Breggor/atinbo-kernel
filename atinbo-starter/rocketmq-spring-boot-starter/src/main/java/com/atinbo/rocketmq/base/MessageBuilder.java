@@ -60,7 +60,7 @@ public class MessageBuilder {
     }
 
     public Message build() {
-        String messageKey = "";
+        String messageKey = "" ;
         try {
             Field[] fields = message.getClass().getDeclaredFields();
             for (Field field : fields) {
@@ -76,7 +76,7 @@ public class MessageBuilder {
                 }
             }
         } catch (Exception e) {
-            log.error("parse key error : {}", e.getMessage());
+            log.error("parse key error : {}" , e.getMessage());
         }
         String str = gson.toJson(message);
         if (StringUtils.isEmpty(topic)) {

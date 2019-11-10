@@ -15,32 +15,32 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "atinbo.generate")
 public class GenerateProperties {
 
-    public static final String GENERATE_PREFIX = "atinbo.generate";
+    public static final String GENERATE_PREFIX = "atinbo.generate" ;
 
     /**
      * 作者
      */
-    private String author = "atinbo generator";
+    private String author = "atinbo generator" ;
 
     /**
      * 项目包名
      */
-    private String packageName = "com.atinbo";
+    private String packageName = "com.atinbo" ;
 
     /**
      * 生成类型  hibernate 或者 mybatis
      */
-    private String category = "mybatis";
+    private String category = "mybatis" ;
 
     /**
      * 表前缀(类名不会包含表前缀)
      */
-    private String tablePrefix = "";
+    private String tablePrefix = "" ;
 
     /**
      * 文件输出路径
      */
-    private String outPath = "src/java/main";
+    private String outPath = "src/java/main" ;
 
     /**
      * 模块配置

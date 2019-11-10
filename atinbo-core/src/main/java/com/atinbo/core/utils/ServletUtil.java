@@ -108,12 +108,12 @@ public class ServletUtil {
         }
 
         String uri = request.getRequestURI();
-        if (Strings.inStringIgnoreCase(uri, ".json", ".xml")) {
+        if (Strings.inStringIgnoreCase(uri, ".json" , ".xml")) {
             return true;
         }
 
         String ajax = request.getParameter("__ajax");
-        if (Strings.inStringIgnoreCase(ajax, "json", "xml")) {
+        if (Strings.inStringIgnoreCase(ajax, "json" , "xml")) {
             return true;
         }
         return false;

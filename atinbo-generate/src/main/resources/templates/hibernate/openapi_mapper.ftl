@@ -11,28 +11,30 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 /**
- *  ${classInfo.classComment} 类型转换
- *
- *  @author ${classInfo.author}
- *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
- */
+*  ${classInfo.classComment} 类型转换
+*
+*  @author ${classInfo.author}
+*  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
+*/
 @Mapper
 public interface ${classInfo.className}Mapper {
 
-    ${classInfo.className}Mapper INSTANCE = Mappers.getMapper(${classInfo.className}Mapper.class);
+${classInfo.className}Mapper INSTANCE = Mappers.getMapper(${classInfo.className}Mapper.class);
 
-    /**
-     * form to param
-     */
-    ${classInfo.className}Param to${classInfo.className}Param(${classInfo.className}Form ${classInfo.className?uncap_first}Form);
+/**
+* form to param
+*/
+${classInfo.className}Param to${classInfo.className}Param(${classInfo.className}Form ${classInfo.className?uncap_first}Form);
 
-    /**
-     * BO to VO
-     */
-    ${classInfo.className}VO to${classInfo.className}Vo(${classInfo.className}BO ${classInfo.className?uncap_first});
+/**
+* BO to VO
+*/
+${classInfo.className}VO to${classInfo.className}Vo(${classInfo.className}BO ${classInfo.className?uncap_first});
 
-    /**
-     * BOList to VOList
-     */
-    List<${classInfo.className}VO> to${classInfo.className}Vos(List<${classInfo.className}BO> ${classInfo.className?uncap_first}List);
-}
+/**
+* BOList to VOList
+*/
+List
+<${classInfo.className}VO> to${classInfo.className}Vos(List
+    <${classInfo.className}BO> ${classInfo.className?uncap_first}List);
+        }

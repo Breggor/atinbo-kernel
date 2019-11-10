@@ -12,5 +12,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface MQKey {
-    String prefix() default "";
+    String prefix() default "" ;
 }

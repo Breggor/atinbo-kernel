@@ -23,20 +23,8 @@ public abstract class BaseBeanCopier {
     private static final BeanCopierKey KEY_FACTORY = (BeanCopierKey) KeyFactory.create(BeanCopierKey.class);
     private static final Type CONVERTER = TypeUtils.parseType("org.springframework.cglib.core.Converter");
     private static final Type BEAN_COPIER = TypeUtils.parseType(BaseBeanCopier.class.getName());
-    private static final Signature COPY = new Signature("copy", Type.VOID_TYPE, new Type[]{Constants.TYPE_OBJECT, Constants.TYPE_OBJECT, CONVERTER});
+    private static final Signature COPY = new Signature("copy" , Type.VOID_TYPE, new Type[]{Constants.TYPE_OBJECT, Constants.TYPE_OBJECT, CONVERTER});
     private static final Signature CONVERT = TypeUtils.parseSignature("Object convert(Object, Class, Object)");
-
-    interface BeanCopierKey {
-        /**
-         * 实例化
-         *
-         * @param source       源
-         * @param target       目标
-         * @param useConverter 是否使用转换
-         * @return
-         */
-        Object newInstance(String source, String target, boolean useConverter);
-    }
 
     public static BaseBeanCopier create(Class source, Class target, boolean useConverter) {
         return BaseBeanCopier.create(source, target, null, useConverter);
@@ -64,6 +52,18 @@ public abstract class BaseBeanCopier {
      */
     abstract public void copy(Object from, Object to, Converter converter);
 
+    interface BeanCopierKey {
+        /**
+         * 实例化
+         *
+         * @param source       源
+         * @param target       目标
+         * @param useConverter 是否使用转换
+         * @return
+         */
+        Object newInstance(String source, String target, boolean useConverter);
+    }
+
     public static class Generator extends AbstractClassGenerator {
         private static final Source SOURCE = new Source(BaseBeanCopier.class.getName());
         private final ClassLoader classLoader;
@@ -79,6 +79,10 @@ public abstract class BaseBeanCopier {
         Generator(ClassLoader classLoader) {
             super(SOURCE);
             this.classLoader = classLoader;
+        }
+
+        private static boolean compatible(PropertyDescriptor getter, PropertyDescriptor setter) {
+            return setter.getPropertyType().isAssignableFrom(getter.getPropertyType());
         }
 
         public void setSource(Class source) {
@@ -177,10 +181,6 @@ public abstract class BaseBeanCopier {
             e.return_value();
             e.end_method();
             ce.end_class();
-        }
-
-        private static boolean compatible(PropertyDescriptor getter, PropertyDescriptor setter) {
-            return setter.getPropertyType().isAssignableFrom(getter.getPropertyType());
         }
 
         @Override

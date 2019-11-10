@@ -33,7 +33,7 @@ public class Jacksons {
         //默认SerializationFeature.FAIL_ON_EMPTY_BEANS为true,实体不提供getter、setter方法时报错
         mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         //允许单引号
-        mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true) ;
+        mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
 //		mapper.configure(Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
 //		mapper.setDateFormat(new SimpleDateFormat(DateUtil.defaultFormat));
     }
@@ -101,11 +101,11 @@ public class Jacksons {
         try {
             mapper.writeValue(write, object);
         } catch (JsonGenerationException e) {
-            throw new RuntimeException("JsonGenerationException when serialize object to json", e);
+            throw new RuntimeException("JsonGenerationException when serialize object to json" , e);
         } catch (JsonMappingException e) {
-            throw new RuntimeException("JsonMappingException when serialize object to json", e);
+            throw new RuntimeException("JsonMappingException when serialize object to json" , e);
         } catch (IOException e) {
-            throw new RuntimeException("IOException when serialize object to json", e);
+            throw new RuntimeException("IOException when serialize object to json" , e);
         }
         return write.toString();
     }
@@ -123,11 +123,11 @@ public class Jacksons {
         try {
             object = mapper.readValue(json, TypeFactory.rawClass(clazz));
         } catch (JsonParseException e) {
-            throw new RuntimeException("JsonParseException when serialize object to json", e);
+            throw new RuntimeException("JsonParseException when serialize object to json" , e);
         } catch (JsonMappingException e) {
-            throw new RuntimeException("JsonMappingException when serialize object to json", e);
+            throw new RuntimeException("JsonMappingException when serialize object to json" , e);
         } catch (IOException e) {
-            throw new RuntimeException("IOException when serialize object to json", e);
+            throw new RuntimeException("IOException when serialize object to json" , e);
         }
 
         return (T) object;

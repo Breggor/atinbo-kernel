@@ -31,8 +31,8 @@ import java.util.Objects;
 @Slf4j
 public class SysLogAspect {
 
-    private static final String HEADER_CLIENT_ID = "X-GW-CLIENT-ID";
-    private static final String HEADER_USER = "X-GW-USER";
+    private static final String HEADER_CLIENT_ID = "X-GW-CLIENT-ID" ;
+    private static final String HEADER_USER = "X-GW-USER" ;
 
     @Value("${spring.application.name}")
     private String module;
@@ -42,7 +42,7 @@ public class SysLogAspect {
     public Object around(ProceedingJoinPoint point, SysLog sysLog) {
         String strClassName = point.getTarget().getClass().getName();
         String strMethodName = point.getSignature().getName();
-        log.info("[模块]:{},[类名]:{},[方法]:{},[日志]:{}", module, strClassName, strMethodName, sysLog.value());
+        log.info("[模块]:{},[类名]:{},[方法]:{},[日志]:{}" , module, strClassName, strMethodName, sysLog.value());
 
         SysLogSource logSource = getSystemLog();
         logSource.setTitle(sysLog.value());
@@ -56,10 +56,10 @@ public class SysLogAspect {
         } catch (Exception e) {
             logSource.setException(e.getMessage());
             throw e;
-        }finally {
+        } finally {
             Long endTime = System.currentTimeMillis();
             logSource.setTime(endTime - startTime);
-            log.info("[类名]:{},[方法]:{},[耗时]:{}", strClassName, strMethodName, endTime - startTime);
+            log.info("[类名]:{},[方法]:{},[耗时]:{}" , strClassName, strMethodName, endTime - startTime);
             SpringContextHolder.publishEvent(new SysLogEvent(logSource));
         }
         return obj;
@@ -75,7 +75,7 @@ public class SysLogAspect {
         logSource.setRequestUri(URLUtil.getPath(request.getRequestURI()));
         logSource.setMethod(request.getMethod());
 
-        logSource.setUserAgent(ServletUtil.getHeader(request, Header.USER_AGENT.toString() , CharsetUtil.UTF_8));
+        logSource.setUserAgent(ServletUtil.getHeader(request, Header.USER_AGENT.toString(), CharsetUtil.UTF_8));
         logSource.setParams(HttpUtil.toParams(request.getParameterMap()));
         logSource.setServiceId(ServletUtil.getHeader(request, HEADER_CLIENT_ID, CharsetUtil.UTF_8));
         logSource.setDelFlag(SysLogSource.DEL_FALSE);

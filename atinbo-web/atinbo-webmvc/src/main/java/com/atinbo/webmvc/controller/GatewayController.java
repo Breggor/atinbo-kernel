@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Slf4j
 public abstract class GatewayController {
-    private static final String ENV_STRICT_KEY = "strict_mode";
+    private static final String ENV_STRICT_KEY = "strict_mode" ;
 
     @Autowired
     protected HttpServletRequest request;

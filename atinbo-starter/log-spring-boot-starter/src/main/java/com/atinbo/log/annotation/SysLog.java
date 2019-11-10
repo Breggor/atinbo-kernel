@@ -21,8 +21,9 @@ public @interface SysLog {
 
     /**
      * 类型
+     *
      * @return
      */
-    String type() default "default";
+    String type() default "default" ;
 
 }

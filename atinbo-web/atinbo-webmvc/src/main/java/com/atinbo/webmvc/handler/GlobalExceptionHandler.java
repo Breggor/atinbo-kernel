@@ -1,6 +1,6 @@
 package com.atinbo.webmvc.handler;
 
-import com.atinbo.core.model.ErrResult;
+import com.atinbo.model.Outcome;
 import com.atinbo.model.StatusCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,8 +23,8 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler
-    public ErrResult handleException(Exception ex) {
+    public Outcome handleException(Exception ex) {
         log.error(ex.getMessage(), ex);
-        return ErrResult.error(StatusCodeEnum.INTERNAL_SERVER_ERROR.getCode(), StatusCodeEnum.INTERNAL_SERVER_ERROR.getMessage(), ex.getMessage());
+        return Outcome.failure(StatusCodeEnum.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 }

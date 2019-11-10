@@ -2,7 +2,7 @@ package com.atinbo.handler;
 
 
 import com.atinbo.core.exception.HttpApiException;
-import com.atinbo.core.model.ErrResult;
+import com.atinbo.model.Outcome;
 import com.atinbo.model.StatusCodeEnum;
 import com.atinbo.utils.HttpRequestUtils;
 import org.springframework.web.util.NestedServletException;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author breggor
  */
 public class FrameworkExceptionHandler extends Handler {
-    private static final String SPRING_404_EXCEPTION_MESSAGE = "org.springframework.web.servlet.resource.ResourceHttpRequestHandler cannot be cast to org.springframework.web.method.HandlerMethod";
+    private static final String SPRING_404_EXCEPTION_MESSAGE = "org.springframework.web.servlet.resource.ResourceHttpRequestHandler cannot be cast to org.springframework.web.method.HandlerMethod" ;
 
     public FrameworkExceptionHandler() {
     }
@@ -45,15 +45,13 @@ public class FrameworkExceptionHandler extends Handler {
     }
 
     private void flushFrameworkException(HttpServletResponse response, HttpApiException ex) {
-        ErrResult result = new ErrResult(ex.getStatus());
         response.setStatus(ex.getStatus().getCode());
-        HttpRequestUtils.flushJson(response, result);
+        HttpRequestUtils.flushJson(response, Outcome.failure(ex.getStatus()));
     }
 
 
     private void flushException500(HttpServletResponse response, Exception e) {
-        response.setStatus(500);
-        ErrResult result = ErrResult.error(StatusCodeEnum.INTERNAL_SERVER_ERROR.getCode(), StatusCodeEnum.INTERNAL_SERVER_ERROR.getMessage(), e.getMessage());
-        HttpRequestUtils.flushJson(response, result);
+        response.setStatus(StatusCodeEnum.INTERNAL_SERVER_ERROR.getCode());
+        HttpRequestUtils.flushJson(response, Outcome.failure(StatusCodeEnum.INTERNAL_SERVER_ERROR, e.getMessage()));
     }
 }

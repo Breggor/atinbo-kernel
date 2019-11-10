@@ -1,9 +1,10 @@
 package com.atinbo.webmvc.handler;
 
-import com.atinbo.core.constants.ErrorType;
+
 import com.atinbo.core.exception.HttpApiException;
 import com.atinbo.core.exception.RequestParamException;
-import com.atinbo.core.model.ErrResult;
+import com.atinbo.model.ErrorInfo;
+import com.atinbo.model.Outcome;
 import com.atinbo.model.StatusCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,10 +18,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.atinbo.model.StatusCodeEnum.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -40,9 +39,9 @@ public class HttpExceptoinHandler {
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrResult bindException(MethodArgumentNotValidException e) {
+    public Outcome bindException(MethodArgumentNotValidException e) {
         log.error(e.getMessage(), e);
-        return doErr(NOT_FOUND, e.getBindingResult());
+        return doErr(StatusCodeEnum.PARAM_VALID_ERROR, e.getBindingResult());
     }
 
 
@@ -54,9 +53,9 @@ public class HttpExceptoinHandler {
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrResult handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
+    public Outcome handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         log.error(e.getMessage(), e);
-        return ErrResult.error(NOT_FOUND.getCode(), ErrorType.DATA_INVALID.getLabel());
+        return Outcome.failure();
     }
 
     /**
@@ -67,9 +66,9 @@ public class HttpExceptoinHandler {
      */
     @ExceptionHandler(value = {RequestParamException.class, RuntimeException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrResult handleException(Exception e) {
+    public Outcome handleException(Exception e) {
         log.error(e.getMessage(), e);
-        return ErrResult.error(FAILURE.getCode(), FAILURE.getMessage(), e.getMessage());
+        return Outcome.failure(StatusCodeEnum.PARAM_TYPE_ERROR, e.getMessage());
     }
 
 
@@ -81,9 +80,9 @@ public class HttpExceptoinHandler {
      */
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ErrResult handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+    public Outcome handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
         log.error(e.getMessage(), e);
-        return ErrResult.error(METHOD_NOT_SUPPORTED.getCode(), METHOD_NOT_SUPPORTED.getMessage());
+        return Outcome.failure(StatusCodeEnum.METHOD_NOT_SUPPORTED);
     }
 
     /**
@@ -94,29 +93,29 @@ public class HttpExceptoinHandler {
      */
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
-    public ErrResult handleHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException e) {
+    public Outcome handleHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException e) {
         log.error(e.getMessage(), e);
-        return ErrResult.error(MEDIA_TYPE_NOT_SUPPORTED.getCode(), MEDIA_TYPE_NOT_SUPPORTED.getMessage());
+        return Outcome.failure(StatusCodeEnum.MEDIA_TYPE_NOT_SUPPORTED);
     }
 
     /**
      * 自定义HttpAPI异常处理
      *
-     * @param e
+     * @param ex
      * @return
      */
     @ExceptionHandler(HttpApiException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrResult handleHttpAPIException(HttpApiException e) {
-        log.error(e.getMessage(), e);
-        return ErrResult.error(INTERNAL_SERVER_ERROR.getCode(), INTERNAL_SERVER_ERROR.getMessage(), e.getMessage());
+    public Outcome handleHttpAPIException(HttpApiException ex) {
+        log.error(ex.getMessage(), ex);
+        return Outcome.failure(ex.getStatus(), ex.getMessage());
     }
 
-    private ErrResult doErr(StatusCodeEnum code, BindingResult br) {
-        Map<String, String> errs = new HashMap<>();
-        for (FieldError fieldError : br.getFieldErrors()) {
-            errs.put(fieldError.getField(), fieldError.getDefaultMessage());
+    private Outcome<List<ErrorInfo>> doErr(StatusCodeEnum code, BindingResult br) {
+        List<ErrorInfo> result = new ArrayList<>();
+        for (FieldError err : br.getFieldErrors()) {
+            result.add(ErrorInfo.of(err.getField(), err.getDefaultMessage()));
         }
-        return ErrResult.error(code, errs);
+        return Outcome.failure(code, result);
     }
 }

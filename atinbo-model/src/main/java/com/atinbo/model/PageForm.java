@@ -1,11 +1,7 @@
-package com.atinbo.core.model;
+package com.atinbo.model;
 
-import com.atinbo.model.PageParam;
-import com.atinbo.model.SortDir;
-import com.atinbo.model.SortInfo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.stream.Stream;
@@ -18,6 +14,8 @@ import java.util.stream.Stream;
 @Data
 public class PageForm implements Serializable {
 
+    public static final String REDUCE = "-" ;
+    public static final String PLUS = "+" ;
     /**
      * 起始页
      */
@@ -38,24 +36,25 @@ public class PageForm implements Serializable {
 
     /**
      * 转换为 PageParam
+     *
      * @return
      */
-    public PageParam toPageParam(){
+    public PageParam toPageParam() {
         PageParam pageParam = new PageParam();
-        if(this.getPage() != null){
+        if (this.getPage() != null) {
             pageParam.setPage(this.getPage());
         }
-        if(this.getSize() != null){
+        if (this.getSize() != null) {
             pageParam.setSize(this.getSize());
         }
-        if(this.getSortBy() != null && getSortBy().trim().length() > 0){
+        if (this.getSortBy() != null && getSortBy().trim().length() > 0) {
             SortInfo sortInfo = new SortInfo();
-            String[] sorts = StringUtils.split(getSortBy(), ",");
+            String[] sorts = getSortBy().split(",");
             Stream.of(sorts).forEach(s -> {
-                if(StringUtils.startsWithIgnoreCase(s,"-")){
+                if (s.startsWith(REDUCE)) {
                     sortInfo.addField(SortDir.DESC, s.substring(1));
-                }else{
-                    if(StringUtils.startsWithIgnoreCase(s,"+")){
+                } else {
+                    if (s.startsWith(PLUS)) {
                         s = s.substring(1);
                     }
                     sortInfo.addField(SortDir.ASC, s);

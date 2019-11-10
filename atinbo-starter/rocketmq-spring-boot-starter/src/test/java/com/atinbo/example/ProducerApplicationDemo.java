@@ -25,11 +25,10 @@ import java.util.Map;
 @SpringBootApplication
 public class ProducerApplicationDemo {
 
-    @Value("${helloworld.topic}")
-    private String topic;
-
     @Autowired
     CustomMQProducer customMQProducer;
+    @Value("${helloworld.topic}")
+    private String topic;
 
     public static void main(String[] args) {
         SpringApplication.run(ProducerApplicationDemo.class, args);
@@ -47,7 +46,7 @@ public class ProducerApplicationDemo {
     }
 
 
-    @MQConsumer(topic = "${helloworld.topic}", consumerGroup = "${helloworld.consumer.group}")
+    @MQConsumer(topic = "${helloworld.topic}" , consumerGroup = "${helloworld.consumer.group}")
     class CustomConsumer extends AbstractMQPushConsumer<HelloWorldMsg> {
 
         @Override

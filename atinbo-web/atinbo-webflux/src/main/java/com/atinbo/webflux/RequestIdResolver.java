@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author breggor
  */
 public class RequestIdResolver implements Serializable {
-    public static final String GW_REQUEST_ID = "X-GW-REQUEST-ID";
+    public static final String GW_REQUEST_ID = "X-GW-REQUEST-ID" ;
 
     public RequestIdResolver() {
     }

@@ -17,8 +17,8 @@ public class JwtTokenOps implements Serializable {
 
     private static final long serialVersionUID = -3301605591108950415L;
 
-    private static final String CLAIM_KEY_SUB = "sub";
-    private static final String CLAIM_KEY_CREATED = "created";
+    private static final String CLAIM_KEY_SUB = "sub" ;
+    private static final String CLAIM_KEY_CREATED = "created" ;
 
     @Value("${jwt.secret:jwtToken}")
     private String secret;

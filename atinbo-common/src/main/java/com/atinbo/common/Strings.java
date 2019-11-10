@@ -29,6 +29,15 @@ import java.util.stream.Stream;
 public final class Strings {
 
     /**
+     * 空字符串
+     */
+    private static final String NULLSTR = "" ;
+    /**
+     * 下划线
+     */
+    private static final char SEPARATOR = '_';
+
+    /**
      * Check whether the given string value is empty. The value is empty if null or length is 0.
      *
      * @param value the string value to test
@@ -94,7 +103,7 @@ public final class Strings {
         return Normalizer.normalize(value, Normalizer.Form.NFD)
                 .replace('\u0141', 'L')
                 .replace('\u0142', 'l')
-                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+" , "");
     }
 
     /**
@@ -158,7 +167,7 @@ public final class Strings {
             return null;
         }
         return Stream.of(text.toString().split("\n"))
-                .map(line -> line.replaceFirst("^\\s+\\|", ""))
+                .map(line -> line.replaceFirst("^\\s+\\|" , ""))
                 .collect(Collectors.joining("\n"));
     }
 
@@ -218,14 +227,4 @@ public final class Strings {
         }
         return false;
     }
-
-    /**
-     * 空字符串
-     */
-    private static final String NULLSTR = "";
-
-    /**
-     * 下划线
-     */
-    private static final char SEPARATOR = '_';
 }

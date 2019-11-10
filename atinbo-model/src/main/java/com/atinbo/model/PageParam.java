@@ -113,7 +113,7 @@ public class PageParam implements Serializable {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", PageParam.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", " , PageParam.class.getSimpleName() + "[" , "]")
                 .add("page=" + page)
                 .add("size=" + size)
                 .add("offset=" + getOffset())

@@ -77,7 +77,7 @@ public class MQProducerAutoConfiguration extends MQBaseAutoConfiguration {
                 producer.start();
                 beanObj.setProducer(producer);
             } catch (Exception e) {
-                log.error("build transaction producer error : {}", e);
+                log.error("build transaction producer error : {}" , e);
             }
         });
     }

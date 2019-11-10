@@ -1,6 +1,5 @@
 package com.atinbo.mybatis.base;
 
-import com.atinbo.entity.BaseDomain;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
@@ -15,11 +14,15 @@ import java.util.Date;
  * @author breggor
  */
 @Data
-public class BaseEntity extends BaseDomain {
+public class BaseEntity {
 
-    /** 1. 已删除 */
+    /**
+     * 1. 已删除
+     */
     public static final int DELETED = 1;
-    /** 0. 未删除 */
+    /**
+     * 0. 未删除
+     */
     public static final int UN_DELETED = 0;
 
     /**

@@ -32,25 +32,21 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class UserTokenService {
 
-    protected static final long MILLIS_SECOND = 1000L;
-    protected static final long MILLIS_MINUTE = 60 * MILLIS_SECOND;
-    private static final Long MILLIS_MINUTE_TEN = 20 * MILLIS_MINUTE;
-
     /**
      * 令牌前缀
      */
-    public static final String LOGIN_USER_KEY = "login_user_key";
-
+    public static final String LOGIN_USER_KEY = "login_user_key" ;
     /**
      * 令牌前缀
      */
-    public static final String TOKEN_PREFIX = "Bearer ";
-
+    public static final String TOKEN_PREFIX = "Bearer " ;
     /**
      * 登录用户 redis key
      */
-    public static final String LOGIN_TOKEN_KEY = "login_tokens:";
-
+    public static final String LOGIN_TOKEN_KEY = "login_tokens:" ;
+    protected static final long MILLIS_SECOND = 1000L;
+    protected static final long MILLIS_MINUTE = 60 * MILLIS_SECOND;
+    private static final Long MILLIS_MINUTE_TEN = 20 * MILLIS_MINUTE;
     /**
      * 令牌自定义标识
      */

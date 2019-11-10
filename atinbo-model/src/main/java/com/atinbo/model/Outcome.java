@@ -24,7 +24,7 @@ public class Outcome<T> implements Serializable {
     /**
      * 状态码: 0:成功，-1：失败，业务异常：非零或非-1
      */
-    @ApiModelProperty(value = "状态码", example = "状态码: 0:成功，-1：失败，业务异常：非零或非-1")
+    @ApiModelProperty(value = "状态码" , example = "状态码: 0:成功，-1：失败，业务异常：非零或非-1")
     private int code;
 
     /**
@@ -40,11 +40,6 @@ public class Outcome<T> implements Serializable {
     private T data;
 
 
-    @Transient
-    public boolean ok() {
-        return (0 == code || StatusCodeEnum.SUCCESS.getCode() == code);
-    }
-
     /**
      * 状态码构造器
      *
@@ -54,10 +49,10 @@ public class Outcome<T> implements Serializable {
         this(statusCode.getCode(), statusCode.getMessage(), null);
     }
 
-
     private Outcome(StatusCode statusCode, String message) {
         this(statusCode, message, null);
     }
+
 
     private Outcome(StatusCode statusCode, T data) {
         this(statusCode, statusCode.getMessage(), data);
@@ -124,7 +119,6 @@ public class Outcome<T> implements Serializable {
         return new Outcome(StatusCodeEnum.SUCCESS);
     }
 
-
     /**
      * 默认失败
      *
@@ -132,6 +126,16 @@ public class Outcome<T> implements Serializable {
      */
     public static Outcome failure() {
         return new Outcome(StatusCodeEnum.FAILURE);
+    }
+
+    /**
+     * 失败返回结果
+     *
+     * @param data
+     * @return
+     */
+    public static <T> Outcome<T> failure(T data) {
+        return new Outcome(StatusCodeEnum.FAILURE, data);
     }
 
     /**
@@ -155,7 +159,6 @@ public class Outcome<T> implements Serializable {
         return new Outcome(code, message, null);
     }
 
-
     /**
      * 原因失败
      *
@@ -164,6 +167,17 @@ public class Outcome<T> implements Serializable {
      */
     public static Outcome failure(StatusCode statusCode) {
         return new Outcome(statusCode);
+    }
+
+    /**
+     * 原因失败
+     *
+     * @param statusCode
+     * @param data
+     * @return
+     */
+    public static <T> Outcome<T> failure(StatusCode statusCode, T data) {
+        return new Outcome(statusCode, data);
     }
 
     /**
@@ -194,5 +208,10 @@ public class Outcome<T> implements Serializable {
      */
     public static Outcome status(boolean status) {
         return status ? success() : failure();
+    }
+
+    @Transient
+    public boolean ok() {
+        return (0 == code || StatusCodeEnum.SUCCESS.getCode() == code);
     }
 }

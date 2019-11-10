@@ -9,12 +9,12 @@ import java.io.OutputStream;
  */
 public interface MultiOutputStream {
 
-	/**
-	 * Builds the output stream.
-	 *
-	 * @param params the params
-	 * @return the output stream
-	 */
-	OutputStream buildOutputStream(Integer... params);
+    /**
+     * Builds the output stream.
+     *
+     * @param params the params
+     * @return the output stream
+     */
+    OutputStream buildOutputStream(Integer... params);
 
 }

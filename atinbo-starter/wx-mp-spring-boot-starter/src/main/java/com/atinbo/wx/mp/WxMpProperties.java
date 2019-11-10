@@ -16,7 +16,7 @@ import static com.atinbo.wx.mp.WxMpProperties.PREFIX;
 @Data
 @ConfigurationProperties(PREFIX)
 public class WxMpProperties {
-    public static final String PREFIX = "wx.mp";
+    public static final String PREFIX = "wx.mp" ;
 
     /**
      * 设置微信公众号的appid.
@@ -44,16 +44,6 @@ public class WxMpProperties {
     private ConfigStorage configStorage = new ConfigStorage();
 
 
-    @Data
-    public static class ConfigStorage implements Serializable {
-        private static final long serialVersionUID = 4815731027000065434L;
-
-        private StorageType type = StorageType.memory;
-
-        private RedisProperties redis = new RedisProperties();
-
-    }
-
     public enum StorageType {
         /**
          * 内存.
@@ -63,5 +53,15 @@ public class WxMpProperties {
          * redis.
          */
         redis
+    }
+
+    @Data
+    public static class ConfigStorage implements Serializable {
+        private static final long serialVersionUID = 4815731027000065434L;
+
+        private StorageType type = StorageType.memory;
+
+        private RedisProperties redis = new RedisProperties();
+
     }
 }

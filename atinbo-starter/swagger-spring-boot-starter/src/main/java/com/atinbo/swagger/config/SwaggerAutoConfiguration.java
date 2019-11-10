@@ -71,7 +71,7 @@ public class SwaggerAutoConfiguration {
 
     private List<ApiKey> buildApiKeys() {
         List<ApiKey> result = Lists.newArrayList();
-        result.add(new ApiKey("Authorization", "Authorization", "header"));
+        result.add(new ApiKey("Authorization" , "Authorization" , "header"));
         if (null != swaggerProperties.getApiKeys() && !swaggerProperties.getApiKeys().isEmpty()) {
             swaggerProperties.getApiKeys().forEach(o -> {
                 result.add(new ApiKey(o.getName(), o.getKeyname(), o.getPassAs()));
@@ -92,7 +92,7 @@ public class SwaggerAutoConfiguration {
 
     private List<SecurityReference> defaultAuth() {
         List<SecurityReference> result = Lists.newArrayList();
-        AuthorizationScope[] authScopes = new AuthorizationScope[]{new AuthorizationScope("global", "全局设置")};
+        AuthorizationScope[] authScopes = new AuthorizationScope[]{new AuthorizationScope("global" , "全局设置")};
 
         buildApiKeys().forEach(o -> {
             result.add(new SecurityReference(o.getName(), authScopes));

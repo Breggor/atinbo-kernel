@@ -27,7 +27,7 @@ public class ClassKeyStrategy extends KeyStrategy {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", ClassKeyStrategy.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", " , ClassKeyStrategy.class.getSimpleName() + "[" , "]")
                 .add("className='" + className + "'")
                 .add("methodName='" + methodName + "'")
                 .toString();

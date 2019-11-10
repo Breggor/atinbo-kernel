@@ -13,7 +13,7 @@ import java.util.Objects;
 public class IpUtil {
     public static String getIpAddr(HttpServletRequest request) {
         if (request == null) {
-            return "unknown";
+            return "unknown" ;
         }
         String ip = request.getHeader("x-forwarded-for");
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
@@ -85,7 +85,7 @@ public class IpUtil {
         }
 
         byte[] bytes = new byte[4];
-        String[] elements = text.split("\\.", -1);
+        String[] elements = text.split("\\." , -1);
         try {
             long l;
             int i;
@@ -146,7 +146,7 @@ public class IpUtil {
             return InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {
         }
-        return "127.0.0.1";
+        return "127.0.0.1" ;
     }
 
     public static String getHostName() {
@@ -154,6 +154,6 @@ public class IpUtil {
             return InetAddress.getLocalHost().getHostName();
         } catch (UnknownHostException e) {
         }
-        return "未知";
+        return "未知" ;
     }
 }

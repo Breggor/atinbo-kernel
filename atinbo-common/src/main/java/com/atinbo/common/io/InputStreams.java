@@ -25,7 +25,7 @@ public abstract class InputStreams {
      */
     public static byte[] readInputStream(InputStream input) throws Exception {
         byte[] data;
-        try (ByteArrayOutputStream output = new ByteArrayOutputStream()){
+        try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
             byte[] buffer = new byte[1024];
             int len = 0;
             while ((len = input.read(buffer)) != -1) {

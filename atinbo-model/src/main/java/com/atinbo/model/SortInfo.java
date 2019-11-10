@@ -52,7 +52,7 @@ public class SortInfo implements Serializable {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    @EqualsAndHashCode(of = {"direction", "property"})
+    @EqualsAndHashCode(of = {"direction" , "property"})
     public class Field implements Serializable {
         private SortDir direction;
         private String property;

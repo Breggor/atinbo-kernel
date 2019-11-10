@@ -24,22 +24,6 @@ import java.util.List;
 public class FileUtil extends org.springframework.util.FileCopyUtils {
 
     /**
-     * 默认为true
-     *
-     * @author L.cm
-     */
-    public static class TrueFilter implements FileFilter, Serializable {
-        private static final long serialVersionUID = -6420452043795072619L;
-
-        public final static TrueFilter TRUE = new TrueFilter();
-
-        @Override
-        public boolean accept(File pathname) {
-            return true;
-        }
-    }
-
-    /**
      * 扫描目录下的文件
      *
      * @param path 路径
@@ -192,7 +176,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
      * @return the file contents, never {@code null}
      */
     public static String readToString(final File file) {
-        return readToString(file, Charsets.UTF_8);
+        return readToString(file, Charsets.UTF8);
     }
 
     /**
@@ -233,7 +217,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
      * @param data the content to write to the file
      */
     public static void writeToFile(final File file, final String data) {
-        writeToFile(file, data, Charsets.UTF_8, false);
+        writeToFile(file, data, Charsets.UTF8, false);
     }
 
     /**
@@ -245,7 +229,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
      *               end of the file rather than overwriting
      */
     public static void writeToFile(final File file, final String data, final boolean append) {
-        writeToFile(file, data, Charsets.UTF_8, append);
+        writeToFile(file, data, Charsets.UTF8, append);
     }
 
     /**
@@ -368,6 +352,21 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
             return file.delete();
         } catch (final Exception ignored) {
             return false;
+        }
+    }
+
+    /**
+     * 默认为true
+     *
+     * @author L.cm
+     */
+    public static class TrueFilter implements FileFilter, Serializable {
+        public final static TrueFilter TRUE = new TrueFilter();
+        private static final long serialVersionUID = -6420452043795072619L;
+
+        @Override
+        public boolean accept(File pathname) {
+            return true;
         }
     }
 

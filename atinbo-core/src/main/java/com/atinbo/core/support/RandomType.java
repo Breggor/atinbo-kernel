@@ -6,8 +6,8 @@ package com.atinbo.core.support;
  * @author breggor
  */
 public enum RandomType {
-	/**
-	 * INT STRING ALL
-	 */
-	INT, STRING, ALL
+    /**
+     * INT STRING ALL
+     */
+    INT, STRING, ALL
 }

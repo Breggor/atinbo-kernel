@@ -4,11 +4,11 @@ import com.atinbo.generate.config.GenerateProperties;
 import com.atinbo.generate.core.GenerateUtil;
 import com.atinbo.generate.core.TemplatePathEnum;
 import com.atinbo.generate.mapper.GenerateMapper;
+import com.atinbo.generate.model.ClassInfo;
 import com.atinbo.generate.model.ColumnInfo;
+import com.atinbo.generate.model.FieldInfo;
 import com.atinbo.generate.model.TableInfo;
 import com.atinbo.generate.service.GenerateService;
-import com.atinbo.generate.model.ClassInfo;
-import com.atinbo.generate.model.FieldInfo;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -56,7 +56,7 @@ public class GenerateServiceImpl implements GenerateService {
                 classInfo.setPackageName(GenerateUtil.getPackageName(generateProperties.getPackageName(), generateProperties.getModule().getName()));
                 classInfo.setAuthor(generateProperties.getAuthor());
 
-                String className = RegExUtils.replaceFirst(tableInfo.getTableName(),generateProperties.getTablePrefix(), "") ;
+                String className = RegExUtils.replaceFirst(tableInfo.getTableName(), generateProperties.getTablePrefix(), "");
                 classInfo.setClassName(GenerateUtil.genClassName(className));
                 classInfo.setTableName(tableInfo.getTableName());
                 classInfo.setClassComment(tableInfo.getTableComment());
@@ -73,7 +73,7 @@ public class GenerateServiceImpl implements GenerateService {
         classInfo.setPackageName(GenerateUtil.getPackageName(generateProperties.getPackageName(), generateProperties.getModule().getName()));
         classInfo.setAuthor(generateProperties.getAuthor());
 
-        String className = RegExUtils.replaceFirst(tableInfo.getTableName(),generateProperties.getTablePrefix(), "") ;
+        String className = RegExUtils.replaceFirst(tableInfo.getTableName(), generateProperties.getTablePrefix(), "");
         classInfo.setClassName(GenerateUtil.genClassName(className));
         classInfo.setTableName(tableInfo.getTableName());
         classInfo.setClassComment(tableInfo.getTableComment());
@@ -105,12 +105,12 @@ public class GenerateServiceImpl implements GenerateService {
     public void generateClass(ClassInfo classInfo) throws IOException, TemplateException {
         String prefixPath = genFilePath(generateProperties.getOutPath(), classInfo.getPackageName());
         String category = generateProperties.getCategory();
-        if(!ArrayUtils.contains(GenerateUtil.SUPPORT_CATEGORY, category)){
+        if (!ArrayUtils.contains(GenerateUtil.SUPPORT_CATEGORY, category)) {
             category = GenerateUtil.SUPPORT_CATEGORY[0];
         }
 
         for (TemplatePathEnum pathEnum : TemplatePathEnum.values()) {
-            if(StringUtils.isBlank(pathEnum.getCategory()) || pathEnum.getCategory().equals(category)) {
+            if (StringUtils.isBlank(pathEnum.getCategory()) || pathEnum.getCategory().equals(category)) {
                 processFile(pathEnum, prefixPath, classInfo, category);
             }
         }
@@ -118,20 +118,20 @@ public class GenerateServiceImpl implements GenerateService {
 
     private void processFile(TemplatePathEnum entity, String prefix, ClassInfo classInfo, String category) throws IOException, TemplateException {
         Map<String, Object> params = new HashMap<>();
-        params.put("classInfo", classInfo);
+        params.put("classInfo" , classInfo);
 
         StringBuffer modulePath = new StringBuffer("");
-        if(generateProperties.getModule() != null){
-            if(StringUtils.isNotBlank(generateProperties.getModule().getName())){
+        if (generateProperties.getModule() != null) {
+            if (StringUtils.isNotBlank(generateProperties.getModule().getName())) {
                 modulePath.append(generateProperties.getModule().getName());
             }
             if (generateProperties.getModule().isMultiple()) {
-                if(modulePath.length() > 0){
+                if (modulePath.length() > 0) {
                     modulePath.append("-");
                 }
                 modulePath.append(entity.getModule());
             }
-            if(modulePath.length() > 0) {
+            if (modulePath.length() > 0) {
                 modulePath.append(File.separator);
             }
         }

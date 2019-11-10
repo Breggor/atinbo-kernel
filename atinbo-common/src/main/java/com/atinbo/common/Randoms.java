@@ -8,11 +8,11 @@ import java.util.Random;
 
 public class Randoms {
 
-    private static final String allChar = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private static final String letterChar = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String allChar = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" ;
+    private static final String letterChar = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" ;
 
-    private final static String CHAR_VALUE = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private final static String NUMBER_VALUE = "0123456789";
+    private final static String CHAR_VALUE = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ" ;
+    private final static String NUMBER_VALUE = "0123456789" ;
 
     private static char[] numbersAndLetters = null;
     private static char[] numbersRandom = null;

@@ -24,27 +24,27 @@ public class AesUtil {
     }
 
     public static byte[] encrypt(byte[] content, String aesTextKey) {
-        return encrypt(content, aesTextKey.getBytes(Charsets.UTF_8));
+        return encrypt(content, aesTextKey.getBytes(Charsets.UTF8));
     }
 
     public static byte[] encrypt(String content, String aesTextKey) {
-        return encrypt(content.getBytes(Charsets.UTF_8), aesTextKey.getBytes(Charsets.UTF_8));
+        return encrypt(content.getBytes(Charsets.UTF8), aesTextKey.getBytes(Charsets.UTF8));
     }
 
     public static byte[] encrypt(String content, java.nio.charset.Charset charset, String aesTextKey) {
-        return encrypt(content.getBytes(charset), aesTextKey.getBytes(Charsets.UTF_8));
+        return encrypt(content.getBytes(charset), aesTextKey.getBytes(Charsets.UTF8));
     }
 
     public static byte[] decrypt(byte[] content, String aesTextKey) {
-        return decrypt(content, aesTextKey.getBytes(Charsets.UTF_8));
+        return decrypt(content, aesTextKey.getBytes(Charsets.UTF8));
     }
 
     public static String decryptToStr(byte[] content, String aesTextKey) {
-        return new String(decrypt(content, aesTextKey.getBytes(Charsets.UTF_8)), Charsets.UTF_8);
+        return new String(decrypt(content, aesTextKey.getBytes(Charsets.UTF8)), Charsets.UTF8);
     }
 
     public static String decryptToStr(byte[] content, String aesTextKey, java.nio.charset.Charset charset) {
-        return new String(decrypt(content, aesTextKey.getBytes(Charsets.UTF_8)), charset);
+        return new String(decrypt(content, aesTextKey.getBytes(Charsets.UTF8)), charset);
     }
 
     public static byte[] encrypt(byte[] content, byte[] aesKey) {

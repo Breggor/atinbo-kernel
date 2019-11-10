@@ -35,10 +35,10 @@ public abstract class AbstractMQProducer {
     public void syncSend(Message message) throws MQException {
         try {
             SendResult sendResult = producer.send(message);
-            log.debug("send rocketmq message ,messageId : {}", sendResult.getMsgId());
+            log.debug("send rocketmq message ,messageId : {}" , sendResult.getMsgId());
             this.doAfterSyncSend(message, sendResult);
         } catch (Exception e) {
-            log.error("消息发送失败，topic : {}, msgObj {}", message.getTopic(), message);
+            log.error("消息发送失败，topic : {}, msgObj {}" , message.getTopic(), message);
             throw new MQException("消息发送失败，topic :" + message.getTopic() + ",e:" + e.getMessage());
         }
     }
@@ -58,10 +58,10 @@ public abstract class AbstractMQProducer {
         }
         try {
             SendResult sendResult = producer.send(message, messageQueueSelector, hashKey);
-            log.debug("send rocketmq message orderly ,messageId : {}", sendResult.getMsgId());
+            log.debug("send rocketmq message orderly ,messageId : {}" , sendResult.getMsgId());
             this.doAfterSyncSend(message, sendResult);
         } catch (Exception e) {
-            log.error("顺序消息发送失败，topic : {}, msgObj {}", message.getTopic(), message);
+            log.error("顺序消息发送失败，topic : {}, msgObj {}" , message.getTopic(), message);
             throw new MQException("顺序消息发送失败，topic :" + message.getTopic() + ",e:" + e.getMessage());
         }
     }
@@ -87,7 +87,7 @@ public abstract class AbstractMQProducer {
             producer.send(message, sendCallback);
             log.debug("send rocketmq message async");
         } catch (Exception e) {
-            log.error("消息发送失败，topic : {}, msgObj {}", message.getTopic(), message);
+            log.error("消息发送失败，topic : {}, msgObj {}" , message.getTopic(), message);
             throw new MQException("消息发送失败，topic :" + message.getTopic() + ",e:" + e.getMessage());
         }
     }

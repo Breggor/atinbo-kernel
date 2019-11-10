@@ -1,10 +1,10 @@
 package com.atinbo.redis;
 
 public abstract class RedisKeyGenerator {
-    private final static String DELIMITER = ":";
+    private final static String DELIMITER = ":" ;
 
     public static String generate(String delimiter, String... fields) {
-        String key = "";
+        String key = "" ;
         if (fields == null || fields.length < 1)
             throw new IllegalArgumentException("fields can not be empty");
 

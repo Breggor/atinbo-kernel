@@ -30,7 +30,7 @@ public class ValidateUtil {
         try {
             constructor = exceptionClazz.getConstructor(String.class);
         } catch (NoSuchMethodException e) {
-            throw new LockValidateException("缺少String为参数的构造函数", e);
+            throw new LockValidateException("缺少String为参数的构造函数" , e);
         }
         try {
             exception = constructor.newInstance(message);
@@ -207,7 +207,7 @@ public class ValidateUtil {
      */
     public static <T extends RuntimeException> boolean longLessThan(long data, long destNum, boolean containDest, Class<T> exceptionClass, String msg) {
         boolean result = containDest ? data <= destNum : data < destNum;
-        String remind = result ? "值应小于等于" : "值应小于";
+        String remind = result ? "值应小于等于" : "值应小于" ;
         return getResult(result, exceptionClass, msg == null ? remind + destNum : msg);
     }
 
@@ -223,7 +223,7 @@ public class ValidateUtil {
      */
     public static <T extends RuntimeException> boolean longGreaterThan(long data, long destNum, boolean containDest, Class<T> exceptionClass, String msg) {
         boolean result = containDest ? data >= destNum : data > destNum;
-        String remind = result ? "值应大于等于" : "值应大于";
+        String remind = result ? "值应大于等于" : "值应大于" ;
         return getResult(result, exceptionClass, msg == null ? remind + destNum : msg);
     }
 

@@ -28,9 +28,9 @@ import java.util.Enumeration;
 @Slf4j
 public class WebUtil extends org.springframework.web.util.WebUtils {
 
-    public static final String USER_AGENT_HEADER = "user-agent";
+    public static final String USER_AGENT_HEADER = "user-agent" ;
 
-    public static final String UN_KNOWN = "unknown";
+    public static final String UN_KNOWN = "unknown" ;
 
     /**
      * 判断是否ajax请求
@@ -198,7 +198,7 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
     public static String getRequestStr(HttpServletRequest request) throws IOException {
         String queryString = request.getQueryString();
         if (StringUtil.isNotBlank(queryString)) {
-            return new String(queryString.getBytes(Charsets.ISO_8859_1), Charsets.UTF_8).replaceAll("&amp;", "&").replaceAll("%22", "\"");
+            return new String(queryString.getBytes(Charsets.ISO_8859_1), Charsets.UTF8).replaceAll("&amp;" , "&").replaceAll("%22" , "\"");
         }
         return getRequestStr(request, getRequestBytes(request));
     }
@@ -247,11 +247,11 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
             while (parameterNames.hasMoreElements()) {
                 String key = parameterNames.nextElement();
                 String value = request.getParameter(key);
-                StringUtil.appendBuilder(sb, key, "=", value, "&");
+                StringUtil.appendBuilder(sb, key, "=" , value, "&");
             }
             str = StringUtil.removeSuffix(sb.toString(), "&");
         }
-        return str.replaceAll("&amp;", "&");
+        return str.replaceAll("&amp;" , "&");
     }
 
 

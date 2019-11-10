@@ -87,7 +87,7 @@ public class MQConsumerAutoConfiguration extends MQBaseAutoConfiguration {
 
         String consumerGroup = environment.resolvePlaceholders(mqConsumer.consumerGroup());
         String topic = environment.resolvePlaceholders(mqConsumer.topic());
-        String tags = "*";
+        String tags = "*" ;
         if (mqConsumer.tag().length == 1) {
             tags = environment.resolvePlaceholders(mqConsumer.tag()[0]);
         } else if (mqConsumer.tag().length > 1) {
@@ -135,7 +135,7 @@ public class MQConsumerAutoConfiguration extends MQBaseAutoConfiguration {
             consumer.start();
         }
 
-        log.info(String.format("%s is ready to subscribe message", bean.getClass().getName()));
+        log.info(String.format("%s is ready to subscribe message" , bean.getClass().getName()));
     }
 
 }

@@ -24,13 +24,13 @@ public class CaffeineDataRegion implements DomainDataStorageAccess {
     private final Cache<Object, Object> cache;
 
     public CaffeineDataRegion(@NonNull String regionName) {
-        this.regionName = StringUtils.replace(regionName, ".", ":") + ":";
+        this.regionName = StringUtils.replace(regionName, "." , ":") + ":" ;
         cache = Caffeine.newBuilder()
                 // 设置cache中的数据在写入之后的存活时间
                 .expireAfterWrite(DEFAULT_EXPIRY_IN_SECONDS, TimeUnit.SECONDS)
                 // 构建cache实例
                 .build();
-        log.debug("caffeiene region={}, expiryInSeconds={}", regionName, DEFAULT_EXPIRY_IN_SECONDS);
+        log.debug("caffeiene region={}, expiryInSeconds={}" , regionName, DEFAULT_EXPIRY_IN_SECONDS);
     }
 
     /**
@@ -43,10 +43,10 @@ public class CaffeineDataRegion implements DomainDataStorageAccess {
     @Override
     public boolean contains(Object key) {
         try {
-            log.debug("contains key={}", key);
+            log.debug("contains key={}" , key);
             return cache.getIfPresent(key) != null;
         } catch (Exception ignored) {
-            log.warn("Fail to exists key. key={}", key, ignored);
+            log.warn("Fail to exists key. key={}" , key, ignored);
             return false;
         }
     }
@@ -56,7 +56,7 @@ public class CaffeineDataRegion implements DomainDataStorageAccess {
         try {
             return cache.getIfPresent(key);
         } catch (Exception ignored) {
-            log.warn("Fail to get cache item... key={}", key, ignored);
+            log.warn("Fail to get cache item... key={}" , key, ignored);
             return null;
         }
     }
@@ -66,7 +66,7 @@ public class CaffeineDataRegion implements DomainDataStorageAccess {
         try {
             cache.put(key, value);
         } catch (Exception ignored) {
-            log.warn("Fail to put cache item... key={},", key, ignored);
+            log.warn("Fail to put cache item... key={}," , key, ignored);
         }
     }
 
@@ -75,7 +75,7 @@ public class CaffeineDataRegion implements DomainDataStorageAccess {
         try {
             cache.invalidateAll();
         } catch (Exception ignored) {
-            log.warn("Fail to clear region... name={}", regionName, ignored);
+            log.warn("Fail to clear region... name={}" , regionName, ignored);
         }
     }
 
@@ -84,7 +84,7 @@ public class CaffeineDataRegion implements DomainDataStorageAccess {
         try {
             cache.invalidate(key);
         } catch (Exception ignored) {
-            log.warn("Fail to remove cache item... key={}", key, ignored);
+            log.warn("Fail to remove cache item... key={}" , key, ignored);
         }
     }
 

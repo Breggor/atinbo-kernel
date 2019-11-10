@@ -34,7 +34,7 @@ public abstract class DefaultAppStarter extends Starter implements AppStarter, A
         Arrays.stream(runerArgs).forEach((v) -> {
             String[] arg = v.split("=");
             if (arg.length > 1) {
-                System.setProperty(arg[0].replace("--", ""), arg[1]);
+                System.setProperty(arg[0].replace("--" , ""), arg[1]);
             }
 
         });

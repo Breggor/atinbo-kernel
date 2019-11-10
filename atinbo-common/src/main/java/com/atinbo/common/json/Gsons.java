@@ -48,13 +48,13 @@ public class Gsons {
                 if (reader.peek() == JsonToken.NULL) {
                     reader.nextNull();
                     // 原先是返回null，这里改为返回空字符串
-                    return "";
+                    return "" ;
                 }
                 return reader.nextString();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return "";
+            return "" ;
         }
 
     };
@@ -66,9 +66,9 @@ public class Gsons {
     private static final Gson GSON_MAP = new GsonBuilder().serializeNulls().registerTypeHierarchyAdapter(new TypeToken<Map<String, Object>>() {
     }.getRawType(), new MapDeserializer<String, Object>()).create();
 
-    private static final String DOT = ".";
+    private static final String DOT = "." ;
 
-    private static final String E = "e";
+    private static final String E = "e" ;
 
     /**
      * Gets instance.
@@ -123,7 +123,7 @@ public class Gsons {
      */
     public String toGetParam(final String json) {
         if (Strings.isBlank(json)) {
-            return "";
+            return "" ;
         }
         final Map<String, String> map = toStringMap(json);
         StringBuilder stringBuilder = new StringBuilder();

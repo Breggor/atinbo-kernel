@@ -85,7 +85,7 @@ $(function () {
 
     $(".table-content").on("click", ".checked-generate", function () {
         var checked = $(".gen-table:checked");
-        if(checked.length != 0){
+        if (checked.length != 0) {
             var tables = [];
             checked.each(function (i, e) {
                 tables[i] = $(e).val();
@@ -98,7 +98,7 @@ $(function () {
      * 全选
      */
     $("#checkAll").click(function () {
-        $(".gen-table").prop("checked",$(this).prop("checked"));
+        $(".gen-table").prop("checked", $(this).prop("checked"));
     });
 
     function genTable(tableName) {

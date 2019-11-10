@@ -13,6 +13,8 @@ import java.security.NoSuchAlgorithmException;
  */
 public class DigestUtil extends org.springframework.util.DigestUtils {
 
+    private static final char[] HEX_DIGITS = "0123456789abcdef".toCharArray();
+
     /**
      * Calculates the MD5 digest and returns the value as a 32 character hex string.
      *
@@ -33,28 +35,26 @@ public class DigestUtil extends org.springframework.util.DigestUtils {
         return DigestUtil.md5DigestAsHex(bytes);
     }
 
-    private static final char[] HEX_DIGITS = "0123456789abcdef".toCharArray();
-
     public static String sha1(String srcStr) {
-        return hash("SHA-1", srcStr);
+        return hash("SHA-1" , srcStr);
     }
 
     public static String sha256(String srcStr) {
-        return hash("SHA-256", srcStr);
+        return hash("SHA-256" , srcStr);
     }
 
     public static String sha384(String srcStr) {
-        return hash("SHA-384", srcStr);
+        return hash("SHA-384" , srcStr);
     }
 
     public static String sha512(String srcStr) {
-        return hash("SHA-512", srcStr);
+        return hash("SHA-512" , srcStr);
     }
 
     public static String hash(String algorithm, String srcStr) {
         try {
             MessageDigest md = MessageDigest.getInstance(algorithm);
-            byte[] bytes = md.digest(srcStr.getBytes(Charsets.UTF_8));
+            byte[] bytes = md.digest(srcStr.getBytes(Charsets.UTF8));
             return toHex(bytes);
         } catch (NoSuchAlgorithmException e) {
             throw Exceptions.unchecked(e);
@@ -74,7 +74,7 @@ public class DigestUtil extends org.springframework.util.DigestUtils {
         if (a == null || b == null) {
             return false;
         }
-        return slowEquals(a.getBytes(Charsets.UTF_8), b.getBytes(Charsets.UTF_8));
+        return slowEquals(a.getBytes(Charsets.UTF8), b.getBytes(Charsets.UTF8));
     }
 
     public static boolean slowEquals(@Nullable byte[] a, @Nullable byte[] b) {

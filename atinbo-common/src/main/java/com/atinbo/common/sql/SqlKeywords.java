@@ -10,16 +10,13 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class SqlKeywords {
     /**
-     * 仅支持字母、数字、下划线、空格、逗号（支持多个字段排序）
-     */
-    public static String SQL_PATTERN = "[a-zA-Z0-9_\\ \\,]+";
-
-
-    /**
      * 定义常用的 sql关键字
      */
-    private final static String SQL_REGEX = "'|%|--|insert|delete|select|count|group|union|drop|truncate|alter|grant|execute|exec|xp_cmdshell|call|declare|sql";
-
+    private final static String SQL_REGEX = "'|%|--|insert|delete|select|count|group|union|drop|truncate|alter|grant|execute|exec|xp_cmdshell|call|declare|sql" ;
+    /**
+     * 仅支持字母、数字、下划线、空格、逗号（支持多个字段排序）
+     */
+    public static String SQL_PATTERN = "[a-zA-Z0-9_\\ \\,]+" ;
 
     /**
      * 检查字符，防止注入绕过

@@ -16,9 +16,9 @@ import java.util.Objects;
  * @author breggor
  */
 @Configuration
-@ConditionalOnProperty(prefix = SnowflakeConfig.SNOWFLAKE_PREFIX, name = "enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(prefix = SnowflakeConfig.SNOWFLAKE_PREFIX, name = "enabled" , havingValue = "true" , matchIfMissing = false)
 public class SnowflakeConfig {
-    public final static String SNOWFLAKE_PREFIX = "snowflake";
+    public final static String SNOWFLAKE_PREFIX = "snowflake" ;
 
     @Value("${snowflake.workerId}")
     private long workerId;

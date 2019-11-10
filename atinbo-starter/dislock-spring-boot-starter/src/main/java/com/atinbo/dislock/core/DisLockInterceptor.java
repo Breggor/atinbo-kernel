@@ -48,17 +48,17 @@ public class DisLockInterceptor {
         String methodName = methodSignature.getName();
 
         if (log.isDebugEnabled()) {
-            log.debug("[分布式锁] - 被锁定对象信息: class={}, method={}", className, methodName);
+            log.debug("[分布式锁] - 被锁定对象信息: class={}, method={}" , className, methodName);
         }
 
         KeyStrategy keyStrategy = getKeyStrategy(className, methodName, realMethod, args);
         if (log.isDebugEnabled()) {
-            log.debug("[分布式锁] - key生成策略: keyStrategy={}", keyStrategy);
+            log.debug("[分布式锁] - key生成策略: keyStrategy={}" , keyStrategy);
         }
 
         KeyInfo lockKey = keyStrategy.generateBuilder().leaseTime(lock.leaseTime()).waitTime(lock.waitTime()).timeUnit(lock.timeUnit()).build();
         if (log.isDebugEnabled()) {
-            log.debug("[分布式锁] - 锁key生成: lockKey={}", lockKey);
+            log.debug("[分布式锁] - 锁key生成: lockKey={}" , lockKey);
         }
 
         LockService lockService = lockServiceFactory.getService(lock.lockType());
@@ -104,7 +104,7 @@ public class DisLockInterceptor {
         localLockService.remove();
     }
 
-    @AfterThrowing(value = "@annotation(com.atinbo.dislock.annotation.DisLock)", throwing = "ex")
+    @AfterThrowing(value = "@annotation(com.atinbo.dislock.annotation.DisLock)" , throwing = "ex")
     public void afterThrowing(JoinPoint joinPoint, Throwable ex) throws Throwable {
         if (log.isDebugEnabled()) {
             log.debug("[分布式锁] - 内部异常：导致锁释放");

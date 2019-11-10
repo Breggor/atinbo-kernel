@@ -19,13 +19,11 @@ import java.util.stream.Collectors;
  */
 @Setter
 public class LoginUser extends User {
-    private static final long serialVersionUID = 1L;
-
     /**
      * 测试用户
      */
-    public static final LoginUser TEST = LoginUser.of(-1L, "test", "$2a$10$9jArgnaZMLNj.hm4GtnSv.iKMtr.rq3oYQB/izJo9TG2Z6Rq9g59S", Sets.newHashSet("ROLE_USER"));
-
+    public static final LoginUser TEST = LoginUser.of(-1L, "test" , "$2a$10$9jArgnaZMLNj.hm4GtnSv.iKMtr.rq3oYQB/izJo9TG2Z6Rq9g59S" , Sets.newHashSet("ROLE_USER"));
+    private static final long serialVersionUID = 1L;
     /**
      * 用户ID
      */
@@ -86,6 +84,12 @@ public class LoginUser extends User {
     @Getter
     private Set<String> permissions;
 
+    public LoginUser(Long userId, String username, String password, Set<String> authorities) {
+        super(username, password, mapToGrantedAuthorities(authorities));
+        this.userId = userId;
+        this.permissions = authorities;
+    }
+
     /**
      * 创建用户
      *
@@ -99,17 +103,9 @@ public class LoginUser extends User {
         return new LoginUser(userId, username, password, authorities);
     }
 
-
     private static List<GrantedAuthority> mapToGrantedAuthorities(Set<String> authorities) {
         return authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
-
-    public LoginUser(Long userId, String username, String password, Set<String> authorities) {
-        super(username, password, mapToGrantedAuthorities(authorities));
-        this.userId = userId;
-        this.permissions = authorities;
-    }
-
 
     /**
      * 账户是否未过期

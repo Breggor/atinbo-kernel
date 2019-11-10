@@ -21,10 +21,10 @@ import java.util.Random;
 import java.util.UUID;
 
 public abstract class CommonUtils {
-    private static final String ADD = "+";
-    private static final String SUBTRACTION = "-";
-    private static final String MULTIPLICATION = "*";
-    private static final String DIVISION = "/";
+    private static final String ADD = "+" ;
+    private static final String SUBTRACTION = "-" ;
+    private static final String MULTIPLICATION = "*" ;
+    private static final String DIVISION = "/" ;
 
     public CommonUtils() {
     }
@@ -103,7 +103,7 @@ public abstract class CommonUtils {
     }
 
     public static String replaceSpecialStr(String str) {
-        return str.replaceAll("[^a-zA-Z_0-9一-龥]", "");
+        return str.replaceAll("[^a-zA-Z_0-9一-龥]" , "");
     }
 
     public static boolean isPhoneNum(String str) {

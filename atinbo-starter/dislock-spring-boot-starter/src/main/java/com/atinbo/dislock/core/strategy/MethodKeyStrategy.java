@@ -41,7 +41,7 @@ public class MethodKeyStrategy extends KeyStrategy {
                                 checkLockKey(fieldVal, propertyName[1]);
                                 keyBuilder.appendKey(wrapKeyTag(fieldVal.toString()));
                             } catch (IllegalAccessException e) {
-                                throw new KeyBuilderException("生成builder失败", e);
+                                throw new KeyBuilderException("生成builder失败" , e);
                             }
                         }
                     }
@@ -53,7 +53,7 @@ public class MethodKeyStrategy extends KeyStrategy {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", MethodKeyStrategy.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", " , MethodKeyStrategy.class.getSimpleName() + "[" , "]")
                 .add("className='" + className + "'")
                 .add("methodName='" + methodName + "'")
                 .toString();

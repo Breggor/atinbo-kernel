@@ -25,9 +25,9 @@ import java.util.TimeZone;
 @UtilityClass
 public class DateUtil {
 
-    public static final String PATTERN_DATETIME = "yyyy-MM-dd HH:mm:ss";
-    public static final String PATTERN_DATE = "yyyy-MM-dd";
-    public static final String PATTERN_TIME = "HH:mm:ss";
+    public static final String PATTERN_DATETIME = "yyyy-MM-dd HH:mm:ss" ;
+    public static final String PATTERN_DATE = "yyyy-MM-dd" ;
+    public static final String PATTERN_TIME = "HH:mm:ss" ;
     /**
      * 老 date 格式化
      */
@@ -579,9 +579,9 @@ public class DateUtil {
         //剩余秒数
         second = second % 60;
         if (days > 0) {
-            return StringUtil.format("{}天{}小时{}分{}秒", days, hours, minutes, second);
+            return StringUtil.format("{}天{}小时{}分{}秒" , days, hours, minutes, second);
         } else {
-            return StringUtil.format("{}小时{}分{}秒", hours, minutes, second);
+            return StringUtil.format("{}小时{}分{}秒" , hours, minutes, second);
         }
     }
 

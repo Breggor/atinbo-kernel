@@ -11,32 +11,32 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum TemplatePathEnum {
 
-    ENTITY("/entity.ftl", "entity/%s.java" , "service", ""),
-    MAPPER("/mapper.ftl", "mapper/%sMapper.java", "service", ""),
-    DAO("/dao.ftl", "dao/%sDao.java","service", "mybatis"),
-    MYBATIS("/mybatis.ftl", "mybatis/%sDao.xml", "service", "mybatis"),
-    REPOSITORY("/repository.ftl", "repository/%sRepository.java", "service", "hibernate"),
-    BO("/bo.ftl", "model/%sBO.java", "api", ""),
-    PARAM("/param.ftl", "model/%sParam.java", "api", ""),
-    QUERY_PARAM("/query_param.ftl", "model/%sQueryParam.java", "api", ""),
-    SERVICE("/service.ftl", "service/%sService.java", "api", ""),
-    IMPL("/impl.ftl", "impl/%sServiceImpl.java", "service", ""),
-    VO("/vo.ftl", "openapi/model/%sVO.java", "openapi", ""),
-    FORM("/form.ftl", "openapi/model/%sForm.java", "openapi", ""),
-    QUERY_FORM("/query_form.ftl", "openapi/model/%sQueryForm.java", "openapi", ""),
-    OPENAPI_MAPPER("/openapi_mapper.ftl", "openapi/mapper/%sMapper.java", "openapi", ""),
-    CONTROLLER("/controller.ftl", "openapi/controller/%sController.java", "openapi", "");
+    ENTITY("/entity.ftl" , "entity/%s.java" , "service" , ""),
+    MAPPER("/mapper.ftl" , "mapper/%sMapper.java" , "service" , ""),
+    DAO("/dao.ftl" , "dao/%sDao.java" , "service" , "mybatis"),
+    MYBATIS("/mybatis.ftl" , "mybatis/%sDao.xml" , "service" , "mybatis"),
+    REPOSITORY("/repository.ftl" , "repository/%sRepository.java" , "service" , "hibernate"),
+    BO("/bo.ftl" , "model/%sBO.java" , "api" , ""),
+    PARAM("/param.ftl" , "model/%sParam.java" , "api" , ""),
+    QUERY_PARAM("/query_param.ftl" , "model/%sQueryParam.java" , "api" , ""),
+    SERVICE("/service.ftl" , "service/%sService.java" , "api" , ""),
+    IMPL("/impl.ftl" , "impl/%sServiceImpl.java" , "service" , ""),
+    VO("/vo.ftl" , "openapi/model/%sVO.java" , "openapi" , ""),
+    FORM("/form.ftl" , "openapi/model/%sForm.java" , "openapi" , ""),
+    QUERY_FORM("/query_form.ftl" , "openapi/model/%sQueryForm.java" , "openapi" , ""),
+    OPENAPI_MAPPER("/openapi_mapper.ftl" , "openapi/mapper/%sMapper.java" , "openapi" , ""),
+    CONTROLLER("/controller.ftl" , "openapi/controller/%sController.java" , "openapi" , "");
 
     private String templatePath;
     private String outPath;
     private String module;
     private String category;
 
-    public String genOutPath(String className){
+    public String genOutPath(String className) {
         return String.format(getOutPath(), className);
     }
 
-    public String genTemplatePath(String category){
+    public String genTemplatePath(String category) {
         return category.concat(getTemplatePath());
     }
 }

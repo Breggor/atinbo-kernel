@@ -38,7 +38,7 @@ public class CaffeineRegionFactory extends RegionFactoryTemplate {
 
     @Override
     protected void prepareForUse(SessionFactoryOptions settings, @SuppressWarnings("rawtypes") Map configValues) {
-        log.debug("RegionFactory is starting... options={}, properties={}", settings, configValues);
+        log.debug("RegionFactory is starting... options={}, properties={}" , settings, configValues);
     }
 
     @Override

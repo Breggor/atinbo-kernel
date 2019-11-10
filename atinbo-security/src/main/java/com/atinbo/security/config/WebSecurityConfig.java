@@ -35,8 +35,8 @@ import java.util.Objects;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final static String[] ALLOW_VISIT_PATH = new String[]{"/*.ico", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js",
-            "/profile/**", "/actuator/**", "/druid/**", "/swagger-ui.html", "/*/api-docs", "/webjars/**", "/swagger-resources/**"};
+    private final static String[] ALLOW_VISIT_PATH = new String[]{"/*.ico" , "/*.html" , "/**/*.html" , "/**/*.css" , "/**/*.js" ,
+            "/profile/**" , "/actuator/**" , "/druid/**" , "/swagger-ui.html" , "/*/api-docs" , "/webjars/**" , "/swagger-resources/**"};
 
     /**
      * 自定义用户认证逻辑
@@ -91,7 +91,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             System.arraycopy(ALLOW_VISIT_PATH, 0, allowPathArr, 0, ALLOW_VISIT_PATH.length);
             System.arraycopy(arr, 0, allowPathArr, ALLOW_VISIT_PATH.length, arr.length);
         }
-        log.info("web security allow paths={}", String.join(",", allowPathArr));
+        log.info("web security allow paths={}" , String.join("," , allowPathArr));
 
         httpSecurity
                 // CRSF禁用，因为不使用session
@@ -105,7 +105,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 允许对于网站静态资源的无授权访问
                 .antMatchers(allowPathArr).permitAll()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
-                .antMatchers("/login", "/captchaImage").anonymous()
+                .antMatchers("/login" , "/captchaImage").anonymous()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
                 .and().headers().frameOptions().disable();

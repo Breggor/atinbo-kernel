@@ -37,7 +37,7 @@ public class CorsAutoConfiguration {
      * @param corsProperties
      */
     @Bean
-    @ConditionalOnProperty(prefix = "cors", name = "enabled", havingValue = "true")
+    @ConditionalOnProperty(prefix = "cors" , name = "enabled" , havingValue = "true")
     public CorsConfigurationSource corsConfigurationSource(CorsProperties corsProperties) {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
@@ -46,7 +46,7 @@ public class CorsAutoConfiguration {
         Arrays.stream(corsProperties.getAllowedMethods()).forEach(config::addAllowedMethod);
         config.setAllowCredentials(true);
         config.setMaxAge(corsProperties.getMaxAge());
-        source.registerCorsConfiguration("/**", config);
+        source.registerCorsConfiguration("/**" , config);
         return source;
     }
 }

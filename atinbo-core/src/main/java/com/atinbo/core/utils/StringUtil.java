@@ -23,6 +23,9 @@ import java.util.stream.Stream;
 public class StringUtil extends org.springframework.util.StringUtils {
 
     public static final int INDEX_NOT_FOUND = -1;
+    private static final String S_INT = "0123456789" ;
+    private static final String S_STR = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" ;
+    private static final String S_ALL = S_INT + S_STR;
 
     /**
      * Check whether the given {@code CharSequence} contains actual <em>text</em>.
@@ -184,13 +187,8 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @return {String}
      */
     public static String cleanChars(String txt) {
-        return txt.replaceAll("[ 　`·•�\\f\\t\\v\\s]", "");
+        return txt.replaceAll("[ 　`·•�\\f\\t\\v\\s]" , "");
     }
-
-
-    private static final String S_INT = "0123456789";
-    private static final String S_STR = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    private static final String S_ALL = S_INT + S_STR;
 
     /**
      * 随机数生成
@@ -211,7 +209,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      */
     public static String random(int count, RandomType randomType) {
         if (count == 0) {
-            return "";
+            return "" ;
         }
         Assert.isTrue(count > 0, "Requested random string length " + count + " is less than 0.");
         final ThreadLocalRandom random = ThreadLocalRandom.current();
@@ -282,7 +280,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 
         String template2 = template.toString();
         for (Map.Entry<?, ?> entry : map.entrySet()) {
-            template2 = template2.replace("{" + entry.getKey() + "}", FuncUtil.toStr(entry.getValue()));
+            template2 = template2.replace("{" + entry.getKey() + "}" , FuncUtil.toStr(entry.getValue()));
         }
         return template2;
     }

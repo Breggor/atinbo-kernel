@@ -30,7 +30,7 @@ public class OnsConsumeMessageHookImpl implements ConsumeMessageHook {
 
     @Override
     public String hookName() {
-        return "OnsConsumeMessageHook";
+        return "OnsConsumeMessageHook" ;
     }
 
 

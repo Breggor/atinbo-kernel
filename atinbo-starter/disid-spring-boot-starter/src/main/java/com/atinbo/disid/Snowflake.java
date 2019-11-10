@@ -37,6 +37,7 @@ public class Snowflake {
     private long sequence = 0L;
     //上一次时间戳
     private long lastStamp = -1L;
+
     public Snowflake(long machineId) {
 
         if (machineId > MAX_MACHINE_NUM || machineId < 0) {

@@ -31,11 +31,11 @@ public class DisruptorEventPublisher implements InitializingBean, DisposableBean
      * disruptor start with bufferSize.
      */
     private void start() {
-        disruptor = new Disruptor<>(new DisruptorEventFactory(), bufferSize, NamedThreadFactory.create("disruptor-thread-", false),
+        disruptor = new Disruptor<>(new DisruptorEventFactory(), bufferSize, NamedThreadFactory.create("disruptor-thread-" , false),
                 ProducerType.MULTI, new BlockingWaitStrategy());
 
         final Executor executor = new ThreadPoolExecutor(threadSize, threadSize, 0, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<>(), NamedThreadFactory.create("disruptor-executor-", false), new ThreadPoolExecutor.AbortPolicy());
+                new LinkedBlockingQueue<>(), NamedThreadFactory.create("disruptor-executor-" , false), new ThreadPoolExecutor.AbortPolicy());
 
         DisruptorWorkHandler[] consumers = new DisruptorWorkHandler[threadSize];
         for (int i = 0; i < threadSize; i++) {

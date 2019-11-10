@@ -35,6 +35,14 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
         return applicationContext;
     }
 
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        log.debug("注入ApplicationContext:{}" , applicationContext);
+        if (SpringContextHolder.applicationContext == null) {
+            SpringContextHolder.applicationContext = applicationContext;
+        }
+    }
+
     public static <T> T getBean(String name) {
         assertApplicationContextInjected();
         return (T) applicationContext.getBean(name);
@@ -67,20 +75,12 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
     }
 
     private static void clearHolder() {
-        log.debug("清除SpringContextHolder中的ApplicationContext:{}", applicationContext);
+        log.debug("清除SpringContextHolder中的ApplicationContext:{}" , applicationContext);
         applicationContext = null;
     }
 
     private static void assertApplicationContextInjected() {
         Objects.requireNonNull(applicationContext, "applicaitonContext属性未注入, 请在applicationContext.xml中定义SpringContextHolder.");
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) {
-        log.debug("注入ApplicationContext:{}", applicationContext);
-        if (SpringContextHolder.applicationContext == null) {
-            SpringContextHolder.applicationContext = applicationContext;
-        }
     }
 
     /**
