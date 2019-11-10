@@ -24,13 +24,13 @@ public class LoginUser extends User {
     /**
      * 测试用户
      */
-    public static final LoginUser TEST = new LoginUser("-1", "test", "$2a$10$9jArgnaZMLNj.hm4GtnSv.iKMtr.rq3oYQB/izJo9TG2Z6Rq9g59S", Sets.newHashSet("ROLE_USER"));
+    public static final LoginUser TEST = LoginUser.of(-1L, "test", "$2a$10$9jArgnaZMLNj.hm4GtnSv.iKMtr.rq3oYQB/izJo9TG2Z6Rq9g59S", Sets.newHashSet("ROLE_USER"));
 
     /**
      * 用户ID
      */
     @Getter
-    private final String userId;
+    private final Long userId;
 
     /**
      * 扩展业务属性
@@ -95,21 +95,8 @@ public class LoginUser extends User {
      * @param authorities
      * @return
      */
-    public static LoginUser of(String userId, String username, String password, Set<String> authorities) {
-        return new LoginUser(userId, username, password, authorities);
-    }
-
-    /**
-     * 创建用户
-     *
-     * @param userId
-     * @param username
-     * @param password
-     * @param authorities
-     * @return
-     */
     public static LoginUser of(Long userId, String username, String password, Set<String> authorities) {
-        return new LoginUser(userId + "", username, password, authorities);
+        return new LoginUser(userId, username, password, authorities);
     }
 
 
@@ -117,7 +104,7 @@ public class LoginUser extends User {
         return authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
-    public LoginUser(String userId, String username, String password, Set<String> authorities) {
+    public LoginUser(Long userId, String username, String password, Set<String> authorities) {
         super(username, password, mapToGrantedAuthorities(authorities));
         this.userId = userId;
         this.permissions = authorities;

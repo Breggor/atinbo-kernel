@@ -20,7 +20,7 @@ public class SecurityUtils {
     /**
      * 获取用户ID
      **/
-    public static String getUserId() {
+    public static Long getUserId() {
         try {
             return ((LoginUser) getUserDetails()).getUserId();
         } catch (Exception e) {
