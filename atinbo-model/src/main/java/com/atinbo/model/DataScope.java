@@ -1,4 +1,4 @@
-package com.atinbo.annotation;
+package com.atinbo.model;
 
 import java.lang.annotation.*;
 

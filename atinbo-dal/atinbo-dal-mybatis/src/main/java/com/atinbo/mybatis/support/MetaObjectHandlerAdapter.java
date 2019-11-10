@@ -31,7 +31,7 @@ import java.util.Date;
  * @author breggor
  */
 @Slf4j
-//@Component
+@Component
 public class MetaObjectHandlerAdapter implements MetaObjectHandler {
 
     /**
@@ -40,9 +40,15 @@ public class MetaObjectHandlerAdapter implements MetaObjectHandler {
      */
     @Override
     public void insertFill(MetaObject metaObject) {
-        if (metaObject.getOriginalObject() instanceof BaseDomain) {
-            setFieldValByName("createTime", new Date(), metaObject, FieldFill.DEFAULT);
-            setFieldValByName("isDeleted", BaseEntity.UN_DELETED, metaObject, FieldFill.DEFAULT);
+        if (metaObject.getOriginalObject() instanceof BaseEntity) {
+            //TODO 操作者用户id
+            Long operatorId = 1L;
+            Date now = new Date();
+            setInsertFieldValByName("createBy", operatorId, metaObject);
+            setInsertFieldValByName("updateBy", operatorId, metaObject);
+            setInsertFieldValByName("createTime", now, metaObject);
+            setInsertFieldValByName("updateTime", now, metaObject);
+            setInsertFieldValByName("isDeleted", BaseEntity.UN_DELETED, metaObject);
         }
     }
 
@@ -52,8 +58,11 @@ public class MetaObjectHandlerAdapter implements MetaObjectHandler {
      */
     @Override
     public void updateFill(MetaObject metaObject) {
-        if (metaObject.getOriginalObject() instanceof BaseDomain) {
-             setFieldValByName("updateTime", new Date(), metaObject, FieldFill.DEFAULT);
+        if (metaObject.getOriginalObject() instanceof BaseEntity) {
+            //TODO 操作者用户id
+            Long operatorId = 1L;
+            setUpdateFieldValByName("updateBy", operatorId, metaObject);
+            setUpdateFieldValByName("updateTime", new Date(), metaObject);
         }
     }
 

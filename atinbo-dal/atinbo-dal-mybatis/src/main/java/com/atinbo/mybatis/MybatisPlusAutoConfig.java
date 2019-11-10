@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2019-11-06
  */
 @Configuration
-//@ComponentScan(basePackageClasses = MybatisPlusAutoConfig.class)
+@ComponentScan(basePackageClasses = MybatisPlusAutoConfig.class)
 public class MybatisPlusAutoConfig {
 
     @Bean
