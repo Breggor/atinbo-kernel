@@ -1,6 +1,7 @@
 package com.atinbo.mybatis;
 
-import com.atinbo.common.reflections.ReflectionUtils;
+
+import com.atinbo.common.reflections.Reflections;
 import com.atinbo.model.Operator;
 import com.atinbo.model.PageParam;
 import com.atinbo.model.QueryField;
@@ -19,16 +20,16 @@ import java.util.List;
  */
 public class DynamicCondition {
 
-    public static <T> Wrapper<T> toWrapper(final QueryParam queryParam){
+    public static <T> Wrapper<T> toWrapper(final QueryParam queryParam) {
         QueryWrapper wrapper = Wrappers.query();
-        List<Field> fieldList = ReflectionUtils.getDeclaredFields(queryParam.getClass(), PageParam.class);
+        List<Field> fieldList = Reflections.getDeclaredFields(queryParam.getClass(), PageParam.class);
 
         String fieldName;
         Object fieldValue;
         Operator operator;
         QueryField queryMode;
         for (Field field : fieldList) {
-            fieldValue = ReflectionUtils.invokeGetterMethod(queryParam, field.getName());
+            fieldValue = Reflections.invokeGetterMethod(queryParam, field.getName());
             if (fieldValue == null || (field.getType() == String.class && StringUtils.isEmpty((String) fieldValue))) {
                 continue;
             }

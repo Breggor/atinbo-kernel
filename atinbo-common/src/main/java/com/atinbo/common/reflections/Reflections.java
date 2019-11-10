@@ -20,9 +20,9 @@ import java.util.stream.Stream;
  */
 
 @SuppressWarnings({"unchecked", "rawtypes"})
-public abstract class ReflectionUtils {
+public abstract class Reflections {
 
-    private static Logger logger = LoggerFactory.getLogger(ReflectionUtils.class);
+    private static Logger logger = LoggerFactory.getLogger(Reflections.class);
 
     /**
      * 调用Getter方法.

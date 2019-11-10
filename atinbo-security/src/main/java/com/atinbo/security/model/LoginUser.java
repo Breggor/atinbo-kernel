@@ -6,44 +6,31 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.User;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
  * 登录用户信息
  */
 @Setter
-public class LoginUser implements UserDetails {
+public class LoginUser extends User {
     private static final long serialVersionUID = 1L;
 
     /**
      * 测试用户
      */
-    public static final LoginUser TEST = new LoginUser("-1", "test", "$2a$10$9jArgnaZMLNj.hm4GtnSv.iKMtr.rq3oYQB/izJo9TG2Z6Rq9g59S", Sets.newHashSet("ROLE_USER"));
+    public static final LoginUser TEST = LoginUser.of(-1L, "test", "$2a$10$9jArgnaZMLNj.hm4GtnSv.iKMtr.rq3oYQB/izJo9TG2Z6Rq9g59S", Sets.newHashSet("ROLE_USER"));
 
     /**
      * 用户ID
      */
     @Getter
-    private final String userId;
-
-    /**
-     * 用户名
-     */
-    private final String username;
-
-    /**
-     * 密码
-     */
-    private final String password;
-
-    /**
-     * 角色 ROLE_USER
-     */
-    @Getter
-    private final Collection<? extends GrantedAuthority> authorities;
+    private final Long userId;
 
     /**
      * 扩展业务属性
@@ -108,21 +95,8 @@ public class LoginUser implements UserDetails {
      * @param authorities
      * @return
      */
-    public static LoginUser of(String userId, String username, String password, Set<String> authorities) {
-        return new LoginUser(userId, username, password, authorities);
-    }
-
-    /**
-     * 创建用户
-     *
-     * @param userId
-     * @param username
-     * @param password
-     * @param authorities
-     * @return
-     */
     public static LoginUser of(Long userId, String username, String password, Set<String> authorities) {
-        return new LoginUser(userId + "", username, password, authorities);
+        return new LoginUser(userId, username, password, authorities);
     }
 
 
@@ -130,24 +104,12 @@ public class LoginUser implements UserDetails {
         return authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
-    public LoginUser(String userId, String username, String password, Set<String> authorities) {
+    public LoginUser(Long userId, String username, String password, Set<String> authorities) {
+        super(username, password, mapToGrantedAuthorities(authorities));
         this.userId = userId;
-        this.username = username;
-        this.password = password;
-        this.authorities = mapToGrantedAuthorities(authorities);
         this.permissions = authorities;
     }
 
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
 
     /**
      * 账户是否未过期

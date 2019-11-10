@@ -1,12 +1,13 @@
 package com.atinbo.core.support;
 
+import com.atinbo.common.CharPool;
 import com.atinbo.common.StringPool;
 import com.atinbo.core.utils.FuncUtil;
 
 /**
  * 字符串格式化
  *
- * @author Chill
+ * @author breggor
  */
 public class StrFormatter {
 
@@ -62,11 +63,11 @@ public class StrFormatter {
 				/**
 				 * 转义符
 				 */
-				if (delimIndex > 0 && strPattern.charAt(delimIndex - 1) == StringPool.BACK_SLASH) {
+				if (delimIndex > 0 && strPattern.charAt(delimIndex - 1) == CharPool.BACK_SLASH) {
 					/**
 					 * 双转义符
 					 */
-					if (delimIndex > 1 && strPattern.charAt(delimIndex - 2) == StringPool.BACK_SLASH) {
+					if (delimIndex > 1 && strPattern.charAt(delimIndex - 2) == CharPool.BACK_SLASH) {
 						//转义符之前还有一个转义符，占位符依旧有效
 						sbuf.append(strPattern, handledPosition, delimIndex - 1);
 						sbuf.append(FuncUtil.toStr(argArray[argIndex]));

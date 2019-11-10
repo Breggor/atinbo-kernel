@@ -30,7 +30,7 @@ import java.util.function.Supplier;
 /**
  * 工具包集合，只做简单的调用，不删除原有工具类
  *
- * @author L.cm
+ * @author breggor
  */
 public class FuncUtil {
 
