@@ -21,16 +21,16 @@ public class PageParam implements Serializable {
     /**
      * 默认当前页
      */
-    public static final int DEFAULT_CURRENT_PAGE = 0;
+    public static final int DEFAULT_CURRENT_PAGE = 1;
 
     /**
      * 当前页
      */
-    private int page;
+    private int page = DEFAULT_CURRENT_PAGE;
     /**
      * 每页行数
      */
-    private int size = 10;
+    private int size = DEFAULT_PAGE_SIZE;
     /**
      * 排序
      */
@@ -81,7 +81,7 @@ public class PageParam implements Serializable {
      * @return
      */
     public int getOffset() {
-        return getPage() * getSize();
+        return (getPage() - 1) * getSize();
     }
 
     public int getPage() {
