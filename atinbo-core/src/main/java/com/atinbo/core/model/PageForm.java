@@ -1,11 +1,11 @@
 package com.atinbo.core.model;
 
-import com.atinbo.core.utils.StringUtil;
 import com.atinbo.model.PageParam;
 import com.atinbo.model.SortDir;
 import com.atinbo.model.SortInfo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.stream.Stream;
@@ -50,12 +50,12 @@ public class PageForm implements Serializable {
         }
         if(this.getSortBy() != null && getSortBy().trim().length() > 0){
             SortInfo sortInfo = new SortInfo();
-            String[] sorts = StringUtil.split(getSortBy(), ",");
+            String[] sorts = StringUtils.split(getSortBy(), ",");
             Stream.of(sorts).forEach(s -> {
-                if(StringUtil.startsWithIgnoreCase(s,"-")){
+                if(StringUtils.startsWithIgnoreCase(s,"-")){
                     sortInfo.addField(SortDir.DESC, s.substring(1));
                 }else{
-                    if(StringUtil.startsWithIgnoreCase(s,"+")){
+                    if(StringUtils.startsWithIgnoreCase(s,"+")){
                         s = s.substring(1);
                     }
                     sortInfo.addField(SortDir.ASC, s);
@@ -65,4 +65,5 @@ public class PageForm implements Serializable {
         }
         return pageParam;
     }
+
 }
