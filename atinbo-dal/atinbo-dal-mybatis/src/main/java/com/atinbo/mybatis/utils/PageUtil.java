@@ -8,9 +8,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author zenghao
@@ -38,7 +38,7 @@ public class PageUtil {
     public static <T> Page toPage(PageParam pageParam, SortInfo defaultSort) {
         Page page = new Page(pageParam.getPage(), pageParam.getSize());
 
-        SortInfo sortInfo = ObjectUtils.defaultIfNull(pageParam.getSort(), defaultSort);
+        SortInfo sortInfo = Objects.isNull(pageParam.getSort()) ? pageParam.getSort() : defaultSort;
         if (sortInfo != null && !sortInfo.isEmpty()) {
             List<String> ascFields = sortInfo.get(SortDir.ASC);
             List<String> descFields = sortInfo.get(SortDir.DESC);
