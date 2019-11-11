@@ -7,9 +7,9 @@
         <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
             <#list classInfo.fieldList as fieldItem >
                 <#if classInfo.primaryField.columnName == fieldItem.columnName>
-                    <id column="${fieldItem.columnName}" property="${fieldItem.fieldName}"/>
+        <id column="${fieldItem.columnName}" property="${fieldItem.fieldName}"/>
                 <#else>
-                    <result column="${fieldItem.columnName}" property="${fieldItem.fieldName}"/>
+        <result column="${fieldItem.columnName}" property="${fieldItem.fieldName}"/>
                 </#if>
             </#list>
         </#if>
@@ -18,7 +18,7 @@
     <sql id="Base_Column_List">
         <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
             <#list classInfo.fieldList as fieldItem >
-                `${fieldItem.columnName}`<#if fieldItem_has_next>,</#if>
+        `${fieldItem.columnName}`<#if fieldItem_has_next>,</#if>
             </#list>
         </#if>
     </sql>

@@ -20,72 +20,68 @@ import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
-*  ${classInfo.classComment}
-*
-*  @author ${classInfo.author}
-*  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
-*/
+ *  ${classInfo.classComment}
+ *
+ *  @author ${classInfo.author}
+ *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ */
 @Slf4j
 @Service
 public class ${classInfo.className}ServiceImpl implements ${classInfo.className}Service {
 
-@Autowired
-private ${classInfo.className}Dao ${classInfo.className?uncap_first}Dao;
+    @Autowired
+    private ${classInfo.className}Dao ${classInfo.className?uncap_first}Dao;
 
-/**
-* 新增
-*/
-@Override
-public Outcome
-<${classInfo.className}BO> save(${classInfo.className}Param ${classInfo.className?uncap_first}Param) {
-    ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}(${classInfo.className?uncap_first}Param);
-    ${classInfo.className?uncap_first}Dao.insert(${classInfo.className?uncap_first});
-    return Outcome.success(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bo(${classInfo.className?uncap_first}));
+    /**
+     * 新增
+     */
+    @Override
+    public Outcome<${classInfo.className}BO> save(${classInfo.className}Param ${classInfo.className?uncap_first}Param) {
+        ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}(${classInfo.className?uncap_first}Param);
+        ${classInfo.className?uncap_first}Dao.insert(${classInfo.className?uncap_first});
+        return Outcome.success(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bo(${classInfo.className?uncap_first}));
     }
 
     /**
-    * 删除
-    */
+     * 删除
+     */
     @Override
     public boolean deleteById(${classInfo.primaryField.fieldClass} id) {
-    if (id == null) {
-    return false;
-    }
-    return ${classInfo.className?uncap_first}Dao.deleteById(id) > 0;
+        if (id == null) {
+            return false;
+        }
+        return ${classInfo.className?uncap_first}Dao.deleteById(id) > 0;
     }
 
     /**
-    * 更新
-    */
+     * 更新
+     */
     @Override
     public boolean update(${classInfo.className}Param ${classInfo.className?uncap_first}Param) {
-    if (${classInfo.className?uncap_first}Param.get${classInfo.primaryField.fieldName?cap_first}() == null) {
-    return false;
-    }
-    ${classInfo.className} entity = ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}(${classInfo.className?uncap_first}Param);
-    return ${classInfo.className?uncap_first}Dao.updateById(entity) > 0;
+        if (${classInfo.className?uncap_first}Param.get${classInfo.primaryField.fieldName?cap_first}() == null) {
+            return false;
+        }
+        ${classInfo.className} entity = ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}(${classInfo.className?uncap_first}Param);
+        return ${classInfo.className?uncap_first}Dao.updateById(entity) > 0;
     }
 
     /**
-    * 根据主键查询
-    */
+     * 根据主键查询
+     */
     @Override
-    public Outcome
-    <${classInfo.className}BO> findById(${classInfo.primaryField.fieldClass} id) {
+    public Outcome<${classInfo.className}BO> findById(${classInfo.primaryField.fieldClass} id) {
         ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className?uncap_first}Dao.selectById(id);
         return Outcome.success(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bo(${classInfo.className?uncap_first}));
-        }
+    }
 
-        /**
-        * 分页查询
-        */
-        @Override
-        public Outcome
-        <Pageable
-        <${classInfo.className}BO>> pageList(${classInfo.className}QueryParam param, PageParam pageParam){
-            Page<${classInfo.className}> page = PageUtil.toPage(pageParam);
-            IPage<${classInfo.className}> pageData = ${classInfo.className?uncap_first}Dao.selectPage(page, DynamicCondition.toWrapper(param));
+    /**
+     * 分页查询
+     */
+    @Override
+    public Outcome<Pageable<${classInfo.className}BO>> pageList(${classInfo.className}QueryParam param, PageParam pageParam){
+        Page<${classInfo.className}> page = PageUtil.toPage(pageParam);
+        IPage<${classInfo.className}> pageData = ${classInfo.className?uncap_first}Dao.selectPage(page, DynamicCondition.toWrapper(param));
 
-            return Outcome.success(PageUtil.toPageable(pageData, ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bos(pageData.getRecords())));
-            }
-            }
+        return Outcome.success(PageUtil.toPageable(pageData, ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bos(pageData.getRecords())));
+    }
+}
