@@ -1,5 +1,6 @@
 package com.atinbo.security.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class BaseUserDetail implements Serializable {
     /**
      * 密码
      */
+    @JsonIgnore
     private String password;
 
     /**
