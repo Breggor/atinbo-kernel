@@ -1,10 +1,8 @@
 package com.atinbo.generate;
 
-import com.atinbo.generate.config.GenerateProperties;
 import freemarker.template.Configuration;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -13,7 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2019-09-02
  */
 @MapperScan("com.atinbo.generate.mapper")
-@EnableConfigurationProperties(GenerateProperties.class)
 @ComponentScan(basePackageClasses = GenerateAutoConfiguration.class)
 public class GenerateAutoConfiguration {
 
@@ -24,4 +21,5 @@ public class GenerateAutoConfiguration {
         configuration.setClassForTemplateLoading(this.getClass(), "/templates");
         return configuration;
     }
+
 }

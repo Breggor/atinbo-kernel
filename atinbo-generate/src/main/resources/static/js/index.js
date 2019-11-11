@@ -27,8 +27,12 @@ $(function () {
 
         },
         ajax: {
-            url: "gen/list",
-            dataSrc: ""
+            url: "gen/index",
+            dataSrc: function (data) {
+                var prop = data["properties"];
+                console.log(prop);
+                return data["classInfos"];
+            }
         },
         columns: [
             {
@@ -83,6 +87,9 @@ $(function () {
         genTable($(this).data("name"));
     });
 
+    /**
+     * 批量生成代码
+     */
     $(".table-content").on("click", ".checked-generate", function () {
         var checked = $(".gen-table:checked");
         if (checked.length != 0) {
@@ -107,7 +114,7 @@ $(function () {
             type: "POST",
             data: {"tableName": tableName},
             success: function (result) {
-                if (result.code == 0) {
+                if (result.code == 200) {
                     layer.alert("代码生成成功");
                 } else {
                     layer.alert(result.message);
