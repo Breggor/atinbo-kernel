@@ -55,6 +55,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.atinbo</groupId>
+            <artifactId>atinbo-cache-redis</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
         </dependency>
