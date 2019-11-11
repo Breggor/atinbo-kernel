@@ -12,7 +12,10 @@ import java.util.Map;
  */
 public class GenerateUtil {
 
-    public static String[] SUPPORT_CATEGORY = {"mybatis" , "hibernate"};
+    public static final String MODULE_API = "api";
+    public static final String MODULE_SERVICE = "service";
+    public static final String MODULE_OPENAPI = "openapi";
+
     /**
      * 数据库类型和java类型映射
      */
