@@ -13,17 +13,17 @@
 
     <modules>
         <module>atinbo-parent</module>
+        <module>atinbo-dependencies</module>
         <module>atinbo-base</module>
         <module>atinbo-common</module>
         <module>atinbo-model</module>
         <module>atinbo-core</module>
         <module>atinbo-dal</module>
+        <module>atinbo-cache</module>
         <module>atinbo-security</module>
         <module>atinbo-web</module>
         <module>atinbo-starter</module>
-        <module>atinbo-dependencies</module>
         <module>atinbo-generate</module>
-        <module>atinbo-cache</module>
     </modules>
 
     <distributionManagement>
