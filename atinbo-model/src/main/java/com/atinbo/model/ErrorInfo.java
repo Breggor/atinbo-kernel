@@ -25,20 +25,20 @@ import java.util.stream.Collectors;
 public class ErrorInfo implements Serializable {
 
     /**
-     * 原因
+     * 参数字段
+     */
+    @ApiModelProperty(value = "参数字段")
+    private String field;
+
+    /**
+     * 错误原因
      */
     @ApiModelProperty(value = "错误原因")
     private String reason;
 
-    /**
-     * 消息
-     */
-    @ApiModelProperty(value = "错误详情")
-    private String detail;
 
-
-    public static ErrorInfo of(String reason, String detail) {
-        return new ErrorInfo(reason, detail);
+    public static ErrorInfo of(String field, String reason) {
+        return new ErrorInfo(field, reason);
     }
 
     public static List<ErrorInfo> of(Map<String, String> errs) {
