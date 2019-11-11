@@ -5,12 +5,9 @@ import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -118,8 +115,8 @@ public class LoginUser extends BaseUserDetail implements UserDetails {
         return new LoginUser(userId, username, password, authorities, extra);
     }
 
-    private static List<GrantedAuthority> mapToGrantedAuthorities(Set<String> authorities) {
-        return authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+    private static Set<BaseGrantedAuthority> mapToGrantedAuthorities(Set<String> authorities) {
+        return authorities.stream().map(BaseGrantedAuthority::new).collect(Collectors.toSet());
     }
 
 

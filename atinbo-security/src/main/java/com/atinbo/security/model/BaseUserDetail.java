@@ -3,12 +3,16 @@ package com.atinbo.security.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 
 
+/**
+ * spring security基础属性类
+ *
+ * @author breggor
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -48,9 +52,9 @@ public class BaseUserDetail implements Serializable {
     /**
      * 角色 ROLE_USER
      */
-    private Collection<? extends GrantedAuthority> authorities;
+    private Set<BaseGrantedAuthority> authorities;
 
-    public BaseUserDetail(String username, String password, Collection<GrantedAuthority> authorities) {
+    public BaseUserDetail(String username, String password, Set<BaseGrantedAuthority> authorities) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
