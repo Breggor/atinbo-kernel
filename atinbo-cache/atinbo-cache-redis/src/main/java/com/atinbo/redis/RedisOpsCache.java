@@ -1,6 +1,8 @@
 package com.atinbo.redis;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -10,10 +12,12 @@ import java.util.concurrent.TimeUnit;
  *
  * @author breggor
  **/
+@Component
 public class RedisOpsCache {
 
     private final RedisTemplate redisTemplate;
 
+    @Autowired
     public RedisOpsCache(RedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
