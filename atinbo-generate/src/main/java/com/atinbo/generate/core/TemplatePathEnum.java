@@ -81,6 +81,6 @@ public enum TemplatePathEnum {
      * @return 框架名 + 模版名 + 模版文件名
      */
     public String genTemplatePath(String framework, String category) {
-        return framework.concat(File.separator).concat(category).concat(getTemplatePath());
+        return framework.concat("/").concat(category).concat(getTemplatePath());
     }
 }
