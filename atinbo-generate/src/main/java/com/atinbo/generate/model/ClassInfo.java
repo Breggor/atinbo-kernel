@@ -1,6 +1,7 @@
 package com.atinbo.generate.model;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @date 2019-8-20
  */
 @Data
+@Accessors(chain = true)
 public class ClassInfo {
 
     /**
