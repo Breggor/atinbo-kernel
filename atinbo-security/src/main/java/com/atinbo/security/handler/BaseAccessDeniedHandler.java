@@ -1,4 +1,4 @@
-package com.atinbo.security.comp;
+package com.atinbo.security.handler;
 
 import com.atinbo.common.Charsets;
 import com.atinbo.model.Outcome;

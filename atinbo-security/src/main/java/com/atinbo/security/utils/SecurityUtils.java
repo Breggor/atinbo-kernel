@@ -1,7 +1,7 @@
 package com.atinbo.security.utils;
 
 
-import com.atinbo.security.exception.UnauthorizedException;
+import com.atinbo.security.exception.UnAuthorizedException;
 import com.atinbo.security.model.LoginUser;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -24,7 +24,7 @@ public class SecurityUtils {
         try {
             return ((LoginUser) getUserDetails()).getUserId();
         } catch (Exception e) {
-            throw new UnauthorizedException(HttpStatus.UNAUTHORIZED, "获取用户账户异常");
+            throw new UnAuthorizedException(HttpStatus.UNAUTHORIZED, "获取用户账户异常");
         }
     }
 
@@ -35,7 +35,7 @@ public class SecurityUtils {
         try {
             return getUserDetails().getUsername();
         } catch (Exception e) {
-            throw new UnauthorizedException(HttpStatus.UNAUTHORIZED, "获取用户账户异常");
+            throw new UnAuthorizedException(HttpStatus.UNAUTHORIZED, "获取用户账户异常");
         }
     }
 
@@ -46,7 +46,7 @@ public class SecurityUtils {
         try {
             return (UserDetails) getAuthentication().getPrincipal();
         } catch (Exception e) {
-            throw new UnauthorizedException(HttpStatus.UNAUTHORIZED, "获取用户信息异常");
+            throw new UnAuthorizedException(HttpStatus.UNAUTHORIZED, "获取用户信息异常");
         }
     }
 
