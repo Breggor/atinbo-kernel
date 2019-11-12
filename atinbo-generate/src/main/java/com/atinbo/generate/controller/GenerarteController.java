@@ -3,7 +3,6 @@ package com.atinbo.generate.controller;
 import com.atinbo.core.utils.BeanUtil;
 import com.atinbo.generate.config.GenerateConfig;
 import com.atinbo.generate.config.RequestThread;
-import com.atinbo.generate.core.FrameworkEnum;
 import com.atinbo.generate.model.ClassInfo;
 import com.atinbo.generate.model.GenForm;
 import com.atinbo.generate.service.GenerateService;
@@ -11,9 +10,9 @@ import com.atinbo.model.Outcome;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -28,12 +27,16 @@ import java.util.Map;
 @RestController
 public class GenerarteController {
 
+    @Value("${spring.application.name}")
+    private String applicationName;
+
     @Autowired
     private GenerateService generateService;
 
     @GetMapping("/gen/index")
     public Map<String,Object> index() {
         GenerateConfig config = GenerateConfig.defaultConfig();
+        config.setModuleName(applicationName);
         RequestThread.setConfig(config);
         List<ClassInfo> classInfos = generateService.findAllTable();
         Map<String, Object> map = new HashMap<>();
@@ -43,15 +46,14 @@ public class GenerarteController {
     }
 
     @PostMapping("/gen")
-    public Outcome gen(GenForm genForm) {
-        GenerateConfig config = GenerateConfig.defaultConfig();
-        config.setAuthor(genForm.getAuthor()).setCategory(genForm.getCategory()).setFramework(genForm.getFramework())
-                .setPackageName(genForm.getPackageName()).setTablePrefix(genForm.getTablePrefix())
-                .setModuleName(genForm.getModuleName());
+    public Outcome gen(String tableName,GenerateConfig config) {
+        if(StringUtils.isBlank(config.getModuleName())){
+            config.setOutPath(GenerateConfig.DEFAULT_OUT_PATH);
+        }
         RequestThread.setConfig(config);
 
-        if (StringUtils.isNotBlank(genForm.getTableName())) {
-            String[] tables = StringUtils.split(genForm.getTableName(), ",");
+        if (StringUtils.isNotBlank(tableName)) {
+            String[] tables = StringUtils.split(tableName, ",");
             for (String table : tables) {
                 ClassInfo classInfo = generateService.findClassInfo(table);
                 try {

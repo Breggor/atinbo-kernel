@@ -18,8 +18,10 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class GenerateConfig {
 
+    public static final String DEFAULT_OUT_PATH = "src/main/java";
+
     public static GenerateConfig defaultConfig(){
-        return new GenerateConfig("atinbo generator", "com.atinbo", "mybatis", "dubbo", "", "src/main/java", null);
+        return new GenerateConfig("atinbo generator", "com.atinbo", "mybatis", "dubbo", "", DEFAULT_OUT_PATH, null);
     }
 
     /**
