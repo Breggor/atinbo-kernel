@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,8 +23,8 @@ import java.io.PrintWriter;
 @Slf4j
 @Component
 @AllArgsConstructor
-public class AccessDeniedHandler extends OAuth2AccessDeniedHandler {
-    private final static String CONTENT_TYPE = "application/json; charset=utf-8" ;
+public class BaseAccessDeniedHandler implements AccessDeniedHandler {
+    private final static String CONTENT_TYPE = "application/json; charset=utf-8";
     private final ObjectMapper objectMapper;
 
     /**
@@ -37,7 +37,7 @@ public class AccessDeniedHandler extends OAuth2AccessDeniedHandler {
     @Override
     @SneakyThrows
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException authException) {
-        log.info("授权失败，禁止访问 {}" , request.getRequestURI());
+        log.info("授权失败，禁止访问 {}", request.getRequestURI());
         response.setCharacterEncoding(Charsets.UTF8_NAME);
         response.setContentType(CONTENT_TYPE);
         Outcome<AccessDeniedException> result = Outcome.failure(new AccessDeniedException("授权失败，禁止访问"));

@@ -45,13 +45,13 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.security.oauth.boot</groupId>
-            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+            <groupId>com.atinbo</groupId>
+            <artifactId>atinbo-core</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.atinbo</groupId>
-            <artifactId>atinbo-core</artifactId>
+            <artifactId>atinbo-cache-redis</artifactId>
         </dependency>
 
         <dependency>

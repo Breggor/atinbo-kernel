@@ -1,10 +1,10 @@
 package com.atinbo.security.service;
 
-import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.atinbo.common.id.IdUtils;
 import com.atinbo.core.utils.AddressUtil;
 import com.atinbo.core.utils.IpUtil;
 import com.atinbo.core.utils.ServletUtil;
+import com.atinbo.redis.RedisOpsCache;
 import com.atinbo.security.model.LoginUser;
 import eu.bitwalker.useragentutils.UserAgent;
 import io.jsonwebtoken.Claims;
@@ -13,10 +13,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,15 +31,15 @@ public class UserTokenService {
     /**
      * 令牌前缀
      */
-    public static final String LOGIN_USER_KEY = "login_user_key" ;
+    public static final String LOGIN_USER_KEY = "login_user_key";
     /**
      * 令牌前缀
      */
-    public static final String TOKEN_PREFIX = "Bearer " ;
+    public static final String TOKEN_PREFIX = "Bearer ";
     /**
      * 登录用户 redis key
      */
-    public static final String LOGIN_TOKEN_KEY = "login_tokens:" ;
+    public static final String LOGIN_TOKEN_KEY = "login_tokens:";
     protected static final long MILLIS_SECOND = 1000L;
     protected static final long MILLIS_MINUTE = 60 * MILLIS_SECOND;
     private static final Long MILLIS_MINUTE_TEN = 20 * MILLIS_MINUTE;
@@ -65,18 +61,9 @@ public class UserTokenService {
     @Value("${token.expireTime}")
     private int expireTime;
 
-
-    private RedisTemplate redisTemplate;
-
     @Autowired
-    public void setRedisTemplate(RedisTemplate redisTemplate) {
-        RedisSerializer stringSerializer = new StringRedisSerializer();
-        redisTemplate.setKeySerializer(stringSerializer);
-        redisTemplate.setHashKeySerializer(stringSerializer);
-        FastJsonRedisSerializer serializer = new FastJsonRedisSerializer(Object.class);
-        redisTemplate.setValueSerializer(serializer);
-        this.redisTemplate = redisTemplate;
-    }
+    private RedisOpsCache redisOpsCache;
+
 
     /**
      * 获取用户身份信息
@@ -91,7 +78,7 @@ public class UserTokenService {
             // 解析对应的权限以及用户信息
             String uuid = (String) claims.get(LOGIN_USER_KEY);
             String userKey = getTokenKey(uuid);
-            LoginUser user = getLoginUserFromCache(userKey);
+            LoginUser user = redisOpsCache.getCacheObject(userKey);
             return user;
         }
         return null;
@@ -141,7 +128,7 @@ public class UserTokenService {
         loginUser.setExpireTime(loginUser.getLoginTime() + expireTime * MILLIS_MINUTE);
         // 根据uuid将loginUser缓存
         String userKey = getTokenKey(loginUser.getToken());
-        saveLoginUserToCache(userKey, loginUser, expireTime, TimeUnit.MINUTES);
+        redisOpsCache.setCacheObject(userKey, loginUser, expireTime, TimeUnit.MINUTES);
     }
 
     /**
@@ -211,32 +198,5 @@ public class UserTokenService {
 
     private String getTokenKey(String uuid) {
         return LOGIN_TOKEN_KEY + uuid;
-    }
-
-
-    /**
-     * 缓存基本的对象，Integer、String、实体类等
-     *
-     * @param key      缓存的键值
-     * @param value    缓存的值
-     * @param timeout  时间
-     * @param timeUnit 时间颗粒度
-     * @return 缓存的对象
-     */
-    private <T> ValueOperations<String, T> saveLoginUserToCache(String key, T value, Integer timeout, TimeUnit timeUnit) {
-        ValueOperations<String, T> operation = redisTemplate.opsForValue();
-        operation.set(key, value, timeout, timeUnit);
-        return operation;
-    }
-
-    /**
-     * 获得缓存的基本对象。
-     *
-     * @param key 缓存键值
-     * @return 缓存键值对应的数据
-     */
-    private <T> T getLoginUserFromCache(String key) {
-        ValueOperations<String, T> operation = redisTemplate.opsForValue();
-        return operation.get(key);
     }
 }
