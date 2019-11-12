@@ -11,34 +11,33 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 /**
-*  ${classInfo.classComment} 类型转换
-*
-*  @author ${classInfo.author}
-*  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
-*/
+ *  ${classInfo.classComment} 类型转换
+ *
+ *  @author ${classInfo.author}
+ *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ */
 @Mapper
 public interface ${classInfo.className}Mapper {
 
-${classInfo.className}Mapper INSTANCE = Mappers.getMapper(${classInfo.className}Mapper.class);
+    ${classInfo.className}Mapper INSTANCE = Mappers.getMapper(${classInfo.className}Mapper.class);
 
-/**
-* param to entity
-*/
-${classInfo.className} to${classInfo.className}(${classInfo.className}Param ${classInfo.className?uncap_first}Param);
+    /**
+     * param to entity
+     */
+    ${classInfo.className} to${classInfo.className}(${classInfo.className}Param ${classInfo.className?uncap_first}Param);
 
-/**
-* entity to BO
-*/
-${classInfo.className}BO to${classInfo.className}Bo(${classInfo.className} ${classInfo.className?uncap_first});
+    /**
+     * entity to BO
+     */
+    ${classInfo.className}BO to${classInfo.className}Bo(${classInfo.className} ${classInfo.className?uncap_first});
 
-/**
-* param to entity for update
-*/
-${classInfo.className} to${classInfo.className}(${classInfo.className}Param ${classInfo.className?uncap_first}Param, @MappingTarget ${classInfo.className} ${classInfo.className?uncap_first});
+    /**
+     * param to entity for update
+     */
+    ${classInfo.className} to${classInfo.className}(${classInfo.className}Param ${classInfo.className?uncap_first}Param, @MappingTarget ${classInfo.className} ${classInfo.className?uncap_first});
 
-/**
-* entityList to BOList
-*/
-List
-<${classInfo.className}BO> to${classInfo.className}Bos(List<${classInfo.className}> ${classInfo.className?uncap_first}List);
-    }
+    /**
+     * entityList to BOList
+     */
+    List<${classInfo.className}BO> to${classInfo.className}Bos(List<${classInfo.className}> ${classInfo.className?uncap_first}List);
+}

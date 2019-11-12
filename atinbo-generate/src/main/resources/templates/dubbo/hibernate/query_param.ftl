@@ -1,4 +1,4 @@
-package ${classInfo.packageName}.openapi.model;
+package ${classInfo.packageName}.model;
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >
@@ -13,8 +13,7 @@ package ${classInfo.packageName}.openapi.model;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import io.swagger.annotations.ApiModelProperty;
-
+import com.atinbo.model.QueryParam;
 <#if importDdate??>
 import java.util.Date;
 </#if>
@@ -23,19 +22,20 @@ import java.math.BigDecimal;
 </#if>
 
 /**
- *  ${classInfo.classComment} 出参参数
+ *  ${classInfo.classComment} QUERY PARAM
  *
  *  @author ${classInfo.author}
  *  @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
  */
 @Data
 @Accessors(chain = true)
-public class ${classInfo.className}VO {
+public class ${classInfo.className}QueryParam implements QueryParam {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
 <#list classInfo.fieldList as fieldItem >
-
-    @ApiModelProperty(value = "${fieldItem.fieldComment}")
+    /**
+     * ${fieldItem.fieldComment}
+     */
     private ${fieldItem.fieldClass} ${fieldItem.fieldName};
 
 </#list>
