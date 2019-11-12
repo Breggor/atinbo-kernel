@@ -29,7 +29,46 @@
                     <div class="col-md-12">
                         <div class="box">
                             <div class="box-header">
-                                <h3 class="box-title">database table</h3>
+                                <h3 class="box-title">代码生成配置信息</h3>
+                            </div>
+                            <form id="settingForm">
+                            <div class="box-body table-content">
+                                <div class="form-group col-md-4">
+                                    <label for="author">author</label>
+                                    <input type="text" id="author" name="author" class="form-control" placeholder="请输入author">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="packageName">包名</label>
+                                    <input type="text" id="packageName" name="packageName" class="form-control" placeholder="请输入包名">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="tablePrefix">表前缀</label>
+                                    <input type="text" id="tablePrefix" name="tablePrefix" class="form-control" placeholder="请输入表前缀(类名不会包含表前缀)">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="category">生成类型</label>
+                                    <select id="category" name="category" class="form-control">
+                                        <option value="mybatis">mybatis</option>
+                                        <option value="hibernate">hibernate</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="framework">框架结构</label>
+                                    <select id="framework" name="framework" class="form-control">
+                                        <option value="dubbo">dubbo</option>
+                                        <option value="springCloud">springCloud</option>
+                                    </select>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">数据库表</h3>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body table-content">

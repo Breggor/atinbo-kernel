@@ -30,7 +30,9 @@ $(function () {
             url: "gen/index",
             dataSrc: function (data) {
                 var prop = data["properties"];
-                console.log(prop);
+                $.each(prop, function(key,value){
+                    $("#"+key).val(value);
+                });
                 return data["classInfos"];
             }
         },
@@ -109,10 +111,16 @@ $(function () {
     });
 
     function genTable(tableName) {
+        var formData = {};
+        var a = $("#settingForm").serializeArray();
+        $.each(a, function () {
+            formData[this.name] = this.value || '';
+        });
+        formData["tableName"] = tableName;
         $.ajax({
             url: "gen",
             type: "POST",
-            data: {"tableName": tableName},
+            data: formData,
             success: function (result) {
                 if (result.code == 200) {
                     layer.alert("代码生成成功");
