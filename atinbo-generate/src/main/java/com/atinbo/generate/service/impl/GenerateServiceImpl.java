@@ -15,6 +15,7 @@ import com.atinbo.generate.service.GenerateService;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ import java.util.Map;
  * @author code-generator
  * @date 2019-8-20
  */
+@Slf4j
 @Service
 public class GenerateServiceImpl implements GenerateService {
 
@@ -102,38 +104,38 @@ public class GenerateServiceImpl implements GenerateService {
     }
 
     @Override
-    public void generateClass(ClassInfo classInfo) throws IOException, TemplateException {
+    public void generateClass(ClassInfo classInfo){
         GenerateConfig config = RequestThread.getConfig();
         String prefixPath = GenerateUtil.genFilePath(config.getOutPath(), classInfo.getPackageName());
         String category = CategoryEnum.check(config.getCategory());
+        String framework = FrameworkEnum.check(config.getFramework());
 
-        for (TemplatePathEnum pathEnum : TemplatePathEnum.values()) {
+        List<TemplatePathEnum> templateEnums = TemplatePathEnum.getTemplates(framework);
+        templateEnums.forEach(t -> {
             //category 为空则是通用的。否则根据类型区分
-            if (StringUtils.isBlank(pathEnum.getCategory()) || pathEnum.getCategory().equals(category)) {
-                processFile(pathEnum, prefixPath, classInfo, category);
+            if (StringUtils.isBlank(t.getCategory()) || t.getCategory().equals(category)) {
+                try {
+                    processFile(t, prefixPath, classInfo, category);
+                } catch (Exception e) {
+                    log.error("生成{}的{}文件失败", classInfo.getClassName(), t.getTemplateName(), e);
+                }
             }
-        }
+        });
     }
 
     private void processFile(TemplatePathEnum entity, String prefix, ClassInfo classInfo, String category) throws IOException, TemplateException {
         GenerateConfig config = RequestThread.getConfig();
         Map<String, Object> params = new HashMap<>();
         params.put("classInfo" , classInfo);
+        params.put("moduleName" , config.getModuleName());
 
         StringBuffer modulePath = new StringBuffer();
         if (StringUtils.isNotBlank(config.getModuleName())) {
-            modulePath.append(config.getModuleName());
+            modulePath.append(config.getModuleName()).append("-").append(entity.getModule()).append(File.separator);
         }
-        if (config.isMultipleModule()) {
-            if (modulePath.length() > 0) {
-                modulePath.append("-");
-            }
-            modulePath.append(entity.getModule());
-        }
-        if (modulePath.length() > 0) {
-            modulePath.append(File.separator);
-        }
-        String filePath = modulePath.append(prefix).append(File.separator).append(entity.genOutPath(classInfo.getClassName())).toString();
+
+        String filePath = modulePath.append(prefix).append(File.separator)
+                .append(entity.genOutPath(classInfo.getClassName())).toString();
         File file = new File(filePath);
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
@@ -142,7 +144,7 @@ public class GenerateServiceImpl implements GenerateService {
             file.createNewFile();
         }
 
-        Template template = configuration.getTemplate(entity.genTemplatePath(FrameworkEnum.check(config.getFramework()), category));
+        Template template = configuration.getTemplate(entity.genTemplatePath(category));
         FileWriter writer = new FileWriter(filePath);
         template.process(params, writer);
         writer.close();

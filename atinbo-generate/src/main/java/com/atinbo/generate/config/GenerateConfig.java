@@ -1,5 +1,6 @@
 package com.atinbo.generate.config;
 
+import com.atinbo.core.utils.StringUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ import lombok.experimental.Accessors;
 public class GenerateConfig {
 
     public static GenerateConfig defaultConfig(){
-        return new GenerateConfig("atinbo generator", "com.atinbo", "mybatis", "dubbo", "", "src/java/main", false, null);
+        return new GenerateConfig("atinbo generator", "com.atinbo", "mybatis", "dubbo", "", "src/java/main", null);
     }
 
     /**
@@ -52,13 +53,56 @@ public class GenerateConfig {
     private String outPath;
 
     /**
-     * 是否开启多模块
-     */
-    private boolean multipleModule;
-
-    /**
      * 模块名称
      */
     private String moduleName;
 
+    public GenerateConfig setAuthor(String author) {
+        if(StringUtil.isNotBlank(author)){
+            this.author = author;
+        }
+        return this;
+    }
+
+    public GenerateConfig setPackageName(String packageName) {
+        if(StringUtil.isNotBlank(packageName)){
+            this.packageName = packageName;
+        }
+        return this;
+    }
+
+    public GenerateConfig setCategory(String category) {
+        if(StringUtil.isNotBlank(category)){
+            this.category = category;
+        }
+        return this;
+    }
+
+    public GenerateConfig setFramework(String framework) {
+        if(StringUtil.isNotBlank(framework)){
+            this.framework = framework;
+        }
+        return this;
+    }
+
+    public GenerateConfig setTablePrefix(String tablePrefix) {
+        if(StringUtil.isNotBlank(tablePrefix)){
+            this.tablePrefix = tablePrefix;
+        }
+        return this;
+    }
+
+    public GenerateConfig setOutPath(String outPath) {
+        if(StringUtil.isNotBlank(outPath)){
+            this.outPath = outPath;
+        }
+        return this;
+    }
+
+    public GenerateConfig setModuleName(String moduleName) {
+        if(StringUtil.isNotBlank(moduleName)){
+            this.moduleName = moduleName;
+        }
+        return this;
+    }
 }

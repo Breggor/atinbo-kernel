@@ -39,4 +39,9 @@ public class GenForm implements Serializable {
      * 表前缀(类名不会包含表前缀)
      */
     private String tablePrefix;
+
+    /**
+     * 模块名称
+     */
+    private String moduleName;
 }

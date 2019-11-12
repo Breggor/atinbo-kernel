@@ -3,6 +3,7 @@ package com.atinbo.generate.controller;
 import com.atinbo.core.utils.BeanUtil;
 import com.atinbo.generate.config.GenerateConfig;
 import com.atinbo.generate.config.RequestThread;
+import com.atinbo.generate.core.FrameworkEnum;
 import com.atinbo.generate.model.ClassInfo;
 import com.atinbo.generate.model.GenForm;
 import com.atinbo.generate.service.GenerateService;
@@ -45,7 +46,8 @@ public class GenerarteController {
     public Outcome gen(GenForm genForm) {
         GenerateConfig config = GenerateConfig.defaultConfig();
         config.setAuthor(genForm.getAuthor()).setCategory(genForm.getCategory()).setFramework(genForm.getFramework())
-                .setPackageName(genForm.getPackageName()).setTablePrefix(genForm.getTablePrefix());
+                .setPackageName(genForm.getPackageName()).setTablePrefix(genForm.getTablePrefix())
+                .setModuleName(genForm.getModuleName());
         RequestThread.setConfig(config);
 
         if (StringUtils.isNotBlank(genForm.getTableName())) {
