@@ -1,8 +1,9 @@
 package com.atinbo.security.handler;
 
-import com.alibaba.fastjson.JSON;
 import com.atinbo.core.utils.ServletUtil;
 import com.atinbo.model.Outcome;
+import com.atinbo.model.StatusCodeEnum;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -19,12 +20,13 @@ import java.io.Serializable;
  * @author breggor
  */
 @Component
-public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint, Serializable {
-    private static final long serialVersionUID = -8970718410437077606L;
+public class BaseAuthenticationEntryPoint implements AuthenticationEntryPoint, Serializable {
+    private static final long serialVersionUID = 1L;
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException {
-        String msg = String.format("请求访问：{}，{}: 认证失败，无法访问系统资源" , request.getRequestURI(), HttpStatus.UNAUTHORIZED);
-        ServletUtil.renderString(response, JSON.toJSONString(Outcome.failure(msg)));
+        String msg = String.format("请求访问：{}，{}: 认证失败，无法访问系统资源", request.getRequestURI(), HttpStatus.UNAUTHORIZED);
+        ServletUtil.renderString(response, objectMapper.writeValueAsString(Outcome.failure(StatusCodeEnum.UN_AUTHORIZED, msg)));
     }
 }

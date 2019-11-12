@@ -1,10 +1,11 @@
 package com.atinbo.security.handler;
 
-import com.alibaba.fastjson.JSON;
+
 import com.atinbo.core.utils.ServletUtil;
 import com.atinbo.model.Outcome;
 import com.atinbo.security.model.LoginUser;
 import com.atinbo.security.service.UserTokenService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +25,8 @@ import java.util.Objects;
  */
 @Slf4j
 @Configuration
-public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {
+public class BaseLogoutSuccessHandler implements LogoutSuccessHandler {
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
     private UserTokenService userTokenService;
@@ -35,14 +37,13 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {
      * @return
      */
     @Override
-    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-            throws IOException, ServletException {
+    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         LoginUser loginUser = userTokenService.getLoginUser(request);
         if (!Objects.isNull(loginUser)) {
             String userName = loginUser.getUsername();
             // 记录用户退出日志
             log.info(userName + "-- 退出成功");
         }
-        ServletUtil.renderString(response, JSON.toJSONString(Outcome.success().setMessage("退出成功")));
+        ServletUtil.renderString(response, objectMapper.writeValueAsString(Outcome.success().setMessage("退出成功")));
     }
 }

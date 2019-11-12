@@ -5,8 +5,7 @@
 
 package com.atinbo.utils;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletOutputStream;
@@ -17,6 +16,7 @@ import java.io.IOException;
 
 @Slf4j
 public abstract class HttpRequestUtils {
+    private static final Gson GSON = new Gson();
 
     public static String readData(HttpServletRequest request) {
         try (BufferedReader br = request.getReader()) {
@@ -44,8 +44,8 @@ public abstract class HttpRequestUtils {
 
     public static void flushJson(HttpServletResponse response, Object record) {
         response.setContentType("application/json");
-        LogUtils.pushResponseData(JSON.toJSONString(record, SerializerFeature.DisableCircularReferenceDetect));
-        byte[] jsonBytes = JSON.toJSONString(record, SerializerFeature.DisableCircularReferenceDetect).getBytes();
+        LogUtils.pushResponseData(GSON.toJson(record));
+        byte[] jsonBytes = GSON.toJson(record).getBytes();
         flushJson(response, jsonBytes);
     }
 }

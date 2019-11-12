@@ -2,8 +2,8 @@ package com.atinbo.security.config;
 
 
 import com.atinbo.security.filter.JwtAuthenticationTokenFilter;
-import com.atinbo.security.handler.AuthenticationEntryPointImpl;
-import com.atinbo.security.handler.LogoutSuccessHandlerImpl;
+import com.atinbo.security.handler.BaseAuthenticationEntryPoint;
+import com.atinbo.security.handler.BaseLogoutSuccessHandler;
 import com.atinbo.security.jwt.JwtTokenOps;
 import com.atinbo.security.service.BaseUserDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,13 +48,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * 认证失败处理类
      */
     @Autowired
-    private AuthenticationEntryPointImpl unauthorizedHandler;
+    private BaseAuthenticationEntryPoint unauthorizedHandler;
 
     /**
      * 退出处理类
      */
     @Autowired
-    private LogoutSuccessHandlerImpl logoutSuccessHandler;
+    private BaseLogoutSuccessHandler logoutSuccessHandler;
 
     /**
      * token认证过滤器
