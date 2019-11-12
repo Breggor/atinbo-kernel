@@ -8,13 +8,21 @@ import com.atinbo.model.StatusCode;
  *
  * @author breggor
  */
-public class HttpApiException extends FrameworkException {
+public class HttpApiException extends RuntimeException {
+
+    protected StatusCode status;
+
+
+    public StatusCode getStatus() {
+        return this.status;
+    }
+
     public HttpApiException(StatusCode statusCode) {
-        super(statusCode);
+        this.status = statusCode;
     }
 
     @Override
     public String toString() {
-        return "APIException{http=" + super.status + '}';
+        return "APIException{http=" + this.status + '}';
     }
 }
