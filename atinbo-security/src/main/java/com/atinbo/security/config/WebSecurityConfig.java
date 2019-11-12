@@ -129,11 +129,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new ObjectMapper();
     }
 
-    @Bean
-    @ConditionalOnMissingBean
-    public JwtTokenOps jwtTokenOps() {
-        return new JwtTokenOps();
-    }
 
     @Bean
     @ConditionalOnMissingBean
