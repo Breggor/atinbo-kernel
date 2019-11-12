@@ -5,7 +5,7 @@ package com.atinbo.security.exception;
  *
  * @author breggor
  */
-public class CaptchaExpireException extends RuntimeException {
+public class CaptchaExpireException extends UserException {
     private static final long serialVersionUID = 1L;
 
     public CaptchaExpireException() {
