@@ -1,4 +1,4 @@
-package com.atinbo.redis;
+package com.atinbo.redis.template;
 
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -6,27 +6,23 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-
+/**
+ * jackson序列化
+ *
+ * @author breggor
+ */
 public class JsonRedisTemplate extends RedisTemplate<String, Object> {
+    private final static RedisSerializer<String> stringSerializer = new StringRedisSerializer();
+    private final static RedisSerializer<Object> jsonSerializer = new GenericJackson2JsonRedisSerializer();
 
-    /**
-     * Constructs a new <status>JdkRedisTemplate</status> instance. {@link #setConnectionFactory(RedisConnectionFactory)}
-     * and {@link #afterPropertiesSet()} still need to be called.
-     */
     public JsonRedisTemplate() {
-        RedisSerializer<String> stringSerializer = new StringRedisSerializer();
-        RedisSerializer<Object> jsonSerializer = new GenericJackson2JsonRedisSerializer();
         setKeySerializer(stringSerializer);
         setValueSerializer(jsonSerializer);
+
         setHashKeySerializer(stringSerializer);
         setHashValueSerializer(jsonSerializer);
     }
 
-    /**
-     * Constructs a new <status>JdkRedisTemplate</status> instance ready to be used.
-     *
-     * @param connectionFactory connection factory for creating new connections
-     */
     public JsonRedisTemplate(RedisConnectionFactory connectionFactory) {
         this();
         setConnectionFactory(connectionFactory);
