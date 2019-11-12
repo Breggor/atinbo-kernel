@@ -42,12 +42,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>com.atinbo</groupId>
             <artifactId>atinbo-core</artifactId>
         </dependency>
