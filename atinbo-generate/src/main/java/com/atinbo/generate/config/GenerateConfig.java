@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
 public class GenerateConfig {
 
     public static GenerateConfig defaultConfig(){
-        return new GenerateConfig("atinbo generator", "com.atinbo", "mybatis", "dubbo", "", "src/java/main", null);
+        return new GenerateConfig("atinbo generator", "com.atinbo", "mybatis", "dubbo", "", "src/main/java", null);
     }
 
     /**
