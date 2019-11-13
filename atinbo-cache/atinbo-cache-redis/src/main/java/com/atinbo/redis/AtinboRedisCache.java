@@ -7,6 +7,6 @@ import org.springframework.context.annotation.ComponentScan;
  *
  * @author breggor
  */
-@ComponentScan(basePackageClasses = AtinboRedisConfig.class)
-public class AtinboRedisConfig {
+@ComponentScan(basePackageClasses = AtinboRedisCache.class)
+public class AtinboRedisCache {
 }

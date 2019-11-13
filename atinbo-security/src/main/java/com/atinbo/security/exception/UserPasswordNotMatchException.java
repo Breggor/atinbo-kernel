@@ -6,7 +6,7 @@ package com.atinbo.security.exception;
  *
  * @author breggor
  */
-public class UserPasswordNotMatchException extends RuntimeException {
+public class UserPasswordNotMatchException extends UserException {
     private static final long serialVersionUID = 1L;
 
     public UserPasswordNotMatchException() {
