@@ -117,11 +117,7 @@ $(function () {
             type: "POST",
             data: formData,
             success: function (result) {
-                if (result.code == 200) {
-                    layer.alert("代码生成成功");
-                } else {
-                    layer.alert(result.message);
-                }
+                layer.alert(result.message);
             },
             error: function (e) {
                 console.error(e);
