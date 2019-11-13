@@ -1,6 +1,8 @@
 package ${classInfo.packageName}.feign;
 
-import ${classInfo.packageName}.feign.fallback.${classInfo.className}ClientFallback;
+import com.atinbo.model.Outcome;
+import com.atinbo.model.Pagable;
+import ${classInfo.packageName}.fallback.${classInfo.className}ClientFallback;
 import ${classInfo.packageName}.model.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;

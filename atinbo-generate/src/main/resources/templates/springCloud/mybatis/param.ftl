@@ -10,7 +10,7 @@ package ${classInfo.packageName}.model;
         </#if>
     </#list>
 </#if>
-
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -30,7 +30,7 @@ import java.math.BigDecimal;
  */
 @Data
 @Accessors(chain = true)
-public class ${classInfo.className}DTO implements Serializable {
+public class ${classInfo.className}Param implements Serializable {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >

@@ -7,7 +7,6 @@ import ${classInfo.packageName}.mapper.${classInfo.className}Mapper;
 import ${classInfo.packageName}.service.${classInfo.className}Service;
 import ${classInfo.packageName}.web.form.${classInfo.className}QueryForm;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -10,13 +10,12 @@ package ${classInfo.packageName}.model;
         </#if>
     </#list>
 </#if>
-
 import com.atinbo.model.PageParam;
 import com.atinbo.model.QueryParam;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 <#if importDdate??>
 import java.time.LocalDateTime;
 </#if>
