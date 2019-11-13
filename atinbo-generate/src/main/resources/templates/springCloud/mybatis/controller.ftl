@@ -1,6 +1,6 @@
 package ${classInfo.packageName}.web.controller;
 
-import com.atinbo.core.exception.BizErrorException;
+import com.atinbo.core.exception.BizException;
 import com.atinbo.model.Outcome;
 import com.atinbo.model.Pagable;
 import com.atinbo.swagger.annotation.HttpApiResponse;
@@ -78,7 +78,7 @@ public class ${classInfo.className}Controller {
     public Outcome<${classInfo.className}> modify(@PathVariable ${classInfo.primaryField.fieldClass} id, @ApiParam("修改${classInfo.classComment}") @RequestBody ${classInfo.className} param) {
         int opt = ${classInfo.className?uncap_first}Service.update(param);
         if (opt <= 0) {
-            throw new BizErrorException("修改失败");
+            throw new BizException("修改失败");
         }
         return Outcome.success(param);
     }

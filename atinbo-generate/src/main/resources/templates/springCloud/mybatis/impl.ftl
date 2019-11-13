@@ -1,7 +1,7 @@
 package ${classInfo.packageName}.service.impl;
 
 import com.atinbo.mybatis.DynamicCondition;
-import com.atinbo.core.exception.CheckErrorException;
+import com.atinbo.core.exception.BizException;
 import ${classInfo.packageName}.entity.${classInfo.className};
 import ${classInfo.packageName}.mapper.${classInfo.className}Mapper;
 import ${classInfo.packageName}.service.${classInfo.className}Service;
@@ -54,7 +54,7 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
     @Override
     public int update(${classInfo.className} entity) {
         if (entity == null || entity.get${classInfo.primaryField.fieldName?cap_first}() == null) {
-            throw new CheckErrorException("修改：参数有误");
+            throw new BizException("修改：参数有误");
         }
         return ${classInfo.className?uncap_first}Mapper.updateById(entity);
     }
