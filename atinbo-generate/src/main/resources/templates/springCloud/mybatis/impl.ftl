@@ -1,5 +1,6 @@
 package ${classInfo.packageName}.service.impl;
 
+import com.atinbo.mybatis.DynamicCondition;
 import com.atinbo.core.exception.CheckErrorException;
 import ${classInfo.packageName}.entity.${classInfo.className};
 import ${classInfo.packageName}.mapper.${classInfo.className}Mapper;
@@ -64,6 +65,6 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
     @Override
     public IPage<${classInfo.className}> findAllByPage(${classInfo.className}QueryForm param) {
         Page<${classInfo.className}> page = new Page(param.getPage(), param.getSize());
-        return ${classInfo.className?uncap_first}Dao.selectPage(page, DynamicCondition.toWrapper(param));
+        return ${classInfo.className?uncap_first}Mapper.selectPage(page, DynamicCondition.toWrapper(param));
     }
 }

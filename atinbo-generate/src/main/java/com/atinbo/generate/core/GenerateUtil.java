@@ -28,11 +28,11 @@ public class GenerateUtil {
         TYPE_MAPPING.put("BIGINT" , "Long");
         TYPE_MAPPING.put("FLOAT" , "Float");
         TYPE_MAPPING.put("DOUBLE" , "Double");
-        TYPE_MAPPING.put("DATETIME" , "Date");
-        TYPE_MAPPING.put("TIMESTAMP" , "Date");
+        TYPE_MAPPING.put("DATETIME" , "LocalDateTime");
+        TYPE_MAPPING.put("TIMESTAMP" , "LocalDateTime");
         TYPE_MAPPING.put("BIT" , "Boolean");
-        TYPE_MAPPING.put("DATE" , "Date");
-        TYPE_MAPPING.put("TIME" , "Date");
+        TYPE_MAPPING.put("DATE" , "LocalDateTime");
+        TYPE_MAPPING.put("TIME" , "LocalDateTime");
         TYPE_MAPPING.put("VARCHAR" , "String");
         TYPE_MAPPING.put("TEXT" , "String");
         TYPE_MAPPING.put("MEDIUMTEXT" , "String");

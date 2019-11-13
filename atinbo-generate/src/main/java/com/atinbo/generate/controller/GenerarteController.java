@@ -47,7 +47,7 @@ public class GenerarteController {
 
     @PostMapping("/gen")
     public Outcome gen(String tableName,GenerateConfig config) {
-        if(StringUtils.isBlank(config.getModuleName())){
+        if(StringUtils.isBlank(config.getOutPath())){
             config.setOutPath(GenerateConfig.DEFAULT_OUT_PATH);
         }
         RequestThread.setConfig(config);

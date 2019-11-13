@@ -2,7 +2,7 @@ package ${classInfo.packageName}.model;
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >
-        <#if fieldItem.fieldClass == "Date">
+        <#if fieldItem.fieldClass == "LocalDateTime">
             <#assign importDdate = true />
         </#if>
         <#if fieldItem.fieldClass == "BigDecimal">

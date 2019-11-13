@@ -1,15 +1,14 @@
 package ${classInfo.packageName}.web.controller;
 
 import com.atinbo.core.exception.BizErrorException;
-import com.atinbo.model.ErrorInfo;
 import com.atinbo.model.Outcome;
 import com.atinbo.model.Pagable;
+import com.atinbo.swagger.annotation.HttpApiResponse;
 import ${classInfo.packageName}.entity.${classInfo.className};
 import ${classInfo.packageName}.service.${classInfo.className}Service;
 import ${classInfo.packageName}.web.form.${classInfo.className}QueryForm;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.*;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

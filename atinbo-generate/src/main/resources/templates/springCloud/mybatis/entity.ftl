@@ -2,22 +2,20 @@ package ${classInfo.packageName}.entity;
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >
-        <#if fieldItem.fieldClass == "Date">
+        <#if fieldItem.fieldClass == "LocalDateTime" >
             <#assign importDdate = true />
         </#if>
-        <#if fieldItem.fieldClass == "BigDecimal">
+        <#if fieldItem.fieldClass == "BigDecimal" >
             <#assign importBigDecimal = true />
         </#if>
     </#list>
 </#if>
-import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.KeySequence;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 <#if importDdate??>
 import java.time.LocalDateTime;
