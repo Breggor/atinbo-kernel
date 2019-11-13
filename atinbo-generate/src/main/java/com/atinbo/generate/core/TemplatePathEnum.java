@@ -74,7 +74,7 @@ public enum TemplatePathEnum {
     /************* API *************/
     S_FEIGN("/feign.ftl","feign/I%sClient.java",
             GenerateUtil.MODULE_API , Strings.EMPTY, FrameworkEnum.SPRING_CLOUD.getValue()),
-    S_FALLBACK("/fallback.ftl", "feign/fallback/%sClientFallback.java",
+    S_FALLBACK("/fallback.ftl", "fallback/%sClientFallback.java",
             GenerateUtil.MODULE_API , Strings.EMPTY, FrameworkEnum.SPRING_CLOUD.getValue()),
     S_DTO("/dto.ftl", "model/%sDTO.java",
             GenerateUtil.MODULE_API , Strings.EMPTY, FrameworkEnum.SPRING_CLOUD.getValue()),
