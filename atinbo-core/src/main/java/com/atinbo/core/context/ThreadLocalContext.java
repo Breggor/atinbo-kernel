@@ -1,4 +1,4 @@
-package com.atinbo.context;
+package com.atinbo.core.context;
 
 import org.springframework.util.StringUtils;
 
@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public abstract class ThreadLocalContext {
-    public static final ThreadLocal<Map<String, Object>> GLOBAL_THREAD_LOCAL = new InheritableThreadLocal();
+    private static final ThreadLocal<Map<String, Object>> GLOBAL_THREAD_LOCAL = new InheritableThreadLocal();
 
     public static void set(String key, Object value) {
         if (!StringUtils.isEmpty(key) && !Objects.isNull(value)) {
