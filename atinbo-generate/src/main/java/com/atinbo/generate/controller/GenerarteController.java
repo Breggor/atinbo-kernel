@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,14 +53,19 @@ public class GenerarteController {
         }
         RequestThread.setConfig(config);
 
+        List<String> error = new ArrayList<>();
         if (StringUtils.isNotBlank(tableName)) {
             String[] tables = StringUtils.split(tableName, ",");
             for (String table : tables) {
-                ClassInfo classInfo = generateService.findClassInfo(table);
                 try {
-                    generateService.generateClass(classInfo);
+                    boolean flag = generateService.generateClass(tableName);
+                    if(!flag){
+                        error.add(table);
+                        continue;
+                    }
                 } catch (Exception e) {
                     log.error("gen table:{} error:" , table, e);
+                    error.add(table);
                     continue;
                 }
             }
@@ -67,24 +73,19 @@ public class GenerarteController {
             List<ClassInfo> classInfoList = generateService.findAllTable();
             for (ClassInfo classInfo : classInfoList) {
                 try {
-                    generateService.generateClass(classInfo);
+                    boolean flag = generateService.generateClass(classInfo.getTableName());
+                    if(!flag){
+                        error.add(classInfo.getTableName());
+                        continue;
+                    }
                 } catch (Exception e) {
                     log.error("gen all table:{} error:" , classInfo.getTableName(), e);
+                    error.add(classInfo.getTableName());
                     continue;
                 }
             }
         }
-        return Outcome.success();
-    }
-
-    public static void main(String[] args) {
-        GenerateConfig param = new GenerateConfig();
-
-        param.setAuthor("aaa");
-        GenerateConfig config = GenerateConfig.defaultConfig();
-        BeanUtil.copyProperties(param, config);
-
-        System.out.println(BeanUtil.toMap(config));
+        return error.isEmpty() ? Outcome.success() : Outcome.failure(String.join("," ,error) + "生成失败");
     }
 
 }

@@ -22,17 +22,10 @@ public interface GenerateService {
     List<ClassInfo> findAllTable();
 
     /**
-     * 获取完整的单表的类对象（包含表中的字段）
-     *
-     * @param tableName
-     */
-    ClassInfo findClassInfo(String tableName);
-
-    /**
      * 生成代码
      *
-     * @param classInfo
+     * @param tableName
      * @return
      */
-    void generateClass(ClassInfo classInfo) throws IOException, TemplateException;
+    boolean generateClass(String tableName);
 }

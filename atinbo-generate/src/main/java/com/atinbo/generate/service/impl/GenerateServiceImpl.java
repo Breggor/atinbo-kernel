@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * 表查询服务实现
@@ -68,7 +69,35 @@ public class GenerateServiceImpl implements GenerateService {
     }
 
     @Override
-    public ClassInfo findClassInfo(String tableName) {
+    public boolean generateClass(String tableName){
+        AtomicBoolean result = new AtomicBoolean(true);
+        GenerateConfig config = RequestThread.getConfig();
+        ClassInfo classInfo = findClassInfo(tableName);
+        String prefixPath = GenerateUtil.genFilePath(config.getOutPath(), classInfo.getPackageName());
+        String category = CategoryEnum.check(config.getCategory());
+        String framework = FrameworkEnum.check(config.getFramework());
+
+        List<TemplatePathEnum> templateEnums = TemplatePathEnum.getTemplates(framework);
+        templateEnums.forEach(t -> {
+            //category 为空则是通用的。否则根据类型区分
+            if (StringUtils.isBlank(t.getCategory()) || t.getCategory().equals(category)) {
+                try {
+                    processFile(t, prefixPath, classInfo, category);
+                } catch (Exception e) {
+                    log.error("生成{}的{}文件失败", classInfo.getClassName(), t.getTemplateName(), e);
+                    result.set(false);
+                }
+            }
+        });
+        return result.get();
+    }
+
+    /**
+     * 获取表信息
+     * @param tableName
+     * @return
+     */
+    private ClassInfo findClassInfo(String tableName) {
         GenerateConfig config = RequestThread.getConfig();
         TableInfo tableInfo = generateMapper.selectTableInfo(tableName);
         ClassInfo classInfo = new ClassInfo();
@@ -93,36 +122,31 @@ public class GenerateServiceImpl implements GenerateService {
                 fieldInfo.setFieldClass(GenerateUtil.getJavaClass(column.getDataType()));
 
                 if ("PRI".equalsIgnoreCase(column.getColumnKey())) {
+                    if(classInfo.getPrimaryField() != null){
+                        log.error("当前表【{}】没有已存在主键信息，目前不支持联合主键", tableName);
+                        return null;
+                    }
                     fieldInfo.setPrimaryKey(true);
                     classInfo.setPrimaryField(fieldInfo);
                 }
                 fieldInfoList.add(fieldInfo);
+            }
+            if(classInfo.getPrimaryField() == null){
+                log.error("当前表【{}】没有找到主键信息", tableName);
+                return null;
             }
             classInfo.setFieldList(fieldInfoList);
         }
         return classInfo;
     }
 
-    @Override
-    public void generateClass(ClassInfo classInfo){
-        GenerateConfig config = RequestThread.getConfig();
-        String prefixPath = GenerateUtil.genFilePath(config.getOutPath(), classInfo.getPackageName());
-        String category = CategoryEnum.check(config.getCategory());
-        String framework = FrameworkEnum.check(config.getFramework());
-
-        List<TemplatePathEnum> templateEnums = TemplatePathEnum.getTemplates(framework);
-        templateEnums.forEach(t -> {
-            //category 为空则是通用的。否则根据类型区分
-            if (StringUtils.isBlank(t.getCategory()) || t.getCategory().equals(category)) {
-                try {
-                    processFile(t, prefixPath, classInfo, category);
-                } catch (Exception e) {
-                    log.error("生成{}的{}文件失败", classInfo.getClassName(), t.getTemplateName(), e);
-                }
-            }
-        });
-    }
-
+    /**
+     * 代码生成
+     * @param entity 模版枚举
+     * @param prefix 生成路径前缀
+     * @param classInfo 生成类信息
+     * @param category 数据层模版类型
+     */
     private void processFile(TemplatePathEnum entity, String prefix, ClassInfo classInfo, String category) throws IOException, TemplateException {
         GenerateConfig config = RequestThread.getConfig();
         Map<String, Object> params = new HashMap<>();

@@ -64,11 +64,6 @@ $(function () {
             },
             {
                 "orderable": false,
-                "data": "author",
-                'sClass': "text-center"
-            },
-            {
-                "orderable": false,
                 'sClass': "text-center",
                 render: function (data, type, row, meta) {
                     return "<a class=\"codeGenerate\" data-name=\"" + row.tableName + "\" href=\"javascript:;\">生成</a>";
