@@ -8,6 +8,7 @@ import com.atinbo.common.id.UUID;
 import com.atinbo.core.utils.FileUtil;
 import com.atinbo.core.utils.IoUtil;
 import com.atinbo.oss.config.OssProperties;
+import com.atinbo.oss.strategy.RenameStrategy;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -30,6 +31,7 @@ public class OssProcessor {
 
     private OSS ossClient;
     private OssProperties ossProperties;
+    private RenameStrategy renameStrategy;
 
     /**
      * 创建Bucket
@@ -59,8 +61,8 @@ public class OssProcessor {
 
         //设置新的文件名
         String ext = FileUtil.getFileExtension(oldName);
-        String lastName = String.format("%s.%s", UUID.randomUUID(), ext);
-        String filePath = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd/")) + lastName;
+        String lastName = String.format("%s.%s", renameStrategy.fileName(oldName) , ext);
+        String filePath = String.format("%s/%s", renameStrategy.filePath(oldName) , lastName);
         try {
 
             // 创建上传Object的Metadata

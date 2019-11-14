@@ -2,7 +2,11 @@ package com.atinbo.oss;
 
 import com.atinbo.oss.config.OssProperties;
 import com.atinbo.oss.processor.OssProcessor;
+import com.atinbo.oss.strategy.DefaultStrategy;
+import com.atinbo.oss.strategy.RenameStrategy;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -15,4 +19,9 @@ import org.springframework.context.annotation.Import;
 @Import(value = { OssProcessor.class})
 public class OssAutoConfiguration {
 
+    @Bean
+    @ConditionalOnMissingBean
+    public RenameStrategy defaultStrategy(){
+        return new DefaultStrategy();
+    }
 }
