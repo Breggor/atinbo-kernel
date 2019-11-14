@@ -1,6 +1,7 @@
 package com.atinbo.log.model;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
  * @date 2019/7/23
  */
 @Data
+@ToString
 public class SysLogSource implements Serializable {
 
     /**
