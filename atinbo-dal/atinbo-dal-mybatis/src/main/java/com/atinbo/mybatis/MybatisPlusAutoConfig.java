@@ -1,9 +1,11 @@
 package com.atinbo.mybatis;
 
+import com.atinbo.mybatis.support.MetaObjectHandlerAdapter;
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.core.incrementer.IKeyGenerator;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -11,15 +13,29 @@ import org.springframework.context.annotation.Configuration;
  * @date 2019-11-06
  */
 @Configuration
-@ComponentScan(basePackageClasses = MybatisPlusAutoConfig.class)
 public class MybatisPlusAutoConfig {
 
+    /**
+     * 分页器
+     * @return
+     */
     @Bean
     public PaginationInterceptor paginationInterceptor() {
         return new PaginationInterceptor();
     }
 
     @Bean
+    @ConditionalOnMissingBean
+    public MetaObjectHandler metaObjectHandler(){
+        return new MetaObjectHandlerAdapter();
+    }
+
+    /**
+     * 主键生成器 需要数据库存在 `id_seq` 表和  next_val 函数（创建语句见注释）
+     * @return
+     */
+    @Bean
+    @ConditionalOnMissingBean
     public IKeyGenerator keyGenerator() {
 //        CREATE TABLE IF NOT EXISTS `id_seq`(
 //            `pk_name` VARCHAR(50) NOT NULL COMMENT '主键',

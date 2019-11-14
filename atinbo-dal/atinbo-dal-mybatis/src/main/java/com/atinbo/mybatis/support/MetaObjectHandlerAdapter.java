@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
  * @author breggor
  */
 @Slf4j
-@Component
 public class MetaObjectHandlerAdapter implements MetaObjectHandler {
 
     public static final String KEY_LOGIN_USER_ID = "LOGIN_USER_ID";
