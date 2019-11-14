@@ -10,13 +10,15 @@ public interface RenameStrategy {
 
     /**
      * 生成新的文件名
-     * @return
+     * @param fileName 原文件名
+     * @return 默认实现为 使用 UUID
      */
     String fileName(String fileName);
 
     /**
      * 生成新的文件路径
-     * @return
+     * @param fileName 原文件名
+     * @return 默认实现为使用 年/月/日
      */
     String filePath(String fileName);
 }

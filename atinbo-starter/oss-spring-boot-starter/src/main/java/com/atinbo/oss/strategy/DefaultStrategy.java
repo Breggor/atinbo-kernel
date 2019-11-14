@@ -1,9 +1,8 @@
 package com.atinbo.oss.strategy;
 
-import com.atinbo.common.id.UUID;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 /**
  * 默认实现 文件名使用 UUID、文件路径使用 日期
