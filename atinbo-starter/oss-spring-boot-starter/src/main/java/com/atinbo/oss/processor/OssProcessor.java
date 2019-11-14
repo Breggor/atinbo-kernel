@@ -14,9 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -58,25 +56,41 @@ public class OssProcessor {
         if (inputStream == null || StringUtils.isEmpty(oldName)) {
             return null;
         }
-
         //设置新的文件名
         String ext = FileUtil.getFileExtension(oldName);
-        String lastName = String.format("%s.%s", renameStrategy.fileName(oldName) , ext);
-        String filePath = String.format("%s/%s", renameStrategy.filePath(oldName) , lastName);
+        String lastName = renameStrategy.fileName(oldName);
+        String filePath = String.format("%s/%s.%s", renameStrategy.filePath(oldName), lastName, ext);
         try {
+            File tempFile = File.createTempFile(String.valueOf(System.currentTimeMillis()), ext);
+            // 写入本地临时文件再上传
+            log.debug("文件：{} 写入临时文件 {}", oldName, tempFile.getPath());
+            FileUtil.toFile(inputStream, tempFile);
 
-            // 创建上传Object的Metadata
-            ObjectMetadata meta = new ObjectMetadata();
-            //设置ContentLength
-            meta.setContentLength(inputStream.available());
-            log.debug("开始上传：{} 文件至 OSS", oldName);
-            PutObjectResult putObjectResult = ossClient.putObject(ossProperties.getBucketName(), filePath, inputStream, meta);
-            log.debug("【{}】上传成功,返回信息为：{},新的文件名为：{}", oldName, putObjectResult.getETag(), lastName);
+            asyncUpload(oldName, filePath, tempFile);
         } catch (IOException e) {
             log.error("【{}】上传到OSS失败,失败原因为：{}", oldName, e);
             return null;
         }
         return filePath;
+    }
+
+
+    private void asyncUpload(final String oldName,final String filePath,final File tempFile){
+        new Thread(() -> {
+            try (InputStream inputStream = new FileInputStream(tempFile)){
+                // 创建上传Object的Metadata
+                ObjectMetadata meta = new ObjectMetadata();
+                //设置ContentLength
+                meta.setContentLength(inputStream.available());
+                log.debug("开始上传：{} 文件至 OSS", oldName);
+                PutObjectResult putObjectResult = ossClient.putObject(ossProperties.getBucketName(), filePath, inputStream, meta);
+                log.debug("【{}】上传至OSS：【{}】 成功，返回数据: {}", oldName, filePath, putObjectResult.getETag());
+                //上传完成删除临时文件
+                tempFile.delete();
+            } catch (Exception e) {
+                log.error("【{}】上传到OSS失败,失败原因为：{}", oldName, e);
+            }
+        }).start();
     }
 
     /**
@@ -103,7 +117,9 @@ public class OssProcessor {
      */
     public boolean delete(String filePath) {
         try {
-            ossClient.deleteObject(ossProperties.getBucketName(), filePath);
+            if(ossClient.doesObjectExist(ossProperties.getBucketName(), filePath)) {
+                ossClient.deleteObject(ossProperties.getBucketName(), filePath);
+            }
             return true;
         } catch (Exception e) {
             log.error("【{}】删除失败,失败原因为：{}", filePath, e);
