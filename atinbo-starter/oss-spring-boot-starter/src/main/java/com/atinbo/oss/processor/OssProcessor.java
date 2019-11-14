@@ -4,7 +4,6 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.OSSObject;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PutObjectResult;
-import com.atinbo.common.id.UUID;
 import com.atinbo.core.utils.FileUtil;
 import com.atinbo.core.utils.IoUtil;
 import com.atinbo.oss.config.OssProperties;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.io.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * @author zenghao
