@@ -4,13 +4,13 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.OSSObject;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PutObjectResult;
-import com.atinbo.core.utils.FileUtil;
-import com.atinbo.core.utils.IoUtil;
 import com.atinbo.oss.config.OssProperties;
 import com.atinbo.oss.strategy.RenameStrategy;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.util.StreamUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.*;
@@ -54,14 +54,15 @@ public class OssProcessor {
             return null;
         }
         //设置新的文件名
-        String ext = FileUtil.getFileExtension(oldName);
+        String ext = oldName.substring(oldName.lastIndexOf('.') + 1);
         String lastName = renameStrategy.fileName(oldName);
         String filePath = String.format("%s/%s.%s", renameStrategy.filePath(oldName), lastName, ext);
         try {
             File tempFile = File.createTempFile(String.valueOf(System.currentTimeMillis()), ext);
             // 写入本地临时文件再上传
             log.debug("文件：{} 写入临时文件 {}", oldName, tempFile.getPath());
-            FileUtil.toFile(inputStream, tempFile);
+            OutputStream out = new FileOutputStream(tempFile);
+            FileCopyUtils.copy(inputStream, out);
 
             asyncUpload(oldName, filePath, tempFile);
         } catch (IOException e) {
@@ -70,7 +71,6 @@ public class OssProcessor {
         }
         return filePath;
     }
-
 
     private void asyncUpload(final String oldName,final String filePath,final File tempFile){
         new Thread(() -> {
@@ -99,7 +99,7 @@ public class OssProcessor {
     public boolean download(String filePath, OutputStream outputStream) {
         try {
             OSSObject ossObject = ossClient.getObject(ossProperties.getBucketName(), filePath);
-            IoUtil.copy(ossObject.getObjectContent(), outputStream);
+            StreamUtils.copy(ossObject.getObjectContent(), outputStream);
             return true;
         } catch (Exception e) {
             log.error("【{}】下载失败,失败原因为：{}", filePath, e);
