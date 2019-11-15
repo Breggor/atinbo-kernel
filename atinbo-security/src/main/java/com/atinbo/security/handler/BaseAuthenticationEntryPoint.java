@@ -26,7 +26,7 @@ public class BaseAuthenticationEntryPoint implements AuthenticationEntryPoint, S
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException {
-        String msg = String.format("请求访问：{}，{}: 认证失败，无法访问系统资源", request.getRequestURI(), HttpStatus.UNAUTHORIZED);
+        String msg = String.format("请求访问：%s，%s: 认证失败，无法访问系统资源", request.getRequestURI(), HttpStatus.UNAUTHORIZED);
         ServletUtil.renderString(response, objectMapper.writeValueAsString(Outcome.failure(StatusCodeEnum.UN_AUTHORIZED, msg)));
     }
 }
