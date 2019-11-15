@@ -57,7 +57,7 @@ public class BaseException extends RuntimeException {
     @Override
     public String getMessage() {
         String msg = null;
-        if (StringUtils.isNoneBlank(code)) {
+        if (StringUtils.isNotBlank(code)) {
             msg = MessageSourceUtil.message(code, args);
         }
         if (msg == null) {
