@@ -8,7 +8,6 @@ import com.atinbo.oss.config.OssProperties;
 import com.atinbo.oss.strategy.RenameStrategy;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StreamUtils;
 import org.springframework.util.StringUtils;
@@ -20,12 +19,11 @@ import java.io.*;
  * @date 2019-11-13
  */
 @Slf4j
-@Component
 @AllArgsConstructor
-public class OssProcessor {
+public class OssService {
 
-    private OSS ossClient;
     private OssProperties ossProperties;
+    private OSS ossClient;
     private RenameStrategy renameStrategy;
 
     /**
@@ -46,7 +44,7 @@ public class OssProcessor {
      * 文件上传到阿里OSS
      *
      * @param inputStream 文件流
-     * @param oldName 原始文件名
+     * @param oldName     原始文件名
      * @return 上传后文件路径
      */
     public String upload(InputStream inputStream, String oldName) {
@@ -72,9 +70,9 @@ public class OssProcessor {
         return filePath;
     }
 
-    private void asyncUpload(final String oldName,final String filePath,final File tempFile){
+    private void asyncUpload(final String oldName, final String filePath, final File tempFile) {
         new Thread(() -> {
-            try (InputStream inputStream = new FileInputStream(tempFile)){
+            try (InputStream inputStream = new FileInputStream(tempFile)) {
                 // 创建上传Object的Metadata
                 ObjectMetadata meta = new ObjectMetadata();
                 //设置ContentLength
@@ -92,7 +90,8 @@ public class OssProcessor {
 
     /**
      * 下载
-     * @param filePath 文件路径
+     *
+     * @param filePath     文件路径
      * @param outputStream 输出流
      * @return
      */
@@ -109,12 +108,13 @@ public class OssProcessor {
 
     /**
      * 删除
+     *
      * @param filePath 文件路径
      * @return
      */
     public boolean delete(String filePath) {
         try {
-            if(ossClient.doesObjectExist(ossProperties.getBucketName(), filePath)) {
+            if (ossClient.doesObjectExist(ossProperties.getBucketName(), filePath)) {
                 ossClient.deleteObject(ossProperties.getBucketName(), filePath);
             }
             return true;
