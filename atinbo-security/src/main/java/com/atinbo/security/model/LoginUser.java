@@ -1,15 +1,15 @@
 package com.atinbo.security.model;
 
 
+import com.atinbo.core.utils.CollectionUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -134,5 +134,13 @@ public class LoginUser extends BaseUserDetail implements UserDetails {
             return defVal;
         }
         return (T) value;
+    }
+
+    @JsonIgnore
+    public Set<String> getPermissions(){
+        if(CollectionUtil.isEmpty(this.getAuthorities())){
+            return Collections.EMPTY_SET;
+        }
+        return this.getAuthorities().stream().map(BaseGrantedAuthority::getAuthority).collect(Collectors.toSet());
     }
 }
