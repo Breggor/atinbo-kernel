@@ -3,6 +3,7 @@ package com.atinbo.security.model;
 
 import com.atinbo.core.exception.BizException;
 import com.atinbo.core.utils.CollectionUtil;
+import com.atinbo.core.utils.JsonUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;
@@ -25,10 +26,6 @@ import java.util.stream.Collectors;
 public class LoginUser extends BaseUserDetail implements UserDetails {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 当前登录Key
-     */
-    public static final String LOGIN_USER_KEY = "loginUserKey";
 
     /**
      * 测试用户
@@ -128,33 +125,15 @@ public class LoginUser extends BaseUserDetail implements UserDetails {
      * 扩展map中直接获取对象
      *
      * @param key
-     * @param defVal 默认值
      * @param <T>
      * @return
      */
-    public <T> T getObjectFromExtra(String key, T defVal) {
-        Object value = getExtra().get(key);
-        if (value == null && defVal != null) {
-            return defVal;
-        }
-        return (T) value;
-    }
-
-
-    /**
-     * 扩展map中直接获取对象
-     *
-     * @param key
-     * @param defVal 默认值
-     * @param <T>
-     * @return
-     */
-    public <T> T getObjectFromExtra(String key) {
+    public <T> T getObjectFromExtra(String key, Class<T> clazz) {
         Object value = getExtra().get(key);
         if (value == null) {
             throw new BizException(String.format("key=%s 没有对应的值", key));
         }
-        return (T) value;
+        return (T) JsonUtil.parse((String) value, clazz);
     }
 
     @JsonIgnore
