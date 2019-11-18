@@ -39,6 +39,11 @@ public interface SecurityConstants {
     public static final String CAPTCHA_CODE_KEY = "captcha_codes:";
 
     /**
+     * 登录失败次数 redis key
+     */
+    public static final String LOGIN_FAILED_KEY = "login_failed_count:";
+
+    /**
      * 登录用户 redis key
      */
     public static final String LOGIN_TOKEN_KEY = "login_tokens:";

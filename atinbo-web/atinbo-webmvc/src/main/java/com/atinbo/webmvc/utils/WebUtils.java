@@ -1,7 +1,7 @@
 package com.atinbo.webmvc.utils;
 
 import cn.hutool.core.codec.Base64;
-import cn.hutool.json.JSONUtil;
+import com.atinbo.core.utils.JsonUtil;
 import com.atinbo.webmvc.exceptions.CheckedException;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
@@ -136,7 +136,7 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
         response.setCharacterEncoding("UTF-8");
         response.setContentType(contentType);
         try (PrintWriter out = response.getWriter()) {
-            out.append(JSONUtil.toJsonStr(result));
+            out.append(JsonUtil.toJson(result));
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }

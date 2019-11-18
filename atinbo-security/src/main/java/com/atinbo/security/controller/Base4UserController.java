@@ -1,4 +1,4 @@
-package com.atinbo.security;
+package com.atinbo.security.controller;
 
 import com.atinbo.security.model.LoginUser;
 import com.atinbo.security.service.UserTokenService;
