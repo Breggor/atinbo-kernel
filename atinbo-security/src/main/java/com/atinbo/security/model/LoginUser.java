@@ -43,9 +43,9 @@ public class LoginUser extends BaseUserDetail implements UserDetails {
     private Map<String, Object> extra = new HashMap<>();
 
     /**
-     * 用户唯一标识
+     * 用户访问唯一标识
      */
-    private String token;
+    private String accessToken;
 
     /**
      * 登陆时间
