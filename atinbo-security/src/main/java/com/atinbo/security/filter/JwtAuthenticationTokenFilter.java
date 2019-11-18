@@ -1,5 +1,6 @@
 package com.atinbo.security.filter;
 
+import com.atinbo.core.utils.ObjectUtil;
 import com.atinbo.security.model.LoginUser;
 import com.atinbo.security.service.UserTokenService;
 import com.atinbo.security.utils.SecurityUtils;
@@ -31,7 +32,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         LoginUser loginUser = userTokenService.getLoginUser(request);
 
-        if (!Objects.isNull(loginUser) && Objects.isNull(SecurityUtils.getAuthentication())) {
+        if (ObjectUtil.isNotEmpty(loginUser) && Objects.isNull(SecurityUtils.getAuthentication())) {
             userTokenService.verifyToken(loginUser);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

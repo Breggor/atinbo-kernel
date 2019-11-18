@@ -97,6 +97,7 @@ public class LoginService {
     }
 
     private Integer validFailedCount(String username) {
-        return redisOpsCache.getCacheObject(SecurityConstants.LOGIN_FAILED_KEY + username);
+        Integer count = redisOpsCache.getCacheObject(SecurityConstants.LOGIN_FAILED_KEY + username);
+        return (count == null) ? Integer.valueOf(0) : count;
     }
 }
