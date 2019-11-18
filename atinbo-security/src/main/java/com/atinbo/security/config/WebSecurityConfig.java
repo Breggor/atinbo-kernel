@@ -34,8 +34,10 @@ import java.util.Objects;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final static String[] ALLOW_VISIT_PATH = new String[]{"/*.ico", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js",
+    private static final String[] ALLOW_VISIT_PATHS = {"/*.ico", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js",
             "/profile/**", "/actuator/**", "/druid/**", "/swagger-ui.html", "/*/api-docs", "/webjars/**", "/swagger-resources/**"};
+
+    public static final String[] ANON_PATHS = {"/login", "/captcha/image"};
 
     /**
      * 自定义用户认证逻辑
@@ -82,13 +84,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        String[] allowPathArr = ALLOW_VISIT_PATH;
+        String[] allowPathArr = ALLOW_VISIT_PATHS;
         if (!StringUtils.isEmpty(this.allowPath)) {
             String[] arr = this.allowPath.split(",");
-            allowPathArr = new String[arr.length + ALLOW_VISIT_PATH.length];
+            allowPathArr = new String[arr.length + ALLOW_VISIT_PATHS.length];
 
-            System.arraycopy(ALLOW_VISIT_PATH, 0, allowPathArr, 0, ALLOW_VISIT_PATH.length);
-            System.arraycopy(arr, 0, allowPathArr, ALLOW_VISIT_PATH.length, arr.length);
+            System.arraycopy(ALLOW_VISIT_PATHS, 0, allowPathArr, 0, ALLOW_VISIT_PATHS.length);
+            System.arraycopy(arr, 0, allowPathArr, ALLOW_VISIT_PATHS.length, arr.length);
         }
         log.info("web security allow paths={}", String.join(",", allowPathArr));
 
@@ -104,7 +106,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 允许对于网站静态资源的无授权访问
                 .antMatchers(allowPathArr).permitAll()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
-                .antMatchers("/login", "/captchaImage").anonymous()
+                .antMatchers(ANON_PATHS).anonymous()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
                 .and().headers().frameOptions().disable();

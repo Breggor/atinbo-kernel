@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.ByteArrayOutputStream;
@@ -27,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 @Api(tags = "验证码")
 @RestController
 @Slf4j
+@RequestMapping("/captcha")
 public class CaptchaController {
     /**
      * 验证码 redis key
@@ -45,7 +47,7 @@ public class CaptchaController {
      * 生成验证码
      */
     @ApiOperation(value = "验证码接口", notes = "验证码接口")
-    @GetMapping("/captchaImage")
+    @GetMapping("/image")
     public Outcome<Map<String, Object>> getCode(String username) throws IOException {
         if (StringUtil.isBlank(username)) {
             throw new BizException("用户名不能为空，根据用户名生成验证码");
