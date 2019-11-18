@@ -1,6 +1,7 @@
 package com.atinbo.security.model;
 
 
+import com.atinbo.core.exception.BizException;
 import com.atinbo.core.utils.CollectionUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Sets;
@@ -9,7 +10,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -136,9 +140,26 @@ public class LoginUser extends BaseUserDetail implements UserDetails {
         return (T) value;
     }
 
+
+    /**
+     * 扩展map中直接获取对象
+     *
+     * @param key
+     * @param defVal 默认值
+     * @param <T>
+     * @return
+     */
+    public <T> T getObjectFromExtra(String key) {
+        Object value = getExtra().get(key);
+        if (value == null) {
+            throw new BizException(String.format("key=%s 没有对应的值", key));
+        }
+        return (T) value;
+    }
+
     @JsonIgnore
-    public Set<String> getPermissions(){
-        if(CollectionUtil.isEmpty(this.getAuthorities())){
+    public Set<String> getPermissions() {
+        if (CollectionUtil.isEmpty(this.getAuthorities())) {
             return Collections.EMPTY_SET;
         }
         return this.getAuthorities().stream().map(BaseGrantedAuthority::getAuthority).collect(Collectors.toSet());
