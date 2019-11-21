@@ -127,7 +127,7 @@
 
             <dependency>
                 <groupId>com.atinbo</groupId>
-                <artifactId>wx-mp-spring-boot-starter</artifactId>
+                <artifactId>wx-spring-boot-starter</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>
 

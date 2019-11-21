@@ -1,9 +1,8 @@
 package com.atinbo.wx.mp;
 
+import com.atinbo.wx.config.StorageType;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-
-import java.io.Serializable;
 
 import static com.atinbo.wx.mp.WxMpProperties.PREFIX;
 
@@ -41,27 +40,7 @@ public class WxMpProperties {
     /**
      * 存储策略, memory, redis.
      */
-    private ConfigStorage configStorage = new ConfigStorage();
+    private StorageType type = StorageType.memory;
 
 
-    public enum StorageType {
-        /**
-         * 内存.
-         */
-        memory,
-        /**
-         * redis.
-         */
-        redis
-    }
-
-    @Data
-    public static class ConfigStorage implements Serializable {
-        private static final long serialVersionUID = 4815731027000065434L;
-
-        private StorageType type = StorageType.memory;
-
-        private RedisProperties redis = new RedisProperties();
-
-    }
 }

@@ -1,8 +1,11 @@
-package com.atinbo.wx.mp;
+package com.atinbo.wx.config;
 
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.io.Serializable;
+
+import static com.atinbo.wx.config.RedisProperties.PREFIX;
 
 /**
  * Redis配置.
@@ -10,7 +13,10 @@ import java.io.Serializable;
  * @author breggor
  */
 @Data
+@ConfigurationProperties(PREFIX)
 public class RedisProperties implements Serializable {
+    public static final String PREFIX = "wx.redis" ;
+
     private static final long serialVersionUID = -5924815351660074401L;
 
     /**

@@ -1,10 +1,10 @@
-# wx-mp-spring-boot-starter
+# wx-spring-boot-starter
 ## 快速开始
 1. 引入依赖
     ```xml
     <dependency>
         <groupId>com.atinbo</groupId>
-        <artifactId>wx-mp-spring-boot-starter</artifactId>
+        <artifactId>wx-spring-boot-starter</artifactId>
         <version>${version}</version>
     </dependency>
     ```
