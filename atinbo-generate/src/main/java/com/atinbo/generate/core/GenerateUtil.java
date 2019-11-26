@@ -31,8 +31,8 @@ public class GenerateUtil {
         TYPE_MAPPING.put("DATETIME" , "LocalDateTime");
         TYPE_MAPPING.put("TIMESTAMP" , "LocalDateTime");
         TYPE_MAPPING.put("BIT" , "Boolean");
-        TYPE_MAPPING.put("DATE" , "LocalDateTime");
-        TYPE_MAPPING.put("TIME" , "LocalDateTime");
+        TYPE_MAPPING.put("DATE" , "LocalDate");
+        TYPE_MAPPING.put("TIME" , "LocalTime");
         TYPE_MAPPING.put("VARCHAR" , "String");
         TYPE_MAPPING.put("TEXT" , "String");
         TYPE_MAPPING.put("MEDIUMTEXT" , "String");

@@ -3,7 +3,13 @@ package ${classInfo.packageName}.openapi.model;
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >
         <#if fieldItem.fieldClass == "LocalDateTime">
-            <#assign importDdate = true />
+            <#assign importDateTime = true />
+        </#if>
+        <#if fieldItem.fieldClass == "LocalDate">
+            <#assign importDate = true />
+        </#if>
+        <#if fieldItem.fieldClass == "LocalTime">
+            <#assign importTime = true />
         </#if>
         <#if fieldItem.fieldClass == "BigDecimal">
             <#assign importBigDecimal = true />
@@ -14,8 +20,14 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import io.swagger.annotations.ApiModelProperty;
 
-<#if importDdate??>
+<#if importDateTime??>
 import java.time.LocalDateTime;
+</#if>
+<#if importDate??>
+import java.time.LocalDate;
+</#if>
+<#if importTime??>
+import java.time.LocalTime;
 </#if>
 <#if importBigDecimal??>
 import java.math.BigDecimal;

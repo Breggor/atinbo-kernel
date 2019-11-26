@@ -17,8 +17,14 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-<#if importDdate??>
+<#if importDateTime??>
 import java.time.LocalDateTime;
+</#if>
+<#if importDate??>
+import java.time.LocalDate;
+</#if>
+<#if importTime??>
+import java.time.LocalTime;
 </#if>
 <#if importBigDecimal??>
 import java.math.BigDecimal;
