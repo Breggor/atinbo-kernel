@@ -57,10 +57,10 @@ public class PageUtil {
      * @return
      */
     public static <T> Pagable<T> toPageable(IPage page) {
-        return Pagable.of(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), page.getRecords());
+        return Pagable.of(page.getCurrent(), page.getSize(), page.getTotal(), page.getRecords());
     }
 
     public static <T> Pagable<T> toPageable(IPage page, List<T> list) {
-        return Pagable.of(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), list);
+        return Pagable.of(page.getCurrent(), page.getSize(), page.getTotal(), list);
     }
 }

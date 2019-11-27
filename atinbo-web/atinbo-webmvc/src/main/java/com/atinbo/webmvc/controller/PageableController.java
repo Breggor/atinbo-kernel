@@ -40,7 +40,7 @@ public abstract class PageableController {
             return null;
         }
         PageInfo page = new PageInfo(list);
-        return Outcome.success(Pagable.of(page.getPageNum(), page.getPageSize(), page.getTotal(), page.getPages(), list));
+        return Outcome.success(Pagable.of(page.getPageNum(), page.getPageSize(), page.getTotal(), list));
     }
 
 }
