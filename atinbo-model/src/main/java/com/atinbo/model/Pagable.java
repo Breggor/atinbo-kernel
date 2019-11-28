@@ -64,7 +64,11 @@ public final class Pagable<T> implements Serializable {
     }
 
     public Pagable(long current, long size, long total, List<T> records) {
-        this(new Pagable(current, size, total, records));
+        this.current = current;
+        this.size = size;
+        this.total = total;
+        this.pages = calcPages();
+        this.records = records;
     }
 
 
