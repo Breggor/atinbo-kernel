@@ -71,7 +71,6 @@ public final class Pagable<T> implements Serializable {
         this.records = records;
     }
 
-
     /**
      * 总页数
      */
@@ -110,7 +109,6 @@ public final class Pagable<T> implements Serializable {
     public static <T> Pagable<T> of(int current, int size, long total, List<T> records) {
         return new Pagable<>(current, size, total, records);
     }
-
 
     /**
      * 创建分页
