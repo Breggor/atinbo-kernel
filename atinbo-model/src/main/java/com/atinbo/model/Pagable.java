@@ -10,7 +10,6 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 分页数据封装类
@@ -53,15 +52,6 @@ public final class Pagable<T> implements Serializable {
      */
     @ApiModelProperty(value = "数据列表")
     private List<T> records = Collections.emptyList();
-
-    public Pagable(Pagable page) {
-        Objects.requireNonNull(page, "page不为null");
-        this.current = page.getCurrent();
-        this.size = page.getSize();
-        this.total = page.getTotal();
-        this.pages = calcPages();
-        this.records = page.getRecords();
-    }
 
     public Pagable(long current, long size, long total, List<T> records) {
         this.current = current;
