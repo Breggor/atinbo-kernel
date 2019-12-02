@@ -14,8 +14,8 @@ import java.util.stream.Stream;
 @Data
 public class PageForm implements Serializable {
 
-    public static final String REDUCE = "-" ;
-    public static final String PLUS = "+" ;
+    public static final String REDUCE = "-";
+    public static final String PLUS = "+";
     /**
      * 起始页
      */
@@ -35,9 +35,9 @@ public class PageForm implements Serializable {
     private String sortBy;
 
     /**
-     * 转换为 PageParam
+     * 转换
      *
-     * @return
+     * @return PageParam
      */
     public PageParam toPageParam() {
         PageParam pageParam = new PageParam();
