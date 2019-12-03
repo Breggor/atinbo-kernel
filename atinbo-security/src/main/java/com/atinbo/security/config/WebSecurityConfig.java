@@ -37,8 +37,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] ALLOW_VISIT_PATHS = {"/*.ico", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js",
             "/profile/**", "/actuator/**", "/druid/**", "/swagger-ui.html", "/*/api-docs", "/webjars/**", "/swagger-resources/**"};
 
-    public static final String[] ANON_PATHS = {"/login", "/captcha/image"};
-
     /**
      * 自定义用户认证逻辑
      */
@@ -106,7 +104,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 允许对于网站静态资源的无授权访问
                 .antMatchers(allowPathArr).permitAll()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
-                .antMatchers(ANON_PATHS).anonymous()
+                .antMatchers(HttpMethod.GET, "/captcha/image").permitAll()
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
                 .and().headers().frameOptions().disable();
