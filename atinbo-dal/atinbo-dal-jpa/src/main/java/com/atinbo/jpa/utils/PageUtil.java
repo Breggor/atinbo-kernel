@@ -17,13 +17,14 @@ import java.util.List;
 public class PageUtil {
 
     public static PageRequest toPageRequest(PageParam pageParam) {
-        Sort sort = toSort(pageParam.getSort());
-        return PageRequest.of(pageParam.getPage(), pageParam.getSize(), sort);
+        //默认不排序
+        return toPageRequest(pageParam, Sort.unsorted());
     }
 
     public static PageRequest toPageRequest(PageParam pageParam, Sort defaultSort) {
         Sort sort = toSort(pageParam.getSort());
-        return PageRequest.of(pageParam.getPage(), pageParam.getSize(), sort.isSorted() ? sort : defaultSort);
+        //JPA 页码是从0开始，此处需要减去1
+        return PageRequest.of(pageParam.getPage() - 1, pageParam.getSize(), sort.isSorted() ? sort : defaultSort);
     }
 
     public static Sort toSort(SortInfo sortInfo) {
