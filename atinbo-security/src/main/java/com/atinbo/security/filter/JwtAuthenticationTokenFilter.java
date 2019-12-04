@@ -4,6 +4,7 @@ import com.atinbo.core.utils.ObjectUtil;
 import com.atinbo.security.model.LoginUser;
 import com.atinbo.security.service.UserTokenService;
 import com.atinbo.security.utils.SecurityUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +24,7 @@ import java.util.Objects;
  *
  * @author breggor
  */
+@Slf4j
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Autowired
@@ -31,7 +33,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         LoginUser loginUser = userTokenService.getLoginUser(request);
-
+        log.info("req path=[{}]", request.getRequestURI());
         if (ObjectUtil.isNotEmpty(loginUser) && Objects.isNull(SecurityUtils.getAuthentication())) {
             userTokenService.verifyToken(loginUser);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());

@@ -27,25 +27,25 @@ public final class Pagable<T> implements Serializable {
      * 当前页
      */
     @ApiModelProperty(value = "当前页")
-    private long current;
+    private long current = 1;
 
     /**
      * 每页行数
      */
     @ApiModelProperty(value = "每页行数")
-    private long size;
+    private long size = 10;
 
     /**
      * 总行数
      */
     @ApiModelProperty(value = "总行数")
-    private long totalRows;
+    private long total;
 
     /**
      * 总页数
      */
     @ApiModelProperty(value = "总页数")
-    private long totalPages;
+    private long pages;
 
     /**
      * 数据列表
@@ -53,52 +53,63 @@ public final class Pagable<T> implements Serializable {
     @ApiModelProperty(value = "数据列表")
     private List<T> records = Collections.emptyList();
 
-    public Pagable(Pagable pageable, List<T> records) {
-        this.current = pageable.getCurrent();
-        this.size = pageable.getSize();
-        this.totalPages = pageable.getTotalPages();
-        this.totalRows = pageable.getTotalRows();
+    public Pagable(long current, long size, long total, List<T> records) {
+        this.current = current;
+        this.size = size;
+        this.total = total;
+        this.pages = calcPages();
         this.records = records;
     }
 
     /**
-     * 创建分页
-     *
-     * @param current    当前页
-     * @param size       每页行数
-     * @param totalRows  总行数
-     * @param totalPages 总页数
-     * @param records    数据列表
-     * @return
+     * 总页数
      */
-    public static <T> Pagable<T> of(int current, int size, long totalRows, int totalPages, List<T> records) {
-        return new Pagable<T>(current, size, totalRows, totalPages, records);
+    private long calcPages() {
+        if (getSize() == 0) {
+            return 0L;
+        }
+        long pages = getTotal() / getSize();
+        if (getTotal() % getSize() != 0) {
+            pages++;
+        }
+        return pages;
     }
-
 
     /**
      * 创建分页
      *
-     * @param current    当前页
-     * @param size       每页行数
-     * @param totalRows  总行数
-     * @param totalPages 总页数
-     * @param records    数据列表
+     * @param current
+     * @param size
+     * @param total
      * @return
      */
-    public static <T> Pagable<T> of(long current, long size, long totalRows, long totalPages, List<T> records) {
-        return new Pagable(current, size, totalRows, totalPages, records);
+    public static Pagable of(long current, long size, long total) {
+        return new Pagable(current, size, total, Collections.emptyList());
     }
-
 
     /**
      * 创建分页
      *
-     * @param pageable 分页
-     * @param records  数据列表
+     * @param current 当前页
+     * @param size    每页行数
+     * @param total   总行数
+     * @param records 数据列表
      * @return
      */
-    public static <T> Pagable<T> of(Pagable pageable, List<T> records) {
-        return new Pagable(pageable, records);
+    public static <T> Pagable<T> of(int current, int size, long total, List<T> records) {
+        return new Pagable<>(current, size, total, records);
+    }
+
+    /**
+     * 创建分页
+     *
+     * @param current 当前页
+     * @param size    每页行数
+     * @param total   总行数
+     * @param records 数据列表
+     * @return
+     */
+    public static <T> Pagable<T> of(long current, long size, long total, List<T> records) {
+        return new Pagable(current, size, total, records);
     }
 }

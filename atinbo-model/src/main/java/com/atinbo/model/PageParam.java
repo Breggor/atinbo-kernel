@@ -55,7 +55,7 @@ public class PageParam implements Serializable {
      *
      * @param page 当前页
      * @param size 每页行数
-     * @return
+     * @return PageParam
      */
     public static PageParam of(int page, int size) {
         return new PageParam(page, size);
@@ -68,7 +68,7 @@ public class PageParam implements Serializable {
      * @param page 当前页
      * @param size 每页行数
      * @param sort 排序
-     * @return
+     * @return PageParam
      */
     public static PageParam of(int page, int size, SortInfo sort) {
         return new PageParam(page, size, sort);
@@ -78,7 +78,7 @@ public class PageParam implements Serializable {
     /**
      * 起始行
      *
-     * @return
+     * @return int
      */
     public int getOffset() {
         return (getPage() - 1) * getSize();
@@ -113,7 +113,7 @@ public class PageParam implements Serializable {
 
     @Override
     public String toString() {
-        return new StringJoiner(", " , PageParam.class.getSimpleName() + "[" , "]")
+        return new StringJoiner(", ", PageParam.class.getSimpleName() + "[", "]")
                 .add("page=" + page)
                 .add("size=" + size)
                 .add("offset=" + getOffset())

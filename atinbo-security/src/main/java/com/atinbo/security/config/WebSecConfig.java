@@ -32,7 +32,7 @@ import java.util.Objects;
  */
 @Slf4j
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] ALLOW_VISIT_PATHS = {"/*.ico", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js",
             "/profile/**", "/actuator/**", "/druid/**", "/swagger-ui.html", "/*/api-docs", "/webjars/**", "/swagger-resources/**"};
@@ -94,7 +94,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         }
         log.info("web security allow paths={}", String.join(",", allowPathArr));
 
-        httpSecurity
+        httpSecurity.cors().and()
                 // CRSF禁用，因为不使用session
                 .csrf().disable()
                 // 认证失败处理类

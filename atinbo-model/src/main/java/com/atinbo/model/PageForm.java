@@ -14,37 +14,37 @@ import java.util.stream.Stream;
 @Data
 public class PageForm implements Serializable {
 
-    public static final String REDUCE = "-" ;
-    public static final String PLUS = "+" ;
+    public static final String REDUCE = "-";
+    public static final String PLUS = "+";
     /**
      * 起始页
      */
-    @ApiModelProperty(value = "起始页")
-    private Integer page;
+    @ApiModelProperty(value = "起始页", notes = "默认起始页1", example = "1")
+    private int page = 1;
 
     /**
      * 每页行数
      */
-    @ApiModelProperty(value = "每页行数")
-    private Integer size;
+    @ApiModelProperty(value = "每页行数", notes = "默认10条记录", example = "10")
+    private int size = 10;
 
     /**
      * 排序列
      */
-    @ApiModelProperty(value = "+为正序[asc], -为反序[desc],多字段排序用','分隔，如: sortBy=+name,-age")
+    @ApiModelProperty(value = "排序", notes = "+为正序[asc], -为反序[desc],多字段排序用','分隔，如: sortBy=+name,-age", example = "+id")
     private String sortBy;
 
     /**
-     * 转换为 PageParam
+     * 转换
      *
-     * @return
+     * @return PageParam
      */
     public PageParam toPageParam() {
         PageParam pageParam = new PageParam();
-        if (this.getPage() != null) {
+        if (this.getPage() >= 0) {
             pageParam.setPage(this.getPage());
         }
-        if (this.getSize() != null) {
+        if (this.getSize() > 0) {
             pageParam.setSize(this.getSize());
         }
         if (this.getSortBy() != null && getSortBy().trim().length() > 0) {

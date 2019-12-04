@@ -42,6 +42,6 @@ public class PageUtil {
     }
 
     public static Pagable toPageable(org.springframework.data.domain.Page page) {
-        return Pagable.of(page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages(), page.getContent());
+        return Pagable.of(page.getNumber(), page.getSize(), page.getTotalElements(), page.getContent());
     }
 }
