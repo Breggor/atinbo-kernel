@@ -20,13 +20,13 @@ public class PageForm implements Serializable {
      * 起始页
      */
     @ApiModelProperty(value = "起始页", notes = "默认起始页1", example = "1")
-    private int page = 1;
+    private Integer page = 1;
 
     /**
      * 每页行数
      */
     @ApiModelProperty(value = "每页行数", notes = "默认10条记录", example = "10")
-    private int size = 10;
+    private Integer size = 10;
 
     /**
      * 排序列
