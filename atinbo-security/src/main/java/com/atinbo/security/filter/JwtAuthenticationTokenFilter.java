@@ -27,18 +27,22 @@ import java.util.Objects;
 @Slf4j
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
+    private final static String LOGIN_PATH = "/login";
     @Autowired
     private UserTokenService userTokenService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
-        LoginUser loginUser = userTokenService.getLoginUser(request);
         log.info("req path=[{}]", request.getRequestURI());
-        if (ObjectUtil.isNotEmpty(loginUser) && Objects.isNull(SecurityUtils.getAuthentication())) {
-            userTokenService.verifyToken(loginUser);
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
-            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+
+        if (!request.getRequestURI().contains(LOGIN_PATH)) {
+            LoginUser loginUser = userTokenService.getLoginUser(request);
+            if (ObjectUtil.isNotEmpty(loginUser) && Objects.isNull(SecurityUtils.getAuthentication())) {
+                userTokenService.verifyToken(loginUser);
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
+                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            }
         }
         chain.doFilter(request, response);
     }
