@@ -1,8 +1,3 @@
-//
-// Source status recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package com.atinbo.handler;
 
 import lombok.extern.slf4j.Slf4j;

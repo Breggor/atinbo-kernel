@@ -1,8 +1,3 @@
-//
-// Source status recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package com.atinbo.handler;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,6 +54,7 @@ public class PatternProxyHandler extends Handler {
         return flag;
     }
 
+    @Override
     public void handle(String url, HttpServletRequest request, HttpServletResponse response) throws Exception {
         if (this.isDoHandler(url)) {
             this.target.handle(url, request, response);

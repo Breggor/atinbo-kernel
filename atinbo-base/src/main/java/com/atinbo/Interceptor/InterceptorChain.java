@@ -1,28 +1,36 @@
 package com.atinbo.Interceptor;
 
 /**
- * 拦截器链
+ * MVC拦截器链
  *
  * @author breggor
  */
 public class InterceptorChain {
-    protected Interceptor head;
-    protected Interceptor tail;
+
+    /**
+     * 链头
+     */
+    private Interceptor head;
+
+    /**
+     * 链尾
+     */
+    private Interceptor tail;
 
     public InterceptorChain() {
     }
 
-    public InterceptorChain add(Interceptor interceptor) {
+    public InterceptorChain add(Interceptor itcpt) {
         if (this.head == null) {
-            this.head = interceptor;
+            this.head = itcpt;
         }
 
-        interceptor.prev = this.tail;
+        itcpt.prev = this.tail;
         if (this.tail != null) {
-            this.tail.next = interceptor;
+            this.tail.next = itcpt;
         }
 
-        this.tail = interceptor;
+        this.tail = itcpt;
         return this;
     }
 }

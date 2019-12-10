@@ -1,8 +1,3 @@
-//
-// Source status recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package com.atinbo.config;
 
 import com.atinbo.Interceptor.Interceptor;
