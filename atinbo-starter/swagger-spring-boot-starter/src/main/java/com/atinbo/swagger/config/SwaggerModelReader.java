@@ -3,7 +3,6 @@ package com.atinbo.swagger.config;
 import com.atinbo.swagger.annotation.ApiProperties;
 import com.fasterxml.classmate.TypeResolver;
 import com.google.common.base.Optional;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javassist.*;
 import javassist.bytecode.AnnotationsAttribute;
@@ -12,7 +11,6 @@ import javassist.bytecode.annotation.Annotation;
 import javassist.bytecode.annotation.StringMemberValue;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -45,11 +43,10 @@ public class SwaggerModelReader implements ParameterBuilderPlugin {
         Optional<ApiProperties> optional = methodParameter.findAnnotation(ApiProperties.class);
         if (optional.isPresent()) {
             Class originClass = parameterContext.resolvedMethodParameter().getParameterType().getErasedType();
-            //model 名称
-            ApiModel apiModel = (ApiModel) originClass.getDeclaredAnnotation(ApiModel.class);
-            String name = apiModel == null ? originClass.getSimpleName() + "Model" : apiModel.value();
-            String[] properties = null;
             ApiProperties apiProperties = optional.get();
+            String name = apiProperties.name();
+            String[] properties = null;
+
             boolean ignoreType = apiProperties.exclude().length > 0;
             if (ignoreType) {
                 properties = apiProperties.exclude();
@@ -60,9 +57,9 @@ public class SwaggerModelReader implements ParameterBuilderPlugin {
                 //像documentContext的Models中添加我们新生成的Class
                 parameterContext.getDocumentationContext()
                         .getAdditionalModels()
-                        .add(typeResolver.resolve(createRefModelIgp(properties, name, originClass, ignoreType)));
+                        .add(typeResolver.resolve(createRefModel(properties, name, originClass, ignoreType)));
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error("生成文档异常：", e);
             }
 
             parameterContext.parameterBuilder()  //修改model参数的ModelRef为我们动态生成的class
@@ -80,7 +77,7 @@ public class SwaggerModelReader implements ParameterBuilderPlugin {
     /**
      * 根据 properties 中的值动态生成含有Swagger注解的javaBeen
      */
-    private Class createRefModelIgp(String[] properties, String name, Class origin, boolean ignoreType) throws NotFoundException {
+    private Class createRefModel(String[] properties, String name, Class origin, boolean ignoreType) throws NotFoundException {
         ClassPool pool = ClassPool.getDefault();
         CtClass ctClass = pool.makeClass(origin.getPackage().getName() + "." + name);
         try {
@@ -94,7 +91,7 @@ public class SwaggerModelReader implements ParameterBuilderPlugin {
             return ctClass.toClass();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("生成model异常：", e);
             return null;
         }
     }

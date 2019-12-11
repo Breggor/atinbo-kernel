@@ -35,4 +35,10 @@ public @interface ApiProperties {
      * @return
      */
     String[] exclude() default {};
+
+    /**
+     * form名称
+     * @return
+     */
+    String name();
 }
