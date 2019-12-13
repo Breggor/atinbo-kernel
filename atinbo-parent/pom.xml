@@ -505,6 +505,8 @@
                     <version>${spring-boot.version}</version>
                     <configuration>
                         <finalName>${project.build.finalName}</finalName>
+                        <layout>JAR</layout>
+                        <classifier>exec</classifier>
                     </configuration>
                     <executions>
                         <execution>
@@ -513,22 +515,6 @@
                             </goals>
                         </execution>
                     </executions>
-                </plugin>
-
-                <plugin>
-                    <groupId>pl.project13.maven</groupId>
-                    <artifactId>git-commit-id-plugin</artifactId>
-                    <version>${maven-git-commit-id.version}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>revision</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
-                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
