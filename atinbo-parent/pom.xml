@@ -522,7 +522,7 @@
                     <groupId>com.spotify</groupId>
                     <artifactId>dockerfile-maven-plugin</artifactId>
                     <version>${dockerfile.maven.version}</version>
-                    <executions>
+                    <!--<executions>
                         <execution>
                             <id>default</id>
                             <goals>
@@ -530,7 +530,7 @@
                                 <goal>push</goal>
                             </goals>
                         </execution>
-                    </executions>
+                    </executions>-->
                     <configuration>
                         <repository>${docker.registry.url}/repo/${project.artifactId}</repository>
                         <tag>${project.version}</tag>
