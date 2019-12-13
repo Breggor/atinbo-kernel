@@ -69,9 +69,8 @@
         <justAuth.version>1.11.0</justAuth.version>
         <weixin-java.version>3.5.0</weixin-java.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
-        
-        <docker.plugin.version>1.2.0</docker.plugin.version>
-
+        <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
+        <docker.registry.url>10.10.4.110</docker.registry.url>
         <skipTests>true</skipTests>
     </properties>
 
@@ -521,8 +520,25 @@
 
                 <plugin>
                     <groupId>com.spotify</groupId>
-                    <artifactId>docker-maven-plugin</artifactId>
-                    <version>${docker.plugin.version}</version>
+                    <artifactId>dockerfile-maven-plugin</artifactId>
+                    <version>${dockerfile.maven.version}</version>
+                    <executions>
+                        <execution>
+                            <id>default</id>
+                            <goals>
+                                <goal>build</goal>
+                                <goal>push</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <repository>${docker.registry.url}/repo/${project.artifactId}</repository>
+                        <tag>${project.version}</tag>
+                        <buildArgs>
+                            <!--提供参数向Dockerfile传递-->
+                            <JAR_FILE>target/${project.name}-${project.version}-exec.jar</JAR_FILE>
+                        </buildArgs>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
