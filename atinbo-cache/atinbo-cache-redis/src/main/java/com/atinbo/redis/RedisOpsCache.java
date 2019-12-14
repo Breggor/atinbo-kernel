@@ -175,6 +175,30 @@ public class RedisOpsCache {
     }
 
     /**
+     * 设置缓存Map key-value
+     *
+     * @param mapKey
+     * @param key
+     * @return
+     */
+    public <T> HashOperations<String, String, T> setCacheMapValue(String mapKey, String key, T value) {
+        HashOperations hashOperations = redisTemplate.opsForHash();
+        hashOperations.put(mapKey, key, value);
+        return hashOperations;
+    }
+
+    /**
+     * 获得缓存Map 的value
+     *
+     * @param mapKey
+     * @param key
+     * @return
+     */
+    public <T> T getCacheMapValue(String mapKey, String key) {
+        return (T) redisTemplate.opsForHash().get(mapKey, key);
+    }
+
+    /**
      * 获得缓存的基本对象列表
      *
      * @param pattern 字符串前缀
