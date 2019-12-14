@@ -17,7 +17,7 @@ public class AtinboRedisCache {
 
     @Bean
     @ConditionalOnMissingBean
-    public RedisTemplate jsonRedisTemplate(RedisConnectionFactory connectionFactory){
+    public RedisTemplate redisTemplate(RedisConnectionFactory connectionFactory){
         return new JsonRedisTemplate(connectionFactory);
     }
 }
