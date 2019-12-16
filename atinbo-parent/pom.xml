@@ -63,7 +63,7 @@
         <hikaricp.version>3.3.1</hikaricp.version>
         <jjwt.version>0.9.1</jjwt.version>
         <springfox.version>2.9.2</springfox.version>
-        <swagger.version>1.5.21</swagger.version>
+        <swagger.version>1.5.22</swagger.version>
         <knife4j.version>2.0.0</knife4j.version>
         <easyexcel.version>2.0.0-beta1</easyexcel.version>
         <justAuth.version>1.11.0</justAuth.version>
