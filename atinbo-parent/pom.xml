@@ -514,6 +514,7 @@
                         <finalName>${project.build.finalName}</finalName>
                         <layout>JAR</layout>
                         <classifier>exec</classifier>
+                        <mainClass>${starter-class}</mainClass>
                     </configuration>
                     <executions>
                         <execution>
