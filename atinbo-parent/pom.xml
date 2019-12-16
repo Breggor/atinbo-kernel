@@ -70,7 +70,7 @@
         <weixin-java.version>3.5.0</weixin-java.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
         <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
-        <docker.registry.url>10.10.4.110</docker.registry.url>
+        <docker.registry.url>10.10.4.113</docker.registry.url>
         <skipTests>true</skipTests>
     </properties>
 
