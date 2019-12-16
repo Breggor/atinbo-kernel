@@ -1,5 +1,6 @@
 package com.atinbo.common.http;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,6 +60,60 @@ public class HttpUtils {
                 }
             } catch (Exception ex) {
                 log.error("调用in.close Exception, url=" + url + ",param=" + param, ex);
+            }
+        }
+        return result.toString();
+    }
+
+    /**
+     * 向指定 URL 发送POST方法的请求
+     *
+     * @param url   发送请求的 URL
+     * @param body 请求参数体 json字符串
+     * @return 所代表远程资源的响应结果
+     */
+    public static String post(String url, String body) {
+        BufferedReader in = null;
+        StringBuilder result = new StringBuilder();
+        try {
+            URL realUrl = new URL(url);
+            URLConnection conn = realUrl.openConnection();
+            conn.setRequestProperty("accept" , "*/*");
+            conn.setRequestProperty("connection" , "Keep-Alive");
+            conn.setRequestProperty("user-agent" , "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            conn.setRequestProperty("Accept-Charset" , "utf-8");
+            conn.setRequestProperty("ContentType" , "application/json;charset=utf-8");
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            if (StringUtils.isNotBlank(body)) {
+                byte[] bytes = body.getBytes();
+                conn.setRequestProperty("Content-Length", String.valueOf(bytes.length));
+                OutputStream outputStream = conn.getOutputStream();
+                outputStream.write(bytes);
+                outputStream.flush();
+                outputStream.close();
+            }
+            in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+            String line;
+            while ((line = in.readLine()) != null) {
+                result.append(line);
+            }
+            log.info("recv - {}" , result);
+        } catch (ConnectException e) {
+            log.error("调用HttpUtils.post ConnectException, url={} body={}" , url , body, e);
+        } catch (SocketTimeoutException e) {
+            log.error("调用HttpUtils.post SocketTimeoutException, url={} body={}" , url , body, e);
+        } catch (IOException e) {
+            log.error("调用HttpUtils.post IOException, url={} body={}" , url , body, e);
+        } catch (Exception e) {
+            log.error("调用HttpsUtil.post Exception, url={} body={}" , url , body, e);
+        } finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (IOException ex) {
+                log.error("调用in.close Exception, url={} body={}" , url , body, ex);
             }
         }
         return result.toString();
