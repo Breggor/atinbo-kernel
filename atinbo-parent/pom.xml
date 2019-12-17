@@ -66,7 +66,7 @@
         <swagger.version>1.5.22</swagger.version>
         <knife4j.version>2.0.0</knife4j.version>
         <easyexcel.version>2.0.0-beta1</easyexcel.version>
-        <justAuth.version>1.11.0</justAuth.version>
+        <justAuth.version>1.13.1</justAuth.version>
         <weixin-java.version>3.5.0</weixin-java.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
         <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
