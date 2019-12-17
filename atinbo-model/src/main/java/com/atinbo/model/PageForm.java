@@ -31,7 +31,7 @@ public class PageForm implements Serializable {
     /**
      * 排序列
      */
-    @ApiModelProperty(value = "排序", notes = "+为正序[asc], -为反序[desc],多字段排序用','分隔，如: sortBy=+name,-age", example = "+id")
+    @ApiModelProperty(value = "排序:+为正序[asc], -为反序[desc],多字段排序用','分隔，如: sortBy=+name,-age", notes = "+为正序[asc], -为反序[desc],多字段排序用','分隔，如: sortBy=+name,-age", example = "+id")
     private String sortBy;
 
     /**
