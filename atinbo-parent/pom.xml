@@ -161,6 +161,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-metadata-report-nacos</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.atinbo</groupId>
                 <artifactId>atinbo-dependencies</artifactId>
                 <version>${atinbo-kernel.version}</version>
