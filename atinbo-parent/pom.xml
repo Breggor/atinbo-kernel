@@ -156,7 +156,7 @@
 
             <dependency>
                 <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-metadata-report-zookeeper</artifactId>
+                <artifactId>dubbo-configcenter-nacos</artifactId>
                 <version>${dubbo.version}</version>
             </dependency>
 
