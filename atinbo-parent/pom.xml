@@ -59,6 +59,7 @@
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
         <mybatis-pagehelper.version>1.2.12</mybatis-pagehelper.version>
         <mysql.connector.version>5.1.48</mysql.connector.version>
+        <hikaricp.version>3.4.1</hikaricp.version>
         <druid.version>1.1.21</druid.version>
         <jjwt.version>0.9.1</jjwt.version>
         <springfox.version>2.9.2</springfox.version>
@@ -153,17 +154,17 @@
                 <version>${dubbo.version}</version>
             </dependency>
 
-<!--            <dependency>-->
-<!--                <groupId>org.apache.dubbo</groupId>-->
-<!--                <artifactId>dubbo-configcenter-nacos</artifactId>-->
-<!--                <version>${dubbo.version}</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-configcenter-nacos</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
 
-<!--            <dependency>-->
-<!--                <groupId>org.apache.dubbo</groupId>-->
-<!--                <artifactId>dubbo-metadata-report-zookeeper</artifactId>-->
-<!--                <version>${dubbo.version}</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-metadata-report-zookeeper</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.atinbo</groupId>
@@ -195,6 +196,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>${hikaricp.version}</version>
             </dependency>
 
             <dependency>
