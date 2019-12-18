@@ -53,7 +53,7 @@
         <spring-boot-admin.version>2.1.6</spring-boot-admin.version>
 
         <nacos.version>1.1.4</nacos.version>
-        <dubbo.version>2.7.3</dubbo.version>
+        <dubbo.version>2.7.4.1</dubbo.version>
         <feign-okhttp.version>10.4.0</feign-okhttp.version>
         <mybatis.version>2.1.1</mybatis.version>
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
@@ -63,8 +63,8 @@
         <hikaricp.version>3.3.1</hikaricp.version>
         <jjwt.version>0.9.1</jjwt.version>
         <springfox.version>2.9.2</springfox.version>
-        <swagger.version>1.5.22</swagger.version>
-        <knife4j.version>2.0.0</knife4j.version>
+        <swagger.version>1.5.21</swagger.version>
+        <knife4j.version>1.9.6</knife4j.version>
         <easyexcel.version>2.0.0-beta1</easyexcel.version>
         <justAuth.version>1.13.1</justAuth.version>
         <weixin-java.version>3.5.0</weixin-java.version>
@@ -162,7 +162,7 @@
 
             <dependency>
                 <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-metadata-report-nacos</artifactId>
+                <artifactId>dubbo-metadata-report-zookeeper</artifactId>
                 <version>${dubbo.version}</version>
             </dependency>
 
@@ -381,13 +381,6 @@
         </profile>
 
         <profile>
-            <id>dev</id>
-            <properties>
-                <profile.active>dev</profile.active>
-            </properties>
-        </profile>
-
-        <profile>
             <id>test</id>
             <properties>
                 <profile.active>test</profile.active>
@@ -551,7 +544,7 @@
                         </execution>
                     </executions>-->
                     <configuration>
-                        <repository>${docker.registry.url}/repo/${project.artifactId}</repository>
+                        <repository>${docker.registry.url}/repo/${profile.active}/${project.artifactId}</repository>
                         <tag>${project.version}</tag>
                         <buildArgs>
                             <!--提供参数向Dockerfile传递-->
