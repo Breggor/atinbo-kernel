@@ -62,7 +62,7 @@ public class OssService {
             OutputStream out = new FileOutputStream(tempFile);
             FileCopyUtils.copy(inputStream, out);
 
-            asyncUpload(oldName, filePath, tempFile);
+            syncUpload(oldName, filePath, tempFile);
         } catch (IOException e) {
             log.error("【{}】上传到OSS失败,失败原因为：{}", oldName, e);
             return null;
@@ -70,23 +70,45 @@ public class OssService {
         return filePath;
     }
 
-    private void asyncUpload(final String oldName, final String filePath, final File tempFile) {
-        new Thread(() -> {
-            try (InputStream inputStream = new FileInputStream(tempFile)) {
-                // 创建上传Object的Metadata
-                ObjectMetadata meta = new ObjectMetadata();
-                //设置ContentLength
-                meta.setContentLength(inputStream.available());
-                log.debug("开始上传：{} 文件至 OSS", oldName);
-                PutObjectResult putObjectResult = ossClient.putObject(ossProperties.getBucketName(), filePath, inputStream, meta);
-                log.debug("【{}】上传至OSS：【{}】 成功，返回数据: {}", oldName, filePath, putObjectResult.getETag());
-                //上传完成删除临时文件
-                tempFile.delete();
-            } catch (Exception e) {
-                log.error("【{}】上传到OSS失败,失败原因为：{}", oldName, e);
-            }
-        }).start();
+    /**
+     * 同步上传
+     * @param oldName
+     * @param filePath
+     * @param tempFile
+     */
+    private void syncUpload(final String oldName, final String filePath, final File tempFile) {
+        try (InputStream inputStream = new FileInputStream(tempFile)) {
+            // 创建上传Object的Metadata
+            ObjectMetadata meta = new ObjectMetadata();
+            //设置ContentLength
+            meta.setContentLength(inputStream.available());
+            log.debug("开始上传：{} 文件至 OSS", oldName);
+            PutObjectResult putObjectResult = ossClient.putObject(ossProperties.getBucketName(), filePath, inputStream, meta);
+            log.debug("【{}】上传至OSS：【{}】 成功，返回数据: {}", oldName, filePath, putObjectResult.getETag());
+            //上传完成删除临时文件
+            tempFile.delete();
+        } catch (Exception e) {
+            log.error("【{}】上传到OSS失败,失败原因为：{}", oldName, e);
+        }
     }
+
+//    private void asyncUpload(final String oldName, final String filePath, final File tempFile) {
+//        new Thread(() -> {
+//            try (InputStream inputStream = new FileInputStream(tempFile)) {
+//                // 创建上传Object的Metadata
+//                ObjectMetadata meta = new ObjectMetadata();
+//                //设置ContentLength
+//                meta.setContentLength(inputStream.available());
+//                log.debug("开始上传：{} 文件至 OSS", oldName);
+//                PutObjectResult putObjectResult = ossClient.putObject(ossProperties.getBucketName(), filePath, inputStream, meta);
+//                log.debug("【{}】上传至OSS：【{}】 成功，返回数据: {}", oldName, filePath, putObjectResult.getETag());
+//                //上传完成删除临时文件
+//                tempFile.delete();
+//            } catch (Exception e) {
+//                log.error("【{}】上传到OSS失败,失败原因为：{}", oldName, e);
+//            }
+//        }).start();
+//    }
 
     /**
      * 下载
