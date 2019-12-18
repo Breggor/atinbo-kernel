@@ -551,7 +551,7 @@
                         </execution>
                     </executions>-->
                     <configuration>
-                        <repository>${docker.registry.url}/repo/${project.artifactId}</repository>
+                        <repository>${docker.registry.url}/repo/${profile.active}/${project.artifactId}</repository>
                         <tag>${project.version}</tag>
                         <buildArgs>
                             <!--提供参数向Dockerfile传递-->
