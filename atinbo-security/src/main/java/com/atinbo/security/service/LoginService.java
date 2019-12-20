@@ -17,6 +17,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -73,6 +74,8 @@ public class LoginService {
         try {
             // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+        } catch (UsernameNotFoundException ex) {
+            throw ex;
         } catch (Exception e) {
             if (e instanceof BadCredentialsException) {
                 addFailedCount(username);
