@@ -28,19 +28,19 @@ import java.util.List;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
     /**
      * 请求参数无法验证异常拦截
      *
      * @param e
      * @return
      */
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Outcome bindException(MethodArgumentNotValidException e) {
         log.error(e.getMessage(), e);
         return doErr(StatusCodeEnum.PARAM_VALID_ERROR, e.getBindingResult());
     }
+
 
 
     /**
@@ -49,8 +49,8 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Outcome handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         log.error(e.getMessage(), e);
         return Outcome.failure();
@@ -63,8 +63,8 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(RequestParamException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Outcome requestParamException(RequestParamException e) {
         log.error(e.getMessage(), e);
         return Outcome.failure(e.getMessage());
@@ -76,7 +76,7 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+//    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public Outcome handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
         log.error(e.getMessage(), e);
@@ -89,8 +89,8 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
+//    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
     public Outcome handleHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException e) {
         log.error(e.getMessage(), e);
         return Outcome.failure(StatusCodeEnum.MEDIA_TYPE_NOT_SUPPORTED);
@@ -102,8 +102,8 @@ public class GlobalExceptionHandler {
      * @param ex
      * @return
      */
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(HttpApiException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Outcome handleHttpAPIException(HttpApiException ex) {
         log.error(ex.getMessage(), ex);
         return Outcome.failure(ex.getStatus(), ex.getMessage());
