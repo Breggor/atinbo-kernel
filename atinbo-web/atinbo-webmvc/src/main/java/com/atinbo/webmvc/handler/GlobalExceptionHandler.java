@@ -1,6 +1,7 @@
 package com.atinbo.webmvc.handler;
 
 import com.atinbo.core.exception.HttpApiException;
+import com.atinbo.core.exception.RequestParamException;
 import com.atinbo.model.ErrorInfo;
 import com.atinbo.model.Outcome;
 import com.atinbo.model.StatusCodeEnum;
@@ -53,6 +54,20 @@ public class GlobalExceptionHandler {
     public Outcome handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         log.error(e.getMessage(), e);
         return Outcome.failure();
+    }
+
+
+    /**
+     * 请参数异常拦截
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(RequestParamException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Outcome requestParamException(RequestParamException e) {
+        log.error(e.getMessage(), e);
+        return Outcome.failure(e.getMessage());
     }
 
     /**
