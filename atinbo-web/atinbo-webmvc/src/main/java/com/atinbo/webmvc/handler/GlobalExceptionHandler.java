@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Outcome bindException(MethodArgumentNotValidException e) {
         log.error(e.getMessage(), e);
@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public Outcome handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         log.error(e.getMessage(), e);
@@ -63,7 +63,7 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(RequestParamException.class)
     public Outcome requestParamException(RequestParamException e) {
         log.error(e.getMessage(), e);
@@ -76,7 +76,7 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-//    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public Outcome handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
         log.error(e.getMessage(), e);
@@ -102,19 +102,11 @@ public class GlobalExceptionHandler {
      * @param ex
      * @return
      */
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(HttpApiException.class)
     public Outcome handleHttpAPIException(HttpApiException ex) {
         log.error(ex.getMessage(), ex);
         return Outcome.failure(ex.getStatus(), ex.getMessage());
-    }
-
-    private Outcome<List<ErrorInfo>> doErr(StatusCodeEnum code, BindingResult br) {
-        List<ErrorInfo> result = new ArrayList<>();
-        for (FieldError err : br.getFieldErrors()) {
-            result.add(ErrorInfo.of(err.getField(), err.getField() + ": " + err.getDefaultMessage()));
-        }
-        return Outcome.failure(code, result);
     }
 
     /**
@@ -127,5 +119,14 @@ public class GlobalExceptionHandler {
     public Outcome handleException(Exception ex) {
         log.error(ex.getMessage(), ex);
         return Outcome.failure(StatusCodeEnum.INTERNAL_SERVER_ERROR, ex.getMessage());
+    }
+
+
+    private Outcome<List<ErrorInfo>> doErr(StatusCodeEnum code, BindingResult br) {
+        List<ErrorInfo> result = new ArrayList<>();
+        for (FieldError err : br.getFieldErrors()) {
+            result.add(ErrorInfo.of(err.getField(), err.getField() + ": " + err.getDefaultMessage()));
+        }
+        return Outcome.failure(code, result);
     }
 }

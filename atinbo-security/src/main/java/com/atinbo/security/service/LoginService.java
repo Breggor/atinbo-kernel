@@ -1,5 +1,6 @@
 package com.atinbo.security.service;
 
+import com.atinbo.core.exception.RequestParamException;
 import com.atinbo.core.spring.SpringContextHolder;
 import com.atinbo.core.utils.MessageSourceUtil;
 import com.atinbo.core.utils.StringUtil;
@@ -52,7 +53,7 @@ public class LoginService {
      */
     public String login(String username, String password, String captcha) {
         if (StringUtil.isBlank(username) || StringUtil.isBlank(password)) {
-            throw new UserException("user.nonempty", null);
+            throw new RequestParamException(MessageSourceUtil.message("user.nonempty", null));
         }
 
         if (validFailedCount(username) > loginFailedCount) {
