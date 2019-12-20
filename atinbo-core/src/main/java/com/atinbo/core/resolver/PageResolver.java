@@ -1,7 +1,7 @@
 package com.atinbo.core.resolver;
 
 
-import com.atinbo.core.utils.ServletUtil;
+import com.atinbo.core.utils.WebUtil;
 import com.atinbo.model.PageForm;
 
 public abstract class PageResolver {
@@ -22,9 +22,9 @@ public abstract class PageResolver {
 
     public static PageForm resolve() {
         PageForm form = new PageForm();
-        form.setPage(ServletUtil.getParameterToInt(PAGE_NUM));
-        form.setSize(ServletUtil.getParameterToInt(PAGE_SIZE));
-        form.setSortBy(ServletUtil.getParameter(SORT_BY));
+        form.setPage(WebUtil.getParameterToInt(PAGE_NUM));
+        form.setSize(WebUtil.getParameterToInt(PAGE_SIZE));
+        form.setSortBy(WebUtil.getParameter(SORT_BY));
         return form;
     }
 }

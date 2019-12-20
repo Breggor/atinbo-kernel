@@ -1,6 +1,7 @@
 package com.atinbo.security.handler;
 
-import com.atinbo.core.utils.ServletUtil;
+
+import com.atinbo.core.utils.WebUtil;
 import com.atinbo.model.Outcome;
 import com.atinbo.model.StatusCodeEnum;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,6 +28,6 @@ public class BaseAuthenticationEntryPoint implements AuthenticationEntryPoint, S
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException {
         String msg = String.format("请求访问：%s，%s: 认证失败，无法访问系统资源", request.getRequestURI(), HttpStatus.UNAUTHORIZED);
-        ServletUtil.renderString(response, objectMapper.writeValueAsString(Outcome.failure(StatusCodeEnum.UN_AUTHORIZED, msg)));
+        WebUtil.renderString(response, objectMapper.writeValueAsString(Outcome.failure(StatusCodeEnum.UN_AUTHORIZED, msg)));
     }
 }

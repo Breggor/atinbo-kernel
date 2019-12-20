@@ -3,7 +3,8 @@ package com.atinbo.security.service;
 import com.atinbo.common.id.IdUtils;
 import com.atinbo.core.utils.AddressUtil;
 import com.atinbo.core.utils.IpUtil;
-import com.atinbo.core.utils.ServletUtil;
+
+import com.atinbo.core.utils.WebUtil;
 import com.atinbo.redis.RedisOpsCache;
 import com.atinbo.security.model.LoginUser;
 import eu.bitwalker.useragentutils.UserAgent;
@@ -137,8 +138,8 @@ public class UserTokenService {
      * @param user 登录信息
      */
     public void setUserAgent(LoginUser user) {
-        UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtil.getRequest().getHeader("User-Agent"));
-        String ip = IpUtil.getIpAddr(ServletUtil.getRequest());
+        UserAgent userAgent = UserAgent.parseUserAgentString(WebUtil.getRequest().getHeader("User-Agent"));
+        String ip = IpUtil.getIpAddr(WebUtil.getRequest());
         user.setIp(ip);
         user.setLocation(AddressUtil.getRealAddressByIP(ip));
         user.setBrowser(userAgent.getBrowser().getName());

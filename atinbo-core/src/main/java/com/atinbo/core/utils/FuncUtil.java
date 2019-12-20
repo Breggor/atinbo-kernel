@@ -1267,7 +1267,7 @@ public class FuncUtil {
      * @return 格式化后的时间
      */
     public static String formatDateTime(TemporalAccessor temporal) {
-        return DateTimeUtil.formatDateTime(temporal);
+        return Java8DateUtil.formatDateTime(temporal);
     }
 
     /**
@@ -1277,7 +1277,7 @@ public class FuncUtil {
      * @return 格式化后的时间
      */
     public static String formatDate(TemporalAccessor temporal) {
-        return DateTimeUtil.formatDate(temporal);
+        return Java8DateUtil.formatDate(temporal);
     }
 
     /**
@@ -1287,7 +1287,7 @@ public class FuncUtil {
      * @return 格式化后的时间
      */
     public static String formatTime(TemporalAccessor temporal) {
-        return DateTimeUtil.formatTime(temporal);
+        return Java8DateUtil.formatTime(temporal);
     }
 
     /**
@@ -1298,7 +1298,7 @@ public class FuncUtil {
      * @return 格式化后的时间
      */
     public static String format(TemporalAccessor temporal, String pattern) {
-        return DateTimeUtil.format(temporal, pattern);
+        return Java8DateUtil.format(temporal, pattern);
     }
 
     /**
@@ -1309,7 +1309,7 @@ public class FuncUtil {
      * @return 时间
      */
     public static TemporalAccessor parse(String dateStr, String pattern) {
-        return DateTimeUtil.parse(dateStr, pattern);
+        return Java8DateUtil.parse(dateStr, pattern);
     }
 
     /**
@@ -1320,7 +1320,7 @@ public class FuncUtil {
      * @return 时间
      */
     public static TemporalAccessor parse(String dateStr, DateTimeFormatter formatter) {
-        return DateTimeUtil.parse(dateStr, formatter);
+        return Java8DateUtil.parse(dateStr, formatter);
     }
 
     /**

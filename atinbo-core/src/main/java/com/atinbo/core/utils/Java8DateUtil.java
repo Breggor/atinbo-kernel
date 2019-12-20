@@ -11,7 +11,7 @@ import java.time.temporal.TemporalAccessor;
  *
  * @author breggor
  */
-public class DateTimeUtil {
+public class Java8DateUtil {
     public static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern(DateUtil.PATTERN_DATETIME);
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern(DateUtil.PATTERN_DATE);
     public static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern(DateUtil.PATTERN_TIME);

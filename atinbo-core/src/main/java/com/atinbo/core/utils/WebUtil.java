@@ -1,7 +1,9 @@
 package com.atinbo.core.utils;
 
 import com.atinbo.common.Charsets;
+import com.atinbo.common.Converts;
 import com.atinbo.common.StringPool;
+import com.atinbo.common.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
@@ -15,6 +17,7 @@ import org.springframework.web.method.HandlerMethod;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
@@ -28,9 +31,9 @@ import java.util.Enumeration;
 @Slf4j
 public class WebUtil extends org.springframework.web.util.WebUtils {
 
-    public static final String USER_AGENT_HEADER = "user-agent" ;
+    public static final String USER_AGENT_HEADER = "user-agent";
 
-    public static final String UN_KNOWN = "unknown" ;
+    public static final String UN_KNOWN = "unknown";
 
     /**
      * 判断是否ajax请求
@@ -52,7 +55,7 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
      */
     @Nullable
     public static String getCookieVal(String name) {
-        HttpServletRequest request = WebUtil.getRequest();
+        HttpServletRequest request = getRequest();
         Assert.notNull(request, "request from RequestContextHolder is null");
         return getCookieVal(request, name);
     }
@@ -139,38 +142,7 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
      * @return {String}
      */
     public static String getIP() {
-        return getIP(WebUtil.getRequest());
-    }
-
-    /**
-     * 获取ip
-     *
-     * @param request HttpServletRequest
-     * @return {String}
-     */
-    @Nullable
-    public static String getIP(HttpServletRequest request) {
-        Assert.notNull(request, "HttpServletRequest is null");
-        String ip = request.getHeader("X-Requested-For");
-        if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("X-Forwarded-For");
-        }
-        if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("Proxy-Client-IP");
-        }
-        if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("HTTP_CLIENT_IP");
-        }
-        if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-        }
-        if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getRemoteAddr();
-        }
-        return StringUtil.isBlank(ip) ? null : ip.split(",")[0];
+        return IpUtil.getIpAddr(getRequest());
     }
 
 
@@ -198,7 +170,7 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
     public static String getRequestStr(HttpServletRequest request) throws IOException {
         String queryString = request.getQueryString();
         if (StringUtil.isNotBlank(queryString)) {
-            return new String(queryString.getBytes(Charsets.ISO_8859_1), Charsets.UTF8).replaceAll("&amp;" , "&").replaceAll("%22" , "\"");
+            return new String(queryString.getBytes(Charsets.ISO_8859_1), Charsets.UTF8).replaceAll("&amp;", "&").replaceAll("%22", "\"");
         }
         return getRequestStr(request, getRequestBytes(request));
     }
@@ -247,11 +219,117 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
             while (parameterNames.hasMoreElements()) {
                 String key = parameterNames.nextElement();
                 String value = request.getParameter(key);
-                StringUtil.appendBuilder(sb, key, "=" , value, "&");
+                StringUtil.appendBuilder(sb, key, "=", value, "&");
             }
             str = StringUtil.removeSuffix(sb.toString(), "&");
         }
-        return str.replaceAll("&amp;" , "&");
+        return str.replaceAll("&amp;", "&");
+    }
+
+    /**
+     * 获取http header信息
+     *
+     * @param name
+     * @return
+     */
+    public static String getHeader(String name) {
+        return getRequest().getHeader(name);
+    }
+
+
+    /**
+     * 获取String参数
+     */
+    public static String getParameter(String name) {
+        return getRequest().getParameter(name);
+    }
+
+    /**
+     * 获取String参数
+     */
+    public static String getParameter(String name, String defaultValue) {
+        return Converts.toStr(getRequest().getParameter(name), defaultValue);
+    }
+
+    /**
+     * 获取Integer参数
+     */
+    public static Integer getParameterToInt(String name) {
+        return Converts.toInt(getRequest().getParameter(name));
+    }
+
+    /**
+     * 获取Integer参数
+     */
+    public static Integer getParameterToInt(String name, Integer defaultValue) {
+        return Converts.toInt(getRequest().getParameter(name), defaultValue);
+    }
+
+
+    /**
+     * 获取response
+     */
+    public static HttpServletResponse getResponse() {
+        return getRequestAttributes().getResponse();
+    }
+
+    /**
+     * 获取session
+     */
+    public static HttpSession getSession() {
+        return getRequest().getSession();
+    }
+
+    public static ServletRequestAttributes getRequestAttributes() {
+        RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
+        return (ServletRequestAttributes) attributes;
+    }
+
+    /**
+     * 将字符串渲染到客户端
+     *
+     * @param response 渲染对象
+     * @param string   待渲染的字符串
+     * @return null
+     */
+    public static String renderString(HttpServletResponse response, String string) {
+        try {
+            response.setStatus(200);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().print(string);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 是否是Ajax异步请求
+     *
+     * @param request
+     */
+    public static boolean isAjaxRequest(HttpServletRequest request) {
+        String accept = request.getHeader("accept");
+        if (accept != null && accept.indexOf("application/json") != -1) {
+            return true;
+        }
+
+        String xRequestedWith = request.getHeader("X-Requested-With");
+        if (xRequestedWith != null && xRequestedWith.indexOf("XMLHttpRequest") != -1) {
+            return true;
+        }
+
+        String uri = request.getRequestURI();
+        if (Strings.inStringIgnoreCase(uri, ".json", ".xml")) {
+            return true;
+        }
+
+        String ajax = request.getParameter("__ajax");
+        if (Strings.inStringIgnoreCase(ajax, "json", "xml")) {
+            return true;
+        }
+        return false;
     }
 
 

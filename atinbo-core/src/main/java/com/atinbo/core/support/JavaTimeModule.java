@@ -1,6 +1,6 @@
 package com.atinbo.core.support;
 
-import com.atinbo.core.utils.DateTimeUtil;
+import com.atinbo.core.utils.Java8DateUtil;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.PackageVersion;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -23,12 +23,12 @@ public class JavaTimeModule extends SimpleModule {
 
     public JavaTimeModule() {
         super(PackageVersion.VERSION);
-        this.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeUtil.DATETIME_FORMAT));
-        this.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeUtil.DATE_FORMAT));
-        this.addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateTimeUtil.TIME_FORMAT));
-        this.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeUtil.DATETIME_FORMAT));
-        this.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeUtil.DATE_FORMAT));
-        this.addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeUtil.TIME_FORMAT));
+        this.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(Java8DateUtil.DATETIME_FORMAT));
+        this.addDeserializer(LocalDate.class, new LocalDateDeserializer(Java8DateUtil.DATE_FORMAT));
+        this.addDeserializer(LocalTime.class, new LocalTimeDeserializer(Java8DateUtil.TIME_FORMAT));
+        this.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(Java8DateUtil.DATETIME_FORMAT));
+        this.addSerializer(LocalDate.class, new LocalDateSerializer(Java8DateUtil.DATE_FORMAT));
+        this.addSerializer(LocalTime.class, new LocalTimeSerializer(Java8DateUtil.TIME_FORMAT));
     }
 
 }

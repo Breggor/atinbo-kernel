@@ -1,7 +1,6 @@
 package com.atinbo.security.handler;
 
-
-import com.atinbo.core.utils.ServletUtil;
+import com.atinbo.core.utils.WebUtil;
 import com.atinbo.model.Outcome;
 import com.atinbo.security.model.LoginUser;
 import com.atinbo.security.service.UserTokenService;
@@ -44,6 +43,6 @@ public class BaseLogoutSuccessHandler implements LogoutSuccessHandler {
             // 记录用户退出日志
             log.info(userName + "-- 退出成功");
         }
-        ServletUtil.renderString(response, objectMapper.writeValueAsString(Outcome.success().setMessage("退出成功")));
+        WebUtil.renderString(response, objectMapper.writeValueAsString(Outcome.success().setMessage("退出成功")));
     }
 }

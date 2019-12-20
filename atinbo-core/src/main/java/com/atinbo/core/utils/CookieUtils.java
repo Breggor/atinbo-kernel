@@ -1,4 +1,4 @@
-package com.atinbo.webmvc.utils;
+package com.atinbo.core.utils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
