@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 public class Inflections {
 
     private static final Map<String, Inflections> INSTANCES = new ConcurrentHashMap<>();
-    private static final String DEFAULT_LANG = "en" ;
+    private static final String DEFAULT_LANG = "en";
 
     private Set<String> ignored = new HashSet<>();
 

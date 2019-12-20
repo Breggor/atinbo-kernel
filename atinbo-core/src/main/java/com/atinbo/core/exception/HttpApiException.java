@@ -13,12 +13,12 @@ public class HttpApiException extends RuntimeException {
     protected StatusCode status;
 
 
-    public StatusCode getStatus() {
-        return this.status;
-    }
-
     public HttpApiException(StatusCode statusCode) {
         this.status = statusCode;
+    }
+
+    public StatusCode getStatus() {
+        return this.status;
     }
 
     @Override

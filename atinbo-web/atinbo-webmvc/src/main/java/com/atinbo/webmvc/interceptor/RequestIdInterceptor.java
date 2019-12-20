@@ -20,7 +20,7 @@ import java.text.MessageFormat;
 @Component
 public class RequestIdInterceptor extends HandlerInterceptorAdapter {
 
-    private static final String REQUEST_ID = "requestId" ;
+    private static final String REQUEST_ID = "requestId";
     ThreadLocal<Long> actTime = new ThreadLocal<>();
 
     @Override
@@ -28,19 +28,19 @@ public class RequestIdInterceptor extends HandlerInterceptorAdapter {
         actTime.set(System.currentTimeMillis());
 
         String requestId = request.getHeader(REQUEST_ID);
-        log.info("Header: requestId({})" , requestId);
+        log.info("Header: requestId({})", requestId);
 
         if (!StringUtils.isEmpty(requestId)) {
             requestId = request.getParameter(REQUEST_ID);
-            log.info("Body: requestId({})" , requestId);
+            log.info("Body: requestId({})", requestId);
         }
 
         if (StringUtils.isEmpty(requestId)) {
-            requestId = System.currentTimeMillis() + "" ;
+            requestId = System.currentTimeMillis() + "";
         }
 
         MDC.put(REQUEST_ID, requestId);
-        log.info(MessageFormat.format("url={0}, method={0}, queryString={0}" , request.getRequestURL().toString(), request.getMethod().toLowerCase(), request.getQueryString()));
+        log.info(MessageFormat.format("url={0}, method={0}, queryString={0}", request.getRequestURL().toString(), request.getMethod().toLowerCase(), request.getQueryString()));
         return true;
     }
 

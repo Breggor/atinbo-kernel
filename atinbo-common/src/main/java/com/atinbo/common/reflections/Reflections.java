@@ -19,7 +19,7 @@ import java.util.stream.Stream;
  * @author Breggor
  */
 
-@SuppressWarnings({"unchecked" , "rawtypes"})
+@SuppressWarnings({"unchecked", "rawtypes"})
 public abstract class Reflections {
 
     private static Logger logger = LoggerFactory.getLogger(Reflections.class);
@@ -64,7 +64,7 @@ public abstract class Reflections {
         try {
             result = field.get(obj);
         } catch (IllegalAccessException e) {
-            logger.error("不可能抛出的异常{}" , e.getMessage());
+            logger.error("不可能抛出的异常{}", e.getMessage());
         }
         return result;
     }
@@ -82,7 +82,7 @@ public abstract class Reflections {
         try {
             field.set(obj, value);
         } catch (IllegalAccessException e) {
-            logger.error("不可能抛出的异常:{}" , e.getMessage());
+            logger.error("不可能抛出的异常:{}", e.getMessage());
         }
     }
 
@@ -197,13 +197,13 @@ public abstract class Reflections {
      */
     public static RuntimeException convertReflectionExceptionToUnchecked(Exception e) {
         if (e instanceof IllegalAccessException || e instanceof IllegalArgumentException || e instanceof NoSuchMethodException) {
-            return new IllegalArgumentException("Reflection Exception." , e);
+            return new IllegalArgumentException("Reflection Exception.", e);
         } else if (e instanceof InvocationTargetException) {
-            return new RuntimeException("Reflection Exception." , ((InvocationTargetException) e).getTargetException());
+            return new RuntimeException("Reflection Exception.", ((InvocationTargetException) e).getTargetException());
         } else if (e instanceof RuntimeException) {
             return (RuntimeException) e;
         }
-        return new RuntimeException("Unexpected Checked Exception." , e);
+        return new RuntimeException("Unexpected Checked Exception.", e);
     }
 
     /**

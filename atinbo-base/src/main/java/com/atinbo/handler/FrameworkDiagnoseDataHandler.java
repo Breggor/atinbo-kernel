@@ -14,7 +14,7 @@ public class FrameworkDiagnoseDataHandler extends Handler {
         try {
             this.next.handle(url, request, response);
         } finally {
-            response.addHeader("req_no" , LogUtils.getReqNo());
+            response.addHeader("req_no", LogUtils.getReqNo());
         }
 
     }

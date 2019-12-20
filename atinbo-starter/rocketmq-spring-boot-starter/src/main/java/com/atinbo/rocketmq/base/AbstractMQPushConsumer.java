@@ -47,13 +47,13 @@ public abstract class AbstractMQPushConsumer<T> extends AbstractMQConsumer<T> {
      */
     public ConsumeConcurrentlyStatus dealMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
         for (MessageExt messageExt : list) {
-            log.debug("receive msgId: {}, tags : {}" , messageExt.getMsgId(), messageExt.getTags());
+            log.debug("receive msgId: {}, tags : {}", messageExt.getMsgId(), messageExt.getTags());
             // parse message body
             T t = parseMessage(messageExt);
             // parse ext properties
             Map<String, Object> ext = parseExtParam(messageExt);
             if (null != t && !process(t, ext)) {
-                log.warn("consume fail , ask for re-consume , msgId: {}" , messageExt.getMsgId());
+                log.warn("consume fail , ask for re-consume , msgId: {}", messageExt.getMsgId());
                 return ConsumeConcurrentlyStatus.RECONSUME_LATER;
             }
         }
@@ -69,11 +69,11 @@ public abstract class AbstractMQPushConsumer<T> extends AbstractMQConsumer<T> {
      */
     public ConsumeOrderlyStatus dealMessage(List<MessageExt> list, ConsumeOrderlyContext consumeOrderlyContext) {
         for (MessageExt messageExt : list) {
-            log.info("receive msgId: {}, tags : {}" , messageExt.getMsgId(), messageExt.getTags());
+            log.info("receive msgId: {}, tags : {}", messageExt.getMsgId(), messageExt.getTags());
             T t = parseMessage(messageExt);
             Map<String, Object> ext = parseExtParam(messageExt);
             if (null != t && !process(t, ext)) {
-                log.warn("consume fail , ask for re-consume , msgId: {}" , messageExt.getMsgId());
+                log.warn("consume fail , ask for re-consume , msgId: {}", messageExt.getMsgId());
                 return ConsumeOrderlyStatus.SUSPEND_CURRENT_QUEUE_A_MOMENT;
             }
         }

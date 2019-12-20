@@ -72,6 +72,7 @@ public class OssService {
 
     /**
      * 同步上传
+     *
      * @param oldName
      * @param filePath
      * @param tempFile

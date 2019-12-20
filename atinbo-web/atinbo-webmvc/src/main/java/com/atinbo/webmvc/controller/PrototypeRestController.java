@@ -28,5 +28,5 @@ public @interface PrototypeRestController {
 
 
     @AliasFor(annotation = RestController.class)
-    String value() default "" ;
+    String value() default "";
 }

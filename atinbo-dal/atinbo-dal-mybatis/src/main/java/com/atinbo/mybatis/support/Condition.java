@@ -16,18 +16,18 @@ import java.util.Map;
  * @author breggor
  */
 public class Condition {
-    private static final String EQUAL = "_equal" ;
-    private static final String NOT_EQUAL = "_notequal" ;
-    private static final String LIKE = "_like" ;
-    private static final String NOT_LIKE = "_notlike" ;
-    private static final String GT = "_gt" ;
-    private static final String LT = "_lt" ;
-    private static final String DATE_GT = "_dategt" ;
-    private static final String DATE_EQUAL = "_dateequal" ;
-    private static final String DATE_LT = "_datelt" ;
-    private static final String IS_NULL = "_null" ;
-    private static final String NOT_NULL = "_notnull" ;
-    private static final String IGNORE = "_ignore" ;
+    private static final String EQUAL = "_equal";
+    private static final String NOT_EQUAL = "_notequal";
+    private static final String LIKE = "_like";
+    private static final String NOT_LIKE = "_notlike";
+    private static final String GT = "_gt";
+    private static final String LT = "_lt";
+    private static final String DATE_GT = "_dategt";
+    private static final String DATE_EQUAL = "_dateequal";
+    private static final String DATE_LT = "_datelt";
+    private static final String IS_NULL = "_null";
+    private static final String NOT_NULL = "_notnull";
+    private static final String IGNORE = "_ignore";
 
     /**
      * 转化成mybatis plus中的Page

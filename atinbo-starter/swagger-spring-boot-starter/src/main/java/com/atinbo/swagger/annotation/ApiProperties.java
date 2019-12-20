@@ -9,6 +9,7 @@ import java.lang.annotation.Target;
 
 /**
  * 自定义 ApiModel 中的字段
+ *
  * @author zenghao
  * @date 2019-12-10
  */
@@ -18,6 +19,7 @@ public @interface ApiProperties {
 
     /**
      * 需要的字段
+     *
      * @return
      */
     @AliasFor("include")
@@ -25,6 +27,7 @@ public @interface ApiProperties {
 
     /**
      * 需要的字段
+     *
      * @return
      */
     @AliasFor("value")
@@ -32,12 +35,14 @@ public @interface ApiProperties {
 
     /**
      * 排除的字段
+     *
      * @return
      */
     String[] exclude() default {};
 
     /**
      * form名称
+     *
      * @return
      */
     String name();

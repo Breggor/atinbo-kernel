@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 /**
  * 框架层模版支持 dubbo、springCloud
+ *
  * @author zenghao
  * @date 2019-11-11
  */
@@ -23,10 +24,11 @@ public enum FrameworkEnum {
 
     /**
      * 校验配置的类型是否支持，若不支持则使用 dubbo
+     *
      * @param framework
      * @return
      */
-    public static String check(String framework){
+    public static String check(String framework) {
         AtomicBoolean has = new AtomicBoolean(false);
         Stream.of(FrameworkEnum.values()).forEach(e -> has.set(e.getValue().equalsIgnoreCase(framework)));
         return has.get() ? framework : DUBBO.getValue();

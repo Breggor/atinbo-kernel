@@ -16,7 +16,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 @ConfigurationProperties(prefix = DisLockProperties.DISLOCK_PREFIX)
 public class DisLockProperties {
-    public static final String DISLOCK_PREFIX = "dislock" ;
+    public static final String DISLOCK_PREFIX = "dislock";
 
     /**
      * Redis的运行模式,默认使用单机模式

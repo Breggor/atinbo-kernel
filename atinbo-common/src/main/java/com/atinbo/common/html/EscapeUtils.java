@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author breggor
  */
 public class EscapeUtils {
-    public static final String RE_HTML_MARK = "(<[^<]*?>)|(<[\\s]*?/[^<]*?>)|(<[^<]*?/[\\s]*?>)" ;
+    public static final String RE_HTML_MARK = "(<[^<]*?>)|(<[\\s]*?/[^<]*?>)|(<[^<]*?/[\\s]*?>)";
 
     private static final char[][] TEXT = new char[64][];
 
@@ -95,7 +95,7 @@ public class EscapeUtils {
         int lastPos = 0, pos = 0;
         char ch;
         while (lastPos < content.length()) {
-            pos = content.indexOf("%" , lastPos);
+            pos = content.indexOf("%", lastPos);
             if (pos == lastPos) {
                 if (content.charAt(pos + 1) == 'u') {
                     ch = (char) Integer.parseInt(content.substring(pos + 2, pos + 6), 16);
@@ -120,7 +120,7 @@ public class EscapeUtils {
     }
 
     public static void main(String[] args) {
-        String html = "<script>alert(1);</script>" ;
+        String html = "<script>alert(1);</script>";
         System.out.println(EscapeUtils.clean(html));
         System.out.println(EscapeUtils.escape(html));
         System.out.println(EscapeUtils.unescape(html));

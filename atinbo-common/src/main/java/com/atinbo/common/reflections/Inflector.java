@@ -124,9 +124,9 @@ public final class Inflector {
         Preconditions.checkNotNull(camelCase);
         return camelCase
                 .trim()
-                .replaceAll("([A-Z]+)([A-Z][a-z])" , "$1_$2")
-                .replaceAll("([a-z\\d])([A-Z])" , "$1_$2")
-                .replaceAll("[-\\s]+" , "_")
+                .replaceAll("([A-Z]+)([A-Z][a-z])", "$1_$2")
+                .replaceAll("([a-z\\d])([A-Z])", "$1_$2")
+                .replaceAll("[-\\s]+", "_")
                 .toLowerCase();
     }
 
@@ -145,7 +145,7 @@ public final class Inflector {
     public String humanize(String word) {
         Preconditions.checkNotNull(word);
         String result =
-                underscore(word).replaceAll("_id$" , "").replaceAll("\\A_+" , "").replaceAll("[_\\s]+" , " ");
+                underscore(word).replaceAll("_id$", "").replaceAll("\\A_+", "").replaceAll("[_\\s]+", " ");
         return capitalize(result);
     }
 
@@ -238,17 +238,17 @@ public final class Inflector {
     public String ordinalize(int number) {
         int mod100 = number % 100;
         if (mod100 == 11 || mod100 == 12 || mod100 == 13) {
-            return String.valueOf(number) + "th" ;
+            return String.valueOf(number) + "th";
         }
         switch (number % 10) {
             case 1:
-                return number + "st" ;
+                return number + "st";
             case 2:
-                return number + "nd" ;
+                return number + "nd";
             case 3:
-                return number + "rd" ;
+                return number + "rd";
         }
-        return number + "th" ;
+        return number + "th";
     }
 
     /**
@@ -261,8 +261,8 @@ public final class Inflector {
     public String ellipsize(String text, int length) {
         Preconditions.checkNotNull(text);
         if (text.length() <= length) return text;
-        if (length < 4) return "..." ;
-        return text.substring(0, length - 3) + "..." ;
+        if (length < 4) return "...";
+        return text.substring(0, length - 3) + "...";
     }
 
     /**
@@ -277,71 +277,71 @@ public final class Inflector {
      */
     public String simplify(String text) {
         Preconditions.checkNotNull(text);
-        return Normalizer.normalize(text, Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}" , "");
+        return Normalizer.normalize(text, Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}", "");
     }
 
     private void initEnglishRules() {
 
         Inflections inflect = INFLECTIONS_EN;
 
-        inflect.plural("$" , "s");
-        inflect.plural("s$" , "s");
-        inflect.plural("^(ax|test)is$" , "$1es");
-        inflect.plural("(octop|vir)us$" , "$1i");
-        inflect.plural("(octop|vir)i$" , "$1i");
-        inflect.plural("(alias|status)$" , "$1es");
-        inflect.plural("(bu)s$" , "$1ses");
-        inflect.plural("(buffal|tomat)o$" , "$1oes");
-        inflect.plural("([ti])um$" , "$1a");
-        inflect.plural("([ti])a$" , "$1a");
-        inflect.plural("sis$" , "ses");
-        inflect.plural("(?:([^f])fe|([lr])f)$" , "$1$2ves");
-        inflect.plural("(hive)$" , "$1s");
-        inflect.plural("([^aeiouy]|qu)y$" , "$1ies");
-        inflect.plural("(x|ch|ss|sh)$" , "$1es");
-        inflect.plural("(matr|vert|ind)(?:ix|ex)$" , "$1ices");
-        inflect.plural("^(m|l)ouse$" , "$1ice");
-        inflect.plural("^(m|l)ice$" , "$1ice");
-        inflect.plural("^(ox)$" , "$1en");
-        inflect.plural("^(oxen)$" , "$1");
-        inflect.plural("(quiz)$" , "$1zes");
+        inflect.plural("$", "s");
+        inflect.plural("s$", "s");
+        inflect.plural("^(ax|test)is$", "$1es");
+        inflect.plural("(octop|vir)us$", "$1i");
+        inflect.plural("(octop|vir)i$", "$1i");
+        inflect.plural("(alias|status)$", "$1es");
+        inflect.plural("(bu)s$", "$1ses");
+        inflect.plural("(buffal|tomat)o$", "$1oes");
+        inflect.plural("([ti])um$", "$1a");
+        inflect.plural("([ti])a$", "$1a");
+        inflect.plural("sis$", "ses");
+        inflect.plural("(?:([^f])fe|([lr])f)$", "$1$2ves");
+        inflect.plural("(hive)$", "$1s");
+        inflect.plural("([^aeiouy]|qu)y$", "$1ies");
+        inflect.plural("(x|ch|ss|sh)$", "$1es");
+        inflect.plural("(matr|vert|ind)(?:ix|ex)$", "$1ices");
+        inflect.plural("^(m|l)ouse$", "$1ice");
+        inflect.plural("^(m|l)ice$", "$1ice");
+        inflect.plural("^(ox)$", "$1en");
+        inflect.plural("^(oxen)$", "$1");
+        inflect.plural("(quiz)$", "$1zes");
 
-        inflect.singular("s$" , "");
-        inflect.singular("(ss)$" , "$1");
-        inflect.singular("(n)ews$" , "$1ews");
-        inflect.singular("([ti])a$" , "$1um");
+        inflect.singular("s$", "");
+        inflect.singular("(ss)$", "$1");
+        inflect.singular("(n)ews$", "$1ews");
+        inflect.singular("([ti])a$", "$1um");
         inflect.singular(
-                "((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)(sis|ses)$" , "$1sis");
-        inflect.singular("(^analy)(sis|ses)$" , "$1sis");
-        inflect.singular("([^f])ves$" , "$1fe");
-        inflect.singular("(hive)s$" , "$1");
-        inflect.singular("(tive)s$" , "$1");
-        inflect.singular("([lr])ves$" , "$1f");
-        inflect.singular("([^aeiouy]|qu)ies$" , "$1y");
-        inflect.singular("(s)eries$" , "$1eries");
-        inflect.singular("(m)ovies$" , "$1ovie");
-        inflect.singular("(x|ch|ss|sh)es$" , "$1");
-        inflect.singular("^(m|l)ice$" , "$1ouse");
-        inflect.singular("(bus)(es)?$" , "$1");
-        inflect.singular("(o)es$" , "$1");
-        inflect.singular("(shoe)s$" , "$1");
-        inflect.singular("(cris|test)(is|es)$" , "$1is");
-        inflect.singular("^(a)x[ie]s$" , "$1xis");
-        inflect.singular("(octop|vir)(us|i)$" , "$1us");
-        inflect.singular("(alias|status)(es)?$" , "$1");
-        inflect.singular("^(ox)en" , "$1");
-        inflect.singular("(vert|ind)ices$" , "$1ex");
-        inflect.singular("(matr)ices$" , "$1ix");
-        inflect.singular("(quiz)zes$" , "$1");
-        inflect.singular("(database)s$" , "$1");
+                "((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)(sis|ses)$", "$1sis");
+        inflect.singular("(^analy)(sis|ses)$", "$1sis");
+        inflect.singular("([^f])ves$", "$1fe");
+        inflect.singular("(hive)s$", "$1");
+        inflect.singular("(tive)s$", "$1");
+        inflect.singular("([lr])ves$", "$1f");
+        inflect.singular("([^aeiouy]|qu)ies$", "$1y");
+        inflect.singular("(s)eries$", "$1eries");
+        inflect.singular("(m)ovies$", "$1ovie");
+        inflect.singular("(x|ch|ss|sh)es$", "$1");
+        inflect.singular("^(m|l)ice$", "$1ouse");
+        inflect.singular("(bus)(es)?$", "$1");
+        inflect.singular("(o)es$", "$1");
+        inflect.singular("(shoe)s$", "$1");
+        inflect.singular("(cris|test)(is|es)$", "$1is");
+        inflect.singular("^(a)x[ie]s$", "$1xis");
+        inflect.singular("(octop|vir)(us|i)$", "$1us");
+        inflect.singular("(alias|status)(es)?$", "$1");
+        inflect.singular("^(ox)en", "$1");
+        inflect.singular("(vert|ind)ices$", "$1ex");
+        inflect.singular("(matr)ices$", "$1ix");
+        inflect.singular("(quiz)zes$", "$1");
+        inflect.singular("(database)s$", "$1");
 
-        inflect.irregular("person" , "people");
-        inflect.irregular("man" , "men");
-        inflect.irregular("child" , "children");
-        inflect.irregular("sex" , "sexes");
-        inflect.irregular("move" , "moves");
-        inflect.irregular("zombie" , "zombies");
-        inflect.irregular("stadium" , "stadiums");
+        inflect.irregular("person", "people");
+        inflect.irregular("man", "men");
+        inflect.irregular("child", "children");
+        inflect.irregular("sex", "sexes");
+        inflect.irregular("move", "moves");
+        inflect.irregular("zombie", "zombies");
+        inflect.irregular("stadium", "stadiums");
 
         inflect.ignore(
                 "equipment information rice money species series fish sheep jeans police data".split(" "));

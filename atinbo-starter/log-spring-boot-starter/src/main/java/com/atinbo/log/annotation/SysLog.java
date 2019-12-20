@@ -24,6 +24,6 @@ public @interface SysLog {
      *
      * @return
      */
-    String type() default "default" ;
+    String type() default "default";
 
 }

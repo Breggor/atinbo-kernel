@@ -31,8 +31,8 @@ import java.util.Objects;
 @Slf4j
 public class SysLogAspect {
 
-    private static final String HEADER_CLIENT_ID = "X-GW-CLIENT-ID" ;
-    private static final String HEADER_USER = "X-GW-USER" ;
+    private static final String HEADER_CLIENT_ID = "X-GW-CLIENT-ID";
+    private static final String HEADER_USER = "X-GW-USER";
 
     @Value("${spring.application.name}")
     private String module;
@@ -42,7 +42,7 @@ public class SysLogAspect {
     public Object around(ProceedingJoinPoint point, SysLog sysLog) {
         String strClassName = point.getTarget().getClass().getName();
         String strMethodName = point.getSignature().getName();
-        log.info("[模块]:{},[类名]:{},[方法]:{},[日志]:{}" , module, strClassName, strMethodName, sysLog.value());
+        log.info("[模块]:{},[类名]:{},[方法]:{},[日志]:{}", module, strClassName, strMethodName, sysLog.value());
 
         SysLogSource logSource = getSystemLog();
         logSource.setTitle(sysLog.value());
@@ -59,7 +59,7 @@ public class SysLogAspect {
         } finally {
             Long endTime = System.currentTimeMillis();
             logSource.setTime(endTime - startTime);
-            log.info("[类名]:{},[方法]:{},[耗时]:{}" , strClassName, strMethodName, endTime - startTime);
+            log.info("[类名]:{},[方法]:{},[耗时]:{}", strClassName, strMethodName, endTime - startTime);
             SpringContextHolder.publishEvent(new SysLogEvent(logSource));
         }
         return obj;

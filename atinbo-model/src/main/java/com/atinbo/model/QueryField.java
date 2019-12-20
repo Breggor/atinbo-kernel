@@ -27,7 +27,7 @@ public @interface QueryField {
      *
      * @return
      */
-    String field() default "" ;
+    String field() default "";
 
     /**
      * 是否忽略该字段 默认不忽略

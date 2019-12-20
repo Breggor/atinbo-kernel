@@ -26,13 +26,13 @@ public abstract class AbstractMQTransactionProducer implements TransactionListen
         try {
             SendResult sendResult = transactionProducer.sendMessageInTransaction(msg, arg);
             if (sendResult.getSendStatus() != SendStatus.SEND_OK) {
-                log.error("事务消息发送失败，topic : {}, msgObj {}" , msg.getTopic(), msg);
+                log.error("事务消息发送失败，topic : {}, msgObj {}", msg.getTopic(), msg);
                 throw new MQException("事务消息发送失败，topic :" + msg.getTopic() + ", status :" + sendResult.getSendStatus());
             }
-            log.info("发送事务消息成功，事务id: {}" , msg.getTransactionId());
+            log.info("发送事务消息成功，事务id: {}", msg.getTransactionId());
             return sendResult;
         } catch (Exception e) {
-            log.error("事务消息发送失败，topic : {}, msgObj {}" , msg.getTopic(), msg);
+            log.error("事务消息发送失败，topic : {}, msgObj {}", msg.getTopic(), msg);
             throw new MQException("事务消息发送失败，topic :" + msg.getTopic() + ",e:" + e.getMessage());
         }
     }

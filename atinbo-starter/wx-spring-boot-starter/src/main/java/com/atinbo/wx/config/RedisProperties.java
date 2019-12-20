@@ -15,14 +15,14 @@ import static com.atinbo.wx.config.RedisProperties.PREFIX;
 @Data
 @ConfigurationProperties(PREFIX)
 public class RedisProperties implements Serializable {
-    public static final String PREFIX = "wx.redis" ;
+    public static final String PREFIX = "wx.redis";
 
     private static final long serialVersionUID = -5924815351660074401L;
 
     /**
      * 主机地址.
      */
-    private String host = "127.0.0.1" ;
+    private String host = "127.0.0.1";
 
     /**
      * 端口号.

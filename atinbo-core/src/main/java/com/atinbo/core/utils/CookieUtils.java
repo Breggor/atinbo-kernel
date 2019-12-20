@@ -125,7 +125,7 @@ public final class CookieUtils {
      */
     public static void deleteCookie(HttpServletRequest request, HttpServletResponse response,
                                     int cookieMaxage, String cookieName) {
-        doSetCookie(request, response, cookieName, "" , cookieMaxage, false);
+        doSetCookie(request, response, cookieName, "", cookieMaxage, false);
     }
 
     /**
@@ -137,7 +137,7 @@ public final class CookieUtils {
                                           String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) {
         try {
             if (cookieValue == null) {
-                cookieValue = "" ;
+                cookieValue = "";
             } else if (isEncode) {
                 cookieValue = URLEncoder.encode(cookieValue, "utf-8");
             }
@@ -167,7 +167,7 @@ public final class CookieUtils {
                                           String cookieName, String cookieValue, int cookieMaxage, String encodeString) {
         try {
             if (cookieValue == null) {
-                cookieValue = "" ;
+                cookieValue = "";
             } else {
                 cookieValue = URLEncoder.encode(cookieValue, encodeString);
             }
@@ -196,7 +196,7 @@ public final class CookieUtils {
 
         String serverName = request.getRequestURL().toString();
         if (serverName == null || serverName.equals("")) {
-            domainName = "" ;
+            domainName = "";
         } else {
             serverName = serverName.toLowerCase();
             serverName = serverName.substring(7);

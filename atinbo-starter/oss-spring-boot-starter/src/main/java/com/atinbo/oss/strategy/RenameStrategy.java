@@ -10,6 +10,7 @@ public interface RenameStrategy {
 
     /**
      * 生成新的文件名
+     *
      * @param fileName 原文件名
      * @return 默认实现为 使用 UUID
      */
@@ -17,6 +18,7 @@ public interface RenameStrategy {
 
     /**
      * 生成新的文件路径
+     *
      * @param fileName 原文件名
      * @return 默认实现为使用 年/月/日
      */

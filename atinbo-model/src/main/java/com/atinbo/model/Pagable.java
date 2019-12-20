@@ -62,20 +62,6 @@ public final class Pagable<T> implements Serializable {
     }
 
     /**
-     * 总页数
-     */
-    private long calcPages() {
-        if (getSize() == 0) {
-            return 0L;
-        }
-        long pages = getTotal() / getSize();
-        if (getTotal() % getSize() != 0) {
-            pages++;
-        }
-        return pages;
-    }
-
-    /**
      * 创建分页
      *
      * @param current
@@ -111,5 +97,19 @@ public final class Pagable<T> implements Serializable {
      */
     public static <T> Pagable<T> of(long current, long size, long total, List<T> records) {
         return new Pagable(current, size, total, records);
+    }
+
+    /**
+     * 总页数
+     */
+    private long calcPages() {
+        if (getSize() == 0) {
+            return 0L;
+        }
+        long pages = getTotal() / getSize();
+        if (getTotal() % getSize() != 0) {
+            pages++;
+        }
+        return pages;
     }
 }

@@ -28,9 +28,9 @@ public class PinyinUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyUtils.class);
 
-    private static Map<String,String> dictionary = new HashMap<>();
+    private static Map<String, String> dictionary = new HashMap<>();
 
-    static{
+    static {
         //加载自定义多音字词典
         BufferedReader br = null;
         try {
@@ -77,6 +77,7 @@ public class PinyinUtil {
 
     /**
      * 中文转换为拼音
+     *
      * @param chineseCharacter
      * @return
      * @throws BadHanyuPinyinOutputFormatCombination
@@ -87,7 +88,7 @@ public class PinyinUtil {
         outputFormat.setCaseType(HanyuPinyinCaseType.LOWERCASE);
         outputFormat.setVCharType(HanyuPinyinVCharType.WITH_V);
         //ASCII >=33 ASCII<=125的直接返回 ,ASCII码表：http://www.asciitable.com/
-        if(chineseCharacter>=32 && chineseCharacter<=125){
+        if (chineseCharacter >= 32 && chineseCharacter <= 125) {
             return new String[]{String.valueOf(chineseCharacter)};
         }
         return PinyinHelper.toHanyuPinyinStringArray(chineseCharacter, outputFormat);
@@ -95,17 +96,19 @@ public class PinyinUtil {
 
     /**
      * 获取汉字拼音的全拼
+     *
      * @param chineseCharacter 中文字符串
      * @return 每个汉字的拼音
      * @throws BadHanyuPinyinOutputFormatCombination
      */
-    public static String toPinyin(String chineseCharacter) throws BadHanyuPinyinOutputFormatCombination{
+    public static String toPinyin(String chineseCharacter) throws BadHanyuPinyinOutputFormatCombination {
         String[] result = toPinyinArray(chineseCharacter);
         return String.join("", result);
     }
 
     /**
      * 将中文字符串转换为拼音全拼大写
+     *
      * @param chineseCharacter
      * @return
      * @throws BadHanyuPinyinOutputFormatCombination
@@ -116,23 +119,25 @@ public class PinyinUtil {
 
     /**
      * 转换为拼音 首字母大写
+     *
      * @param chineseCharacter 中文字符串
      * @return
      * @throws BadHanyuPinyinOutputFormatCombination
      */
-    public static String toPinYinFirstUpperCase(String chineseCharacter) throws BadHanyuPinyinOutputFormatCombination{
+    public static String toPinYinFirstUpperCase(String chineseCharacter) throws BadHanyuPinyinOutputFormatCombination {
         String[] result = toPinyinArray(chineseCharacter);
-        List<String> list = Stream.of(result).map(s -> s.substring(0, 1).toUpperCase()+s.substring(1)).collect(Collectors.toList());
+        List<String> list = Stream.of(result).map(s -> s.substring(0, 1).toUpperCase() + s.substring(1)).collect(Collectors.toList());
         return String.join("", list);
     }
 
     /**
      * 转换为拼音首字母缩写
+     *
      * @param chineseCharacter 中文字符串
      * @return
      * @throws BadHanyuPinyinOutputFormatCombination
      */
-    public static String toPinYinAcronym(String chineseCharacter) throws BadHanyuPinyinOutputFormatCombination{
+    public static String toPinYinAcronym(String chineseCharacter) throws BadHanyuPinyinOutputFormatCombination {
         String[] result = toPinyinArray(chineseCharacter);
         List<String> list = Stream.of(result).map(s -> s.substring(0, 1)).collect(Collectors.toList());
         return String.join("", list);
@@ -140,22 +145,24 @@ public class PinyinUtil {
 
     /**
      * 转换为拼音首字母缩写大写
+     *
      * @param chineseCharacter 中文字符串
      * @return
      * @throws BadHanyuPinyinOutputFormatCombination
      */
-    public static String toPinYinAcronymUpperCase(String chineseCharacter) throws BadHanyuPinyinOutputFormatCombination{
+    public static String toPinYinAcronymUpperCase(String chineseCharacter) throws BadHanyuPinyinOutputFormatCombination {
         return toPinYinAcronym(chineseCharacter).toUpperCase();
     }
 
     /**
      * 获取汉字拼音的全拼
+     *
      * @param chineseCharacter 中文字符串
      * @return 每个汉字的拼音 数组
      * @throws BadHanyuPinyinOutputFormatCombination
      */
-    public static String[] toPinyinArray(String chineseCharacter) throws BadHanyuPinyinOutputFormatCombination{
-        if(StringUtils.isEmpty(chineseCharacter)){
+    public static String[] toPinyinArray(String chineseCharacter) throws BadHanyuPinyinOutputFormatCombination {
+        if (StringUtils.isEmpty(chineseCharacter)) {
             return null;
         }
         char[] chs = chineseCharacter.toCharArray();

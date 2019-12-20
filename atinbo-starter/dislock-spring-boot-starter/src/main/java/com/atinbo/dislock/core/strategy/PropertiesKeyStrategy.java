@@ -36,9 +36,9 @@ public class PropertiesKeyStrategy extends KeyStrategy {
                         checkLockKey(fieldVal, field.getName());
                         keyBuilder.appendKey(wrapKeyTag(fieldVal.toString()));
                     } catch (IllegalArgumentException e) {
-                        throw new KeyBuilderException("生成builder失败" , e);
+                        throw new KeyBuilderException("生成builder失败", e);
                     } catch (IllegalAccessException e) {
-                        throw new KeyBuilderException("生成builder失败" , e);
+                        throw new KeyBuilderException("生成builder失败", e);
                     }
                 }
             }
@@ -48,7 +48,7 @@ public class PropertiesKeyStrategy extends KeyStrategy {
 
     @Override
     public String toString() {
-        return new StringJoiner(", " , PropertiesKeyStrategy.class.getSimpleName() + "[" , "]")
+        return new StringJoiner(", ", PropertiesKeyStrategy.class.getSimpleName() + "[", "]")
                 .add("className='" + className + "'")
                 .add("methodName='" + methodName + "'")
                 .toString();

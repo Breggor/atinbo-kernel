@@ -4,8 +4,8 @@ package com.atinbo.config;
 import com.atinbo.utils.LogUtils;
 
 public class AppEnv {
-    public static final String SPRING_ENV_CMD = "--spring.profiles.active" ;
-    private String env = "dev" ;
+    public static final String SPRING_ENV_CMD = "--spring.profiles.active";
+    private String env = "dev";
     private Boolean debug = false;
     private String logFilePath;
     private String logMaxHistory;
@@ -16,7 +16,7 @@ public class AppEnv {
     }
 
     public static String getSpringEnvCmd() {
-        return "--spring.profiles.active" ;
+        return "--spring.profiles.active";
     }
 
     public String getEnv() {

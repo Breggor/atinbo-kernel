@@ -24,7 +24,7 @@ public class Outcome<T> implements Serializable {
     /**
      * 状态码: 0:成功，-1：失败，业务异常：非零或非-1
      */
-    @ApiModelProperty(value = "状态码" , example = "状态码: 0:成功，-1：失败，业务异常：非零或非-1")
+    @ApiModelProperty(value = "状态码", example = "状态码: 0:成功，-1：失败，业务异常：非零或非-1")
     private int code;
 
     /**

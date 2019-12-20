@@ -66,7 +66,7 @@ public class MixUtils {
 
     public static String normalizeHostAddress(final InetAddress localHost) {
         if (localHost instanceof Inet6Address) {
-            return "[" + localHost.getHostAddress() + "]" ;
+            return "[" + localHost.getHostAddress() + "]";
         } else {
             return localHost.getHostAddress();
         }

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author breggor
  */
 public class FrameworkExceptionHandler extends Handler {
-    private static final String SPRING_404_EXCEPTION_MESSAGE = "org.springframework.web.servlet.resource.ResourceHttpRequestHandler cannot be cast to org.springframework.web.method.HandlerMethod" ;
+    private static final String SPRING_404_EXCEPTION_MESSAGE = "org.springframework.web.servlet.resource.ResourceHttpRequestHandler cannot be cast to org.springframework.web.method.HandlerMethod";
 
     public FrameworkExceptionHandler() {
     }

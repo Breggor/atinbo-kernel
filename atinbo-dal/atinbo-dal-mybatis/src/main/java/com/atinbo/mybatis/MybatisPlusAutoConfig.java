@@ -17,6 +17,7 @@ public class MybatisPlusAutoConfig {
 
     /**
      * 分页器
+     *
      * @return
      */
     @Bean
@@ -26,12 +27,13 @@ public class MybatisPlusAutoConfig {
 
     @Bean
     @ConditionalOnMissingBean
-    public MetaObjectHandler metaObjectHandler(){
+    public MetaObjectHandler metaObjectHandler() {
         return new MetaObjectHandlerAdapter();
     }
 
     /**
      * 主键生成器 需要数据库存在 `id_seq` 表和  next_val 函数（创建语句见注释）
+     *
      * @return
      */
     @Bean

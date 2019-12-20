@@ -15,7 +15,7 @@ public class PropertyUtils {
         try {
             resourceBundle = ResourceBundle.getBundle(propertyName);
         } catch (MissingResourceException e) {
-            logger.warn(String.format("file '%s.properties' not found!" , propertyName));
+            logger.warn(String.format("file '%s.properties' not found!", propertyName));
             throw e;
         }
     }
@@ -24,7 +24,7 @@ public class PropertyUtils {
         if (resourceBundle.containsKey(key)) {
             return resourceBundle.getString(key);
         } else {
-            logger.warn(String.format("key '%s' not found!" , key));
+            logger.warn(String.format("key '%s' not found!", key));
             return null;
         }
     }

@@ -101,11 +101,11 @@ public class Jacksons {
         try {
             mapper.writeValue(write, object);
         } catch (JsonGenerationException e) {
-            throw new RuntimeException("JsonGenerationException when serialize object to json" , e);
+            throw new RuntimeException("JsonGenerationException when serialize object to json", e);
         } catch (JsonMappingException e) {
-            throw new RuntimeException("JsonMappingException when serialize object to json" , e);
+            throw new RuntimeException("JsonMappingException when serialize object to json", e);
         } catch (IOException e) {
-            throw new RuntimeException("IOException when serialize object to json" , e);
+            throw new RuntimeException("IOException when serialize object to json", e);
         }
         return write.toString();
     }
@@ -123,11 +123,11 @@ public class Jacksons {
         try {
             object = mapper.readValue(json, TypeFactory.rawClass(clazz));
         } catch (JsonParseException e) {
-            throw new RuntimeException("JsonParseException when serialize object to json" , e);
+            throw new RuntimeException("JsonParseException when serialize object to json", e);
         } catch (JsonMappingException e) {
-            throw new RuntimeException("JsonMappingException when serialize object to json" , e);
+            throw new RuntimeException("JsonMappingException when serialize object to json", e);
         } catch (IOException e) {
-            throw new RuntimeException("IOException when serialize object to json" , e);
+            throw new RuntimeException("IOException when serialize object to json", e);
         }
 
         return (T) object;

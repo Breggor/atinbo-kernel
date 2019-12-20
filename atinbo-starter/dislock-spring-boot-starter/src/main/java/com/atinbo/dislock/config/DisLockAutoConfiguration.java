@@ -49,7 +49,7 @@ public class DisLockAutoConfiguration {
      *
      * @return RedissonClient
      */
-    @Bean(name = "disLockRedissonClient" , destroyMethod = "shutdown")
+    @Bean(name = "disLockRedissonClient", destroyMethod = "shutdown")
     public RedissonClient redissonClient() throws URISyntaxException {
         Config config = new Config();
         ServerPattern serverPattern = ServerPatternFactory.getServerPattern(disLockProperties.getPattern());
@@ -132,7 +132,7 @@ public class DisLockAutoConfiguration {
      */
     private void initSingleConfig(SingleServerConfig singleServerConfig) throws URISyntaxException {
         DisLockProperties.SingleConfig singleConfig = disLockProperties.getSingleServer();
-        singleServerConfig.setAddress(String.format("%s%s%s%s" , DisLockConsts.REDIS_URL_PREFIX, singleConfig.getAddress(), DisLockConsts.COLON, singleConfig.getPort()));
+        singleServerConfig.setAddress(String.format("%s%s%s%s", DisLockConsts.REDIS_URL_PREFIX, singleConfig.getAddress(), DisLockConsts.COLON, singleConfig.getPort()));
         singleServerConfig.setClientName(disLockProperties.getClientName());
         singleServerConfig.setConnectionMinimumIdleSize(singleConfig.getConnMinIdleSize());
         singleServerConfig.setConnectionPoolSize(singleConfig.getConnPoolSize());
@@ -163,7 +163,7 @@ public class DisLockAutoConfiguration {
         DisLockProperties.ClusterConfig clusterConfig = disLockProperties.getClusterServer();
         String[] addressArr = clusterConfig.getNodeAddresses().split(DisLockConsts.COMMA);
         Arrays.asList(addressArr).forEach(
-                address -> clusterServerConfig.addNodeAddress(String.format("%s%s" , DisLockConsts.REDIS_URL_PREFIX, address))
+                address -> clusterServerConfig.addNodeAddress(String.format("%s%s", DisLockConsts.REDIS_URL_PREFIX, address))
         );
         clusterServerConfig.setScanInterval(clusterConfig.getScanInterval());
 
@@ -205,7 +205,7 @@ public class DisLockAutoConfiguration {
         DisLockProperties.SentinelConfig sentinelConfig = disLockProperties.getSentinelServer();
         String[] addressArr = sentinelConfig.getSentinelAddresses().split(DisLockConsts.COMMA);
         Arrays.asList(addressArr).forEach(
-                address -> sentinelServersConfig.addSentinelAddress(String.format("%s%s" , DisLockConsts.REDIS_URL_PREFIX, address))
+                address -> sentinelServersConfig.addSentinelAddress(String.format("%s%s", DisLockConsts.REDIS_URL_PREFIX, address))
         );
 
         ReadMode readMode = getReadMode(sentinelConfig.getReadMode());
@@ -250,7 +250,7 @@ public class DisLockAutoConfiguration {
 
         String[] addressArr = replicatedConfig.getNodeAddresses().split(DisLockConsts.COMMA);
         Arrays.asList(addressArr).forEach(
-                address -> replicatedServersConfig.addNodeAddress(String.format("%s%s" , DisLockConsts.REDIS_URL_PREFIX, address))
+                address -> replicatedServersConfig.addNodeAddress(String.format("%s%s", DisLockConsts.REDIS_URL_PREFIX, address))
         );
         ReadMode readMode = getReadMode(replicatedConfig.getReadMode());
         ValidateUtil.notNull(readMode, UnknownReadModeException.class, "未知读取操作的负载均衡模式类型");
@@ -292,11 +292,11 @@ public class DisLockAutoConfiguration {
      */
     private void initMasterSlaveConfig(MasterSlaveServersConfig masterSlaveServersConfig) throws URISyntaxException {
         DisLockProperties.MasterSlaveConfig masterSlaveConfig = disLockProperties.getMasterSlaveServer();
-        masterSlaveServersConfig.setMasterAddress(String.format("%s%s" , DisLockConsts.REDIS_URL_PREFIX, masterSlaveConfig.getMasterAddress()));
+        masterSlaveServersConfig.setMasterAddress(String.format("%s%s", DisLockConsts.REDIS_URL_PREFIX, masterSlaveConfig.getMasterAddress()));
         String[] addressArr = masterSlaveConfig.getSlaveAddresses().split(DisLockConsts.COMMA);
 
         Arrays.asList(addressArr).forEach(address -> {
-            masterSlaveServersConfig.addSlaveAddress(String.format("%s%s" , DisLockConsts.REDIS_URL_PREFIX, address));
+            masterSlaveServersConfig.addSlaveAddress(String.format("%s%s", DisLockConsts.REDIS_URL_PREFIX, address));
         });
 
         ReadMode readMode = getReadMode(masterSlaveConfig.getReadMode());

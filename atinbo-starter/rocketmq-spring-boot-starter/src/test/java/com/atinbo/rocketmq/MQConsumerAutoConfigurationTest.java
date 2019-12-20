@@ -97,7 +97,7 @@ public class MQConsumerAutoConfigurationTest {
     }
 
     @Component
-    @MQConsumer(consumerGroup = "test_consumer_group" , topic = "test_topic")
+    @MQConsumer(consumerGroup = "test_consumer_group", topic = "test_topic")
     static class TestConsumer extends AbstractMQPushConsumer<String> {
         @Override
         public boolean process(String message, Map<String, Object> extMap) {
@@ -106,7 +106,7 @@ public class MQConsumerAutoConfigurationTest {
     }
 
     @Component
-    @MQConsumer(consumerGroup = "test_consumer_group" , topic = "test_topic" , consumeMode = MessageExtConst.CONSUME_MODE_ORDERLY)
+    @MQConsumer(consumerGroup = "test_consumer_group", topic = "test_topic", consumeMode = MessageExtConst.CONSUME_MODE_ORDERLY)
     static class TestConsumerOrderly extends AbstractMQPushConsumer<String> {
         @Override
         public boolean process(String message, Map<String, Object> extMap) {
@@ -115,7 +115,7 @@ public class MQConsumerAutoConfigurationTest {
     }
 
     @Component
-    @MQConsumer(consumerGroup = "test_consumer_group" , topic = "test_topic" , consumeMode = "TYPE_MESSAGE_MODE")
+    @MQConsumer(consumerGroup = "test_consumer_group", topic = "test_topic", consumeMode = "TYPE_MESSAGE_MODE")
     static class TestConsumerErrorCM extends AbstractMQPushConsumer<String> {
         @Override
         public boolean process(String message, Map<String, Object> extMap) {
@@ -124,7 +124,7 @@ public class MQConsumerAutoConfigurationTest {
     }
 
     @Component
-    @MQConsumer(consumerGroup = "test_consumer_group" , topic = "test_topic")
+    @MQConsumer(consumerGroup = "test_consumer_group", topic = "test_topic")
     static class TestConsumerMissingParent {
     }
 

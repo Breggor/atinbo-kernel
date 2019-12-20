@@ -37,10 +37,10 @@ public abstract class AbstractMQConsumer<T> {
                 T data = gson.fromJson(new String(message.getBody()), type);
                 return data;
             } catch (JsonSyntaxException e) {
-                log.error("parse message json fail : {}" , e.getMessage());
+                log.error("parse message json fail : {}", e.getMessage());
             }
         } else {
-            log.warn("Parse msg error. {}" , message);
+            log.warn("Parse msg error. {}", message);
         }
         return null;
     }

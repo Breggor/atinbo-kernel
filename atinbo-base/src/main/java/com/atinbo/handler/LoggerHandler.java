@@ -36,10 +36,10 @@ public class LoggerHandler extends Handler {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         } finally {
-            log.info("<= <<Response-Http-Status>> : {}" , response.getStatus());
-            log.info("<= <<Response-Content-Type>> : {}" , LogUtils.getResponseData().length() > 0 ? "application/json" : "NULL");
+            log.info("<= <<Response-Http-Status>> : {}", response.getStatus());
+            log.info("<= <<Response-Content-Type>> : {}", LogUtils.getResponseData().length() > 0 ? "application/json" : "NULL");
             this.printResponseLog();
-            log.info("<= <<Time-Taken>> : {}" , System.currentTimeMillis() - startTime);
+            log.info("<= <<Time-Taken>> : {}", System.currentTimeMillis() - startTime);
             log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
             LogUtils.release();
         }
@@ -66,7 +66,7 @@ public class LoggerHandler extends Handler {
             System.out.println(LogUtils.getResponseData());
             System.out.println("--------------------------------------------------------");
         } else {
-            log.info("<= {}" , LogUtils.getResponseData());
+            log.info("<= {}", LogUtils.getResponseData());
         }
 
     }
@@ -78,7 +78,7 @@ public class LoggerHandler extends Handler {
             requestURI = requestURI + "?" + request.getQueryString();
         }
 
-        log.info("=> <<{}>> {}" , request.getMethod(), requestURI);
+        log.info("=> <<{}>> {}", request.getMethod(), requestURI);
         if (request.getContentType() != null) {
             if (request.getContentType().contains("application/x-www-form-urlencoded")) {
                 Map<String, String[]> parameterMap = request.getParameterMap();
@@ -92,13 +92,13 @@ public class LoggerHandler extends Handler {
             }
 
             if (request.getContentType().contains("application/json") || request.getContentType().contains("application/xml")) {
-                String requestBody = CommonUtils.readInputStreamToString(request.getInputStream()).replace("\r" , "").replace("\n" , "");
+                String requestBody = CommonUtils.readInputStreamToString(request.getInputStream()).replace("\r", "").replace("\n", "");
                 stringBuilder.append(requestBody);
             }
 
             if (!AppConfig.APP_ENV.getDebug()) {
-                log.info("=> <<Request-Content-Type>> : {}" , request.getContentType());
-                log.info("=> {}" , stringBuilder.toString());
+                log.info("=> <<Request-Content-Type>> : {}", request.getContentType());
+                log.info("=> {}", stringBuilder.toString());
             } else {
                 StringBuilder sb = new StringBuilder();
                 sb.append("----- Request Content-Type : ").append(request.getContentType()).append(" ---");

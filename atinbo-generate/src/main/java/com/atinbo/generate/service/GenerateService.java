@@ -1,9 +1,7 @@
 package com.atinbo.generate.service;
 
 import com.atinbo.generate.model.ClassInfo;
-import freemarker.template.TemplateException;
 
-import java.io.IOException;
 import java.util.List;
 
 /**

@@ -49,7 +49,7 @@ public abstract class KeyStrategy {
      * @param field
      */
     protected void checkLockKey(Object fieldVal, String field) {
-        Objects.requireNonNull(fieldVal, () -> MessageFormat.format("[分布式锁] - LockKey={0},不能为空" , field));
+        Objects.requireNonNull(fieldVal, () -> MessageFormat.format("[分布式锁] - LockKey={0},不能为空", field));
     }
 
     /**

@@ -42,7 +42,6 @@ public class GlobalExceptionHandler {
     }
 
 
-
     /**
      * 请求没有数据异常拦截
      *

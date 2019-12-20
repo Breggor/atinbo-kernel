@@ -6,15 +6,13 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 public class GatewayMediaFetchHandler extends Handler {
 
-    public static final String GW_REQUEST_ID = "X-GW-REQUEST-ID" ;
-    public static final String GW_SESSION_USER = "X-GW-SESSION-USER" ;
-    public static final String GW_SESSION_USER_ENCODED = "X-GW-SESSION-USER-ENCODED" ;
+    public static final String GW_REQUEST_ID = "X-GW-REQUEST-ID";
+    public static final String GW_SESSION_USER = "X-GW-SESSION-USER";
+    public static final String GW_SESSION_USER_ENCODED = "X-GW-SESSION-USER-ENCODED";
 
     public GatewayMediaFetchHandler() {
     }
@@ -24,7 +22,7 @@ public class GatewayMediaFetchHandler extends Handler {
         String reqId = httpServletRequest.getHeader(GW_REQUEST_ID);
         String user = httpServletRequest.getHeader("X-GW-SESSION-USER");
         String userEnc = httpServletRequest.getHeader("X-GW-SESSION-USER-ENCODED");
-        log.debug("request header param, {}:{}, {}:{}, {}:{}" , GW_REQUEST_ID, reqId, GW_SESSION_USER, user, GW_SESSION_USER_ENCODED, userEnc);
+        log.debug("request header param, {}:{}, {}:{}, {}:{}", GW_REQUEST_ID, reqId, GW_SESSION_USER, user, GW_SESSION_USER_ENCODED, userEnc);
 
         if (!StringUtils.isEmpty(reqId)) {
             ThreadLocalContext.set(GW_REQUEST_ID, reqId);

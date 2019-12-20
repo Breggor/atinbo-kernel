@@ -604,7 +604,7 @@ public class FuncUtil {
      * @return 结果
      */
     public static Integer[] toIntArray(String str) {
-        return toIntArray("," , str);
+        return toIntArray(",", str);
     }
 
     /**
@@ -655,7 +655,7 @@ public class FuncUtil {
      * @return 结果
      */
     public static Long[] toLongArray(String str) {
-        return toLongArray("," , str);
+        return toLongArray(",", str);
     }
 
     /**
@@ -706,7 +706,7 @@ public class FuncUtil {
      * @return 结果
      */
     public static String[] toStrArray(String str) {
-        return toStrArray("," , str);
+        return toStrArray(",", str);
     }
 
     /**

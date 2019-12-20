@@ -46,7 +46,7 @@ public class ProducerApplicationDemo {
     }
 
 
-    @MQConsumer(topic = "${helloworld.topic}" , consumerGroup = "${helloworld.consumer.group}")
+    @MQConsumer(topic = "${helloworld.topic}", consumerGroup = "${helloworld.consumer.group}")
     class CustomConsumer extends AbstractMQPushConsumer<HelloWorldMsg> {
 
         @Override

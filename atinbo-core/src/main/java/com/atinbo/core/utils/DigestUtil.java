@@ -36,19 +36,19 @@ public class DigestUtil extends org.springframework.util.DigestUtils {
     }
 
     public static String sha1(String srcStr) {
-        return hash("SHA-1" , srcStr);
+        return hash("SHA-1", srcStr);
     }
 
     public static String sha256(String srcStr) {
-        return hash("SHA-256" , srcStr);
+        return hash("SHA-256", srcStr);
     }
 
     public static String sha384(String srcStr) {
-        return hash("SHA-384" , srcStr);
+        return hash("SHA-384", srcStr);
     }
 
     public static String sha512(String srcStr) {
-        return hash("SHA-512" , srcStr);
+        return hash("SHA-512", srcStr);
     }
 
     public static String hash(String algorithm, String srcStr) {

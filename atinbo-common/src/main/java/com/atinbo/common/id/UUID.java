@@ -30,7 +30,7 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
     private UUID(byte[] data) {
         long msb = 0;
         long lsb = 0;
-        assert data.length == 16 : "data must be 16 bytes in length" ;
+        assert data.length == 16 : "data must be 16 bytes in length";
         for (int i = 0; i < 8; i++) {
             msb = (msb << 8) | (data[i] & 0xff);
         }

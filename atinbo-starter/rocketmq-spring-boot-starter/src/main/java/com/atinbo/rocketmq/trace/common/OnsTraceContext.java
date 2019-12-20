@@ -19,11 +19,11 @@ public class OnsTraceContext implements Comparable<OnsTraceContext> {
     /**
      * Region信息
      */
-    private String regionId = "" ;
+    private String regionId = "";
     /**
      * 发送组或者消费组名
      */
-    private String groupName = "" ;
+    private String groupName = "";
     /**
      * 耗时，单位ms
      */
@@ -35,7 +35,7 @@ public class OnsTraceContext implements Comparable<OnsTraceContext> {
     /**
      * UUID,用于匹配消费前和消费后的数据
      */
-    private String requestId = UUID.randomUUID().toString().replaceAll("-" , "");
+    private String requestId = UUID.randomUUID().toString().replaceAll("-", "");
     /**
      * 针对每条消息的轨迹数据
      */

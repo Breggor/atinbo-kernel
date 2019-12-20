@@ -28,15 +28,15 @@ import java.util.Objects;
  */
 public final class ClassUtils {
 
-    private static final String PROXY_CLASS_SEPARATOR = "$$" ;
+    private static final String PROXY_CLASS_SEPARATOR = "$$";
 
-    private static final String CLASSPATH_URL_PREFIX = "classpath:" ;
+    private static final String CLASSPATH_URL_PREFIX = "classpath:";
 
-    private static final String PATH_SEPARATOR = "/" ;
+    private static final String PATH_SEPARATOR = "/";
 
-    private static final String PACKAGE_SEPARATOR = "." ;
+    private static final String PACKAGE_SEPARATOR = ".";
 
-    private static final String CLASS_FILE_SUFFIX = ".class" ;
+    private static final String CLASS_FILE_SUFFIX = ".class";
 
     private ClassUtils() {
     }

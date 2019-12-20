@@ -12,22 +12,22 @@ public class RegexUtil {
     /**
      * 用户名
      */
-    public static final String USER_NAME = "^[a-zA-Z\\u4E00-\\u9FA5][a-zA-Z0-9_\\u4E00-\\u9FA5]{1,11}$" ;
+    public static final String USER_NAME = "^[a-zA-Z\\u4E00-\\u9FA5][a-zA-Z0-9_\\u4E00-\\u9FA5]{1,11}$";
 
     /**
      * 密码
      */
-    public static final String USER_PASSWORD = "^.{6,32}$" ;
+    public static final String USER_PASSWORD = "^.{6,32}$";
 
     /**
      * 邮箱
      */
-    public static final String EMAIL = "^\\w+([-+.]*\\w+)*@([\\da-z](-[\\da-z])?)+(\\.{1,2}[a-z]+)+$" ;
+    public static final String EMAIL = "^\\w+([-+.]*\\w+)*@([\\da-z](-[\\da-z])?)+(\\.{1,2}[a-z]+)+$";
 
     /**
      * 手机号
      */
-    public static final String PHONE = "^1[3456789]\\d{9}$" ;
+    public static final String PHONE = "^1[3456789]\\d{9}$";
 
     /**
      * 手机号或者邮箱
@@ -37,17 +37,17 @@ public class RegexUtil {
     /**
      * URL路径
      */
-    public static final String URL = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})(:[\\d]+)?([\\/\\w\\.-]*)*\\/?$" ;
+    public static final String URL = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})(:[\\d]+)?([\\/\\w\\.-]*)*\\/?$";
 
     /**
      * 身份证校验，初级校验，具体规则有一套算法
      */
-    public static final String ID_CARD = "^\\d{15}$|^\\d{17}([0-9]|X)$" ;
+    public static final String ID_CARD = "^\\d{15}$|^\\d{17}([0-9]|X)$";
 
     /**
      * 域名校验
      */
-    public static final String DOMAIN = "^[0-9a-zA-Z]+[0-9a-zA-Z\\.-]*\\.[a-zA-Z]{2,4}$" ;
+    public static final String DOMAIN = "^[0-9a-zA-Z]+[0-9a-zA-Z\\.-]*\\.[a-zA-Z]{2,4}$";
 
     /**
      * 编译传入正则表达式和字符串去匹配,忽略大小写

@@ -18,7 +18,7 @@ public abstract class ThreadLocalContext {
             entry.put(key, value);
             GLOBAL_THREAD_LOCAL.set(entry);
         } else {
-            throw new IllegalArgumentException(String.format("ThreadLocal argument empty for set , key : {%s}, value : {%s}" , key, value));
+            throw new IllegalArgumentException(String.format("ThreadLocal argument empty for set , key : {%s}, value : {%s}", key, value));
         }
     }
 
@@ -28,7 +28,7 @@ public abstract class ThreadLocalContext {
 
     public static void remove(String key) {
         if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException(String.format("ThreadLocal argument empty for remove method , key : {%s}, value : {%s}" , key));
+            throw new IllegalArgumentException(String.format("ThreadLocal argument empty for remove method , key : {%s}, value : {%s}", key));
         } else {
             Map<String, Object> entry = GLOBAL_THREAD_LOCAL.get();
             if (entry != null) {
@@ -46,7 +46,7 @@ public abstract class ThreadLocalContext {
     public static Object get(String key) {
         Object result = null;
         if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException(String.format("ThreadLocal argument empty for remove method , key : {%s}, value : {%s}" , key));
+            throw new IllegalArgumentException(String.format("ThreadLocal argument empty for remove method , key : {%s}, value : {%s}", key));
         } else {
             Map<String, Object> entry = (Map) GLOBAL_THREAD_LOCAL.get();
             if (entry != null && entry.containsKey(key)) {

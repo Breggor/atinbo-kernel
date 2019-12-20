@@ -15,7 +15,7 @@ import static com.atinbo.wx.mp.WxMpProperties.PREFIX;
 @Data
 @ConfigurationProperties(PREFIX)
 public class WxMpProperties {
-    public static final String PREFIX = "wx.mp" ;
+    public static final String PREFIX = "wx.mp";
 
     /**
      * 设置微信公众号的appid.

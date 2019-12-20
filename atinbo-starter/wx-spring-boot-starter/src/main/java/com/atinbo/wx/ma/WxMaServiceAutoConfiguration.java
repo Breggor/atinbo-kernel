@@ -44,7 +44,7 @@ public class WxMaServiceAutoConfiguration {
         StorageType type = properties.getType();
 
         if (type == StorageType.redis) {
-            if(redisProperties == null){
+            if (redisProperties == null) {
                 throw new RuntimeException("无法获取redis相关配置");
             }
             return wxMaRedisConfig(redisProperties);

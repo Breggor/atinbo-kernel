@@ -8,15 +8,15 @@ public class RequestThread {
 
     private static final ThreadLocal<GenerateConfig> THREAD_LOCAL = new ThreadLocal<>();
 
-    public static void setConfig(GenerateConfig config){
-        THREAD_LOCAL.set(config);
-    }
-
     public static void clean() {
         THREAD_LOCAL.remove();
     }
 
-    public static GenerateConfig getConfig(){
+    public static GenerateConfig getConfig() {
         return THREAD_LOCAL.get();
+    }
+
+    public static void setConfig(GenerateConfig config) {
+        THREAD_LOCAL.set(config);
     }
 }

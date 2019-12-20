@@ -6,22 +6,22 @@ package com.atinbo.rocketmq.trace.common;
  */
 public class OnsTraceConstants {
     // 实例名称
-    public static final String InstanceName = "InstanceName" ;
+    public static final String InstanceName = "InstanceName";
     // 缓冲区队列大小
-    public static final String AsyncBufferSize = "AsyncBufferSize" ;
+    public static final String AsyncBufferSize = "AsyncBufferSize";
     // 最大Batch
-    public static final String MaxBatchNum = "MaxBatchNum" ;
-    public static final String WakeUpNum = "WakeUpNum" ;
+    public static final String MaxBatchNum = "MaxBatchNum";
+    public static final String WakeUpNum = "WakeUpNum";
     // Batch消息最大大小
-    public static final String MaxMsgSize = "MaxMsgSize" ;
+    public static final String MaxMsgSize = "MaxMsgSize";
     // producer名称
-    public static final String groupName = "_INNER_TRACE_PRODUCER" ;
+    public static final String groupName = "_INNER_TRACE_PRODUCER";
     // topic
-    public static final String traceTopic = "MQ_TRACE_DATA" ;
+    public static final String traceTopic = "MQ_TRACE_DATA";
     // 外部直传Nameserver的地址
-    public static String NAMESRV_ADDR = "NAMESRV_ADDR" ;
+    public static String NAMESRV_ADDR = "NAMESRV_ADDR";
     // 外部传入地址服务器的Url，获取NameServer地址
-    public static String ADDRSRV_URL = "ADDRSRV_URL" ;
+    public static String ADDRSRV_URL = "ADDRSRV_URL";
     public static char CONTENT_SPLITOR = (char) 1;
     public static char FIELD_SPLITOR = (char) 2;
 }

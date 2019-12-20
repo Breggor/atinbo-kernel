@@ -9,11 +9,11 @@ import org.apache.rocketmq.common.message.MessageType;
  */
 public class OnsTraceBean {
     private static String LOCAL_ADDRESS = MixUtils.getLocalAddress();
-    private String topic = "" ;
-    private String msgId = "" ;
-    private String offsetMsgId = "" ;
-    private String tags = "" ;
-    private String keys = "" ;
+    private String topic = "";
+    private String msgId = "";
+    private String offsetMsgId = "";
+    private String tags = "";
+    private String keys = "";
     private String storeHost = LOCAL_ADDRESS;
     private String clientHost = LOCAL_ADDRESS;
     private long storeTime;

@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @ConfigurationProperties(prefix = SwaggerProperties.SWAGGER_PREFIX)
 public class SwaggerProperties {
-    public static final String SWAGGER_PREFIX = "swagger" ;
+    public static final String SWAGGER_PREFIX = "swagger";
 
     /**
      * 标题

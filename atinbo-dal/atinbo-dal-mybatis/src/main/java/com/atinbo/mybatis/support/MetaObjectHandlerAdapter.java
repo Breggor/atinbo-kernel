@@ -6,7 +6,6 @@ import com.atinbo.mybatis.base.BaseEntity;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
@@ -32,11 +31,11 @@ public class MetaObjectHandlerAdapter implements MetaObjectHandler {
             Long operatorId = Converts.toLong(userId, 0L);
 
             LocalDateTime now = LocalDateTime.now();
-            setInsertFieldValByName("createBy" , operatorId, metaObject);
-            setInsertFieldValByName("updateBy" , operatorId, metaObject);
-            setInsertFieldValByName("createTime" , now, metaObject);
-            setInsertFieldValByName("updateTime" , now, metaObject);
-            setInsertFieldValByName("isDeleted" , BaseEntity.UN_DELETED, metaObject);
+            setInsertFieldValByName("createBy", operatorId, metaObject);
+            setInsertFieldValByName("updateBy", operatorId, metaObject);
+            setInsertFieldValByName("createTime", now, metaObject);
+            setInsertFieldValByName("updateTime", now, metaObject);
+            setInsertFieldValByName("isDeleted", BaseEntity.UN_DELETED, metaObject);
         }
     }
 
@@ -51,8 +50,8 @@ public class MetaObjectHandlerAdapter implements MetaObjectHandler {
             Object userId = ThreadLocalContext.get(KEY_LOGIN_USER_ID);
             Long operatorId = Converts.toLong(userId, 0L);
 
-            setUpdateFieldValByName("updateBy" , operatorId, metaObject);
-            setUpdateFieldValByName("updateTime" , LocalDateTime.now(), metaObject);
+            setUpdateFieldValByName("updateBy", operatorId, metaObject);
+            setUpdateFieldValByName("updateTime", LocalDateTime.now(), metaObject);
         }
     }
 

@@ -49,7 +49,7 @@ public class KeyInfo {
 
     @Override
     public String toString() {
-        return new StringJoiner(", " , KeyInfo.class.getSimpleName() + "[" , "]")
+        return new StringJoiner(", ", KeyInfo.class.getSimpleName() + "[", "]")
                 .add("keys=" + keys)
                 .add("leaseTime=" + leaseTime)
                 .add("waitTime=" + waitTime)

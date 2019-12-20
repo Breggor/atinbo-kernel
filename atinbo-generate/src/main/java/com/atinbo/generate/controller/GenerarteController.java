@@ -1,10 +1,8 @@
 package com.atinbo.generate.controller;
 
-import com.atinbo.core.utils.BeanUtil;
 import com.atinbo.generate.config.GenerateConfig;
 import com.atinbo.generate.config.RequestThread;
 import com.atinbo.generate.model.ClassInfo;
-import com.atinbo.generate.model.GenForm;
 import com.atinbo.generate.service.GenerateService;
 import com.atinbo.model.Outcome;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +33,7 @@ public class GenerarteController {
     private GenerateService generateService;
 
     @GetMapping("/gen/index")
-    public Map<String,Object> index() {
+    public Map<String, Object> index() {
         GenerateConfig config = GenerateConfig.defaultConfig();
         config.setModuleName(applicationName);
         RequestThread.setConfig(config);
@@ -47,8 +45,8 @@ public class GenerarteController {
     }
 
     @PostMapping("/gen")
-    public Outcome gen(String tableName,GenerateConfig config) {
-        if(StringUtils.isBlank(config.getOutPath())){
+    public Outcome gen(String tableName, GenerateConfig config) {
+        if (StringUtils.isBlank(config.getOutPath())) {
             config.setOutPath(GenerateConfig.DEFAULT_OUT_PATH);
         }
         RequestThread.setConfig(config);
@@ -59,12 +57,12 @@ public class GenerarteController {
             for (String table : tables) {
                 try {
                     boolean flag = generateService.generateClass(tableName);
-                    if(!flag){
+                    if (!flag) {
                         error.add(table);
                         continue;
                     }
                 } catch (Exception e) {
-                    log.error("gen table:{} error:" , table, e);
+                    log.error("gen table:{} error:", table, e);
                     error.add(table);
                     continue;
                 }
@@ -74,18 +72,18 @@ public class GenerarteController {
             for (ClassInfo classInfo : classInfoList) {
                 try {
                     boolean flag = generateService.generateClass(classInfo.getTableName());
-                    if(!flag){
+                    if (!flag) {
                         error.add(classInfo.getTableName());
                         continue;
                     }
                 } catch (Exception e) {
-                    log.error("gen all table:{} error:" , classInfo.getTableName(), e);
+                    log.error("gen all table:{} error:", classInfo.getTableName(), e);
                     error.add(classInfo.getTableName());
                     continue;
                 }
             }
         }
-        return error.isEmpty() ? Outcome.success() : Outcome.failure(String.join("," ,error) + "生成失败");
+        return error.isEmpty() ? Outcome.success() : Outcome.failure(String.join(",", error) + "生成失败");
     }
 
 }

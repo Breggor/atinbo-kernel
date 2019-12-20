@@ -22,7 +22,7 @@ public abstract class StartupHelper {
                             "Local: \t\thttp://localhost:{}\n\t" +
                             "External: \thttp://{}:{}\n\t" +
                             "Doc: \thttp://{}:{}/doc.html\n" +
-                            "----------------------------------------------------------" ,
+                            "----------------------------------------------------------",
                     env.getProperty("spring.application.name"),
                     env.getProperty("server.port"),
                     InetAddress.getLocalHost().getHostAddress(),

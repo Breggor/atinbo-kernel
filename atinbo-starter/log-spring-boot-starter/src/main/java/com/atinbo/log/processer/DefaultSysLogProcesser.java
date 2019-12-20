@@ -8,6 +8,6 @@ public class DefaultSysLogProcesser implements ISysLogProcesser {
 
     @Override
     public void saveSysLog(SysLogSource logSource) {
-        log.info("#DefaultSysLogProcesser# --- {}" , logSource);
+        log.info("#DefaultSysLogProcesser# --- {}", logSource);
     }
 }

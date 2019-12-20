@@ -31,7 +31,7 @@ public final class Strings {
     /**
      * 空字符串
      */
-    private static final String NULLSTR = "" ;
+    private static final String NULLSTR = "";
     /**
      * 下划线
      */
@@ -103,7 +103,7 @@ public final class Strings {
         return Normalizer.normalize(value, Normalizer.Form.NFD)
                 .replace('\u0141', 'L')
                 .replace('\u0142', 'l')
-                .replaceAll("\\p{InCombiningDiacriticalMarks}+" , "");
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     }
 
     /**
@@ -167,7 +167,7 @@ public final class Strings {
             return null;
         }
         return Stream.of(text.toString().split("\n"))
-                .map(line -> line.replaceFirst("^\\s+\\|" , ""))
+                .map(line -> line.replaceFirst("^\\s+\\|", ""))
                 .collect(Collectors.joining("\n"));
     }
 

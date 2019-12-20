@@ -22,38 +22,38 @@ public class GenerateUtil {
     private static Map<String, String> TYPE_MAPPING = new HashMap<>();
 
     static {
-        TYPE_MAPPING.put("INT" , "Integer");
-        TYPE_MAPPING.put("TINYINT" , "Integer");
-        TYPE_MAPPING.put("SMALLINT" , "Integer");
-        TYPE_MAPPING.put("BIGINT" , "Long");
-        TYPE_MAPPING.put("FLOAT" , "Float");
-        TYPE_MAPPING.put("DOUBLE" , "Double");
-        TYPE_MAPPING.put("DATETIME" , "LocalDateTime");
-        TYPE_MAPPING.put("TIMESTAMP" , "LocalDateTime");
-        TYPE_MAPPING.put("BIT" , "Boolean");
-        TYPE_MAPPING.put("DATE" , "LocalDate");
-        TYPE_MAPPING.put("TIME" , "LocalTime");
-        TYPE_MAPPING.put("VARCHAR" , "String");
-        TYPE_MAPPING.put("TEXT" , "String");
-        TYPE_MAPPING.put("MEDIUMTEXT" , "String");
-        TYPE_MAPPING.put("LONGTEXT" , "String");
-        TYPE_MAPPING.put("CHAR" , "String");
-        TYPE_MAPPING.put("BLOB" , "String");
-        TYPE_MAPPING.put("DECIMAL" , "BigDecimal");
+        TYPE_MAPPING.put("INT", "Integer");
+        TYPE_MAPPING.put("TINYINT", "Integer");
+        TYPE_MAPPING.put("SMALLINT", "Integer");
+        TYPE_MAPPING.put("BIGINT", "Long");
+        TYPE_MAPPING.put("FLOAT", "Float");
+        TYPE_MAPPING.put("DOUBLE", "Double");
+        TYPE_MAPPING.put("DATETIME", "LocalDateTime");
+        TYPE_MAPPING.put("TIMESTAMP", "LocalDateTime");
+        TYPE_MAPPING.put("BIT", "Boolean");
+        TYPE_MAPPING.put("DATE", "LocalDate");
+        TYPE_MAPPING.put("TIME", "LocalTime");
+        TYPE_MAPPING.put("VARCHAR", "String");
+        TYPE_MAPPING.put("TEXT", "String");
+        TYPE_MAPPING.put("MEDIUMTEXT", "String");
+        TYPE_MAPPING.put("LONGTEXT", "String");
+        TYPE_MAPPING.put("CHAR", "String");
+        TYPE_MAPPING.put("BLOB", "String");
+        TYPE_MAPPING.put("DECIMAL", "BigDecimal");
     }
 
     public static String getJavaClass(String dbType) {
         if (StringUtils.isNotBlank(dbType) && TYPE_MAPPING.containsKey(dbType.toUpperCase())) {
             return TYPE_MAPPING.get(dbType.toUpperCase());
         }
-        throw new RuntimeException(String.format("cannot found javaType mapping for dbType: %s ,please add to GenerateUtil.TYPE_MAPPING" , dbType));
+        throw new RuntimeException(String.format("cannot found javaType mapping for dbType: %s ,please add to GenerateUtil.TYPE_MAPPING", dbType));
     }
 
     public static String getPackageName(String packageName, String moduleName) {
         if (packageName == null || moduleName == null || moduleName.trim().length() == 0 || packageName.endsWith(moduleName)) {
             return packageName;
         }
-        return packageName.concat(".").concat(moduleName.replace("-" , "."));
+        return packageName.concat(".").concat(moduleName.replace("-", "."));
     }
 
     /**
@@ -64,7 +64,7 @@ public class GenerateUtil {
      * @return
      */
     public static String genFilePath(String outPath, String packageName) {
-        return outPath + File.separator + packageName.replace("." , File.separator);
+        return outPath + File.separator + packageName.replace(".", File.separator);
     }
 
     /**

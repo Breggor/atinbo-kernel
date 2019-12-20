@@ -22,6 +22,6 @@ public class MysqlKeyGenerator implements IKeyGenerator {
 
     @Override
     public String executeSql(String incrementerName) {
-        return "select next_val('" + incrementerName + "')" ;
+        return "select next_val('" + incrementerName + "')";
     }
 }

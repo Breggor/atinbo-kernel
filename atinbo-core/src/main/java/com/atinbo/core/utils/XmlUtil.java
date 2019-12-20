@@ -82,23 +82,23 @@ public class XmlUtil {
     private static void preventXXE(DocumentBuilderFactory dbf) throws ParserConfigurationException {
         // This is the PRIMARY defense. If DTDs (doctypes) are disallowed, almost all XML entity attacks are prevented
         // Xerces 2 only - http://xerces.apache.org/xerces2-j/features.html#disallow-doctype-decl
-        dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl" , true);
+        dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 
         // If you can't completely disable DTDs, then at least do the following:
         // Xerces 1 - http://xerces.apache.org/xerces-j/features.html#external-general-entities
         // Xerces 2 - http://xerces.apache.org/xerces2-j/features.html#external-general-entities
 
         // JDK7+ - http://xml.org/sax/features/external-general-entities
-        dbf.setFeature("http://xml.org/sax/features/external-general-entities" , false);
+        dbf.setFeature("http://xml.org/sax/features/external-general-entities", false);
 
         // Xerces 1 - http://xerces.apache.org/xerces-j/features.html#external-parameter-entities
         // Xerces 2 - http://xerces.apache.org/xerces2-j/features.html#external-parameter-entities
 
         // JDK7+ - http://xml.org/sax/features/external-parameter-entities
-        dbf.setFeature("http://xml.org/sax/features/external-parameter-entities" , false);
+        dbf.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
 
         // Disable external DTDs as well
-        dbf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd" , false);
+        dbf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
 
         // and these as well, per Timothy Morgan's 2014 paper: "XML Schema, DTD, and Entity Attacks"
         dbf.setXIncludeAware(false);

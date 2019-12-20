@@ -16,8 +16,8 @@ import java.io.IOException;
  * @author breggor
  */
 public class ResourceUtil extends org.springframework.util.ResourceUtils {
-    public static final String HTTP_REGEX = "^https?:.+$" ;
-    public static final String FTP_URL_PREFIX = "ftp:" ;
+    public static final String HTTP_REGEX = "^https?:.+$";
+    public static final String FTP_URL_PREFIX = "ftp:";
 
     /**
      * 获取资源

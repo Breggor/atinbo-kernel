@@ -3,7 +3,6 @@ package com.atinbo.security.service;
 import com.atinbo.common.id.IdUtils;
 import com.atinbo.core.utils.AddressUtil;
 import com.atinbo.core.utils.IpUtil;
-
 import com.atinbo.core.utils.WebUtil;
 import com.atinbo.redis.RedisOpsCache;
 import com.atinbo.security.model.LoginUser;

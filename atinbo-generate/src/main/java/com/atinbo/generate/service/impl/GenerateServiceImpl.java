@@ -69,7 +69,7 @@ public class GenerateServiceImpl implements GenerateService {
     }
 
     @Override
-    public boolean generateClass(String tableName){
+    public boolean generateClass(String tableName) {
         AtomicBoolean result = new AtomicBoolean(true);
         GenerateConfig config = RequestThread.getConfig();
         ClassInfo classInfo = findClassInfo(tableName);
@@ -94,6 +94,7 @@ public class GenerateServiceImpl implements GenerateService {
 
     /**
      * 获取表信息
+     *
      * @param tableName
      * @return
      */
@@ -122,7 +123,7 @@ public class GenerateServiceImpl implements GenerateService {
                 fieldInfo.setFieldClass(GenerateUtil.getJavaClass(column.getDataType()));
 
                 if ("PRI".equalsIgnoreCase(column.getColumnKey())) {
-                    if(classInfo.getPrimaryField() != null){
+                    if (classInfo.getPrimaryField() != null) {
                         log.error("当前表【{}】没有已存在主键信息，目前不支持联合主键", tableName);
                         return null;
                     }
@@ -131,7 +132,7 @@ public class GenerateServiceImpl implements GenerateService {
                 }
                 fieldInfoList.add(fieldInfo);
             }
-            if(classInfo.getPrimaryField() == null){
+            if (classInfo.getPrimaryField() == null) {
                 log.error("当前表【{}】没有找到主键信息", tableName);
                 return null;
             }
@@ -142,16 +143,17 @@ public class GenerateServiceImpl implements GenerateService {
 
     /**
      * 代码生成
-     * @param entity 模版枚举
-     * @param prefix 生成路径前缀
+     *
+     * @param entity    模版枚举
+     * @param prefix    生成路径前缀
      * @param classInfo 生成类信息
-     * @param category 数据层模版类型
+     * @param category  数据层模版类型
      */
     private void processFile(TemplatePathEnum entity, String prefix, ClassInfo classInfo, String category) throws IOException, TemplateException {
         GenerateConfig config = RequestThread.getConfig();
         Map<String, Object> params = new HashMap<>();
-        params.put("classInfo" , classInfo);
-        params.put("moduleName" , config.getModuleName());
+        params.put("classInfo", classInfo);
+        params.put("moduleName", config.getModuleName());
 
         StringBuffer modulePath = new StringBuffer();
         if (StringUtils.isNotBlank(config.getModuleName())) {

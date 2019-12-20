@@ -26,6 +26,6 @@ public class SysLogListener {
         if (sysLogProcesser != null) {
             sysLogProcesser.saveSysLog(logSource);
         }
-        log.info("logSource:{}" , logSource);
+        log.info("logSource:{}", logSource);
     }
 }

@@ -17,7 +17,7 @@ import java.util.Random;
  */
 public class VerifyCodes {
     // 使用到Algerian字体，系统里没有的话需要安装字体，字体只显示大写，去掉了1,0,i,o几个容易混淆的字符
-    public static final String VERIFY_CODES = "123456789ABCDEFGHJKLMNPQRSTUVWXYZ" ;
+    public static final String VERIFY_CODES = "123456789ABCDEFGHJKLMNPQRSTUVWXYZ";
 
     private static Random random = new SecureRandom();
 
@@ -108,7 +108,7 @@ public class VerifyCodes {
 
         g2.setColor(getRandColor(100, 160));
         int fontSize = h - 4;
-        Font font = new Font("Algerian" , Font.ITALIC, fontSize);
+        Font font = new Font("Algerian", Font.ITALIC, fontSize);
         g2.setFont(font);
         char[] chars = code.toCharArray();
         for (int i = 0; i < verifySize; i++) {
@@ -120,7 +120,7 @@ public class VerifyCodes {
         }
 
         g2.dispose();
-        ImageIO.write(image, "jpg" , os);
+        ImageIO.write(image, "jpg", os);
     }
 
     private static Color getRandColor(int fc, int bc) {
