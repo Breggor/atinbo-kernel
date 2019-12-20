@@ -51,6 +51,10 @@ public class LoginService {
      * @return 结果
      */
     public String login(String username, String password, String captcha) {
+        if (StringUtil.isBlank(username) || StringUtil.isBlank(password)) {
+            throw new UserException("user.nonempty", null);
+        }
+
         if (validFailedCount(username) > loginFailedCount) {
             if (StringUtil.isBlank(captcha)) {
                 throw new UserException("user.login.failed", new Object[]{loginFailedCount});
