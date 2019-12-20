@@ -12,6 +12,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -73,7 +74,13 @@ public class DynamicCondition {
                     wrapper.isNull(fieldName);
                     break;
                 case IN:
-                    wrapper.in(fieldName, fieldValue);
+                    if(fieldValue instanceof Collection){
+                        wrapper.in(fieldName, (Collection)fieldValue);
+                    }else if(fieldValue.getClass().isArray()){
+                        wrapper.in(fieldName, (Object[]) fieldValue);
+                    }else {
+                        wrapper.in(fieldName, fieldValue);
+                    }
                     break;
                 default:
                     break;
