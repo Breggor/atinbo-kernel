@@ -1,4 +1,4 @@
-package com.atinbo.webmvc.exceptions;
+package com.atinbo.webmvc.exception;
 
 /**
  * 没有请求Id异常

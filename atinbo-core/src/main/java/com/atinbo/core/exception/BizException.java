@@ -2,9 +2,10 @@ package com.atinbo.core.exception;
 
 /**
  * 自定义异常
- *
+ * 请使用 atinbo-webmvc模块里的异常类
  * @author breggor
  */
+@Deprecated
 public class BizException extends BaseException {
     private static final long serialVersionUID = 1L;
 

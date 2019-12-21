@@ -1,15 +1,13 @@
-package com.atinbo.core.exception;
+package com.atinbo.webmvc.exception;
 
 
 import com.atinbo.model.StatusCode;
 
 /**
  * 接口异常
- * 请使用 atinbo-webmvc模块里的异常类
  *
  * @author breggor
  */
-@Deprecated
 public class HttpApiException extends RuntimeException {
 
     protected StatusCode status;

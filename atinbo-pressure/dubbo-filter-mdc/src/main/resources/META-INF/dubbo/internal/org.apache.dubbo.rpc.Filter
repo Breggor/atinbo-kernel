@@ -1,1 +1,1 @@
-mdc=com.atinbo.dubbo.mdc.MdcLoggorFilter
+mdc=com.atinbo.rpc.filter.MdcLoggorFilter

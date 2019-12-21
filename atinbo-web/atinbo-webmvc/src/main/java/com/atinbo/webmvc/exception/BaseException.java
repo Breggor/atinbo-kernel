@@ -1,14 +1,13 @@
-package com.atinbo.core.exception;
+package com.atinbo.webmvc.exception;
 
 import com.atinbo.core.utils.MessageSourceUtil;
 import org.apache.commons.lang3.StringUtils;
 
 /**
  * 基础异常
- * 请使用 atinbo-webmvc模块里的异常类
+ *
  * @author breggor
  */
-@Deprecated
 public class BaseException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 

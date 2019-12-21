@@ -24,7 +24,7 @@
         <module>atinbo-starter</module>
         <module>atinbo-generate</module>
         <module>atinbo-pressure</module>
-    </modules>
+     </modules>
 
     <distributionManagement>
         <repository>

@@ -2,9 +2,11 @@ package com.atinbo.webmvc.handler;
 
 import com.atinbo.core.exception.HttpApiException;
 import com.atinbo.core.exception.RequestParamException;
+import com.atinbo.exception.RpcBizException;
 import com.atinbo.model.ErrorInfo;
 import com.atinbo.model.Outcome;
 import com.atinbo.model.StatusCodeEnum;
+import com.atinbo.webmvc.exception.HttpParamException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -63,8 +65,8 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(RequestParamException.class)
-    public Outcome requestParamException(RequestParamException e) {
+    @ExceptionHandler({HttpParamException.class, RequestParamException.class})
+    public Outcome requestParamException(IllegalArgumentException e) {
         log.error(e.getMessage(), e);
         return Outcome.failure(e.getMessage());
     }
@@ -88,7 +90,7 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-//    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
+    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     public Outcome handleHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException e) {
         log.error(e.getMessage(), e);
@@ -116,8 +118,12 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler
     public Outcome handleException(Exception ex) {
+        String msg = ex.getMessage();
+        if (ex instanceof RpcBizException) {
+            msg = ((RpcBizException) ex).getMessage();
+        }
         log.error(ex.getMessage(), ex);
-        return Outcome.failure(StatusCodeEnum.INTERNAL_SERVER_ERROR, ex.getMessage());
+        return Outcome.failure(StatusCodeEnum.INTERNAL_SERVER_ERROR, msg);
     }
 
 

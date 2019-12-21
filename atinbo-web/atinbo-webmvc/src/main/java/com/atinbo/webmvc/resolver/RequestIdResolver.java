@@ -1,6 +1,6 @@
 package com.atinbo.webmvc.resolver;
 
-import com.atinbo.webmvc.exceptions.RequestIdNotFoundException;
+import com.atinbo.webmvc.exception.RequestIdNotFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;

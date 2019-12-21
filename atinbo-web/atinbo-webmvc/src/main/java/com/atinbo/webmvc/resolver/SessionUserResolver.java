@@ -1,7 +1,7 @@
 package com.atinbo.webmvc.resolver;
 
 import com.atinbo.core.model.GatewayUser;
-import com.atinbo.webmvc.exceptions.UserNotFoundException;
+import com.atinbo.webmvc.exception.UserNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 

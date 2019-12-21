@@ -4,7 +4,7 @@ package com.atinbo.webmvc.controller;
 import com.atinbo.core.exception.HttpApiException;
 import com.atinbo.core.model.GatewayUser;
 import com.atinbo.model.StatusCodeEnum;
-import com.atinbo.webmvc.exceptions.UserNotFoundException;
+import com.atinbo.webmvc.exception.UserNotFoundException;
 import com.atinbo.webmvc.resolver.SessionUserResolver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

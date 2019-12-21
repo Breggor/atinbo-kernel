@@ -2,7 +2,7 @@ package com.atinbo.security.controller;
 
 import cn.hutool.core.map.MapUtil;
 import com.atinbo.common.VerifyCodes;
-import com.atinbo.core.exception.BizException;
+import com.atinbo.core.exception.RequestParamException;
 import com.atinbo.core.utils.Base64Util;
 import com.atinbo.core.utils.StringUtil;
 import com.atinbo.model.Outcome;
@@ -50,7 +50,7 @@ public class CaptchaController {
     @GetMapping("/image")
     public Outcome<Map<String, Object>> getCode(String username) throws IOException {
         if (StringUtil.isBlank(username)) {
-            throw new BizException("用户名不能为空，根据用户名生成验证码");
+            throw new RequestParamException("用户名不能为空，根据用户名生成验证码");
         }
         // 生成随机字串
         String verifyCode = VerifyCodes.generateVerifyCode(4);
