@@ -79,7 +79,13 @@
 
             <dependency>
                 <groupId>com.atinbo</groupId>
-                <artifactId>atinbo-base</artifactId>
+                <artifactId>spring-cloud</artifactId>
+                <version>${atinbo-kernel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atinbo</groupId>
+                <artifactId>dubbo-filter-mdc</artifactId>
                 <version>${atinbo-kernel.version}</version>
             </dependency>
 
