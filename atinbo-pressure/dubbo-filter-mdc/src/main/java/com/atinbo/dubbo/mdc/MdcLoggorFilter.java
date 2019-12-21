@@ -38,9 +38,9 @@ public class MdcLoggorFilter implements Filter {
                     MDC.put(REQ_ID, requestId);
                 }
             }
-            logger.info("Dubbo MdcFilter Interface={}, Method={}, Params={}", invoker.getInterface().getName(), RpcContext.getContext().getMethodName(), JSON.toJSONString(getParamMap()));
+            logger.info("MDCFilter Interface={}, Method={}, Params={}", invoker.getInterface().getName(), RpcContext.getContext().getMethodName(), JSON.toJSONString(getParamMap()));
         } catch (Exception e) {
-            logger.warn("Exception in MDCFilter of service(" + invoker + " -> " + invocation + ")", e);
+            logger.error("MDCFilter Exception service(" + invoker + " -> " + invocation + ")", e);
             throw new RpcException(e.getMessage(), e);
         }
         return invoker.invoke(invocation);
