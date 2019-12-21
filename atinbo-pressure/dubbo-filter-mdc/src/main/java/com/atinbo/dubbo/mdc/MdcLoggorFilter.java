@@ -41,7 +41,7 @@ public class MdcLoggorFilter implements Filter {
                 }
 
                 //dubbo请求参数
-                Class[] paramTypes = RpcContext.getContext().getParameterTypes();
+                Class<?>[] paramTypes = RpcContext.getContext().getParameterTypes();
                 if (paramTypes != null && paramTypes.length > 0) {
                     for (int i = 0, len = paramTypes.length; i < len; i++) {
                         paramMap.put(paramTypes[i].getSimpleName(), RpcContext.getContext().getArguments()[i]);
