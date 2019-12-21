@@ -26,17 +26,10 @@ public class MdcLoggorFilter implements Filter {
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         try {
-            if (RpcContext.getContext().isConsumerSide()) {
-                if (StringUtils.isBlank(MDC.get(REQ_ID))) {
-                    logger.warn("slf4j MDC [requestId] don't setting!");
-                } else {
-                    RpcContext.getContext().setAttachment(REQ_ID, MDC.get(REQ_ID));
-                }
-            } else if (RpcContext.getContext().isProviderSide()) {
-                String requestId = RpcContext.getContext().getAttachment(REQ_ID);
-                if (StringUtils.isNotEmpty(requestId)) {
-                    MDC.put(REQ_ID, requestId);
-                }
+            if (RpcContext.getContext().isConsumerSide() && StringUtils.isNotEmpty(MDC.get(REQ_ID))) {
+                RpcContext.getContext().setAttachment(REQ_ID, MDC.get(REQ_ID));
+            } else if (RpcContext.getContext().isProviderSide() && StringUtils.isNotEmpty(RpcContext.getContext().getAttachment(REQ_ID))) {
+                MDC.put(REQ_ID, RpcContext.getContext().getAttachment(REQ_ID));
             }
             logger.info("MDCFilter Interface={}, Method={}, Params={}", invoker.getInterface().getName(), RpcContext.getContext().getMethodName(), JSON.toJSONString(getParamMap()));
         } catch (Exception e) {
