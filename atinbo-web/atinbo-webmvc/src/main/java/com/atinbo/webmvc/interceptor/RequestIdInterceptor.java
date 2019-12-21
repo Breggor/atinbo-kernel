@@ -26,7 +26,6 @@ public class RequestIdInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         actTime.set(System.currentTimeMillis());
-
         String requestId = request.getHeader(REQUEST_ID);
         log.info("Header: requestId({})", requestId);
 
