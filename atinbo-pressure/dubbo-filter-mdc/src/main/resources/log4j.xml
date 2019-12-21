@@ -15,11 +15,12 @@
   -->
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
-    <appender name="DUBBO" class="com.alibaba.dubbo.common.utils.DubboAppender">
+    <appender name="DUBBO" class="com.apache.dubbo.common.utils.DubboAppender">
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{yyyy/MM/dd hh:mm:ss:sss} %X{requestId} %t %5p %c{2}: %m%n"/>
         </layout>
     </appender>
+
     <root>
         <level value="INFO"/>
         <appender-ref ref="DUBBO"/>
