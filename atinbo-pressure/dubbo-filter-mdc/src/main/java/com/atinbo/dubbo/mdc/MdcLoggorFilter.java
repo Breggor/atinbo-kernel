@@ -26,8 +26,6 @@ public class MdcLoggorFilter implements Filter {
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         try {
-            Map<String, Object> paramMap = new HashMap();
-
             if (RpcContext.getContext().isConsumerSide()) {
                 if (StringUtils.isBlank(MDC.get(REQ_ID))) {
                     logger.warn("slf4j MDC [requestId] don't setting!");
@@ -39,21 +37,29 @@ public class MdcLoggorFilter implements Filter {
                 if (StringUtils.isNotEmpty(requestId)) {
                     MDC.put(REQ_ID, requestId);
                 }
-
-                //dubbo请求参数
-                Class<?>[] paramTypes = RpcContext.getContext().getParameterTypes();
-                if (paramTypes != null && paramTypes.length > 0) {
-                    for (int i = 0, len = paramTypes.length; i < len; i++) {
-                        paramMap.put(paramTypes[i].getSimpleName(), RpcContext.getContext().getArguments()[i]);
-                    }
-                }
             }
-
-            logger.info("Dubbo MdcFilter Interface={}, Method={}, Params={}", invoker.getInterface().getName(), RpcContext.getContext().getMethodName(), JSON.toJSONString(paramMap));
+            logger.info("Dubbo MdcFilter Interface={}, Method={}, Params={}", invoker.getInterface().getName(), RpcContext.getContext().getMethodName(), JSON.toJSONString(getParamMap()));
         } catch (Exception e) {
             logger.warn("Exception in MDCFilter of service(" + invoker + " -> " + invocation + ")", e);
             throw new RpcException(e.getMessage(), e);
         }
         return invoker.invoke(invocation);
+    }
+
+    /**
+     * dubbo参数
+     *
+     * @return
+     */
+    private Map<String, Object> getParamMap() {
+        Map<String, Object> paramMap = new HashMap<>();
+        Class<?>[] paramTypes = RpcContext.getContext().getParameterTypes();
+        Object[] args = RpcContext.getContext().getArguments();
+        if (paramTypes != null && paramTypes.length > 0) {
+            for (int i = 0, len = paramTypes.length; i < len; i++) {
+                paramMap.put(paramTypes[i].getSimpleName(), args[i]);
+            }
+        }
+        return paramMap;
     }
 }
