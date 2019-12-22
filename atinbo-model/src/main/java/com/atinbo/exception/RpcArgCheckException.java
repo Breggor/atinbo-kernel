@@ -2,11 +2,11 @@ package com.atinbo.exception;
 
 
 /**
- * RPC参数检测异常
+ * RPC参数校验异常
  *
  * @author breggor
  */
-public class RpcArgCheckException extends RpcBizException {
+public class RpcArgCheckException extends IllegalArgumentException {
 
     public RpcArgCheckException(String message) {
         super(message);

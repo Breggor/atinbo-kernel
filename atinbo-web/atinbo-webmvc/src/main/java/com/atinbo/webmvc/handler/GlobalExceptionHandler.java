@@ -2,6 +2,7 @@ package com.atinbo.webmvc.handler;
 
 import com.atinbo.core.exception.HttpApiException;
 import com.atinbo.core.exception.RequestParamException;
+import com.atinbo.exception.RpcArgCheckException;
 import com.atinbo.exception.RpcBizException;
 import com.atinbo.model.ErrorInfo;
 import com.atinbo.model.Outcome;
@@ -110,6 +111,20 @@ public class GlobalExceptionHandler {
         return Outcome.failure(ex.getStatus(), ex.getMessage());
     }
 
+
+    /**
+     * 后端业务异常
+     *
+     * @param ex
+     * @return
+     */
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler({RpcArgCheckException.class, RpcBizException.class})
+    public Outcome handleHttpAPIException(Exception ex) {
+        log.error(ex.getMessage(), ex);
+        return Outcome.failure(ex.getMessage());
+    }
+
     /**
      * 全局异常处理
      *
@@ -119,6 +134,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler
     public Outcome handleException(Exception ex) {
         String msg = ex.getMessage();
+        if (ex instanceof RpcArgCheckException) {
+            msg = ((RpcArgCheckException) ex).getMessage();
+        }
         if (ex instanceof RpcBizException) {
             msg = ((RpcBizException) ex).getMessage();
         }

@@ -21,5 +21,4 @@ public class RequestParamException extends IllegalArgumentException {
     public RequestParamException(Throwable cause) {
         super(cause);
     }
-
 }

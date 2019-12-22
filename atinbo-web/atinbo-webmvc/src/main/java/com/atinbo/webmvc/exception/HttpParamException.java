@@ -1,23 +1,19 @@
 package com.atinbo.webmvc.exception;
 
 
+import com.atinbo.model.StatusCodeEnum;
+
 /**
  * 请求参数错误异常
  *
  * @author breggor
  */
-public class HttpParamException extends IllegalArgumentException {
+public class HttpParamException extends HttpApiException {
+
 
     public HttpParamException(String message) {
-        super(message);
+        super(StatusCodeEnum.PARAM_VALID_ERROR, message);
     }
 
-    public HttpParamException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public HttpParamException(Throwable cause) {
-        super(cause);
-    }
 
 }

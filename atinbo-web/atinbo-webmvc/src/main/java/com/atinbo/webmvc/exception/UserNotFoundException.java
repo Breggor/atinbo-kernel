@@ -6,8 +6,7 @@ package com.atinbo.webmvc.exception;
  *
  * @author breggor
  */
-public class UserNotFoundException extends BaseException {
-
+public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message) {
         super(message);
     }
