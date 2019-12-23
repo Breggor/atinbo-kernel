@@ -39,9 +39,9 @@ public class BaseLogoutSuccessHandler implements LogoutSuccessHandler {
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         LoginUser loginUser = userTokenService.getLoginUser(request);
         if (!Objects.isNull(loginUser)) {
-            String userName = loginUser.getUsername();
+            userTokenService.removeToken(loginUser);
             // 记录用户退出日志
-            log.info(userName + "-- 退出成功");
+            log.info("{} -- 退出成功", loginUser.getUsername());
         }
         WebUtil.renderString(response, objectMapper.writeValueAsString(Outcome.success().setMessage("退出成功")));
     }

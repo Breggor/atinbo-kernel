@@ -34,7 +34,7 @@ import java.util.Objects;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecConfig extends WebSecurityConfigurerAdapter {
 
-    public static final String[] ANON_PATHS = {"/login", "/captcha/image"};
+    public static final String[] ANON_PATHS = {"/login", "/logout", "/captcha/image"};
     private static final String[] ALLOW_VISIT_PATHS = {"/*.ico", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js",
             "/profile/**", "/actuator/**", "/druid/**", "/swagger-ui.html", "/*/api-docs", "/webjars/**", "/swagger-resources/**"};
     /**

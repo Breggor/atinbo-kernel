@@ -131,6 +131,17 @@ public class UserTokenService {
         redisOpsCache.setCacheObject(userKey, loginUser, expireTime, TimeUnit.MINUTES);
     }
 
+
+    /**
+     * 移除登录令牌
+     *
+     * @param loginUser 登录信息
+     */
+    public void removeToken(LoginUser loginUser) {
+        String userKey = getTokenKey(loginUser.getAccessToken());
+        redisOpsCache.deleteObject(userKey);
+    }
+
     /**
      * 设置用户代理信息
      *
