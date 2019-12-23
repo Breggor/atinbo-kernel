@@ -85,6 +85,18 @@ public class LoginUser extends BaseUserDetail implements UserDetails {
         this.extra = extra;
     }
 
+
+    /**
+     * 创建用户
+     *
+     * @param userId
+     * @param username
+     * @return
+     */
+    public static LoginUser of(Long userId, String username) {
+        return new LoginUser(userId, username, "wx_openid", Sets.newHashSet("ROLE_USER"));
+    }
+
     /**
      * 创建用户
      *
