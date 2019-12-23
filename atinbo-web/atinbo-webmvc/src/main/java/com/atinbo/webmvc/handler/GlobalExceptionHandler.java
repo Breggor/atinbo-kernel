@@ -7,7 +7,7 @@ import com.atinbo.exception.RpcBizException;
 import com.atinbo.model.ErrorInfo;
 import com.atinbo.model.Outcome;
 import com.atinbo.model.StatusCodeEnum;
-import com.atinbo.webmvc.exception.HttpParamException;
+import com.atinbo.webmvc.exception.HttpParamCheckException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -66,7 +66,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({HttpParamException.class, RequestParamException.class})
+    @ExceptionHandler({HttpParamCheckException.class, RequestParamException.class})
     public Outcome requestParamException(IllegalArgumentException e) {
         log.error(e.getMessage(), e);
         return Outcome.failure(e.getMessage());
