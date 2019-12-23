@@ -1,6 +1,7 @@
 package com.atinbo.rpc.filter;
 
 
+import com.atinbo.exception.RpcArgCheckException;
 import com.atinbo.exception.RpcBizException;
 import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.common.extension.Activate;
@@ -67,7 +68,7 @@ public class CustomExceptionFilter implements Filter {
                         return result;
                     }
 
-                    if (exception instanceof RpcBizException) {
+                    if (exception instanceof RpcArgCheckException || exception instanceof RpcBizException) {
                         return result;
                     }
 
