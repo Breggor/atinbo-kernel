@@ -10,6 +10,7 @@ import eu.bitwalker.useragentutils.UserAgent;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +26,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author breggor
  */
+@Slf4j
 @Component
 public class UserTokenService {
 
@@ -75,11 +77,13 @@ public class UserTokenService {
         String token = getToken(request);
         if (StringUtils.isNotEmpty(token)) {
             Claims claims = parseToken(token);
-            // 解析对应的权限以及用户信息
-            String uuid = (String) claims.get(LOGIN_USER_KEY);
-            String userKey = getTokenKey(uuid);
-            LoginUser user = redisOpsCache.getCacheObject(userKey);
-            return user;
+            if (claims != null) {
+                // 解析对应的权限以及用户信息
+                String uuid = (String) claims.get(LOGIN_USER_KEY);
+                String userKey = getTokenKey(uuid);
+                LoginUser user = redisOpsCache.getCacheObject(userKey);
+                return user;
+            }
         }
         return null;
     }
@@ -176,10 +180,16 @@ public class UserTokenService {
      * @return 数据声明
      */
     private Claims parseToken(String token) {
-        return Jwts.parser()
-                .setSigningKey(secret)
-                .parseClaimsJws(token)
-                .getBody();
+        try {
+            return Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info(e.getMessage(), e);
+        }
+        return null;
     }
 
     /**
