@@ -19,7 +19,7 @@ import java.util.Map;
  * @author breggor
  */
 @Activate(group = {CommonConstants.CONSUMER, CommonConstants.PROVIDER})
-public class MdcLoggorFilter implements Filter {
+public class MDCLoggorFilter implements Filter {
     public static final String REQ_ID = "requestId";
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
