@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration scan="true" debug="true">
+<configuration scan="true" debug="false">
     <property name="LOG_PATH" value="./logs"/>
     <springProperty scope="context" name="LOG_PROJECT" source="spring.application.name"/>
     <springProperty scope="context" name="profile" source="spring.profiles.active"/>
