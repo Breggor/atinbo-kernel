@@ -1,8 +1,8 @@
-package com.atinbo.core.resolver;
+package com.atinbo.webmvc.resolver;
 
 
-import com.atinbo.core.utils.WebUtil;
 import com.atinbo.model.PageForm;
+import com.atinbo.webmvc.utils.WebUtil;
 
 public abstract class PageResolver {
     /**

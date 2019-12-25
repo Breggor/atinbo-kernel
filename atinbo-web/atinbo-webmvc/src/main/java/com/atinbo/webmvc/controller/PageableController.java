@@ -2,7 +2,7 @@ package com.atinbo.webmvc.controller;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.atinbo.common.sql.SqlKeywords;
-import com.atinbo.core.resolver.PageResolver;
+import com.atinbo.webmvc.resolver.PageResolver;
 import com.atinbo.core.utils.ObjectUtil;
 import com.atinbo.model.Outcome;
 import com.atinbo.model.Pagable;

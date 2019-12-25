@@ -1,10 +1,14 @@
-package com.atinbo.core.utils;
+package com.atinbo.webmvc.utils;
 
 import com.atinbo.common.Charsets;
 import com.atinbo.common.Converts;
 import com.atinbo.common.StringPool;
 import com.atinbo.common.Strings;
+import com.atinbo.core.utils.IpUtil;
+import com.atinbo.core.utils.JsonUtil;
+import com.atinbo.core.utils.StringUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
@@ -20,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.annotation.Annotation;
 import java.util.Enumeration;
 
 
@@ -36,6 +41,25 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
     public static final String UN_KNOWN = "unknown";
 
     /**
+     * 获取Annotation
+     *
+     * @param handlerMethod  HandlerMethod
+     * @param annotationType 注解类
+     * @param <A>            泛型标记
+     * @return {Annotation}
+     */
+    public static <A extends Annotation> A getAnnotation(HandlerMethod handlerMethod, Class<A> annotationType) {
+        // 先找方法，再找方法上的类
+        A annotation = handlerMethod.getMethodAnnotation(annotationType);
+        if (null != annotation) {
+            return annotation;
+        }
+        // 获取类上面的Annotation，可能包含组合注解，故采用spring的工具类
+        Class<?> beanType = handlerMethod.getBeanType();
+        return AnnotatedElementUtils.findMergedAnnotation(beanType, annotationType);
+    }
+
+    /**
      * 判断是否ajax请求
      * spring ajax 返回含有 ResponseBody 或者 RestController注解
      *
@@ -43,7 +67,7 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
      * @return 是否ajax请求
      */
     public static boolean isBody(HandlerMethod handlerMethod) {
-        ResponseBody responseBody = ClassUtil.getAnnotation(handlerMethod, ResponseBody.class);
+        ResponseBody responseBody = getAnnotation(handlerMethod, ResponseBody.class);
         return responseBody != null;
     }
 

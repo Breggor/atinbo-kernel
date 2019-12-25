@@ -1,9 +1,10 @@
 package com.atinbo.security.handler;
 
 
-import com.atinbo.core.utils.WebUtil;
+
 import com.atinbo.model.Outcome;
 import com.atinbo.model.StatusCodeEnum;
+import com.atinbo.webmvc.utils.WebUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;

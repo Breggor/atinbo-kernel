@@ -11,7 +11,6 @@ import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
-import org.springframework.web.method.HandlerMethod;
 
 import java.io.Closeable;
 import java.io.InputStream;
@@ -810,15 +809,6 @@ public class FuncUtil {
         return StringUtil.randomUUID();
     }
 
-    /**
-     * 转义HTML用于安全过滤
-     *
-     * @param html html
-     * @return {String}
-     */
-    public static String escapeHtml(String html) {
-        return StringUtil.escapeHtml(html);
-    }
 
     /**
      * 随机数生成
@@ -1139,34 +1129,7 @@ public class FuncUtil {
         return JsonUtil.parse(in, typeReference);
     }
 
-    /**
-     * Encode all characters that are either illegal, or have any reserved
-     * meaning, anywhere within a URI, as defined in
-     * <a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a>.
-     * This is useful to ensure that the given String will be preserved as-is
-     * and will not have any o impact on the structure or meaning of the URI.
-     *
-     * @param source the String to be encoded
-     * @return the encoded String
-     */
-    public static String encode(String source) {
-        return UrlUtil.encode(source, Charsets.UTF8);
-    }
 
-    /**
-     * Encode all characters that are either illegal, or have any reserved
-     * meaning, anywhere within a URI, as defined in
-     * <a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a>.
-     * This is useful to ensure that the given String will be preserved as-is
-     * and will not have any o impact on the structure or meaning of the URI.
-     *
-     * @param source  the String to be encoded
-     * @param charset the character encoding to encode to
-     * @return the encoded String
-     */
-    public static String encode(String source, Charset charset) {
-        return UrlUtil.encode(source, charset);
-    }
 
     /**
      * Decode the given encoded URI component.
@@ -1382,18 +1345,6 @@ public class FuncUtil {
         return ClassUtil.getAnnotation(method, annotationType);
     }
 
-    /**
-     * 获取Annotation
-     *
-     * @param handlerMethod  HandlerMethod
-     * @param annotationType 注解类
-     * @param <A>            泛型标记
-     * @return {Annotation}
-     */
-    @Nullable
-    public static <A extends Annotation> A getAnnotation(HandlerMethod handlerMethod, Class<A> annotationType) {
-        return ClassUtil.getAnnotation(handlerMethod, annotationType);
-    }
 
     /**
      * 实例化对象

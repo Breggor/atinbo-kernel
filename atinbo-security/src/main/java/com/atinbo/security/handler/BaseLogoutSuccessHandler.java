@@ -1,9 +1,10 @@
 package com.atinbo.security.handler;
 
-import com.atinbo.core.utils.WebUtil;
+
 import com.atinbo.model.Outcome;
 import com.atinbo.security.model.LoginUser;
 import com.atinbo.security.service.UserTokenService;
+import com.atinbo.webmvc.utils.WebUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

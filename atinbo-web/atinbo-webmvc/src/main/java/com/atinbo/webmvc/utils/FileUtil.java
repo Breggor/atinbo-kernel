@@ -1,7 +1,9 @@
-package com.atinbo.core.utils;
+package com.atinbo.webmvc.utils;
 
 import com.atinbo.common.CharPool;
 import com.atinbo.common.Charsets;
+import com.atinbo.core.utils.Exceptions;
+import com.atinbo.core.utils.IoUtil;
 import lombok.experimental.UtilityClass;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
@@ -268,7 +270,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
      */
     public static void toFile(MultipartFile multipartFile, final File file) {
         try {
-            FileUtil.toFile(multipartFile.getInputStream(), file);
+            toFile(multipartFile.getInputStream(), file);
         } catch (IOException e) {
             throw Exceptions.unchecked(e);
         }

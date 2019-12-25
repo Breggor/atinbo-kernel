@@ -1,4 +1,4 @@
-package com.atinbo.core.utils;
+package com.atinbo.webmvc.utils;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,7 +19,7 @@ public class UrlUtil extends org.springframework.web.util.UriUtils {
      * @return 编码后的url
      */
     public static String encodeURL(String source, Charset charset) {
-        return UrlUtil.encode(source, charset.name());
+        return encode(source, charset.name());
     }
 
     /**
@@ -30,7 +30,7 @@ public class UrlUtil extends org.springframework.web.util.UriUtils {
      * @return 解码url
      */
     public static String decodeURL(String source, Charset charset) {
-        return UrlUtil.decode(source, charset.name());
+        return decode(source, charset.name());
     }
 
     /**
