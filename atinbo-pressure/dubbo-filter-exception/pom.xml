@@ -11,22 +11,20 @@
 
     <artifactId>dubbo-filter-exception</artifactId>
 
-
     <dependencies>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo-rpc-api</artifactId>
             <version>${dubbo.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atinbo</groupId>
-            <artifactId>atinbo-model</artifactId>
+            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 </project>

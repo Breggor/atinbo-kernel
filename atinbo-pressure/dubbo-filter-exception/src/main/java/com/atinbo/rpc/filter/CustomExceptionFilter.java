@@ -68,10 +68,6 @@ public class CustomExceptionFilter implements Filter {
                         return result;
                     }
 
-                    if (exception instanceof RpcArgCheckException || exception instanceof RpcBizException) {
-                        return result;
-                    }
-
                     // otherwise, wrap with RuntimeException and throw back to the client
                     return new AppResponse(new RuntimeException(StringUtils.toString(exception)));
                 } catch (Throwable e) {
