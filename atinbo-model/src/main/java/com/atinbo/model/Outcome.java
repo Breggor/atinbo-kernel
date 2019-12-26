@@ -22,6 +22,7 @@ import java.util.Optional;
 @ApiModel(description = "返回信息")
 public class Outcome<T> implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     /**
      * 状态码: 0:成功，-1：失败，业务异常：非零或非-1
      */

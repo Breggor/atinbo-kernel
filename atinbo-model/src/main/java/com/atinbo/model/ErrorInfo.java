@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 @Accessors(chain = true)
 public class ErrorInfo implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     /**
      * 参数字段
      */

@@ -10,6 +10,8 @@ import java.util.StringJoiner;
  * @author breggor
  */
 public class PageParam implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     /**
      * 默认单页记录数
      */
@@ -22,7 +24,6 @@ public class PageParam implements Serializable {
      * 默认当前页
      */
     public static final int DEFAULT_CURRENT_PAGE = 1;
-
     /**
      * 当前页
      */

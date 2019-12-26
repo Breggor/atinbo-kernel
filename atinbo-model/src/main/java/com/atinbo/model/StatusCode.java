@@ -8,6 +8,7 @@ import java.io.Serializable;
  * @author breggor
  */
 public interface StatusCode extends Serializable {
+    long serialVersionUID = 1L;
 
     /**
      * 消息

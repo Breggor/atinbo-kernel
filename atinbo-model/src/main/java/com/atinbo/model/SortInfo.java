@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 @Data
 public class SortInfo implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private List<Field> orders = new ArrayList<>();
 
     public boolean isEmpty() {

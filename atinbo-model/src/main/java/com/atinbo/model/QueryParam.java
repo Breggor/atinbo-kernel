@@ -7,4 +7,5 @@ import java.io.Serializable;
  * @date 2019-07-20
  */
 public interface QueryParam extends Serializable {
+    long serialVersionUID = 1L;
 }

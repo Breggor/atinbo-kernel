@@ -23,6 +23,7 @@ import java.util.List;
 @ApiModel(description = "分页数据")
 public final class Pagable<T> implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     /**
      * 当前页
      */

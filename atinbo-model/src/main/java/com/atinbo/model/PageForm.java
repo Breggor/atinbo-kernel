@@ -13,6 +13,7 @@ import java.util.stream.Stream;
  */
 @Data
 public class PageForm implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     public static final String REDUCE = "-";
     public static final String PLUS = "+";
