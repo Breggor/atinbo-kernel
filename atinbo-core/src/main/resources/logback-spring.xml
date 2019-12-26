@@ -77,6 +77,7 @@
         </then>
     </if>
 
+    <Logger name="com.atinbo" level="INFO"/>
     <logger name="druid.sql" level="INFO"/>
     <logger name="com.alibaba.nacos" level="ERROR"/>
     <logger name="com.apache.dubbo" level="ERROR"/>
