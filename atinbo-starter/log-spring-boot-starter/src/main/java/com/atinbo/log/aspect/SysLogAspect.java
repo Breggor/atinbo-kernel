@@ -1,11 +1,10 @@
 package com.atinbo.log.aspect;
 
-import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.URLUtil;
-import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.http.Header;
 import cn.hutool.http.HttpUtil;
 import com.atinbo.core.spring.SpringContextHolder;
+import com.atinbo.core.utils.IpUtil;
 import com.atinbo.log.annotation.SysLog;
 import com.atinbo.log.event.SysLogEvent;
 import com.atinbo.log.model.SysLogSource;
@@ -66,18 +65,17 @@ public class SysLogAspect {
     }
 
     private SysLogSource getSystemLog() {
-        HttpServletRequest request = ((ServletRequestAttributes) Objects
-                .requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         SysLogSource logSource = new SysLogSource();
-        logSource.setCreateBy(Objects.requireNonNull(ServletUtil.getHeader(request, HEADER_USER, CharsetUtil.UTF_8)));
+        logSource.setCreateBy(Objects.requireNonNull(request.getHeader(HEADER_USER)));
         logSource.setCreateTime(LocalDateTime.now());
-        logSource.setRemoteAddr(ServletUtil.getClientIP(request));
+        logSource.setRemoteAddr(IpUtil.getIpAddr(request));
         logSource.setRequestUri(URLUtil.getPath(request.getRequestURI()));
         logSource.setMethod(request.getMethod());
 
-        logSource.setUserAgent(ServletUtil.getHeader(request, Header.USER_AGENT.toString(), CharsetUtil.UTF_8));
+        logSource.setUserAgent(request.getHeader(Header.USER_AGENT.toString()));
         logSource.setParams(HttpUtil.toParams(request.getParameterMap()));
-        logSource.setServiceId(ServletUtil.getHeader(request, HEADER_CLIENT_ID, CharsetUtil.UTF_8));
+        logSource.setServiceId(request.getHeader(HEADER_CLIENT_ID));
         logSource.setDelFlag(SysLogSource.DEL_FALSE);
         return logSource;
     }
