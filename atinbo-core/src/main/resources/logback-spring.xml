@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration scan="true" debug="false">
+<configuration scan="true" scanPeriod="30 seconds" debug="false">
     <property name="LOG_PATH" value="./logs"/>
     <springProperty scope="context" name="LOG_PROJECT" source="spring.application.name"/>
-    <springProperty scope="context" name="profile" source="spring.profiles.active"/>
+    <springProperty scope="context" name="LOG_ACT" source="spring.profiles.active"/>
 
     <!-- 控制台输出 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -34,7 +34,7 @@
         </triggeringPolicy>
     </appender>
 
-    <if condition='property("profile").contains("local")'>
+    <if condition='property("LOG_ACT").contains("local")'>
         <then>
             <!-- 日志输出级别 -->
             <root level="INFO">
@@ -82,6 +82,6 @@
     <logger name="com.apache.dubbo" level="ERROR"/>
 
     <root level="INFO">
-        <appender-ref ref="FILE" />
+        <appender-ref ref="FILE"/>
     </root>
 </configuration>
