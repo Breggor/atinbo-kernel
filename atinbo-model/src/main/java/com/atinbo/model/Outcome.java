@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 
 import java.beans.Transient;
 import java.io.Serializable;
+import java.util.Optional;
 
 /**
  * 返回数据封装类
@@ -39,7 +40,6 @@ public class Outcome<T> implements Serializable {
     @ApiModelProperty(value = "数据列表")
     private T data;
 
-
     /**
      * 状态码构造器
      *
@@ -66,6 +66,15 @@ public class Outcome<T> implements Serializable {
         this.code = code;
         this.data = data;
         this.message = message;
+    }
+
+    /**
+     * 返回值
+     *
+     * @return Optional<T>
+     */
+    public Optional<T> value() {
+        return Optional.ofNullable(this.data);
     }
 
     /**
