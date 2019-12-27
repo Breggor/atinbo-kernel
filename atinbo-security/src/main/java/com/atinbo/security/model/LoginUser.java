@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 /**
  * 登录用户信息
+ * @author breggor
  */
 @Data
 @NoArgsConstructor

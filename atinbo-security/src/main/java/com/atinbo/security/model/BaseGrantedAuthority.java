@@ -16,6 +16,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public final class BaseGrantedAuthority implements GrantedAuthority {
 
+    private static final long serialVersionUID = 8042674896077075133L;
     private String authority;
 
     public BaseGrantedAuthority(String authority) {
