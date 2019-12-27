@@ -113,6 +113,20 @@ public class GlobalExceptionHandler {
 
 
     /**
+     * NPE异常
+     *
+     * @param ex
+     * @return
+     */
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(NullPointerException.class)
+    public Outcome handleNullPointerException(NullPointerException ex) {
+        log.error(ex.getMessage(), ex);
+        return Outcome.failure(StatusCodeEnum.FAILURE, "NPE-异常");
+    }
+
+
+    /**
      * 后端业务异常
      *
      * @param ex
