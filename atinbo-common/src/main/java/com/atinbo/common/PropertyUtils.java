@@ -6,10 +6,15 @@ import org.slf4j.LoggerFactory;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-public class PropertyUtils {
 
-    protected static final Logger logger = LoggerFactory.getLogger(PropertyUtils.class);
-    private ResourceBundle resourceBundle = null;
+/**
+ * property工具类
+ *
+ * @author breggor
+ */
+public class PropertyUtils {
+    private static final Logger logger = LoggerFactory.getLogger(PropertyUtils.class);
+    private final ResourceBundle resourceBundle;
 
     public PropertyUtils(String propertyName) {
         try {
@@ -21,11 +26,10 @@ public class PropertyUtils {
     }
 
     public String getPropertyValue(String key) {
-        if (resourceBundle.containsKey(key)) {
-            return resourceBundle.getString(key);
-        } else {
+        if (!resourceBundle.containsKey(key)) {
             logger.warn(String.format("key '%s' not found!", key));
             return null;
         }
+        return resourceBundle.getString(key);
     }
 }
