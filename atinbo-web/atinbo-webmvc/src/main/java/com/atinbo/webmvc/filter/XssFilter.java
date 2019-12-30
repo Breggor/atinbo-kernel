@@ -2,7 +2,6 @@ package com.atinbo.webmvc.filter;
 
 import com.atinbo.common.StringPool;
 import com.atinbo.webmvc.xss.XssHttpServletRequestWrapper;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -22,20 +21,19 @@ import java.util.Arrays;
  */
 @Slf4j
 @Component
-@AllArgsConstructor
 public class XssFilter extends OncePerRequestFilter {
 
     /**
      * 放行url
      */
     @Value("${xss.skipUrls:''}")
-    private final String skipUrls;
+    private String skipUrls;
 
     /**
      * 排除匹配模式
      */
     @Value("${xss.excludePatterns:'/**'}")
-    private final String excludePatterns;
+    private String excludePatterns;
 
 
     @Override
