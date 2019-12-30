@@ -16,7 +16,7 @@ import java.util.*;
  *
  * @author breggor
  */
-public class BeanValidatorUtils {
+public abstract class BeanValidatorUtils {
 
     /**
      * 存放错误信息的properties数组
