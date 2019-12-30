@@ -72,7 +72,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public Outcome handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         log.error(e.getMessage(), e);
-        return Outcome.failure();
+        return Outcome.failure(StatusCodeEnum.PARAM_VALID_ERROR, "请求参数格式有误，请检查");
     }
 
 
