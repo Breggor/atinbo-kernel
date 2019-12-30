@@ -22,10 +22,6 @@ public abstract class BeanValidatorUtils {
      * 存放错误信息的properties数组
      */
     public static final List<String> VALIDATION_MESSAGES = Arrays.asList("validationMessage");
-    /**
-     * 错误消息分隔符
-     */
-    public static final String SEPARATOR = "<br>";
 
     /**
      * 使用hibernate的注解来进行验证 .failFast(true)遇到错误立即报错
@@ -42,15 +38,15 @@ public abstract class BeanValidatorUtils {
      * @return 错误信息列表
      */
     public static <T> List<String> validateToList(T bean, Class<?>... groups) {
-        List<String> errorMessages = new ArrayList<>();
+        List<String> errs = new ArrayList<>();
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(bean, groups);
         // 抛出检验异常
-        if (constraintViolations.size() > 0) {
-            for (ConstraintViolation<T> violation : constraintViolations) {
-                errorMessages.add(violation.getMessage());
+        if (!constraintViolations.isEmpty()) {
+            for (ConstraintViolation<T> cv : constraintViolations) {
+                errs.add(cv.getMessage());
             }
         }
-        return errorMessages;
+        return errs;
     }
 
     /**
@@ -61,15 +57,15 @@ public abstract class BeanValidatorUtils {
      * @return 错误信息列表
      */
     public static <T> Map<String, String> validateToMap(T bean, Class<?>... groups) {
-        Map<String, String> errorMessages = new HashMap<String, String>();
+        Map<String, String> errs = new HashMap<>();
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(bean, groups);
         // 抛出检验异常
-        if (constraintViolations.size() > 0) {
-            for (ConstraintViolation<T> violation : constraintViolations) {
-                errorMessages.put(violation.getPropertyPath().toString(), violation.getMessage());
+        if (!constraintViolations.isEmpty()) {
+            for (ConstraintViolation<T> cv : constraintViolations) {
+                errs.put(cv.getPropertyPath().toString(), cv.getMessage());
             }
         }
-        return errorMessages;
+        return errs;
     }
 
     /**
@@ -80,24 +76,9 @@ public abstract class BeanValidatorUtils {
      */
     public static void validateToException(Object bean, Class<?>... groups) throws ConstraintViolationException {
         Set<? extends ConstraintViolation<?>> constraintViolations = validator.validate(bean, groups);
-        if (constraintViolations.size() > 0) {
+        if (!constraintViolations.isEmpty()) {
             // 错误信息以异常的 形式抛出可通过e.getConstraintViolations()方法获取具体验证信息
             throw new ConstraintViolationException(constraintViolations);
         }
-    }
-
-    /**
-     * 内部转换方法，将错误信息List转换成String
-     *
-     * @param errors 将错误信息List
-     * @return 错误信息
-     */
-    public static String validateToString(List<String> errors) {
-        StringBuffer strBuffer = new StringBuffer();
-        for (String error : errors) {
-            strBuffer.append(error);
-            strBuffer.append(SEPARATOR);
-        }
-        return strBuffer.toString();
     }
 }
