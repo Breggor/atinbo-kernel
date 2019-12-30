@@ -20,8 +20,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 全局异常处理
@@ -31,6 +34,7 @@ import java.util.List;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
     /**
      * 请求参数无法验证异常拦截
      *
@@ -41,7 +45,20 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Outcome bindException(MethodArgumentNotValidException e) {
         log.error(e.getMessage(), e);
-        return doErr(StatusCodeEnum.PARAM_VALID_ERROR, e.getBindingResult());
+        return doErrForBindResult(StatusCodeEnum.PARAM_VALID_ERROR, e.getBindingResult());
+    }
+
+    /**
+     * 请求参数验证异常拦截
+     *
+     * @param e
+     * @return
+     */
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ConstraintViolationException.class)
+    public Outcome handConstraintException(ConstraintViolationException e) {
+        log.error(e.getMessage(), e);
+        return doErrForConstraint(StatusCodeEnum.PARAM_VALID_ERROR, e.getConstraintViolations());
     }
 
 
@@ -158,11 +175,33 @@ public class GlobalExceptionHandler {
         return Outcome.failure(StatusCodeEnum.INTERNAL_SERVER_ERROR, msg);
     }
 
-
-    private Outcome<List<ErrorInfo>> doErr(StatusCodeEnum code, BindingResult br) {
+    /**
+     * 处理数据绑定异常
+     *
+     * @param code
+     * @param br
+     * @return
+     */
+    private Outcome<List<ErrorInfo>> doErrForBindResult(StatusCodeEnum code, BindingResult br) {
         List<ErrorInfo> result = new ArrayList<>();
         for (FieldError err : br.getFieldErrors()) {
             result.add(ErrorInfo.of(err.getField(), err.getField() + ": " + err.getDefaultMessage()));
+        }
+        return Outcome.failure(code, result);
+    }
+
+
+    /**
+     * 处理数据验证异常
+     *
+     * @param code
+     * @param constraintViolations
+     * @return
+     */
+    private Outcome doErrForConstraint(StatusCodeEnum code, Set<ConstraintViolation<?>> constraintViolations) {
+        List<ErrorInfo> result = new ArrayList<>();
+        for (ConstraintViolation err : constraintViolations) {
+            result.add(ErrorInfo.of(err.getPropertyPath().toString(), err.getPropertyPath().toString() + ": " + err.getMessage()));
         }
         return Outcome.failure(code, result);
     }
