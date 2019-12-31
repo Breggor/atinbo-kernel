@@ -35,15 +35,21 @@ public class XssFilter extends OncePerRequestFilter {
     @Value("${xss.excludePatterns:'/**'}")
     private String excludePatterns;
 
+    /**
+     * 是否开启xss
+     */
+    @Value("${xss.enable:false}")
+    private boolean enable;
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         String path = request.getServletPath();
-        if (isSkip(path)) {
-            chain.doFilter(request, response);
-        } else {
+        if (enable && !isSkip(path)) {
             XssHttpServletRequestWrapper xssRequest = new XssHttpServletRequestWrapper((HttpServletRequest) request);
             chain.doFilter(xssRequest, response);
+        } else {
+            chain.doFilter(request, response);
         }
     }
 
