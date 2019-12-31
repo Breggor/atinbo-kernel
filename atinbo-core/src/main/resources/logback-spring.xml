@@ -16,9 +16,9 @@
         <file>${LOG_PATH}/${LOG_PROJECT}.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!--日志文件输出的文件名-->
-            <FileNamePattern>${LOG_PATH}/${LOG_PROJECT}-%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <fileNamePattern>${LOG_PATH}/${LOG_PROJECT}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <!--日志文件保留天数-->
-            <MaxHistory>30</MaxHistory>
+            <maxHistory>30</maxHistory>
             <maxFileSize>10MB</maxFileSize>
         </rollingPolicy>
 
@@ -28,11 +28,6 @@
             <!-- 编码 -->
             <charset>UTF-8</charset>
         </encoder>
-<!--
-        &lt;!&ndash;日志文件最大的大小&ndash;&gt;
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <MaxFileSize>10MB</MaxFileSize>
-        </triggeringPolicy>-->
     </appender>
 
     <logger name="net.sf.ehcache" level="INFO"/>
@@ -66,7 +61,7 @@
     <logger name="org.apache.http" level="INFO"/>
     <logger name="com.netflix.discovery" level="INFO"/>
     <!-- 业务日志 -->
-    <Logger name="com.atinbo" level="DEBUG"/>
+    <logger name="com.atinbo" level="DEBUG"/>
 
 
     <!-- 日志输出级别 -->
