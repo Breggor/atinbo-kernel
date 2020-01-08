@@ -9,8 +9,8 @@ import ${classInfo.packageName}.entity.${classInfo.className};
 import ${classInfo.packageName}.model.${classInfo.className}Param;
 import ${classInfo.packageName}.model.${classInfo.className}QueryParam;
 import ${classInfo.packageName}.model.${classInfo.className}BO;
+import ${classInfo.packageName}.convertor.${classInfo.className}Convertor;
 import ${classInfo.packageName}.mapper.${classInfo.className}Mapper;
-import ${classInfo.packageName}.dao.${classInfo.className}Dao;
 import ${classInfo.packageName}.service.${classInfo.className}Service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -30,16 +30,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ${classInfo.className}ServiceImpl implements ${classInfo.className}Service {
 
     @Autowired
-    private ${classInfo.className}Dao ${classInfo.className?uncap_first}Dao;
+    private ${classInfo.className}Mapper ${classInfo.className?uncap_first}Mapper;
 
     /**
      * 新增
      */
     @Override
     public Outcome<${classInfo.className}BO> save(${classInfo.className}Param ${classInfo.className?uncap_first}Param) {
-        ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}(${classInfo.className?uncap_first}Param);
-        ${classInfo.className?uncap_first}Dao.insert(${classInfo.className?uncap_first});
-        return Outcome.success(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bo(${classInfo.className?uncap_first}));
+        ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className}Convertor.INSTANCE.to${classInfo.className}(${classInfo.className?uncap_first}Param);
+        ${classInfo.className?uncap_first}Mapper.insert(${classInfo.className?uncap_first});
+        return Outcome.success(${classInfo.className}Convertor.INSTANCE.to${classInfo.className}Bo(${classInfo.className?uncap_first}));
     }
 
     /**
@@ -50,7 +50,7 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
         if (id == null) {
             return false;
         }
-        return ${classInfo.className?uncap_first}Dao.deleteById(id) > 0;
+        return ${classInfo.className?uncap_first}Mapper.deleteById(id) > 0;
     }
 
     /**
@@ -61,8 +61,8 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
         if (${classInfo.className?uncap_first}Param.get${classInfo.primaryField.fieldName?cap_first}() == null) {
             return false;
         }
-        ${classInfo.className} entity = ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}(${classInfo.className?uncap_first}Param);
-        return ${classInfo.className?uncap_first}Dao.updateById(entity) > 0;
+        ${classInfo.className} entity = ${classInfo.className}Convertor.INSTANCE.to${classInfo.className}(${classInfo.className?uncap_first}Param);
+        return ${classInfo.className?uncap_first}Mapper.updateById(entity) > 0;
     }
 
     /**
@@ -70,8 +70,8 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
      */
     @Override
     public Outcome<${classInfo.className}BO> findById(${classInfo.primaryField.fieldClass} id) {
-        ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className?uncap_first}Dao.selectById(id);
-        return Outcome.success(${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bo(${classInfo.className?uncap_first}));
+        ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className?uncap_first}Mapper.selectById(id);
+        return Outcome.success(${classInfo.className}Convertor.INSTANCE.to${classInfo.className}Bo(${classInfo.className?uncap_first}));
     }
 
     /**
@@ -80,8 +80,8 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
     @Override
     public Outcome<Pageable<${classInfo.className}BO>> pageList(${classInfo.className}QueryParam param, PageParam pageParam){
         Page<${classInfo.className}> page = PageUtil.toPage(pageParam);
-        IPage<${classInfo.className}> pageData = ${classInfo.className?uncap_first}Dao.selectPage(page, DynamicCondition.toWrapper(param));
+        IPage<${classInfo.className}> pageData = ${classInfo.className?uncap_first}Mapper.selectPage(page, DynamicCondition.toWrapper(param));
 
-        return Outcome.success(PageUtil.toPageable(pageData, ${classInfo.className}Mapper.INSTANCE.to${classInfo.className}Bos(pageData.getRecords())));
+        return Outcome.success(PageUtil.toPageable(pageData, ${classInfo.className}Convertor.INSTANCE.to${classInfo.className}Bos(pageData.getRecords())));
     }
 }
