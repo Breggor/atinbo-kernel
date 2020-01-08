@@ -30,11 +30,11 @@ public enum TemplatePathEnum {
     /************* SERVICE *************/
     D_ENTITY("/entity.ftl", "entity/%s.java",
             GenerateUtil.MODULE_SERVICE, Strings.EMPTY, FrameworkEnum.DUBBO.getValue()),
-    D_MAPPER("/mapper.ftl", "mapper/%sMapper.java",
+    D_MAPPER("/convertor.ftl", "convertor/%sConvertor.java",
             GenerateUtil.MODULE_SERVICE, Strings.EMPTY, FrameworkEnum.DUBBO.getValue()),
-    D_DAO("/dao.ftl", "dao/%sDao.java",
+    D_DAO("/mapper.ftl", "mapper/%sMapper.java",
             GenerateUtil.MODULE_SERVICE, CategoryEnum.MYBATIS.getValue(), FrameworkEnum.DUBBO.getValue()),
-    D_MYBATIS("/mybatis.ftl", "mybatis/%sDao.xml",
+    D_MYBATIS("/mybatis.ftl", "mybatis/%sMapper.xml",
             GenerateUtil.MODULE_SERVICE, CategoryEnum.MYBATIS.getValue(), FrameworkEnum.DUBBO.getValue()),
     D_REPOSITORY("/repository.ftl", "repository/%sRepository.java",
             GenerateUtil.MODULE_SERVICE, CategoryEnum.HIBERNATE.getValue(), FrameworkEnum.DUBBO.getValue()),
@@ -58,7 +58,7 @@ public enum TemplatePathEnum {
     /************* SERVICE *************/
     S_ENTITY("/entity.ftl", "entity/%s.java",
             GenerateUtil.MODULE_SERVICE, Strings.EMPTY, FrameworkEnum.SPRING_CLOUD.getValue()),
-    S_MAPPER("/mapper.ftl", "mapper/%sMapper.java",
+    S_MAPPER("/convertor.ftl", "mapper/%sMapper.java",
             GenerateUtil.MODULE_SERVICE, CategoryEnum.MYBATIS.getValue(), FrameworkEnum.SPRING_CLOUD.getValue()),
     S_MYBATIS("/mybatis.ftl", "mybatis/%sMapper.xml",
             GenerateUtil.MODULE_SERVICE, CategoryEnum.MYBATIS.getValue(), FrameworkEnum.SPRING_CLOUD.getValue()),
