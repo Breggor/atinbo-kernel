@@ -35,7 +35,7 @@ public class GenerarteController {
     @GetMapping("/gen/index")
     public Map<String, Object> index() {
         GenerateConfig config = GenerateConfig.defaultConfig();
-        config.setModuleName(applicationName);
+        config.setModuleName(applicationName.substring(0,applicationName.indexOf("-")));
         RequestThread.setConfig(config);
         List<ClassInfo> classInfos = generateService.findAllTable();
         Map<String, Object> map = new HashMap<>();
