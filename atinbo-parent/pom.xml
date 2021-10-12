@@ -72,7 +72,7 @@
         <pinyin4j.version>2.5.1</pinyin4j.version>
         <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
         <docker.registry.url>10.10.4.113</docker.registry.url>
-        <xxl-job.version>2.1.2</xxl-job.version>
+        <xxl-job.version>2.3.0</xxl-job.version>
         <skipTests>true</skipTests>
     </properties>
 
